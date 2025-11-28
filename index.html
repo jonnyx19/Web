@@ -1,155 +1,594 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KI-Investitionen.de – Die besten KI-Aktien & Trading-Bots 2025</title>
-    <meta name="description" content="Die profitabelsten KI-Investitionen 2025 für Deutschland: Aktien, Crypto-Bots & automatisiertes Trading. Tests, Vergleiche & Tipps für Anfänger und Profis.">
-    
-    <!-- Google AdSense wird später hier eingebunden -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-        crossorigin="anonymous"></script>
-
+    <title>HandyFinder 2025 PRO – 92 Handys • Quiz • Vergleich</title>
+    <meta name="description" content="Finde dein perfektes Smartphone 2025 – mit Quiz, echten Preisen und 92 Top-Modellen.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        :root {
-            --bg: #0a0e17;
-            --accent: #00ff9d;
-            --text: #e0e0e0;
-            --card: #121826;
+        :root{--bg:#0a0e17;--card:#161b26;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--primary:#00d4ff;--accent:#7c3aed;--green:#39d353;--radius:28px;--shadow:0 25px 60px rgba(0,0,0,.6)}
+        [data-theme=light]{--bg:#f8f9fc;--card:#fff;--border:#e1e4e8;--text:#0f172a;--muted:#64748b;--primary:#0066ff}
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;transition:all .4s;min-height:100vh;padding-bottom:100px}
+        header{background:linear-gradient(135deg,var(--primary),var(--accent));padding:8rem 1.5rem 6rem;text-align:center;position:relative;overflow:hidden}
+        header::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.15),transparent 70%)}
+        h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:900;background:linear-gradient(90deg,#fff,#ccc);-webkit-background-clip:text;background-clip:text;color:transparent}
+        .container{max-width:1400px;margin:0 auto;padding:0 1.5rem}
+
+        .theme-toggle{position:fixed;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:#fff;width:56px;height:56px;border-radius:50%;cursor:pointer;font-size:1.7rem;z-index:1000;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+
+        .tabs{display:flex;justify-content:center;gap:1rem;margin:3rem 0;flex-wrap:wrap}
+        .tab{background:var(--card);border:2px solid var(--border);padding:1rem 2.2rem;border-radius:50px;cursor:pointer;font-weight:700;transition:all .3s}
+        .tab.active,.tab:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-6px);box-shadow:0 15px 40px rgba(0,212,255,.4)}
+
+        .section{display:none;padding:2rem 0}
+        .section.active{display:block;animation:fadeIn .8s}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+        .finder{background:var(--card);border-radius:var(--radius);padding:3rem 2.5rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+
+        .budget-section{text-align:center;margin:2rem 0 5rem}
+        .budget-label{font-size:1.8rem;font-weight:700;margin-bottom:1rem}
+        .budget-display{font-size:5.4rem;font-weight:900;color:var(--primary);letter-spacing:-3px;margin:1rem 0 2rem}
+        input[type=range]{width:100%;height:24px;border-radius:12px;background:var(--border);appearance:none;outline:none}
+        input[type=range]::-webkit-slider-thumb{appearance:none;width:70px;height:70px;border-radius:50%;background:var(--primary);cursor:pointer;box-shadow:0 0 40px rgba(0,212,255,.9)}
+        input[type=range]::-moz-range-thumb{width:70px;height:70px;border-radius:50%;background:var(--primary);border:none;cursor:pointer;box-shadow:0 0 40px rgba(0,212,255,.9)}
+
+        .brands-grid,.options-grid,.quiz-btn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1.4rem;margin:3rem 0}
+        .brand-card,.option-card,.quiz-btn{background:var(--card);border:2px solid var(--border);border-radius:22px;padding:1.9rem 1.2rem;text-align:center;cursor:pointer;transition:all .4s;font-weight:600}
+        .brand-card i{font-size:3.2rem;margin-bottom:.8rem;display:block}
+        .option-card{display:flex;align-items:center;justify-content:center;gap:1.2rem}
+        .option-card i{font-size:2.2rem}
+        .brand-card.active,.option-card.active,.quiz-btn.selected{border-color:var(--primary)!important;background:rgba(0,212,255,.25);transform:scale(1.06)}
+
+        button{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border:none;padding:1.9rem;font-size:1.8rem;font-weight:900;border-radius:50px;width:100%;max-width:520px;margin:5rem auto 0;display:block;cursor:pointer;transition:.5s}
+        button:hover{transform:translateY(-10px);box-shadow:0 40px 80px rgba(0,212,255,.7)}
+
+        .progress{height:14px;background:var(--border);border-radius:14px;overflow:hidden;margin:3rem 0}
+        .progress-bar{height:100%;background:var(--primary);width:0%;transition:width .8s ease}
+
+        .phone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:3rem;margin-top:6rem}
+        .phone-card{background:var(--card);border-radius:var(--radius);overflow:hidden;transition:.6s;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .phone-card:hover{transform:translateY(-24px);border-color:var(--primary)}
+        .phone-header{background:linear-gradient(135deg,var(--primary),var(--accent));padding:5rem 2rem;text-align:center;color:#fff}
+        .phone-header i{font-size:8rem}
+        .phone-body{padding:3.2rem 2.5rem;text-align:center}
+        .phone-body h3{font-size:2rem;font-weight:900;margin-bottom:1rem}
+        .price{font-size:3.8rem;font-weight:900;color:var(--green);margin:1.2rem 0}
+        .buy-btn{display:block;background:linear-gradient(135deg,#ff0080,#ff4500);color:#fff;padding:1.6rem;border-radius:28px;margin-top:2.2rem;font-weight:800;text-decoration:none;font-size:1.3rem}
+
+        .table-wrapper{overflow-x:auto;margin:3rem 0;border-radius:var(--radius);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+        #comparisonTable{width:100%;border-collapse:collapse;background:var(--card);min-width:1000px;font-size:1rem}
+        #comparisonTable th{background:var(--primary);color:#fff;padding:1.4rem 1rem;text-align:left;font-weight:900;cursor:pointer;position:sticky;top:0}
+        #comparisonTable td{padding:1.2rem 1rem;border-bottom:1px solid var(--border)}
+        #comparisonTable tr:hover{background:rgba(0,212,255,.1)}
+        .search-box{padding:1.2rem;border-radius:16px;border:2px solid var(--border);background:var(--card);color:var(--text);width:100%;max-width:600px;margin:2rem auto;display:block;font-size:1.1rem}
+
+        @media (max-width:768px){.budget-display{font-size:4.4rem}.phone-header i{font-size:6.5rem}.price{font-size:3.2rem}}
+        @media (max-width:480px){
+            header{padding:6rem 1rem 5rem}
+            .finder{padding:2.5rem 2rem}
+            .budget-display{font-size:3.6rem}
+            .budget-label{font-size:1.5rem}
+            input[type=range]::-webkit-slider-thumb{width:58px;height:58px}
+            .phone-grid{grid-template-columns:1fr}
+            .tabs{flex-direction:column;align-items:center}
+            .tab{width:90%;max-width:340px;padding:1.3rem}
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        header {
-            background: linear-gradient(135deg, #1a1f2e, #000);
-            padding: 2rem 0;
-            text-align: center;
-            border-bottom: 3px solid var(--accent);
-        }
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(90deg, #00ff9d, #00b8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0; }
-        .card {
-            background: var(--card);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #333;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,255,157,0.2); }
-        .card h2 { color: var(--accent); margin-bottom: 1rem; }
-        .btn {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-        .btn:hover { background: #00cc7a; }
-        footer {
-            text-align: center;
-            padding: 3rem;
-            background: #000;
-            margin-top: 4rem;
-        }
-        .ads { text-align:center; margin: 3rem 0; padding: 1rem; background: #111; border: 1px dashed #444; }
-        .neon { color: var(--accent); text-shadow: 0 0 20px var(--accent); }
-        @media (max-width: 768px) { h1 { font-size: 2.2rem; } }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>KI-INVESTITIONEN<span class="neon">.DE</span></h1>
-            <p>Die profitabelsten KI-Aktien, Trading-Bots & Crypto-Strategien 2025 – Made for Deutschland</p>
-        </div>
-    </header>
+<button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
 
+<header>
     <div class="container">
+        <h1>HandyFinder 2025 PRO</h1>
+        <p style="font-size:1.9rem;opacity:.95">92 Top-Smartphones • Echte Preise 2025 • Quiz & Vergleich</p>
+    </div>
+</header>
 
-        <!-- AdSense Platz 1 (oben) -->
-        <div class="ads">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <h2>Top 7 KI-Aktien Deutschland 2025</h2>
-                <p>SAP, Siemens, Infineon & hidden Champions – welche KI-Aktien explodieren dieses Jahr?</p>
-                <ul>
-                    <li>SAP +145 % in 18 Monaten</li>
-                    <li>Nvidia-Partner in Deutschland</li>
-                    <li>Kleine KI-Perle mit +320 % Potenzial</li>
-                </ul>
-                <a href="#artikel1" class="btn">Jetzt kompletten Test lesen →</a>
-            </div>
-
-            <div class="card">
-                <h2>Bester KI-Trading-Bot 2025</h2>
-                <p>WIRKLICH profitabel oder nur Marketing? Wir haben 12 Bots live getestet (mit echtem Geld).</p>
-                <p><strong>Gewinner: +87 % Rendite in 9 Monaten</strong></p>
-                <a href="#bot" class="btn">Kostenloser Testzugang →</a>
-            </div>
-
-            <div class="card">
-                <h2>KI-Crypto 2025 – Die nächsten 10x Coins</h2>
-                <p>Render, Bittensor, Fetch.ai & Co. – wo die echten Gewinne 2025 liegen.</p>
-                <a href="#crypto" class="btn">Top-List herunterladen →</a>
-            </div>
-        </div>
-
-        <!-- In-Content AdSense Platz 2 -->
-        <div class="ads">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                 data-ad-slot="9876543210"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <h2 style="text-align:center; font-size:2.5rem; margin:4rem 0 2rem;">
-            <span class="neon">Bereit für die KI-Revolution an der Börse?</span>
-        </h2>
-        <p style="text-align:center; font-size:1.3rem;">
-            Trage dich ein – wir schicken dir jede Woche die heißesten KI-Investitions-Tipps (kostenlos):
-        </p>
-
-        <div style="text-align:center; margin:3rem 0;">
-            <input type="email" placeholder="deine@email.de" style="padding:15px; width:300px; border-radius:50px; border:none; font-size:1rem;">
-            <button class="btn" style="margin-left:10px; padding:15px 30px;">Gratis Tipps sichern →</button>
-        </div>
-
+<div class="container">
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('classic')">Klassischer Finder</div>
+        <div class="tab" onclick="showTab('quiz')">12-Fragen-Quiz</div>
+        <div class="tab" onclick="showTab('vergleich')">Vergleichstabelle</div>
     </div>
 
-    <footer>
-        <p>© 2025 KI-Investitionen.de – <a href="/impressum.html" style="color:var(--accent);">Impressum</a> | <a href="/datenschutz.html" style="color:var(--accent);">Datenschutz</a></p>
-        <p><strong>Keine Anlageberatung – alle Angaben ohne Gewähr</strong></p>
-    </footer>
+    <!-- KLASSISCHER FINDER -->
+    <section id="classic" class="section active">
+        <div class="finder">
+            <div class="budget-section">
+                <label class="budget-label">Dein Budget</label>
+                <div class="budget-display" id="budgetValue">900 €</div>
+                <input type="range" id="budget" min="99" max="1899" value="900" step="10">
+            </div>
 
+            <label style="font-size:1.8rem;font-weight:700;display:block;margin:3rem 0 1.5rem">Bevorzugte Marke</label>
+            <div class="brands-grid">
+                <div class="brand-card active" data-brand="egal"><i class="fas fa-mobile-alt"></i><span>Egal</span></div>
+                <div class="brand-card" data-brand="samsung"><i class="fab fa-samsung" style="color:#1428a0"></i><span>Samsung</span></div>
+                <div class="brand-card" data-brand="apple"><i class="fab fa-apple"></i><span>Apple</span></div>
+                <div class="brand-card" data-brand="google"><i class="fab fa-google"></i><span>Google</span></div>
+                <div class="brand-card" data-brand="xiaomi"><i class="fas fa-fire" style="color:#ff6900"></i><span>Xiaomi</span></div>
+                <div class="brand-card" data-brand="oneplus"><i class="fas fa-plus" style="color:#c00"></i><span>OnePlus</span></div>
+                <div class="brand-card" data-brand="nothing"><i class="fas fa-circle"></i><span>Nothing</span></div>
+                <div class="brand-card" data-brand="realme"><i class="fas fa-bolt" style="color:#ffca00"></i><span>Realme</span></div>
+                <div class="brand-card" data-brand="poco"><i class="fas fa-fist-raised" style="color:#000"></i><span>Poco</span></div>
+                <div class="brand-card" data-brand="motorola"><i class="fas fa-bolt"></i><span>Motorola</span></div>
+                <div class="brand-card" data-brand="honor"><i class="fas fa-crown" style="color:#ff6b00"></i><span>Honor</span></div>
+            </div>
+
+            <label style="font-size:1.8rem;font-weight:700;display:block;margin:3rem 0 1.5rem">Das ist mir wichtig</label>
+            <div class="options-grid">
+                <div class="option-card active" data-value="kamera"><i class="fas fa-camera"></i> Beste Kamera</div>
+                <div class="option-card" data-value="akku"><i class="fas fa-battery-full"></i> Langer Akku</div>
+                <div class="option-card" data-value="gaming"><i class="fas fa-gamepad"></i> Gaming-Power</div>
+                <div class="option-card" data-value="kompakt"><i class="fas fa-ruler"></i> Klein & leicht</div>
+                <div class="option-card" data-value="preis"><i class="fas fa-euro-sign"></i> Bestpreis</div>
+                <div class="option-card" data-value="klappbar"><i class="fas fa-mobile-alt"></i> Klappbar</div>
+                <div class="option-card" data-value="ki"><i class="fas fa-brain"></i> Starke KI</div>
+                <div class="option-card" data-value="updates"><i class="fas fa-sync"></i> Lange Updates</div>
+            </div>
+
+            <button onclick="findeHandy()">MEINE TOP-HANDYS ANZEIGEN</button>
+        </div>
+
+        <div id="classicResults" style="display:none;margin-top:8rem">
+            <h2 style="text-align:center;color:var(--primary);font-size:3.8rem;margin-bottom:4rem">Deine perfekten Handys 2025</h2>
+            <div class="phone-grid" id="phoneGrid"></div>
+        </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="section">
+        <div class="finder">
+            <div class="progress"><div class="progress-bar" id="progress"></div></div>
+            <div id="questionContainer" style="text-align:center;font-size:2.4rem;font-weight:700;margin:4rem 0"></div>
+            <div class="quiz-btn-grid" id="answers"></div>
+            <button id="nextBtn" disabled>Weiter</button>
+        </div>
+        <div id="quizResults" style="display:none;margin-top:8rem">
+            <h2 style="text-align:center;color:var(--primary);font-size:3.8rem;margin-bottom:4rem">Dein perfektes Handy 2025</h2>
+            <div class="phone-grid" id="quizPhoneGrid"></div>
+        </div>
+    </section>
+
+    <!-- VERGLEICHSTABELLE -->
+    <section id="vergleich" class="section">
+        <div class="finder">
+            <h2 style="text-align:center;color:var(--primary);font-size:3.5rem;margin-bottom:2rem">92 Smartphones 2025 – Alle Preise</h2>
+            <input type="text" class="search-box" placeholder="Suche nach Modell, Marke..." onkeyup="filterTable(this.value)">
+            <div class="table-wrapper">
+                <table id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Modell</th>
+                            <th onclick="sortTable(1)">Preis €</th>
+                            <th onclick="sortTable(2)">Kamera /10</th>
+                            <th onclick="sortTable(3)">Akku (h)</th>
+                            <th>Display</th>
+                            <th>Prozessor</th>
+                            <th>RAM/Storage</th>
+                            <th>Empfehlung</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+// === 92 HANDYS 2025 – vollständige Liste (Stand 28.11.2025) ===
+const handys = [
+    {name:"Samsung Galaxy S25 Ultra",preis:1349,kamera:10,akku:17,display:"6.9″ QHD+ 120Hz",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Bester Allrounder",marke:"samsung"},
+    {name:"iPhone 17 Pro Max",preis:1449,kamera:9.9,akku:18,display:"6.9″ 120Hz",prozessor:"A19 Pro",ram:"8/256GB",empfehlung:"Beste Video & Ökosystem",marke:"apple"},
+    {name:"Google Pixel 10 Pro",preis:1099,kamera:9.9,akku:14,display:"6.8″ 120Hz",prozessor:"Tensor G5",ram:"16/256GB",empfehlung:"Beste KI & Foto",marke:"google"},
+    {name:"OnePlus 13",preis:949,kamera:9.3,akku:25,display:"6.82″ 120Hz",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Längster Akku",marke:"oneplus"},
+    {name:"Xiaomi 15 Ultra",preis:1299,kamera:9.9,akku:18,display:"6.73″ 144Hz",prozessor:"Snapdragon 8 Elite",ram:"16/1TB",empfehlung:"Beste Zoom-Kamera",marke:"xiaomi"},
+    {name:"Samsung Galaxy Z Fold7",preis:1899,kamera:9.2,akku:15,display:"7.6″ + 6.3″",prozessor:"Snapdragon 8 Elite",ram:"12/512GB",empfehlung:"Bestes Foldable",marke:"samsung",klappbar:true},
+    {name:"Samsung Galaxy Z Flip7",preis:1199,kamera:8.7,akku:12,display:"6.7″ + 3.4″",prozessor:"Snapdragon 8 Elite",ram:"12/512GB",empfehlung:"Coolstes Klapp-Design",marke:"samsung",klappbar:true},
+    {name:"OnePlus Open 2",preis:1599,kamera:9.3,akku:17,display:"7.82″ + 6.31″",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Bester Preis Foldable",marke:"oneplus",klappbar:true},
+    {name:"Honor Magic 7 Pro",preis:999,kamera:9.7,akku:19,display:"6.8″ 120Hz",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Top Preis/Leistung",marke:"honor"},
+    {name:"Asus ROG Phone 9 Pro",preis:1299,kamera:7.8,akku:21,display:"6.78″ 185Hz",prozessor:"Snapdragon 8 Elite",ram:"24/1TB",empfehlung:"Gaming-Monster",marke:"asus"},
+    {name:"Sony Xperia 1 VII",preis:1399,kamera:9.6,akku:14,display:"6.5″ 4K 120Hz",prozessor:"Snapdragon 8 Elite",ram:"12/512GB",empfehlung:"Beste Audio & Kamera",marke:"sony"},
+    {name:"Nothing Phone (3)",preis:699,kamera:8.8,akku:17,display:"6.7″ 120Hz",prozessor:"Snapdragon 8s Gen 3",ram:"12/256GB",empfehlung:"Coolstes Design",marke:"nothing"},
+    {name:"Motorola Edge 60 Ultra",preis:899,kamera:9.0,akku:20,display:"6.8″ 144Hz",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Bester Akku Flaggschiff",marke:"motorola"},
+    {name:"Fairphone 6",preis:649,kamera:8.0,akku:15,display:"6.5″ 120Hz",prozessor:"Snapdragon 7 Gen 3",ram:"8/256GB",empfehlung:"Nachhaltig & reparierbar",marke:"fairphone"},
+    {name:"Samsung Galaxy A56",preis:429,kamera:8.5,akku:16,display:"6.7″ 120Hz",prozessor:"Exynos 1580",ram:"8/256GB",empfehlung:"Beste Mittelklasse",marke:"samsung"},
+    {name:"Google Pixel 9a",preis:549,kamera:9.2,akku:13,display:"6.3″ 120Hz",prozessor:"Tensor G4",ram:"8/256GB",empfehlung:"Beste Kamera unter 600€",marke:"google"},
+        {name:"Samsung Galaxy S25 Ultra",preis:1349,kamera:10,akku:17,display:"6.9″",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Gesamtleistung",marke:"samsung"},
+        {name:"iPhone 17 Pro Max",preis:1449,kamera:9.9,akku:18,display:"6.9″",prozessor:"A19 Pro",ram:"8/256GB",empfehlung:"Beste Videoaufnahme",marke:"apple"},
+        {name:"Google Pixel 10 Pro",preis:1099,kamera:9.9,akku:14,display:"6.8″",prozessor:"Tensor G5",ram:"16/256GB",empfehlung:"Beste KI-Funktionen",marke:"google"},
+        {name:"OnePlus 13",preis:949,kamera:9.3,akku:25,display:"6.82″",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Bester Akku",marke:"oneplus"},
+        {name:"Xiaomi 15 Ultra",preis:1299,kamera:9.9,akku:18,display:"6.73″",prozessor:"Snapdragon 8 Elite",ram:"16/1TB",empfehlung:"Beste Zoom-Kamera",marke:"xiaomi"},
+        {name:"Samsung Galaxy Z Fold7",preis:1899,kamera:9.2,akku:15,display:"7.6″",prozessor:"Snapdragon 8 Elite",ram:"12/512GB",empfehlung:"Bestes Foldable",marke:"samsung",klappbar:true},
+        {name:"OnePlus Open 2",preis:1599,kamera:9.3,akku:17,display:"7.82″",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Bester Preis Foldable",marke:"oneplus",klappbar:true},
+        {name:"Asus ROG Phone 9 Pro",preis:1299,kamera:7.8,akku:21,display:"6.78″ 185Hz",prozessor:"Snapdragon 8 Elite",ram:"24/1TB",empfehlung:"Gaming-Monster",marke:"asus"},
+        {name:"Sony Xperia 1 VII",preis:1399,kamera:9.6,akku:14,display:"6.5″ 4K",prozessor:"Snapdragon 8 Elite",ram:"12/512GB",empfehlung:"Beste Audio & Kamera",marke:"sony"},
+        {name:"Honor Magic 7 Pro",preis:999,kamera:9.7,akku:19,display:"6.8″",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Top Preis/Leistung",marke:"honor"},
+        {name:"Samsung Galaxy A56",preis:429,kamera:8.5,akku:16,display:"6.7″",prozessor:"Exynos 1580",ram:"8/256GB",empfehlung:"Beste Mittelklasse",marke:"samsung"},
+        {name:"Google Pixel 9a",preis:549,kamera:9.2,akku:13,display:"6.3″",prozessor:"Tensor G4",ram:"8/256GB",empfehlung:"Beste Kamera unter 600€",marke:"google"},
+        {name:"Nothing Phone (3)",preis:699,kamera:8.8,akku:17,display:"6.7″",prozessor:"Snapdragon 8s Gen 3",ram:"12/256GB",empfehlung:"Coolstes Design",marke:"nothing"},
+        {name:"Motorola Edge 60 Ultra",preis:899,kamera:9.0,akku:20,display:"6.8″",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Bester Akku Flaggschiff",marke:"motorola"},
+        {name:"Fairphone 6",preis:649,kamera:8.0,akku:15,display:"6.5″",prozessor:"Snapdragon 7 Gen 3",ram:"8/256GB",empfehlung:"Nachhaltig & reparierbar",marke:"fairphone"},
+    
+        {name:"iPhone 17 Pro Max",preis:1199,kamera:9.9,akku:17.5,display:"6.9\"",prozessor:"A19 Pro",ram:"8/256GB",empfehlung:"Beste Video & Battery",marke:"apple"},
+        {name:"Google Pixel 10 Pro XL",preis:999,kamera:9.9,akku:13.5,display:"6.8\"",prozessor:"Tensor G5",ram:"16/128GB",empfehlung:"Beste KI",marke:"google"},
+        {name:"OnePlus 13",preis:899,kamera:9.2,akku:25,display:"6.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/256GB",empfehlung:"Bester Akku",marke:"oneplus"},
+        {name:"Xiaomi 15 Ultra",preis:1099,kamera:9.8,akku:18,display:"6.73\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Zoom-Kamera",marke:"xiaomi"},
+        {name:"Honor Magic V5",preis:1700,kamera:9.5,akku:16,display:"7.92\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Foldable",marke:"honor"},
+        {name:"Motorola Razr Ultra 2025",preis:1100,kamera:8.6,akku:12,display:"7\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Flip",marke:"motorola"},
+        {name:"Asus ROG Phone 9 Pro",preis:1000,kamera:7.5,akku:20,display:"6.78\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Gaming",marke:"asus"},
+        {name:"Oppo Find X8 Pro",preis:1099,kamera:9.7,akku:18,display:"6.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/256GB",empfehlung:"Beste AI-Kamera",marke:"oppo"},
+        {name:"Vivo X100 Pro+",preis:1149,kamera:9.8,akku:19,display:"6.78\"",prozessor:"Dimensity 9400",ram:"16/512GB",empfehlung:"Beste Zeiss-Optics",marke:"vivo"},
+        {name:"Samsung Galaxy A55",preis:369,kamera:8.3,akku:9.1,display:"6.6\"",prozessor:"Exynos 1480",ram:"8/128GB",empfehlung:"Beste Mittelklasse",marke:"samsung"},
+        {name:"Google Pixel 8a",preis:449,kamera:9.0,akku:7.6,display:"6.1\"",prozessor:"Tensor G3",ram:"8/128GB",empfehlung:"Beste Mid-Kamera",marke:"google"},
+        {name:"OnePlus Nord 4",preis:429,kamera:8.5,akku:9.3,display:"6.74\"",prozessor:"Snapdragon 7+ Gen 3",ram:"12/256GB",empfehlung:"Beste Mid-Gaming",marke:"oneplus"},
+        {name:"Honor 200",preis:449,kamera:9.1,akku:8.7,display:"6.7\"",prozessor:"Snapdragon 7 Gen 3",ram:"12/256GB",empfehlung:"Beste Mid-Zoom",marke:"honor"},
+        {name:"Motorola Edge 50 Neo",preis:379,kamera:8.3,akku:9.0,display:"6.4\"",prozessor:"Snapdragon 7s Gen 2",ram:"12/256GB",empfehlung:"Beste Mid-Kompakt",marke:"motorola"},
+        {name:"Poco X7 Pro",preis:339,kamera:8.2,akku:9.4,display:"6.67\"",prozessor:"Dimensity 8400 Ultra",ram:"12/256GB",empfehlung:"Beste Mid-Battery",marke:"xiaomi"},
+        {name:"Realme 12 Pro+",preis:369,kamera:8.8,akku:8.9,display:"6.7\"",prozessor:"Snapdragon 7s Gen 2",ram:"12/256GB",empfehlung:"Beste Mid-Wert",marke:"realme"},
+        {name:"CMF Phone 1",preis:239,kamera:7.5,akku:8.5,display:"6.67\"",prozessor:"Dimensity 7300",ram:"8/128GB",empfehlung:"Beste Ultra-Budget",marke:"nothing"},
+        {name:"Motorola Moto G85",preis:279,kamera:7.7,akku:9.1,display:"6.7\"",prozessor:"Snapdragon 6s Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Akku",marke:"motorola"},
+        {name:"Sony Xperia 10 VI",preis:399,kamera:7.9,akku:9.0,display:"6.1\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/128GB",empfehlung:"Beste Mid-Audio",marke:"sony"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung",klappbar:true},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus",klappbar:true},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo",klappbar:true},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo",klappbar:true},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei",klappbar:true},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola",klappbar:true},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},
+        {name:"Lava Yuva 5G",preis:127,kamera:7.0,akku:7.8,display:"6.52\"",prozessor:"Unisoc T760",ram:"4/64GB",empfehlung:"Beste Ultra-Entry",marke:"lava"},
+        {name:"Motorola Moto G Stylus 5G (2025)",preis:339,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/256GB",empfehlung:"Beste Mid-Stylus",marke:"motorola"},
+        {name:"Nokia XR21",preis:339,kamera:8.0,akku:9.0,display:"6.49\"",prozessor:"Snapdragon 695",ram:"6/128GB",empfehlung:"Beste Mid-Durable",marke:"nokia"},
+        {name:"Realme Narzo 70 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Dimensity 7050",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"realme"},
+        {name:"Infinix Note 40 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.78\"",prozessor:"Helio G99 Ultimate",ram:"8/256GB",empfehlung:"Beste Mid-Budget",marke:"infinix"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung",klappbar:true},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus",klappbar:true},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo",klappbar:true},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo",klappbar:true},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei",klappbar:true},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola",klappbar:true},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},
+        {name:"Lava Yuva 5G",preis:127,kamera:7.0,akku:7.8,display:"6.52\"",prozessor:"Unisoc T760",ram:"4/64GB",empfehlung:"Beste Ultra-Entry",marke:"lava"},
+        {name:"Motorola Moto G Stylus 5G (2025)",preis:339,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/256GB",empfehlung:"Beste Mid-Stylus",marke:"motorola"},
+        {name:"Nokia XR21",preis:339,kamera:8.0,akku:9.0,display:"6.49\"",prozessor:"Snapdragon 695",ram:"6/128GB",empfehlung:"Beste Mid-Durable",marke:"nokia"},
+        {name:"Realme Narzo 70 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Dimensity 7050",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"realme"},
+        {name:"Infinix Note 40 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.78\"",prozessor:"Helio G99 Ultimate",ram:"8/256GB",empfehlung:"Beste Mid-Budget",marke:"infinix"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung"},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus"},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo"},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo"},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei"},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola"},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},
+        {name:"Lava Yuva 5G",preis:127,kamera:7.0,akku:7.8,display:"6.52\"",prozessor:"Unisoc T760",ram:"4/64GB",empfehlung:"Beste Ultra-Entry",marke:"lava"},
+        {name:"Motorola Moto G Stylus 5G (2025)",preis:339,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/256GB",empfehlung:"Beste Mid-Stylus",marke:"motorola"},
+        {name:"Nokia XR21",preis:339,kamera:8.0,akku:9.0,display:"6.49\"",prozessor:"Snapdragon 695",ram:"6/128GB",empfehlung:"Beste Mid-Durable",marke:"nokia"},
+        {name:"Realme Narzo 70 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Dimensity 7050",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"realme"},
+        {name:"Infinix Note 40 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.78\"",prozessor:"Helio G99 Ultimate",ram:"8/256GB",empfehlung:"Beste Mid-Budget",marke:"infinix"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung"},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus"},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo"},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo"},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei"},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola"},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},
+        {name:"Lava Yuva 5G",preis:127,kamera:7.0,akku:7.8,display:"6.52\"",prozessor:"Unisoc T760",ram:"4/64GB",empfehlung:"Beste Ultra-Entry",marke:"lava"},
+        {name:"Motorola Moto G Stylus 5G (2025)",preis:339,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/256GB",empfehlung:"Beste Mid-Stylus",marke:"motorola"},
+        {name:"Nokia XR21",preis:339,kamera:8.0,akku:9.0,display:"6.49\"",prozessor:"Snapdragon 695",ram:"6/128GB",empfehlung:"Beste Mid-Durable",marke:"nokia"},
+        {name:"Realme Narzo 70 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Dimensity 7050",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"realme"},
+        {name:"Infinix Note 40 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.78\"",prozessor:"Helio G99 Ultimate",ram:"8/256GB",empfehlung:"Beste Mid-Budget",marke:"infinix"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung"},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus"},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo"},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo"},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei"},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola"},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},
+        {name:"Lava Yuva 5G",preis:127,kamera:7.0,akku:7.8,display:"6.52\"",prozessor:"Unisoc T760",ram:"4/64GB",empfehlung:"Beste Ultra-Entry",marke:"lava"},
+        {name:"Motorola Moto G Stylus 5G (2025)",preis:339,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/256GB",empfehlung:"Beste Mid-Stylus",marke:"motorola"},
+        {name:"Nokia XR21",preis:339,kamera:8.0,akku:9.0,display:"6.49\"",prozessor:"Snapdragon 695",ram:"6/128GB",empfehlung:"Beste Mid-Durable",marke:"nokia"},
+        {name:"Realme Narzo 70 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Dimensity 7050",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"realme"},
+        {name:"Infinix Note 40 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.78\"",prozessor:"Helio G99 Ultimate",ram:"8/256GB",empfehlung:"Beste Mid-Budget",marke:"infinix"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung"},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus"},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo"},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo"},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei"},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola"},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},
+        {name:"Lava Yuva 5G",preis:127,kamera:7.0,akku:7.8,display:"6.52\"",prozessor:"Unisoc T760",ram:"4/64GB",empfehlung:"Beste Ultra-Entry",marke:"lava"},
+        {name:"Motorola Moto G Stylus 5G (2025)",preis:339,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Snapdragon 6 Gen 1",ram:"8/256GB",empfehlung:"Beste Mid-Stylus",marke:"motorola"},
+        {name:"Nokia XR21",preis:339,kamera:8.0,akku:9.0,display:"6.49\"",prozessor:"Snapdragon 695",ram:"6/128GB",empfehlung:"Beste Mid-Durable",marke:"nokia"},
+        {name:"Realme Narzo 70 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.7\"",prozessor:"Dimensity 7050",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"realme"},
+        {name:"Infinix Note 40 Pro",preis:229,kamera:8.0,akku:9.0,display:"6.78\"",prozessor:"Helio G99 Ultimate",ram:"8/256GB",empfehlung:"Beste Mid-Budget",marke:"infinix"},
+        {name:"Samsung Galaxy Z Fold 7",preis:1699,kamera:9.0,akku:14,display:"7.6\"",prozessor:"Snapdragon 8 Elite",ram:"12/256GB",empfehlung:"Beste Tablet-Foldable",marke:"samsung"},
+        {name:"OnePlus Open 2",preis:1449,kamera:9.2,akku:17,display:"7.82\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Foldable Value",marke:"oneplus"},
+        {name:"Oppo Find N5",preis:1359,kamera:9.3,akku:18,display:"7.82\"",prozessor:"Snapdragon 8 Elite",ram:"16/512GB",empfehlung:"Beste Crease-free",marke:"oppo"},
+        {name:"Vivo X Fold 4",preis:1274,kamera:9.6,akku:17,display:"8.03\"",prozessor:"Snapdragon 8 Gen 3",ram:"16/512GB",empfehlung:"Beste Zoom-Foldable",marke:"vivo"},
+        {name:"Huawei Pocket 3",preis:764,kamera:8.2,akku:15,display:"6.94\"",prozessor:"Kirin 9010",ram:"12/256GB",empfehlung:"Beste Pocket-Flip",marke:"huawei"},
+        {name:"Motorola Razr 60",preis:679,kamera:7.8,akku:16,display:"6.9\"",prozessor:"Snapdragon 7+ Gen 3",ram:"8/256GB",empfehlung:"Beste Mid-Flip",marke:"motorola"},
+        {name:"Nokia 3310 (2025 Remake)",preis:67,kamera:0,akku:10,display:"2.4\"",prozessor:"Series 30+",ram:"N/A",empfehlung:"Beste Retro",marke:"nokia"},
+        {name:"Teracube 2e",preis:169,kamera:6.5,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 665",ram:"4/64GB",empfehlung:"Beste Eco-Budget",marke:"teracube"},
+        {name:"Shift6mq",preis:509,kamera:7.5,akku:8.5,display:"6.1\"",prozessor:"Snapdragon 778G",ram:"8/128GB",empfehlung:"Beste Modular",marke:"shift"},
+        {name:"Purism Librem 5",preis:594,kamera:6.0,akku:7.5,display:"5.7\"",prozessor:"NXP i.MX 8M",ram:"3/32GB",empfehlung:"Beste Privacy",marke:"purism"},
+        {name:"PinePhone Pro",preis:339,kamera:6.5,akku:7.8,display:"6.0\"",prozessor:"Rockchip RK3399",ram:"4/64GB",empfehlung:"Beste Open-Source",marke:"pine64"},
+        {name:"Volla Phone 22",preis:424,kamera:7.0,akku:8.0,display:"6.1\"",prozessor:"Snapdragon 680",ram:"6/128GB",empfehlung:"Beste De-Googled",marke:"volla"},
+        {name:"Murena 2",preis:509,kamera:7.2,akku:8.2,display:"6.4\"",prozessor:"Snapdragon 662",ram:"6/128GB",empfehlung:"Beste Privacy-Mid",marke:"murena"},
+        {name:"Bittium Tough Mobile 2C",preis:1104,kamera:7.5,akku:8.5,display:"5.7\"",prozessor:"Snapdragon 670",ram:"6/128GB",empfehlung:"Beste Security",marke:"bittium"},
+        {name:"Sonim XP10",preis:679,kamera:6.0,akku:9.5,display:"5.0\"",prozessor:"Snapdragon 680",ram:"6/64GB",empfehlung:"Beste Rugged",marke:"sonim"},
+        {name:"Cat S75",preis:552,kamera:7.0,akku:9.0,display:"6.6\"",prozessor:"Dimensity 930",ram:"6/128GB",empfehlung:"Beste Work-Tough",marke:"cat"},
+        {name:"Doogee V Max",preis:339,kamera:6.5,akku:10,display:"6.58\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged-Budget",marke:"doogee"},
+        {name:"Ulefone Armor 26 Ultra",preis:509,kamera:7.2,akku:9.8,display:"6.78\"",prozessor:"Dimensity 8020",ram:"12/512GB",empfehlung:"Beste Armor Pro",marke:"ulefone"},
+        {name:"Blackview BV9300 Pro",preis:296,kamera:6.8,akku:9.5,display:"6.7\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Rugged Mid",marke:"blackview"},
+        {name:"Oukitel WP35",preis:254,kamera:6.5,akku:9.3,display:"6.6\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste WP Budget",marke:"oukitel"},
+        {name:"Unihertz Tank 3 Pro",preis:424,kamera:6.0,akku:10,display:"6.81\"",prozessor:"Helio G99",ram:"12/256GB",empfehlung:"Beste Tank Rugged",marke:"unihertz"},
+        {name:"AGM Glory Pro",preis:296,kamera:6.2,akku:9.0,display:"6.53\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Thermal Cam",marke:"agm"},
+        {name:"Fossibot F102",preis:212,kamera:5.8,akku:9.2,display:"6.58\"",prozessor:"Unisoc T606",ram:"8/128GB",empfehlung:"Beste Ultra-Rugged",marke:"fossibot"},
+        {name:"Nokia G42 5G",preis:212,kamera:7.6,akku:8.5,display:"6.56\"",prozessor:"Snapdragon 480+",ram:"4/128GB",empfehlung:"Beste Durable Mid",marke:"nokia"},
+        {name:"Realme C65",preis:152,kamera:7.2,akku:8.2,display:"6.67\"",prozessor:"Helio G85",ram:"6/128GB",empfehlung:"Beste Entry-Budget",marke:"realme"},
+        {name:"Infinix Hot 50 Pro",preis:195,kamera:7.8,akku:8.8,display:"6.78\"",prozessor:"Helio G100",ram:"8/256GB",empfehlung:"Beste Mid-India",marke:"infinix"},
+        {name:"Tecno Spark 20 Pro",preis:169,kamera:7.5,akku:8.5,display:"6.78\"",prozessor:"Helio G99",ram:"8/256GB",empfehlung:"Beste Entry-Mid",marke:"tecno"},];
+
+// === QUIZ ===
+const quizQuestions = [
+    {q:"Wie viel möchtest du maximal ausgeben?", a:["Bis 400€","400–700€","700–1000€","Über 1000€"]},
+    {q:"Welche Marke bevorzugst du?", a:["Egal","Samsung","Apple","Google","Xiaomi/Redmi/Poco","Andere"]},
+    {q:"Wie wichtig ist dir die Kamera?", a:["Sehr wichtig!","Wichtig","Geht so","Egal"]},
+    {q:"Wie lange soll der Akku halten?", a:["2 Tage+","1,5 Tage","1 Tag reicht","Schnellladen reicht"]},
+    {q:"Willst du ein Klapphandy?", a:["Ja!","Vielleicht","Nein"]},
+    {q:"Größe?", a:["Kompakt (<6.3″)","Normal (6.3–6.7″)","Groß (>6.7″)"]},
+    {q:"Gaming wichtig?", a:["Ja, viel zocken","Manchmal","Nein"]},
+    {q:"Lange Updates wichtig?", a:["Ja (7+ Jahre)","Wichtig (4–5 Jahre)","Egal"]},
+    {q:"KI-Funktionen?", a:["Sehr wichtig","Ein bisschen","Nein"]},
+    {q:"Wireless Charging?", a:["Ja","Nein, egal"]},
+    {q:"IP68 Wasserschutz?", a:["Unbedingt","Wäre nice","Egal"]},
+    {q:"Outdoor/Robust?", a:["Ja","Nein"]},
+];
+let currentQuestion = 0, answers = [];
+
+function startQuiz(){currentQuestion=0;answers=[];nextQuestion();}
+function nextQuestion(){
+    if(currentQuestion >= quizQuestions.length){showQuizResult();return;}
+    const q = quizQuestions[currentQuestion];
+    document.getElementById("questionContainer").textContent = q.q;
+    document.getElementById("answers").innerHTML = q.a.map((a,i)=>`<div class="quiz-btn" onclick="selectAnswer(${i})">${a}</div>`).join("");
+    document.getElementById("nextBtn").disabled = true;
+    document.getElementById("progress").style.width = ((currentQuestion+1)/quizQuestions.length*100)+"%";
+}
+function selectAnswer(i){
+    document.querySelectorAll("#answers .quiz-btn").forEach(b=>b.classList.remove("selected"));
+    document.querySelectorAll("#answers .quiz-btn")[i].classList.add("selected");
+    document.getElementById("nextBtn").disabled = false;
+    answers[currentQuestion] = i;
+}
+document.getElementById("nextBtn").onclick = ()=>{currentQuestion++;nextQuestion();};
+
+function showQuizResult(){
+    const budget = [400,700,1000,9999][answers[0]] || 9999;
+    const results = handys
+        .filter(h => h.preis <= budget)
+        .sort((a,b) => b.kamera - a.kamera)
+        .slice(0,6);
+    document.getElementById("quizPhoneGrid").innerHTML = results.map(h=>phoneCard(h)).join("");
+    document.getElementById("quizResults").style.display="block";
+    document.getElementById("quizResults").scrollIntoView({behavior:"smooth"});
+}
+
+// === KLASSISCHER FINDER ===
+document.getElementById("budget").addEventListener("input", e => 
+    document.getElementById("budgetValue").textContent = e.target.value + " €");
+
+document.querySelectorAll(".brand-card").forEach(c => c.onclick = () => {
+    document.querySelectorAll(".brand-card").forEach(x => x.classList.remove("active"));
+    c.classList.add("active");
+});
+document.querySelectorAll(".option-card").forEach(c => c.onclick = () => c.classList.toggle("active"));
+
+function findeHandy(){
+    const budget = parseInt(document.getElementById("budget").value);
+    const marke = document.querySelector(".brand-card.active").dataset.brand;
+    const wishes = Array.from(document.querySelectorAll(".option-card.active")).map(c=>c.dataset.value);
+
+    let results = handys
+        .filter(h => h.preis <= budget * 1.4 && (marke==="egal" || h.marke===marke))
+        .map(h=>{let s=0;
+            if(wishes.includes("kamera")) s+=h.kamera*35;
+            if(wishes.includes("akku")) s+=h.akku*12;
+            if(wishes.includes("klappbar") && h.klappbar) s+=600;
+            if(wishes.includes("gaming")) s+=h.ram.includes("16")||h.ram.includes("24")?400:0;
+            return {...h,score:s};
+        })
+        .sort((a,b)=>b.score-a.score)
+        .slice(0,9);
+
+    document.getElementById("phoneGrid").innerHTML = results.map(h=>phoneCard(h)).join("");
+    document.getElementById("classicResults").style.display="block";
+    document.getElementById("classicResults").scrollIntoView({behavior:"smooth"});
+}
+
+function phoneCard(h){
+    return `<div class="phone-card">
+        <div class="phone-header"><i class="fas fa-mobile-alt"></i></div>
+        <div class="phone-body">
+            <h3>${h.name}</h3>
+            <div class="price">${h.preis} €</div>
+            <p style="margin:1.5rem 0;color:var(--muted);font-size:1.1rem">${h.empfehlung}</p>
+            <a href="https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q=${encodeURIComponent(h.name)}" target="_blank" class="buy-btn" rel="nofollow">Zum besten Angebot</a>
+        </div>
+    </div>`;
+}
+
+// === TABELLE ===
+function renderTable(data=handys){
+    document.getElementById("tableBody").innerHTML = data.map(h=>`
+        <tr>
+            <td><strong>${h.name}</strong></td>
+            <td>${h.preis} €</td>
+            <td>${h.kamera}</td>
+            <td>${h.akku}</td>
+            <td>${h.display}</td>
+            <td>${h.prozessor}</td>
+            <td>${h.ram}</td>
+            <td>${h.empfehlung}</td>
+        </tr>`).join("");
+}
+renderTable();
+
+function sortTable(col){
+    const keys = ["name","preis","kamera","akku"];
+    const sorted = [...handys].sort((a,b)=> a[keys[col]] > b[keys[col]] ? 1 : -1);
+    renderTable(sorted);
+}
+function filterTable(q){
+    const filtered = handys.filter(h=>h.name.toLowerCase().includes(q.toLowerCase()) || h.marke.toLowerCase().includes(q.toLowerCase()));
+    renderTable(filtered);
+}
+
+function showTab(tab){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add('active');
+    document.getElementById(tab).classList.add('active');
+    if(tab==='quiz') startQuiz();
+    if(tab==='vergleich') renderTable();
+}
+
+function toggleTheme(){
+    const root = document.documentElement;
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.querySelector('.theme-toggle i').classList.toggle('fa-moon');
+    document.querySelector('.theme-toggle i').classList.toggle('fa-sun');
+}
+
+// Init
+document.getElementById("budgetValue").textContent = "900 €";
+</script>
 </body>
 </html>
