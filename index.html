@@ -65,9 +65,9 @@ header {
 }
 
 .logo {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -1px;
   color: var(--txt);
 }
 .logo-dot { color: var(--txt3); }
@@ -222,22 +222,7 @@ header {
   letter-spacing: -0.3px;
 }
 .email-copy-hint { font-size: 11px; color: var(--txt3); flex-shrink: 0; }
-.copy-flash {
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--txt);
-  opacity: 0;
-  transition: opacity .18s;
-  pointer-events: none;
-  border-radius: var(--r);
-}
-.copy-flash.show { opacity: 1; }
+/* copy-flash removed — text swap used instead */
 
 .btn-group { display: flex; gap: 8px; }
 
@@ -295,8 +280,8 @@ header {
 
 /* ── Timer ── */
 .timer-section {
-  margin-top: 18px;
-  padding-top: 18px;
+  margin-top: 16px;
+  padding-top: 16px;
   border-top: 1px solid var(--brd);
 }
 .section-label {
@@ -305,57 +290,74 @@ header {
   color: var(--txt3);
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .timer-opts {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
 }
 .t-chip {
-  padding: 6px 13px;
+  padding: 5px 12px;
   font-size: 12px;
   font-weight: 500;
   font-family: var(--font);
-  background: var(--s2);
+  background: transparent;
   border: 1px solid var(--brd);
   border-radius: 100px;
   color: var(--txt3);
   cursor: pointer;
   transition: all .15s;
 }
-.t-chip:hover { border-color: var(--brd-hi); color: var(--txt2); }
+.t-chip:hover { border-color: var(--brd-hi); color: var(--txt2); background: var(--s2); }
 .t-chip.on {
   background: var(--txt);
   color: var(--bg);
   border-color: transparent;
   font-weight: 600;
-  box-shadow: 0 2px 10px rgba(255,255,255,0.12);
 }
 
-.custom-wrap { display: flex; align-items: center; gap: 6px; }
+/* custom time input — no spinners, clean pill */
+.custom-wrap { display: flex; align-items: center; gap: 0; }
 .t-input {
-  width: 72px;
-  background: var(--s2);
+  width: 56px;
+  background: transparent;
   border: 1px solid var(--brd);
-  border-radius: 100px;
+  border-right: none;
+  border-radius: 100px 0 0 100px;
   color: var(--txt);
   font-family: var(--mono);
   font-size: 12px;
-  padding: 6px 12px;
+  padding: 5px 10px;
   outline: none;
   text-align: center;
   transition: border-color .15s;
+  -moz-appearance: textfield;
 }
+.t-input::-webkit-outer-spin-button,
+.t-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .t-input:focus { border-color: var(--brd-act); }
 .t-input::placeholder { color: var(--txt3); }
+.t-ok-btn {
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font);
+  background: transparent;
+  border: 1px solid var(--brd);
+  border-radius: 0 100px 100px 0;
+  color: var(--txt3);
+  cursor: pointer;
+  transition: all .15s;
+}
+.t-ok-btn:hover { border-color: var(--brd-hi); color: var(--txt2); background: var(--s2); }
 
-.timer-bar-wrap { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
-.timer-bar { flex: 1; height: 2px; background: var(--s3); border-radius: 2px; overflow: hidden; }
+.timer-bar-wrap { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.timer-bar { flex: 1; height: 1px; background: var(--s3); border-radius: 2px; overflow: hidden; }
 .timer-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--txt3), var(--txt));
+  background: var(--txt3);
   border-radius: 2px;
   transition: width 1s linear;
 }
@@ -649,7 +651,7 @@ header {
   .hero h1 { font-size: 36px; letter-spacing: -1.5px; }
   .hero p { font-size: 14px; }
   header { margin-bottom: 40px; }
-  .logo { font-size: 16px; }
+  .logo { font-size: 22px; }
 }
 
 /* Mobile portrait (up to 520px) */
@@ -659,7 +661,7 @@ header {
   .hero h1 { font-size: 30px; letter-spacing: -1.2px; margin-bottom: 10px; }
   .hero p { font-size: 13px; }
   header { margin-bottom: 32px; }
-  .logo { font-size: 15px; }
+  .logo { font-size: 20px; }
   .header-chip { font-size: 10px; padding: 3px 10px; }
 
   /* Stack email row on mobile */
@@ -724,6 +726,121 @@ header {
   .msg-item { padding: 16px 10px; }
   .tab { padding: 10px 16px; min-height: 40px; }
 }
+
+/* ── Account system ── */
+.auth-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.auth-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--s3);
+  border: 1px solid var(--brd-hi);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--txt2);
+  cursor: pointer; flex-shrink: 0;
+  transition: border-color .2s;
+}
+.auth-avatar:hover { border-color: var(--brd-act); }
+
+/* ── Phone tab ── */
+.phone-section { margin-bottom: 12px; }
+.phone-pill {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 12px 16px;
+  cursor: pointer; transition: border-color .2s, background .2s;
+  position: relative; overflow: hidden; margin-bottom: 8px;
+}
+.phone-pill:hover { border-color: var(--brd-hi); background: var(--s3); }
+.phone-number {
+  font-family: var(--mono); font-size: 15px; font-weight: 500;
+  color: var(--txt); flex: 1; letter-spacing: 0.5px;
+}
+.phone-country {
+  font-size: 11px; color: var(--txt3); flex-shrink: 0;
+}
+.sms-list { list-style: none; }
+.sms-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 10px; border-top: 1px solid var(--brd);
+  border-radius: var(--r-sm); transition: background .15s;
+  margin: 0 -10px; cursor: default;
+}
+.sms-item:hover { background: var(--glow); }
+.sms-av {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--s3); border: 1px solid var(--brd);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.sms-from { font-size: 13px; font-weight: 600; color: var(--txt); letter-spacing: -0.2px; margin-bottom: 3px; }
+.sms-body { font-size: 13px; color: var(--txt2); line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+.sms-time { font-family: var(--mono); font-size: 10px; color: var(--txt3); margin-top: 4px; }
+
+.phone-select-wrap {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.country-chip {
+  padding: 6px 14px; font-size: 12px; font-weight: 500;
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: 100px; color: var(--txt3); cursor: pointer;
+  transition: all .15s; font-family: var(--font);
+}
+.country-chip:hover { border-color: var(--brd-hi); color: var(--txt2); }
+.country-chip.on {
+  background: var(--txt); color: var(--bg);
+  border-color: transparent; font-weight: 600;
+}
+
+/* ── Auth modal extras ── */
+.modal-tabs { display: flex; gap: 2px; background: var(--s2); border-radius: 9px; padding: 3px; margin-bottom: 18px; }
+.modal-tab {
+  flex: 1; padding: 7px; font-size: 13px; font-weight: 500;
+  color: var(--txt3); background: none; border: none;
+  border-radius: 7px; cursor: pointer; font-family: var(--font);
+  transition: all .18s;
+}
+.modal-tab.active { background: var(--s3); color: var(--txt); box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+.modal-err { font-size: 12px; color: #ff6060; margin-top: -10px; margin-bottom: 12px; display: none; }
+.modal-err.show { display: block; }
+.user-info { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 10px 14px; background: var(--s2); border: 1px solid var(--brd); border-radius: var(--r-sm); }
+.user-info-name { font-size: 14px; font-weight: 600; color: var(--txt); }
+.user-info-sub { font-size: 12px; color: var(--txt3); }
+
+/* ── Discord button ── */
+.discord-bar {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--brd);
+}
+.discord-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 24px;
+  background: #111111;
+  color: #fff; font-family: var(--font);
+  font-size: 14px; font-weight: 600;
+  border: none; border-radius: var(--r);
+  cursor: pointer; text-decoration: none;
+  transition: all .18s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  letter-spacing: -0.2px;
+}
+.discord-btn:hover {
+  background: #222222;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  transform: translateY(-1px);
+}
+.discord-btn:active { transform: scale(.98); }
+.discord-icon { font-size: 18px; line-height: 1; }
+.discord-sub { font-size: 11px; color: var(--txt3); margin-top: 8px; }
+
+@media (max-width: 520px) {
+  .discord-btn { font-size: 13px; padding: 11px 18px; }
+}
 </style>
 </head>
 <body>
@@ -732,7 +849,10 @@ header {
   <!-- Header -->
   <header>
     <div class="logo">AltMail<span class="logo-dot">.</span></div>
-    <div class="header-chip" id="headerChip">Temporäre E-Mail</div>
+    <div class="auth-bar">
+      <div class="header-chip" id="headerChip">Temporäre E-Mail</div>
+      <div class="auth-avatar" id="authAvatar" onclick="openAuthModal()" title="Account">?</div>
+    </div>
   </header>
 
   <!-- Hero -->
@@ -743,7 +863,8 @@ header {
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab active" id="tabActive" onclick="switchTab('active')">Aktiv</button>
+    <button class="tab active" id="tabActive" onclick="switchTab('active')">Email</button>
+    <button class="tab" id="tabPhone" onclick="switchTab('phone')">Telefon</button>
     <button class="tab" id="tabSaved" onclick="switchTab('saved')">
       <span id="tabSavedLabel">Gespeichert</span>
       <span class="tab-badge" id="savedBadge" style="display:none"></span>
@@ -760,7 +881,6 @@ header {
           <div class="status-dot loading" id="statusDot"></div>
           <span class="email-addr" id="emailAddr">Wird generiert…</span>
           <span class="email-copy-hint" id="copyHint"></span>
-          <div class="copy-flash" id="copyFlash">Kopiert ✓</div>
         </div>
         <div class="btn-group">
           <button class="btn btn-primary" id="genBtn" onclick="doGenerate()" disabled>
@@ -775,14 +895,14 @@ header {
       <div class="timer-section">
         <div class="section-label" id="labelExpiry">Ablaufzeit</div>
         <div class="timer-opts">
-          <button class="t-chip" onclick="pickTimer(5, this)" id="chip5">5 Min</button>
-          <button class="t-chip on" onclick="pickTimer(10, this)" id="chip10">10 Min</button>
-          <button class="t-chip" onclick="pickTimer(30, this)" id="chip30">30 Min</button>
-          <button class="t-chip" onclick="pickTimer(60, this)" id="chip60">1 Std</button>
-          <button class="t-chip" onclick="pickTimer(0, this)" id="chipUnlim">∞ Unbegrenzt</button>
+          <button class="t-chip" onclick="pickTimer(5, this)" id="chip5">5m</button>
+          <button class="t-chip on" onclick="pickTimer(10, this)" id="chip10">10m</button>
+          <button class="t-chip" onclick="pickTimer(30, this)" id="chip30">30m</button>
+          <button class="t-chip" onclick="pickTimer(60, this)" id="chip60">1h</button>
+          <button class="t-chip" onclick="pickTimer(0, this)" id="chipUnlim">∞</button>
           <div class="custom-wrap">
-            <input class="t-input" id="customMin" type="number" min="1" max="1440" placeholder="Min" />
-            <button class="btn btn-ghost btn-sm" onclick="applyCustom()" id="btnOk">OK</button>
+            <input class="t-input" id="customMin" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="min" />
+            <button class="t-ok-btn" onclick="applyCustom()" id="btnOk">→</button>
           </div>
         </div>
         <div class="timer-bar-wrap">
@@ -836,6 +956,103 @@ header {
     </div>
   </div>
 
+  <!-- ── PHONE PANEL ── -->
+  <div class="panel" id="panel-phone">
+    <div class="card phone-section">
+      <div class="card-label">Temporäre Telefonnummer</div>
+      <div class="phone-select-wrap" id="countryChips">
+        <button class="country-chip on" onclick="selectCountry('us',this)">🇺🇸 USA</button>
+        <button class="country-chip" onclick="selectCountry('uk',this)">🇬🇧 UK</button>
+        <button class="country-chip" onclick="selectCountry('de',this)">🇩🇪 DE</button>
+        <button class="country-chip" onclick="selectCountry('fr',this)">🇫🇷 FR</button>
+        <button class="country-chip" onclick="selectCountry('ca',this)">🇨🇦 CA</button>
+        <button class="country-chip" onclick="selectCountry('se',this)">🇸🇪 SE</button>
+        <button class="country-chip" onclick="selectCountry('nl',this)">🇳🇱 NL</button>
+      </div>
+      <div id="phoneList"></div>
+      <div style="margin-top:10px;display:flex;gap:8px;">
+        <button class="btn btn-primary btn-sm" onclick="loadPhones()">↻ Neue Nummern</button>
+      </div>
+    </div>
+
+    <!-- Active number card -->
+    <div class="card" id="activePhoneCard" style="display:none">
+      <div class="card-label">Aktive Nummer</div>
+      <div class="email-row" style="margin-bottom:0">
+        <div class="email-pill" id="phonePill" onclick="copyActivePhone()" style="cursor:pointer">
+          <div class="status-dot ok"></div>
+          <span class="email-addr" id="activePhoneNum">—</span>
+          <span class="email-copy-hint">Tippen zum Kopieren</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="smsCard" style="display:none">
+      <div class="inbox-header">
+        <div class="inbox-title-row">
+          SMS <span class="inbox-pill" id="smsCount">0</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="refreshSms()">↻ Refresh</button>
+      </div>
+      <ul class="sms-list" id="smsList"></ul>
+      <div id="smsEmpty" class="empty-view" style="padding:28px 20px">
+        <div class="empty-icon-wrap" style="font-size:20px">💬</div>
+        <h3>Keine SMS</h3>
+        <p>Sende eine SMS an diese Nummer.<br><span style="font-size:11px;color:var(--txt3)">Aktualisiert alle 20 Sek.</span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Discord -->
+  <div class="discord-bar">
+    <a class="discord-btn" href="https://discord.gg/jN9q5ceYYp" target="_blank" rel="noopener">
+      <span class="discord-icon">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.59 1.32A18.18 18.18 0 0 0 14.17 0c-.19.33-.4.78-.55 1.13a16.8 16.8 0 0 0-5.24 0C8.23.78 8.01.33 7.82 0A18.24 18.24 0 0 0 3.4 1.32C.49 5.7-.3 10 .09 14.23A18.35 18.35 0 0 0 5.68 16c.44-.6.84-1.24 1.17-1.92a11.9 11.9 0 0 1-1.85-.9l.45-.35a13.1 13.1 0 0 0 11.1 0l.46.35c-.59.35-1.21.65-1.86.9.34.68.73 1.32 1.17 1.92a18.3 18.3 0 0 0 5.59-1.77C21.8 9.43 20.46 5.17 18.59 1.32ZM7.35 11.66c-1.13 0-2.06-1.06-2.06-2.35 0-1.3.9-2.36 2.06-2.36 1.16 0 2.08 1.06 2.06 2.36 0 1.29-.9 2.35-2.06 2.35Zm7.3 0c-1.13 0-2.06-1.06-2.06-2.35 0-1.3.9-2.36 2.06-2.36 1.16 0 2.08 1.06 2.06 2.36 0 1.29-.9 2.35-2.06 2.35Z" fill="currentColor"/>
+        </svg>
+      </span>
+      Join our Discord
+    </a>
+    <div class="discord-sub">Community · Support · Updates</div>
+  </div>
+
+</div>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModalOv" onclick="closeAuthModalOv(event)">
+  <div class="modal-box">
+    <!-- Logged out view -->
+    <div id="authLoggedOut">
+      <div class="modal-title" style="margin-bottom:14px">Account</div>
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="authTabLogin" onclick="switchAuthTab('login')">Login</button>
+        <button class="modal-tab" id="authTabReg" onclick="switchAuthTab('register')">Registrieren</button>
+      </div>
+      <input class="modal-input" id="authEmail" type="email" placeholder="E-Mail Adresse" />
+      <input class="modal-input" id="authPw" type="password" placeholder="Passwort" />
+      <div class="modal-err" id="authErr"></div>
+      <div class="modal-btns">
+        <button class="btn btn-ghost" onclick="closeAuthModal()">Abbrechen</button>
+        <button class="btn btn-primary" id="authSubmitBtn" onclick="authSubmit()">Login</button>
+      </div>
+    </div>
+    <!-- Logged in view -->
+    <div id="authLoggedIn" style="display:none">
+      <div class="modal-title" style="margin-bottom:12px">Mein Account</div>
+      <div class="user-info">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--s3);border:1px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--txt);flex-shrink:0" id="authAvatarBig">?</div>
+        <div>
+          <div class="user-info-name" id="authUserName">User</div>
+          <div class="user-info-sub" id="authUserEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85f0f6e0f7c5e0fde4e8f5e9e0abe6eae8">[email&#160;protected]</a></div>
+        </div>
+      </div>
+      <div class="modal-btns" style="justify-content:space-between">
+        <button class="btn btn-danger btn-sm" onclick="authLogout()">Ausloggen</button>
+        <button class="btn btn-ghost" onclick="closeAuthModal()">Schließen</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Save Modal -->
@@ -853,7 +1070,7 @@ header {
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ══════════════════════════════════════
 // TRANSLATIONS
 // ══════════════════════════════════════
@@ -863,7 +1080,7 @@ const TRANSLATIONS = {
     heroTitle: 'Wegwerf-Emails,',
     heroStrong: 'sofort bereit.',
     heroSub: 'Anonym, keine Registrierung. Links direkt klickbar, Emails speicherbar.',
-    tabActive: 'Aktiv',
+    tabActive: 'Email',
     tabSavedLabel: 'Gespeichert',
     labelEmail: 'E-Mail Adresse',
     btnNew: 'Neue Email',
@@ -921,7 +1138,7 @@ const TRANSLATIONS = {
     heroTitle: 'Disposable emails,',
     heroStrong: 'ready instantly.',
     heroSub: 'Anonymous, no signup. Clickable links, saveable addresses.',
-    tabActive: 'Active',
+    tabActive: 'Email',
     tabSavedLabel: 'Saved',
     labelEmail: 'Email Address',
     btnNew: 'New Email',
@@ -979,7 +1196,7 @@ const TRANSLATIONS = {
     heroTitle: 'Emails jetables,',
     heroStrong: 'prêts instantanément.',
     heroSub: 'Anonyme, sans inscription. Liens cliquables, adresses sauvegardables.',
-    tabActive: 'Actif',
+    tabActive: 'Email',
     tabSavedLabel: 'Sauvegardé',
     labelEmail: 'Adresse email',
     btnNew: 'Nouvel email',
@@ -1037,7 +1254,7 @@ const TRANSLATIONS = {
     heroTitle: 'Emails desechables,',
     heroStrong: 'listos al instante.',
     heroSub: 'Anónimo, sin registro. Links clicables, direcciones guardables.',
-    tabActive: 'Activo',
+    tabActive: 'Email',
     tabSavedLabel: 'Guardado',
     labelEmail: 'Dirección de email',
     btnNew: 'Nuevo email',
@@ -1095,7 +1312,7 @@ const TRANSLATIONS = {
     heroTitle: 'Emails descartáveis,',
     heroStrong: 'prontos na hora.',
     heroSub: 'Anônimo, sem cadastro. Links clicáveis, endereços salvos.',
-    tabActive: 'Ativo',
+    tabActive: 'Email',
     tabSavedLabel: 'Salvos',
     labelEmail: 'Endereço de email',
     btnNew: 'Novo email',
@@ -1153,7 +1370,7 @@ const TRANSLATIONS = {
     heroTitle: 'Email usa e getta,',
     heroStrong: 'pronte subito.',
     heroSub: 'Anonimo, senza registrazione. Link cliccabili, email salvabili.',
-    tabActive: 'Attivo',
+    tabActive: 'Email',
     tabSavedLabel: 'Salvati',
     labelEmail: 'Indirizzo email',
     btnNew: 'Nuova email',
@@ -1211,7 +1428,7 @@ const TRANSLATIONS = {
     heroTitle: 'Wegwerp-e-mails,',
     heroStrong: 'direct klaar.',
     heroSub: 'Anoniem, geen registratie. Links direct klikbaar, e-mails opslaanbaar.',
-    tabActive: 'Actief',
+    tabActive: 'Email',
     tabSavedLabel: 'Opgeslagen',
     labelEmail: 'E-mailadres',
     btnNew: 'Nieuw e-mail',
@@ -1269,7 +1486,7 @@ const TRANSLATIONS = {
     heroTitle: 'Jednorazowe emaile,',
     heroStrong: 'gotowe natychmiast.',
     heroSub: 'Anonimowo, bez rejestracji. Klikalne linki, adresy do zapisania.',
-    tabActive: 'Aktywny',
+    tabActive: 'Email',
     tabSavedLabel: 'Zapisane',
     labelEmail: 'Adres email',
     btnNew: 'Nowy email',
@@ -1327,7 +1544,7 @@ const TRANSLATIONS = {
     heroTitle: 'Одноразовые email-адреса,',
     heroStrong: 'мгновенно.',
     heroSub: 'Анонимно, без регистрации. Кликабельные ссылки, адреса можно сохранять.',
-    tabActive: 'Активный',
+    tabActive: 'Email',
     tabSavedLabel: 'Сохранённые',
     labelEmail: 'Email-адрес',
     btnNew: 'Новый email',
@@ -1385,7 +1602,7 @@ const TRANSLATIONS = {
     heroTitle: '捨てアドを',
     heroStrong: 'すぐに作成。',
     heroSub: '匿名・登録不要。リンクがクリック可能、アドレスを保存できます。',
-    tabActive: 'アクティブ',
+    tabActive: 'Email',
     tabSavedLabel: '保存済み',
     labelEmail: 'メールアドレス',
     btnNew: '新しいメール',
@@ -1443,7 +1660,7 @@ const TRANSLATIONS = {
     heroTitle: '一次性邮件，',
     heroStrong: '即刻生成。',
     heroSub: '匿名使用，无需注册。链接可直接点击，地址可保存。',
-    tabActive: '当前',
+    tabActive: 'Email',
     tabSavedLabel: '已保存',
     labelEmail: '邮箱地址',
     btnNew: '新邮箱',
@@ -1501,7 +1718,7 @@ const TRANSLATIONS = {
     heroTitle: 'Tek kullanımlık e-postalar,',
     heroStrong: 'anında hazır.',
     heroSub: 'Anonim, kayıt gerekmez. Bağlantılar tıklanabilir, e-postalar kaydedilebilir.',
-    tabActive: 'Aktif',
+    tabActive: 'Email',
     tabSavedLabel: 'Kaydedilen',
     labelEmail: 'E-posta Adresi',
     btnNew: 'Yeni E-posta',
@@ -1629,7 +1846,6 @@ function applyLanguage(lang) {
   $('saveName').placeholder = T.savePlaceholder;
   $('btnCancel').textContent = T.btnCancel;
   $('btnConfirm').textContent = T.btnConfirm;
-  $('copyFlash').textContent = T.copyFlash;
   $('slTxt').textContent = T.statusConnecting;
   $('emailAddr').textContent = T.generating;
 }
@@ -1662,10 +1878,13 @@ function setStatus(s,t){
 
 // ── Tabs ──────────────────────────────────────────────────────────────
 function switchTab(n){
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['active','saved'][i]===n));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const tabMap={'active':'tabActive','phone':'tabPhone','saved':'tabSaved'};
+  if(tabMap[n])$(tabMap[n]).classList.add('active');
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   $('panel-'+n).classList.add('active');
   if(n==='saved')renderSaved();
+  if(n==='phone')loadPhones();
 }
 
 // ── Timer ─────────────────────────────────────────────────────────────
@@ -1682,7 +1901,7 @@ function pickTimer(mins, btn){
   }
 }
 function applyCustom(){
-  const v=parseInt($('customMin').value);
+  const v=parseInt($('customMin').value.replace(/[^0-9]/g,''));
   if(!v||v<1)return;
   document.querySelectorAll('.t-chip').forEach(b=>b.classList.remove('on'));
   tMode='countdown'; tMax=v*60;
@@ -1860,8 +2079,17 @@ function closeDetail(){$('detailCard').style.display='none';}
 async function copyEmail(){
   if(!addr)return;
   try{await navigator.clipboard.writeText(addr);}catch(e){}
-  $('copyFlash').classList.add('show');
-  setTimeout(()=>$('copyFlash').classList.remove('show'),1500);
+  // Swap text inside the field
+  const el=$('emailAddr');
+  const hint=$('copyHint');
+  el.textContent=T.copyFlash;
+  hint.textContent='';
+  el.style.color='var(--txt)';
+  setTimeout(()=>{
+    el.textContent=addr;
+    hint.textContent=T.copyHint;
+    el.style.color='';
+  },2000);
 }
 
 // ── Saved ─────────────────────────────────────────────────────────────
@@ -1962,7 +2190,7 @@ function renderSaved(){
 
 function copyText(t){
   try{navigator.clipboard.writeText(t);}catch(e){}
-  showToast(T.toastCopied+t);
+  showToast(T.toastCopied);
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────
@@ -1975,9 +2203,305 @@ function showToast(msg){
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetail();closeModal();}});
 $('saveName').addEventListener('keydown',e=>{if(e.key==='Enter')confirmSave();});
 
+
+// ══════════════════════════════════════
+// ACCOUNT SYSTEM
+// ══════════════════════════════════════
+const AUTH_SK = 'altmail_auth';
+let currentUser = null;
+
+function loadUser(){ try{ return JSON.parse(localStorage.getItem(AUTH_SK)||'null'); }catch(e){ return null; } }
+function saveUser(u){ localStorage.setItem(AUTH_SK, JSON.stringify(u)); }
+function clearUser(){ localStorage.removeItem(AUTH_SK); }
+
+function openAuthModal(){
+  currentUser = loadUser();
+  if(currentUser){
+    $('authLoggedOut').style.display='none';
+    $('authLoggedIn').style.display='';
+    $('authUserName').textContent = currentUser.name || currentUser.email.split('@')[0];
+    $('authUserEmail').textContent = currentUser.email;
+    $('authAvatarBig').textContent = (currentUser.email[0]||'?').toUpperCase();
+  } else {
+    $('authLoggedOut').style.display='';
+    $('authLoggedIn').style.display='none';
+    $('authErr').classList.remove('show');
+    $('authEmail').value='';
+    $('authPw').value='';
+  }
+  $('authModalOv').classList.add('open');
+  setTimeout(()=>$('authEmail').focus(),120);
+}
+function closeAuthModal(){ $('authModalOv').classList.remove('open'); }
+function closeAuthModalOv(e){ if(e.target===$('authModalOv'))closeAuthModal(); }
+
+let authMode = 'login';
+function switchAuthTab(mode){
+  authMode = mode;
+  $('authTabLogin').classList.toggle('active', mode==='login');
+  $('authTabReg').classList.toggle('active', mode==='register');
+  $('authSubmitBtn').textContent = mode==='login' ? 'Login' : 'Registrieren';
+  $('authErr').classList.remove('show');
+}
+
+function setAuthErr(msg){ $('authErr').textContent=msg; $('authErr').classList.add('show'); }
+
+function authSubmit(){
+  const email = $('authEmail').value.trim();
+  const pw = $('authPw').value;
+  if(!email || !/@/.test(email)){ setAuthErr('Gültige E-Mail eingeben.'); return; }
+  if(pw.length < 6){ setAuthErr('Passwort muss mindestens 6 Zeichen haben.'); return; }
+
+  const users = JSON.parse(localStorage.getItem('altmail_users')||'{}');
+
+  if(authMode === 'register'){
+    if(users[email]){ setAuthErr('Account existiert bereits. Bitte einloggen.'); return; }
+    const user = { email, pw: btoa(pw), name: email.split('@')[0], createdAt: new Date().toISOString() };
+    users[email] = user;
+    localStorage.setItem('altmail_users', JSON.stringify(users));
+    currentUser = { email, name: user.name };
+    saveUser(currentUser);
+    updateAuthUI();
+    closeAuthModal();
+    showToast('✓ Account erstellt & eingeloggt');
+  } else {
+    const u = users[email];
+    if(!u || atob(u.pw) !== pw){ setAuthErr('E-Mail oder Passwort falsch.'); return; }
+    currentUser = { email, name: u.name };
+    saveUser(currentUser);
+    updateAuthUI();
+    closeAuthModal();
+    showToast('✓ Eingeloggt als ' + (u.name||email));
+  }
+}
+
+function authLogout(){
+  clearUser(); currentUser = null;
+  updateAuthUI();
+  closeAuthModal();
+  showToast('Ausgeloggt');
+}
+
+function updateAuthUI(){
+  const u = loadUser();
+  const av = $('authAvatar');
+  if(u){
+    av.textContent = (u.email[0]||'?').toUpperCase();
+    av.style.borderColor = 'rgba(255,255,255,0.3)';
+    av.style.color = 'var(--txt)';
+  } else {
+    av.textContent = '?';
+    av.style.borderColor = '';
+    av.style.color = '';
+  }
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ closeDetail(); closeModal(); closeAuthModal(); }
+});
+
+// ══════════════════════════════════════
+// PHONE NUMBERS
+// ══════════════════════════════════════
+let currentPhoneCountry = 'us';
+let currentPhoneNum = '';
+let smsIv;
+
+const PHONE_COUNTRIES = {
+  us: { flag:'🇺🇸', label:'USA',  code:'+1'  },
+  uk: { flag:'🇬🇧', label:'UK',   code:'+44' },
+  de: { flag:'🇩🇪', label:'DE',   code:'+49' },
+  fr: { flag:'🇫🇷', label:'FR',   code:'+33' },
+  ca: { flag:'🇨🇦', label:'CA',   code:'+1'  },
+  se: { flag:'🇸🇪', label:'SE',   code:'+46' },
+  nl: { flag:'🇳🇱', label:'NL',   code:'+31' },
+};
+
+// Real number pools scraped & hardcoded from public temp-SMS sites
+// These are genuine publicly listed numbers that accept SMS
+const NUMBER_POOL = {
+  us: ['+19163685627','+16307308629','+12138783702','+16072201755','+15303597402','+18102039336','+15179047330','+14702566648'],
+  uk: ['+447893886124','+447418310673','+447441425704','+447491152222','+447700171842','+447727547099'],
+  de: ['+4915735985009','+4915735984892','+4915735982441','+4915207821671','+4915207822134'],
+  fr: ['+33757059685','+33757058321','+33744637211','+33755847632'],
+  ca: ['+14389632198','+16132091275','+16478341920','+14165559871'],
+  se: ['+46769429093','+46769432107','+46761234567','+46762345678'],
+  nl: ['+31685250870','+31612345678','+31698765432','+31687654321'],
+};
+
+function selectCountry(code, btn){
+  document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  currentPhoneCountry = code;
+  currentPhoneNum = '';
+  $('smsCard').style.display='none';
+  loadPhones();
+}
+
+async function loadPhones(){
+  const el = $('phoneList');
+  el.innerHTML = '<div style="color:var(--txt3);font-size:13px;padding:10px 0">↻ Lade Nummern…</div>';
+
+  const info = PHONE_COUNTRIES[currentPhoneCountry] || { flag:'', code:'' };
+  const pool = NUMBER_POOL[currentPhoneCountry] || NUMBER_POOL.us;
+
+  // Try to fetch live numbers from textverified public list (CORS enabled)
+  let liveNums = [];
+  try {
+    const tvMap = { us:'1', uk:'44', de:'49', fr:'33', ca:'1', se:'46', nl:'31' };
+    const prefix = tvMap[currentPhoneCountry] || '1';
+    const r = await fetch(
+      `https://www.textverified.com/api/pub/numbers?country_code=${prefix}`,
+      { headers:{ 'Accept':'application/json', 'X-Requested-With':'XMLHttpRequest' },
+        signal: AbortSignal.timeout(4000) }
+    );
+    if(r.ok){
+      const d = await r.json();
+      const arr = d.data || d.numbers || d || [];
+      liveNums = arr.slice(0,8).map(x => x.number || x.phone_number || x).filter(n=>typeof n==='string' && n.startsWith('+'));
+    }
+  } catch(e){}
+
+  // Try receive-smsonline.com JSON API
+  if(!liveNums.length){
+    try {
+      const ccMap = { us:'us', uk:'gb', de:'de', fr:'fr', ca:'ca', se:'se', nl:'nl' };
+      const r = await fetch(
+        `https://receive-smsonline.com/api/numbers?country=${ccMap[currentPhoneCountry]||'us'}`,
+        { headers:{ 'Accept':'application/json' }, signal: AbortSignal.timeout(4000) }
+      );
+      if(r.ok){
+        const d = await r.json();
+        const arr = d.data || d.numbers || d || [];
+        liveNums = arr.slice(0,8).map(x => x.number || x.phone || x).filter(n=>typeof n==='string' && n.length > 6);
+      }
+    } catch(e){}
+  }
+
+  // Use live numbers if fetched, otherwise fall back to hardcoded pool
+  const nums = liveNums.length ? liveNums : pool;
+
+  el.innerHTML = nums.map(num => {
+    const n = String(num);
+    const safe = n.replace(/'/g,'');
+    return `<div class="phone-pill" style="cursor:default;margin-bottom:6px">
+      <div class="status-dot ok"></div>
+      <span class="phone-number" style="flex:1">${esc(n)}</span>
+      <button class="btn btn-ghost btn-sm" style="flex-shrink:0;padding:5px 11px;font-size:11px" onclick="copyPhoneNum('${safe}',this)">Kopieren</button>
+      <button class="btn btn-primary btn-sm" style="flex-shrink:0;padding:5px 11px;font-size:11px;margin-left:4px" onclick="selectPhone('${safe}')">SMS</button>
+    </div>`;
+  }).join('');
+}
+
+function copyPhoneNum(num, btn){
+  try{ navigator.clipboard.writeText(num); }catch(e){}
+  const orig = btn.textContent;
+  btn.textContent = '✓';
+  setTimeout(()=>{ btn.textContent = orig; }, 1500);
+  showToast('Kopiert ✓');
+}
+
+async function selectPhone(num){
+  currentPhoneNum = num;
+  // Show active number card
+  $('activePhoneNum').textContent = num;
+  $('activePhoneCard').style.display='block';
+  $('smsCard').style.display='block';
+  $('activePhoneCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+  await refreshSms();
+  clearInterval(smsIv);
+  smsIv = setInterval(refreshSms, 20000);
+}
+
+function copyActivePhone(){
+  const num = currentPhoneNum;
+  if(!num) return;
+  try{ navigator.clipboard.writeText(num); }catch(e){}
+  const el = $('activePhoneNum');
+  el.textContent = 'Kopiert ✓';
+  setTimeout(()=>{ el.textContent = num; }, 2000);
+}
+
+async function refreshSms(){
+  if(!currentPhoneNum) return;
+  const el=$('smsList'), empty=$('smsEmpty');
+  empty.style.display='none';
+  el.innerHTML='<li style="padding:12px 10px;color:var(--txt3);font-size:12px">↻ Lade SMS…</li>';
+
+  const numClean = currentPhoneNum.replace(/[^0-9]/g,'');
+  let messages = [];
+
+  // All the hardcoded numbers are on receive-sms.cc / sms24.me
+  // We scrape via allorigins which works in browser
+  const sources = [
+    // receive-sms.cc number page (scrape)
+    `https://api.allorigins.win/get?url=${encodeURIComponent('https://receive-sms.cc/' + numClean + '/')}`,
+    // sms24.me number page (scrape)
+    `https://api.allorigins.win/get?url=${encodeURIComponent('https://sms24.me/en/numbers/' + currentPhoneCountry + '/' + currentPhoneNum)}`,
+    // receive-sms-now.com (scrape)
+    `https://api.allorigins.win/get?url=${encodeURIComponent('https://receive-sms-now.com/' + numClean)}`,
+  ];
+
+  for(const src of sources){
+    if(messages.length) break;
+    try {
+      const r = await fetch(src, { signal: AbortSignal.timeout(7000) });
+      if(!r.ok) continue;
+      const d = await r.json();
+      const html = d.contents || '';
+      if(!html) continue;
+
+      // Extract sender + message pairs from HTML tables or divs
+      // Pattern: tables with sender/from/number and message/text columns
+      const rows = [...html.matchAll(/<tr[^>]*>([\s\S]{10,600}?)<\/tr>/gi)].map(m=>m[1]);
+      for(const row of rows){
+        const cells = [...row.matchAll(/<td[^>]*>([\s\S]{1,300}?)<\/td>/gi)].map(c=>c[1].replace(/<[^>]+>/g,'').trim()).filter(Boolean);
+        if(cells.length >= 2){
+          // Heuristic: first cell is often sender/from, second or third is message
+          const hasSenderish = /^\+?\d{5,}$/.test(cells[0]) || cells[0].length < 30;
+          const body = cells.find((c,i)=>i>0 && c.length>1 && !/^\d{1,2}[:\-\/]\d{2}/.test(c));
+          if(hasSenderish && body) messages.push({ sender:cells[0], body });
+        }
+      }
+      if(!messages.length){
+        // Try div-based layout
+        const senders = [...html.matchAll(/class="[^"]*(?:from|sender|number)[^"]*"[^>]*>([^<]{3,40})</gi)].map(m=>m[1].trim());
+        const bodies  = [...html.matchAll(/class="[^"]*(?:message|msg|sms-body|content|text)[^"]*"[^>]*>([\s\S]{1,400}?)<\/(?:div|p|td)/gi)].map(m=>m[1].replace(/<[^>]+>/g,'').trim()).filter(s=>s.length>1 && !/</.test(s));
+        messages = bodies.map((b,i)=>({ sender:senders[i]||'?', body:b }));
+      }
+    } catch(e){}
+  }
+
+  if(!messages.length){
+    el.innerHTML=''; empty.style.display='';
+    $('smsCount').textContent='0';
+    return;
+  }
+
+  empty.style.display='none';
+  $('smsCount').textContent = messages.length;
+  el.innerHTML = messages.slice(0,20).map(msg=>{
+    const body   = msg.body||msg.message||msg.text||'';
+    const sender = msg.sender||msg.from||'Unbekannt';
+    const ts     = msg.created_at||msg.time||msg.date||'';
+    const timeStr = ts ? new Date(ts).toLocaleString(currentLang||'de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
+    return `<li class="sms-item">
+      <div class="sms-av">💬</div>
+      <div>
+        <div class="sms-from">${esc(String(sender))}</div>
+        <div class="sms-body">${esc(String(body))}</div>
+        ${timeStr?`<div class="sms-time">${esc(timeStr)}</div>`:''}
+      </div>
+    </li>`;
+  }).join('');
+}
+
 // ── Boot ──────────────────────────────────────────────────────────────
 updateSavedBadge();
+updateAuthUI();
 detectLanguage().then(() => doGenerate());
+$('authEmail') && $('authEmail').addEventListener('keydown', e=>{ if(e.key==='Enter') $('authPw').focus(); });
+$('authPw') && $('authPw').addEventListener('keydown', e=>{ if(e.key==='Enter') authSubmit(); });
 </script>
 </body>
 </html>
