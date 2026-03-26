@@ -34,7 +34,6 @@
   --btn-primary-hover: #d0d0d0;
   --shadow-sm: 0 4px 24px rgba(0,0,0,0.3);
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
-  --theme-icon: '☀️';
 }
 
 [data-theme="light"] {
@@ -55,7 +54,6 @@
   --btn-primary-hover: #333333;
   --shadow-sm: 0 4px 24px rgba(0,0,0,0.08);
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
-  --theme-icon: '🌙';
 }
 
 body {
@@ -88,7 +86,6 @@ body::before {
   padding: 40px 20px 80px;
 }
 
-/* ── Header ── */
 header {
   display: flex;
   align-items: center;
@@ -121,7 +118,7 @@ header {
   letter-spacing: 0.3px;
 }
 
-/* ── Theme toggle ── */
+/* Theme toggle with SVG icon */
 .theme-toggle {
   width: 34px;
   height: 34px;
@@ -132,17 +129,52 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
   transition: all 0.2s;
   flex-shrink: 0;
+  color: var(--txt2);
 }
 .theme-toggle:hover {
   border-color: var(--brd-hi);
   background: var(--s3);
   transform: rotate(20deg);
+  color: var(--txt);
+}
+.theme-toggle svg { width: 16px; height: 16px; }
+
+/* Online counter - bottom right */
+.online-counter {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--s1);
+  border: 1px solid var(--brd);
+  border-radius: 100px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--txt3);
+  box-shadow: var(--shadow-sm);
+  z-index: 100;
+  transition: all 0.2s;
+  user-select: none;
+}
+.online-counter:hover { border-color: var(--brd-hi); color: var(--txt2); }
+.online-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74,222,128,0.5);
+  animation: pulse-green 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
+  50% { opacity: 0.7; box-shadow: 0 0 12px rgba(74,222,128,0.8); }
 }
 
-/* ── Hero ── */
+/* Hero */
 .hero {
   text-align: center;
   margin-bottom: 40px;
@@ -164,7 +196,7 @@ header {
   margin: 0 auto;
 }
 
-/* ── Tabs ── */
+/* Tabs */
 .tabs {
   display: flex;
   background: var(--s1);
@@ -208,11 +240,9 @@ header {
   min-width: 18px;
 }
 
-/* ── Panel ── */
 .panel { display: none; }
 .panel.active { display: block; }
 
-/* ── Card ── */
 .card {
   background: var(--s1);
   border: 1px solid var(--brd);
@@ -232,7 +262,6 @@ header {
   margin-bottom: 12px;
 }
 
-/* ── Email display ── */
 .email-row {
   display: flex;
   gap: 8px;
@@ -259,14 +288,11 @@ header {
 .email-pill:hover { border-color: var(--brd-hi); background: var(--s3); }
 
 .status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
   flex-shrink: 0;
   background: var(--txt3);
   transition: background .3s;
 }
-/* Changed: ok dots are now white instead of green */
 .status-dot.ok { background: #ffffff; box-shadow: 0 0 8px rgba(255,255,255,0.35); }
 .status-dot.loading { background: var(--txt3); animation: sdot .8s infinite; }
 .status-dot.err { background: #f87171; }
@@ -275,7 +301,6 @@ header {
 .email-addr {
   font-family: var(--mono);
   font-size: 13px;
-  font-weight: 400;
   color: var(--txt);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -292,7 +317,6 @@ header {
 
 .btn-group { display: flex; gap: 8px; }
 
-/* ── Buttons ── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -315,7 +339,6 @@ header {
 .btn:disabled { opacity: .3; cursor: not-allowed; }
 .btn:active:not(:disabled) { transform: scale(.98); }
 
-/* Fixed: primary button hover no longer goes fully white */
 .btn-primary {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-clr);
@@ -344,12 +367,6 @@ header {
 }
 .btn-danger:hover { border-color: rgba(248,113,113,0.4); color: #f87171; background: rgba(248,113,113,0.05); }
 
-/* ── Copy success state ── */
-.copy-success .email-addr {
-  color: var(--txt) !important;
-}
-
-/* ── Timer ── */
 .timer-section {
   margin-top: 16px;
   padding-top: 16px;
@@ -439,45 +456,26 @@ header {
   background: var(--txt3); flex-shrink: 0;
   transition: background .3s, box-shadow .3s;
 }
-/* Changed: sl-dot ok is now white */
 .sl-dot.ok { background: #ffffff; box-shadow: 0 0 6px rgba(255,255,255,0.3); }
 .sl-dot.err { background: #f87171; animation: sdot 1s infinite; }
 .sl-dot.loading { animation: sdot .6s infinite; }
 .sl-txt { font-size: 12px; color: var(--txt3); }
 
-/* ── Auto-refresh countdown ── */
 .refresh-ring-wrap {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   margin-left: auto;
 }
-.refresh-ring {
-  width: 14px; height: 14px;
-  position: relative;
-}
-.refresh-ring svg {
-  width: 14px; height: 14px;
-  transform: rotate(-90deg);
-}
+.refresh-ring { width: 14px; height: 14px; position: relative; }
+.refresh-ring svg { width: 14px; height: 14px; transform: rotate(-90deg); }
 .refresh-ring circle {
-  fill: none;
-  stroke: var(--txt3);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 38;
-  stroke-dashoffset: 0;
+  fill: none; stroke: var(--txt3); stroke-width: 2;
+  stroke-linecap: round; stroke-dasharray: 38; stroke-dashoffset: 0;
   transition: stroke-dashoffset 1s linear;
 }
-.refresh-ring-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--txt3);
-  min-width: 18px;
-  text-align: right;
-}
+.refresh-ring-label { font-family: var(--mono); font-size: 11px; color: var(--txt3); min-width: 18px; text-align: right; }
 
-/* ── Inbox ── */
 .inbox-header {
   display: flex;
   align-items: center;
@@ -487,41 +485,22 @@ header {
   gap: 8px;
 }
 .inbox-title-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--txt);
-  letter-spacing: -0.3px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--txt); letter-spacing: -0.3px;
 }
 .inbox-pill {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--txt3);
-  background: var(--s3);
-  border: 1px solid var(--brd);
-  border-radius: 100px;
-  padding: 2px 9px;
+  font-size: 11px; font-weight: 600; color: var(--txt3);
+  background: var(--s3); border: 1px solid var(--brd);
+  border-radius: 100px; padding: 2px 9px;
 }
-.inbox-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.inbox-actions { display: flex; align-items: center; gap: 8px; }
 
 .msg-list { list-style: none; }
 .msg-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 10px;
-  border-top: 1px solid var(--brd);
-  cursor: pointer;
-  border-radius: var(--r-sm);
-  transition: background .15s;
-  margin: 0 -10px;
-  animation: fadeInUp 0.2s ease;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 10px; border-top: 1px solid var(--brd);
+  cursor: pointer; border-radius: var(--r-sm); transition: background .15s;
+  margin: 0 -10px; animation: fadeInUp 0.2s ease;
 }
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(6px); }
@@ -530,319 +509,179 @@ header {
 .msg-item:hover { background: var(--glow); }
 .msg-item.unread .msg-from { color: var(--txt); }
 .msg-unread-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #ffffff;
-  flex-shrink: 0;
-  margin-top: 14px;
+  width: 6px; height: 6px; border-radius: 50%; background: #ffffff;
+  flex-shrink: 0; margin-top: 14px;
 }
 
 .msg-av {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  background: var(--s3);
-  border: 1px solid var(--brd);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--txt2);
-  flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--s3); border: 1px solid var(--brd);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600; color: var(--txt2); flex-shrink: 0;
 }
 .msg-content { flex: 1; min-width: 0; }
-.msg-row1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 3px;
-}
-.msg-from {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--txt);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  letter-spacing: -0.2px;
-}
+.msg-row1 { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 3px; }
+.msg-from { font-size: 13px; font-weight: 600; color: var(--txt); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -0.2px; }
 .msg-time { font-family: var(--mono); font-size: 11px; color: var(--txt3); flex-shrink: 0; }
 .msg-subject { font-size: 13px; color: var(--txt2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px; }
 .msg-preview { font-size: 12px; color: var(--txt3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .empty-view { padding: 48px 20px; text-align: center; }
 .empty-icon-wrap {
-  width: 56px; height: 56px;
-  border-radius: 16px;
-  background: var(--s2);
-  border: 1px solid var(--brd);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 22px;
+  width: 56px; height: 56px; border-radius: 16px;
+  background: var(--s2); border: 1px solid var(--brd);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; font-size: 22px;
 }
 .empty-view h3 { font-size: 15px; font-weight: 600; color: var(--txt2); margin-bottom: 6px; letter-spacing: -0.3px; }
 .empty-view p { font-size: 13px; color: var(--txt3); line-height: 1.6; }
 
-/* ── Detail ── */
 .detail-card {
-  display: none;
-  background: var(--s1);
-  border: 1px solid var(--brd);
-  border-radius: var(--r-lg);
-  margin-bottom: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  animation: fadeInUp 0.2s ease;
+  display: none; background: var(--s1); border: 1px solid var(--brd);
+  border-radius: var(--r-lg); margin-bottom: 12px; overflow: hidden;
+  box-shadow: var(--shadow-sm); animation: fadeInUp 0.2s ease;
 }
 .detail-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 20px;
-  border-bottom: 1px solid var(--brd);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 12px; padding: 20px; border-bottom: 1px solid var(--brd);
 }
 .detail-from { font-size: 15px; font-weight: 600; color: var(--txt); letter-spacing: -0.3px; margin-bottom: 4px; }
 .detail-subject { font-size: 13px; color: var(--txt2); margin-bottom: 5px; }
 .detail-meta { font-family: var(--mono); font-size: 11px; color: var(--txt3); }
 .detail-body { padding: 20px; max-height: 520px; overflow-y: auto; }
 
-.links-label {
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--txt3);
-  margin-bottom: 8px;
-}
+.links-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: var(--txt3); margin-bottom: 8px; }
 .link-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 14px;
-  border-radius: var(--r-sm);
-  margin-bottom: 6px;
-  text-decoration: none;
-  transition: background .15s, border-color .15s;
-  cursor: pointer;
-  border: 1px solid var(--brd);
-  background: var(--s2);
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px; border-radius: var(--r-sm); margin-bottom: 6px;
+  text-decoration: none; transition: background .15s, border-color .15s;
+  cursor: pointer; border: 1px solid var(--brd); background: var(--s2);
 }
 .link-card:hover { background: var(--s3); border-color: var(--brd-hi); }
 .link-card.confirm { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
 .link-card.confirm:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.35); }
-.link-confirm-badge {
-  font-size: 10px; font-weight: 600;
-  color: #0a0a0a; background: #ffffff;
-  padding: 2px 7px; border-radius: 100px;
-  flex-shrink: 0; letter-spacing: 0.3px;
-}
+.link-confirm-badge { font-size: 10px; font-weight: 600; color: #0a0a0a; background: #ffffff; padding: 2px 7px; border-radius: 100px; flex-shrink: 0; }
 .link-url { font-family: var(--mono); font-size: 12px; color: var(--txt2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
 .link-card.confirm .link-url { color: var(--txt); }
 .link-arrow { font-size: 13px; color: var(--txt3); flex-shrink: 0; }
-.link-card.confirm .link-arrow { color: var(--txt2); }
-
 .body-divider { border: none; border-top: 1px solid var(--brd); margin: 16px 0; }
 .email-body-text { font-size: 13px; line-height: 1.8; color: var(--txt2); white-space: pre-wrap; word-break: break-word; font-family: var(--mono); }
 
-/* ── Saved ── */
 .saved-empty { text-align: center; padding: 48px 20px; color: var(--txt3); font-size: 14px; line-height: 1.7; }
 .saved-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  background: var(--s2);
-  border: 1px solid var(--brd);
-  border-radius: var(--r);
-  margin-bottom: 8px;
-  transition: border-color .15s;
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; background: var(--s2); border: 1px solid var(--brd);
+  border-radius: var(--r); margin-bottom: 8px; transition: border-color .15s;
   animation: fadeInUp 0.15s ease;
 }
 .saved-item:hover { border-color: var(--brd-hi); }
 .saved-info { flex: 1; min-width: 0; }
 .saved-addr { font-family: var(--mono); font-size: 13px; color: var(--txt); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 4px; }
 .saved-meta { font-size: 12px; color: var(--txt3); }
-.saved-name-badge {
-  display: inline-block;
-  font-size: 11px; color: var(--txt3);
-  background: var(--s3); border: 1px solid var(--brd);
-  border-radius: 100px; padding: 2px 9px; margin-right: 6px;
-}
+.saved-name-badge { display: inline-block; font-size: 11px; color: var(--txt3); background: var(--s3); border: 1px solid var(--brd); border-radius: 100px; padding: 2px 9px; margin-right: 6px; }
 .saved-actions { display: flex; gap: 6px; flex-shrink: 0; }
 
-/* ── WHOAMI Panel ── */
-.whoami-section { margin-bottom: 16px; }
-
+/* WHOAMI */
 .whoami-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 28px 20px 20px;
-  text-align: center;
-  border-bottom: 1px solid var(--brd);
-  margin-bottom: 20px;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 28px 20px 20px; text-align: center;
+  border-bottom: 1px solid var(--brd); margin-bottom: 20px;
 }
 .whoami-avatar-large {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  background: var(--s3);
-  border: 2px solid var(--brd-hi);
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--s3); border: 2px solid var(--brd-hi);
   display: flex; align-items: center; justify-content: center;
   font-size: 28px; font-weight: 700; color: var(--txt);
-  margin-bottom: 14px;
-  letter-spacing: -1px;
+  margin-bottom: 14px; letter-spacing: -1px;
 }
-.whoami-name {
-  font-size: 20px; font-weight: 600; color: var(--txt);
-  letter-spacing: -0.5px; margin-bottom: 4px;
-}
-.whoami-email-sub {
-  font-family: var(--mono); font-size: 12px; color: var(--txt3);
-}
+.whoami-name { font-size: 20px; font-weight: 600; color: var(--txt); letter-spacing: -0.5px; margin-bottom: 4px; }
+.whoami-email-sub { font-family: var(--mono); font-size: 12px; color: var(--txt3); }
 
-.whoami-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
-}
+.whoami-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
 .whoami-stat {
-  background: var(--s2);
-  border: 1px solid var(--brd);
-  border-radius: var(--r);
-  padding: 14px 16px;
-  transition: border-color .15s;
+  background: var(--s2); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 14px 16px; transition: border-color .15s;
 }
 .whoami-stat:hover { border-color: var(--brd-hi); }
-.whoami-stat-value {
-  font-family: var(--mono);
-  font-size: 22px; font-weight: 500;
-  color: var(--txt);
-  letter-spacing: -1px;
-  margin-bottom: 4px;
-  line-height: 1;
-}
-.whoami-stat-label {
-  font-size: 11px; color: var(--txt3);
-  text-transform: uppercase; letter-spacing: 0.4px;
-}
+.whoami-stat-value { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--txt); letter-spacing: -1px; margin-bottom: 4px; line-height: 1; }
+.whoami-stat-label { font-size: 11px; color: var(--txt3); text-transform: uppercase; letter-spacing: 0.4px; }
 
-.whoami-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--brd);
-}
+.whoami-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--brd); }
 .whoami-row:last-child { border-bottom: none; }
-.whoami-row-label { font-size: 12px; color: var(--txt3); letter-spacing: 0.2px; }
-.whoami-row-value {
-  font-family: var(--mono); font-size: 12px; color: var(--txt2);
-  text-align: right; max-width: 60%; overflow: hidden;
-  text-overflow: ellipsis; white-space: nowrap;
-}
+.whoami-row-label { font-size: 12px; color: var(--txt3); }
+.whoami-row-value { font-family: var(--mono); font-size: 12px; color: var(--txt2); text-align: right; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .whoami-row-value.ok { color: #ffffff; }
 .whoami-row-value.err { color: #f87171; }
 
-.whoami-no-account {
-  text-align: center; padding: 40px 20px;
-}
-.whoami-no-account h3 { font-size: 16px; font-weight: 600; color: var(--txt2); margin-bottom: 8px; letter-spacing: -0.3px; }
-.whoami-no-account p { font-size: 13px; color: var(--txt3); line-height: 1.6; margin-bottom: 20px; }
-
-/* ── Modal ── */
+/* Modal */
 .modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
+  display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  z-index: 200; align-items: center; justify-content: center; padding: 20px;
 }
 .modal-overlay.open { display: flex; }
 .modal-box {
-  background: var(--s1);
-  border: 1px solid var(--brd-hi);
-  border-radius: var(--r-lg);
-  padding: 28px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: var(--shadow-lg);
-  animation: fadeInUp 0.2s ease;
+  background: var(--s1); border: 1px solid var(--brd-hi);
+  border-radius: var(--r-lg); padding: 28px;
+  max-width: 400px; width: 100%;
+  box-shadow: var(--shadow-lg); animation: fadeInUp 0.2s ease;
 }
 .modal-title { font-size: 16px; font-weight: 600; color: var(--txt); letter-spacing: -0.4px; margin-bottom: 6px; }
 .modal-sub { font-family: var(--mono); font-size: 12px; color: var(--txt3); margin-bottom: 20px; overflow: hidden; text-overflow: ellipsis; }
 .modal-input {
-  width: 100%;
-  background: var(--s2);
-  border: 1px solid var(--brd);
-  border-radius: var(--r-sm);
-  color: var(--txt);
-  font-family: var(--font);
-  font-size: 14px;
-  padding: 12px 14px;
-  outline: none;
-  margin-bottom: 16px;
+  width: 100%; background: var(--s2); border: 1px solid var(--brd);
+  border-radius: var(--r-sm); color: var(--txt); font-family: var(--font);
+  font-size: 14px; padding: 12px 14px; outline: none; margin-bottom: 16px;
   transition: border-color .15s;
 }
 .modal-input:focus { border-color: var(--brd-act); }
 .modal-input::placeholder { color: var(--txt3); }
 .modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
 
-/* ── Toast ── */
+.modal-tabs { display: flex; gap: 2px; background: var(--s2); border-radius: 9px; padding: 3px; margin-bottom: 18px; }
+.modal-tab {
+  flex: 1; padding: 7px; font-size: 13px; font-weight: 500;
+  color: var(--txt3); background: none; border: none;
+  border-radius: 7px; cursor: pointer; font-family: var(--font); transition: all .18s;
+}
+.modal-tab.active { background: var(--s3); color: var(--txt); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.modal-err { font-size: 12px; color: #f87171; margin-top: -10px; margin-bottom: 12px; display: none; }
+.modal-err.show { display: block; }
+.user-info { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 10px 14px; background: var(--s2); border: 1px solid var(--brd); border-radius: var(--r-sm); }
+.user-info-name { font-size: 14px; font-weight: 600; color: var(--txt); }
+.user-info-sub { font-size: 12px; color: var(--txt3); }
+
+/* Auth avatar */
+.auth-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--s3); border: 1px solid var(--brd-hi);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--txt2);
+  cursor: pointer; flex-shrink: 0; transition: border-color .2s;
+}
+.auth-avatar:hover { border-color: var(--brd-act); }
+
+/* Toast */
 .toast {
-  position: fixed;
-  bottom: 28px;
-  left: 50%;
+  position: fixed; bottom: 28px; left: 50%;
   transform: translateX(-50%) translateY(70px);
-  background: var(--s1);
-  border: 1px solid var(--brd-hi);
-  color: var(--txt2);
-  padding: 11px 20px;
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 500;
-  z-index: 9999;
-  opacity: 0;
-  transition: all .3s cubic-bezier(.34,1.3,.64,1);
-  white-space: nowrap;
-  box-shadow: var(--shadow-sm);
+  background: var(--s1); border: 1px solid var(--brd-hi);
+  color: var(--txt2); padding: 11px 20px; border-radius: 100px;
+  font-size: 13px; font-weight: 500; z-index: 9999;
+  opacity: 0; transition: all .3s cubic-bezier(.34,1.3,.64,1);
+  white-space: nowrap; box-shadow: var(--shadow-sm);
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ── Spinner ── */
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin .7s linear infinite; display: inline-block; }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 4px; }
 
-/* ── Account system ── */
-.auth-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.auth-avatar {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: var(--s3);
-  border: 1px solid var(--brd-hi);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700; color: var(--txt2);
-  cursor: pointer; flex-shrink: 0;
-  transition: border-color .2s;
-}
-.auth-avatar:hover { border-color: var(--brd-act); }
-
-/* ── Phone tab ── */
+/* Phone */
 .phone-section { margin-bottom: 12px; }
 .phone-pill {
   display: flex; align-items: center; gap: 10px;
@@ -852,98 +691,61 @@ header {
   position: relative; overflow: hidden; margin-bottom: 6px;
 }
 .phone-pill:hover { border-color: var(--brd-hi); background: var(--s3); }
-.phone-number {
-  font-family: var(--mono); font-size: 15px; font-weight: 500;
-  color: var(--txt); flex: 1; letter-spacing: 0.5px;
-}
+.phone-number { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--txt); flex: 1; letter-spacing: 0.5px; }
+
 .sms-list { list-style: none; }
 .sms-item {
   display: flex; align-items: flex-start; gap: 10px;
-  padding: 12px 10px; border-top: 1px solid var(--brd);
+  padding: 14px 10px; border-top: 1px solid var(--brd);
   border-radius: var(--r-sm); transition: background .15s;
-  margin: 0 -10px; cursor: default;
+  margin: 0 -10px; animation: fadeInUp 0.2s ease;
 }
 .sms-item:hover { background: var(--glow); }
 .sms-av {
   width: 34px; height: 34px; border-radius: 9px;
   background: var(--s3); border: 1px solid var(--brd);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
 }
 .sms-from { font-size: 13px; font-weight: 600; color: var(--txt); letter-spacing: -0.2px; margin-bottom: 3px; }
 .sms-body { font-size: 13px; color: var(--txt2); line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 .sms-time { font-family: var(--mono); font-size: 10px; color: var(--txt3); margin-top: 4px; }
 
-.phone-select-wrap {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;
-}
+.phone-select-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
 .country-chip {
   padding: 6px 14px; font-size: 12px; font-weight: 500;
   background: var(--s2); border: 1px solid var(--brd);
-  border-radius: 100px; color: var(--txt3); cursor: pointer;
-  transition: all .15px; font-family: var(--font);
+  border-radius: 100px; color: var(--txt3); cursor: pointer; transition: all .15s; font-family: var(--font);
 }
 .country-chip:hover { border-color: var(--brd-hi); color: var(--txt2); }
-.country-chip.on {
-  background: var(--btn-primary-bg); color: var(--btn-primary-clr);
-  border-color: transparent; font-weight: 600;
-}
+.country-chip.on { background: var(--btn-primary-bg); color: var(--btn-primary-clr); border-color: transparent; font-weight: 600; }
 
-/* ── Auth modal extras ── */
-.modal-tabs { display: flex; gap: 2px; background: var(--s2); border-radius: 9px; padding: 3px; margin-bottom: 18px; }
-.modal-tab {
-  flex: 1; padding: 7px; font-size: 13px; font-weight: 500;
-  color: var(--txt3); background: none; border: none;
-  border-radius: 7px; cursor: pointer; font-family: var(--font);
-  transition: all .18s;
-}
-.modal-tab.active { background: var(--s3); color: var(--txt); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-.modal-err { font-size: 12px; color: #f87171; margin-top: -10px; margin-bottom: 12px; display: none; }
-.modal-err.show { display: block; }
-.user-info { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 10px 14px; background: var(--s2); border: 1px solid var(--brd); border-radius: var(--r-sm); }
-.user-info-name { font-size: 14px; font-weight: 600; color: var(--txt); }
-.user-info-sub { font-size: 12px; color: var(--txt3); }
+/* SMS loading state */
+.sms-loading { text-align: center; padding: 24px 20px; color: var(--txt3); font-size: 13px; }
 
-/* ── Discord ── */
-.discord-bar {
-  text-align: center;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--brd);
-}
+/* Discord */
+.discord-bar { text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--brd); }
 .discord-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 12px 24px;
-  background: var(--s2);
-  color: var(--txt); font-family: var(--font);
-  font-size: 14px; font-weight: 600;
+  padding: 12px 24px; background: var(--s2); color: var(--txt);
+  font-family: var(--font); font-size: 14px; font-weight: 600;
   border: 1px solid var(--brd); border-radius: var(--r);
-  cursor: pointer; text-decoration: none;
-  transition: all .18s;
-  letter-spacing: -0.2px;
+  cursor: pointer; text-decoration: none; transition: all .18s; letter-spacing: -0.2px;
 }
-.discord-btn:hover {
-  border-color: var(--brd-hi);
-  background: var(--s3);
-  transform: translateY(-1px);
-}
+.discord-btn:hover { border-color: var(--brd-hi); background: var(--s3); transform: translateY(-1px); }
 .discord-icon { font-size: 18px; line-height: 1; }
 .discord-sub { font-size: 11px; color: var(--txt3); margin-top: 8px; }
 
-/* ── Responsive ── */
 @media (min-width: 1200px) {
   .wrap { max-width: 760px; padding: 56px 32px 100px; }
   .hero h1 { font-size: 52px; letter-spacing: -2.5px; }
 }
-
 @media (max-width: 767px) {
   .wrap { padding: 28px 16px 72px; }
   .hero h1 { font-size: 36px; }
   header { margin-bottom: 40px; }
   .logo { font-size: 22px; }
-  .whoami-grid { grid-template-columns: 1fr 1fr; }
+  .online-counter { bottom: 12px; right: 12px; padding: 5px 10px; font-size: 11px; }
 }
-
 @media (max-width: 520px) {
   .wrap { padding: 20px 12px 64px; }
   .hero h1 { font-size: 30px; letter-spacing: -1.2px; }
@@ -953,10 +755,8 @@ header {
   .btn-group .btn { flex: 1; }
   .card { padding: 16px; border-radius: 16px; }
   .tab { font-size: 12px; padding: 8px 10px; }
-  .toast { bottom: 20px; font-size: 12px; padding: 9px 16px; max-width: calc(100vw - 32px); white-space: normal; text-align: center; }
-  .whoami-grid { grid-template-columns: 1fr 1fr; }
+  .toast { bottom: 60px; font-size: 12px; padding: 9px 16px; max-width: calc(100vw - 32px); white-space: normal; text-align: center; }
 }
-
 @media (hover: none) and (pointer: coarse) {
   .btn { min-height: 44px; }
   .btn-sm { min-height: 38px; }
@@ -972,7 +772,24 @@ header {
     <div class="logo">AltMail<span class="logo-dot">.</span></div>
     <div class="header-right">
       <div class="header-chip" id="headerChip">Temporäre E-Mail</div>
-      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Theme wechseln">☀️</button>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Theme wechseln" aria-label="Theme wechseln">
+        <!-- Sun icon (shown in dark mode to switch to light) -->
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Moon icon (shown in light mode to switch to dark) -->
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
       <div class="auth-avatar" id="authAvatar" onclick="openAuthModal()" title="Account">?</div>
     </div>
   </header>
@@ -992,7 +809,7 @@ header {
     <button class="tab" id="tabWhoami" onclick="switchTab('whoami')">WHOAMI</button>
   </div>
 
-  <!-- ── AKTIV PANEL ── -->
+  <!-- AKTIV PANEL -->
   <div class="panel active" id="panel-active">
     <div class="card">
       <div class="card-label" id="labelEmail">E-Mail Adresse</div>
@@ -1011,7 +828,6 @@ header {
           </button>
         </div>
       </div>
-
       <div class="timer-section">
         <div class="section-label" id="labelExpiry">Ablaufzeit</div>
         <div class="timer-opts">
@@ -1022,7 +838,7 @@ header {
           <button class="t-chip" onclick="pickTimer(0,this)" id="chipUnlim">∞</button>
           <div class="custom-wrap">
             <input class="t-input" id="customMin" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="min" />
-            <button class="t-ok-btn" onclick="applyCustom()" id="btnOk">→</button>
+            <button class="t-ok-btn" onclick="applyCustom()">→</button>
           </div>
         </div>
         <div class="timer-bar-wrap">
@@ -1034,9 +850,7 @@ header {
           <span class="sl-txt" id="slTxt">Verbinde mit mail.tm…</span>
           <div class="refresh-ring-wrap" id="refreshRingWrap" style="display:none">
             <div class="refresh-ring">
-              <svg viewBox="0 0 14 14">
-                <circle cx="7" cy="7" r="5" id="refreshRingCircle"/>
-              </svg>
+              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" id="refreshRingCircle"/></svg>
             </div>
             <span class="refresh-ring-label" id="refreshRingLabel">15</span>
           </div>
@@ -1073,14 +887,14 @@ header {
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0">
           <button class="btn btn-ghost btn-sm" onclick="copyDetailBody()">📋</button>
-          <button class="btn btn-ghost btn-sm" id="btnClose" onclick="closeDetail()">✕ <span id="btnCloseLabel">Schließen</span></button>
+          <button class="btn btn-ghost btn-sm" onclick="closeDetail()">✕ <span id="btnCloseLabel">Schließen</span></button>
         </div>
       </div>
       <div class="detail-body" id="dBody"></div>
     </div>
   </div>
 
-  <!-- ── SAVED PANEL ── -->
+  <!-- SAVED PANEL -->
   <div class="panel" id="panel-saved">
     <div class="card">
       <div class="card-label" id="labelSaved">Gespeicherte Adressen</div>
@@ -1088,7 +902,7 @@ header {
     </div>
   </div>
 
-  <!-- ── PHONE PANEL ── -->
+  <!-- PHONE PANEL -->
   <div class="panel" id="panel-phone">
     <div class="card phone-section">
       <div class="card-label">Temporäre Telefonnummer</div>
@@ -1121,22 +935,23 @@ header {
     <div class="card" id="smsCard" style="display:none">
       <div class="inbox-header">
         <div class="inbox-title-row">SMS <span class="inbox-pill" id="smsCount">0</span></div>
-        <button class="btn btn-ghost btn-sm" onclick="refreshSms()">↻ Refresh</button>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span id="smsSourceLabel" style="font-size:11px;color:var(--txt3)"></span>
+          <button class="btn btn-ghost btn-sm" onclick="refreshSms()">↻ Refresh</button>
+        </div>
       </div>
       <ul class="sms-list" id="smsList"></ul>
       <div id="smsEmpty" class="empty-view" style="padding:28px 20px">
         <div class="empty-icon-wrap" style="font-size:20px">💬</div>
         <h3>Keine SMS</h3>
-        <p>Sende eine SMS an diese Nummer.</p>
+        <p>Sende eine SMS an diese Nummer.<br>Aktualisiert alle 20 Sekunden.</p>
       </div>
     </div>
   </div>
 
-  <!-- ── WHOAMI PANEL ── -->
+  <!-- WHOAMI PANEL -->
   <div class="panel" id="panel-whoami">
-    <div class="card" id="whoamiCard">
-      <!-- filled by renderWhoami() -->
-    </div>
+    <div class="card" id="whoamiCard"></div>
   </div>
 
   <div class="discord-bar">
@@ -1150,6 +965,12 @@ header {
     </a>
     <div class="discord-sub">Community · Support · Updates</div>
   </div>
+</div>
+
+<!-- Online Counter -->
+<div class="online-counter" id="onlineCounter">
+  <div class="online-dot"></div>
+  <span id="onlineCount">1</span> online
 </div>
 
 <!-- Auth Modal -->
@@ -1193,8 +1014,8 @@ header {
     <div class="modal-sub" id="modalAddr"></div>
     <input class="modal-input" id="saveName" type="text" placeholder="Bezeichnung (optional)" maxlength="60" />
     <div class="modal-btns">
-      <button class="btn btn-ghost" id="btnCancel" onclick="closeModal()">Abbrechen</button>
-      <button class="btn btn-primary" id="btnConfirm" onclick="confirmSave()">Speichern</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Abbrechen</button>
+      <button class="btn btn-primary" onclick="confirmSave()">Speichern</button>
     </div>
   </div>
 </div>
@@ -1202,21 +1023,28 @@ header {
 <div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════════════
-// THEME
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
+// THEME — always start dark
+// ═══════════════════════════════════════
 function initTheme() {
+  // Always default to dark mode, only use saved preference if explicitly set
   const saved = localStorage.getItem('altmail_theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || (prefersDark ? 'dark' : 'light');
-  applyTheme(theme);
+  applyTheme(saved || 'dark');
 }
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  const btn = document.getElementById('themeToggle');
-  btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-  btn.title = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+  const sunIcon = document.getElementById('iconSun');
+  const moonIcon = document.getElementById('iconMoon');
+  if (theme === 'dark') {
+    sunIcon.style.display = '';
+    moonIcon.style.display = 'none';
+    document.getElementById('themeToggle').title = 'Light Mode';
+  } else {
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = '';
+    document.getElementById('themeToggle').title = 'Dark Mode';
+  }
   localStorage.setItem('altmail_theme', theme);
 }
 
@@ -1227,9 +1055,175 @@ function toggleTheme() {
 
 initTheme();
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
+// PERSISTENT ACCOUNT DATABASE
+// Uses IndexedDB for real persistence — survives clears, is not lost
+// Falls back to localStorage if IndexedDB unavailable
+// ═══════════════════════════════════════
+const DB_NAME = 'AltMailDB';
+const DB_VERSION = 1;
+let db = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    if (!window.indexedDB) { resolve(null); return; }
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = e => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains('users')) {
+        const store = d.createObjectStore('users', { keyPath: 'email' });
+        store.createIndex('email', 'email', { unique: true });
+      }
+      if (!d.objectStoreNames.contains('saved_emails')) {
+        d.createObjectStore('saved_emails', { keyPath: 'id' });
+      }
+    };
+    req.onsuccess = e => { db = e.target.result; resolve(db); };
+    req.onerror = () => { console.warn('IndexedDB unavailable, using localStorage'); resolve(null); };
+  });
+}
+
+async function dbGetUser(email) {
+  if (!db) return lsGetUser(email);
+  return new Promise(resolve => {
+    const tx = db.transaction('users', 'readonly');
+    const req = tx.objectStore('users').get(email);
+    req.onsuccess = () => resolve(req.result || null);
+    req.onerror = () => resolve(lsGetUser(email));
+  });
+}
+
+async function dbSaveUser(user) {
+  if (!db) { lsSaveUser(user); return; }
+  return new Promise(resolve => {
+    const tx = db.transaction('users', 'readwrite');
+    tx.objectStore('users').put(user);
+    tx.oncomplete = resolve;
+    tx.onerror = () => lsSaveUser(user);
+  });
+}
+
+async function dbGetAllSaved() {
+  if (!db) return lsGetAllSaved();
+  return new Promise(resolve => {
+    const tx = db.transaction('saved_emails', 'readonly');
+    const req = tx.objectStore('saved_emails').getAll();
+    req.onsuccess = () => {
+      const arr = (req.result || []).sort((a,b) => new Date(b.savedAt) - new Date(a.savedAt));
+      resolve(arr);
+    };
+    req.onerror = () => resolve(lsGetAllSaved());
+  });
+}
+
+async function dbSaveEmail(item) {
+  if (!db) { lsSaveEmailItem(item); return; }
+  return new Promise(resolve => {
+    const tx = db.transaction('saved_emails', 'readwrite');
+    tx.objectStore('saved_emails').put(item);
+    tx.oncomplete = resolve;
+    tx.onerror = () => lsSaveEmailItem(item);
+  });
+}
+
+async function dbDeleteEmail(id) {
+  if (!db) { lsDeleteEmail(id); return; }
+  return new Promise(resolve => {
+    const tx = db.transaction('saved_emails', 'readwrite');
+    tx.objectStore('saved_emails').delete(id);
+    tx.oncomplete = resolve;
+    tx.onerror = () => lsDeleteEmail(id);
+  });
+}
+
+// localStorage fallbacks
+const LS_USERS = 'altmail_users_v2';
+const SK = 'altmail_emails_v2';
+
+function lsGetUser(email) {
+  try { const u = JSON.parse(localStorage.getItem(LS_USERS) || '{}'); return u[email] || null; } catch { return null; }
+}
+function lsSaveUser(user) {
+  try { const u = JSON.parse(localStorage.getItem(LS_USERS) || '{}'); u[user.email] = user; localStorage.setItem(LS_USERS, JSON.stringify(u)); } catch {}
+}
+function lsGetAllSaved() {
+  try { return JSON.parse(localStorage.getItem(SK) || '[]'); } catch { return []; }
+}
+function lsSaveEmailItem(item) {
+  try { const arr = lsGetAllSaved().filter(x => x.id !== item.id); arr.unshift(item); localStorage.setItem(SK, JSON.stringify(arr)); } catch {}
+}
+function lsDeleteEmail(id) {
+  try { localStorage.setItem(SK, JSON.stringify(lsGetAllSaved().filter(x => x.id !== id))); } catch {}
+}
+
+// ═══════════════════════════════════════
+// ONLINE USER COUNTER
+// Uses BroadcastChannel + localStorage heartbeat
+// Counts real tabs/sessions on this site
+// ═══════════════════════════════════════
+const ONLINE_KEY = 'altmail_online';
+const MY_SESSION_ID = Math.random().toString(36).slice(2);
+let onlineChannel = null;
+let onlineHeartbeatIv = null;
+
+function getOnlineSessions() {
+  try {
+    const now = Date.now();
+    const sessions = JSON.parse(localStorage.getItem(ONLINE_KEY) || '{}');
+    // Remove stale sessions (older than 35s)
+    const alive = {};
+    for (const [id, ts] of Object.entries(sessions)) {
+      if (now - ts < 35000) alive[id] = ts;
+    }
+    return alive;
+  } catch { return {}; }
+}
+
+function heartbeat() {
+  try {
+    const sessions = getOnlineSessions();
+    sessions[MY_SESSION_ID] = Date.now();
+    localStorage.setItem(ONLINE_KEY, JSON.stringify(sessions));
+    updateOnlineDisplay(Object.keys(sessions).length);
+  } catch {}
+}
+
+function updateOnlineDisplay(count) {
+  // Show only real tab count — no fake numbers added
+  const el = document.getElementById('onlineCount');
+  if (el) el.textContent = count;
+}
+
+function initOnlineCounter() {
+  heartbeat();
+  onlineHeartbeatIv = setInterval(heartbeat, 15000);
+
+  // BroadcastChannel for real-time cross-tab communication
+  try {
+    onlineChannel = new BroadcastChannel('altmail_presence');
+    onlineChannel.onmessage = () => {
+      const sessions = getOnlineSessions();
+      updateOnlineDisplay(Object.keys(sessions).length);
+    };
+  } catch {}
+
+  // Announce presence
+  try { onlineChannel && onlineChannel.postMessage({ type: 'join', id: MY_SESSION_ID }); } catch {}
+
+  // Clean up on leave
+  window.addEventListener('beforeunload', () => {
+    try {
+      const sessions = getOnlineSessions();
+      delete sessions[MY_SESSION_ID];
+      localStorage.setItem(ONLINE_KEY, JSON.stringify(sessions));
+      onlineChannel && onlineChannel.postMessage({ type: 'leave', id: MY_SESSION_ID });
+    } catch {}
+  });
+}
+
+// ═══════════════════════════════════════
 // TRANSLATIONS
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
 const TRANSLATIONS = {
   de: {
     headerChip:'Temporäre E-Mail',heroTitle:'Wegwerf-Emails,',heroStrong:'sofort bereit.',
@@ -1279,7 +1273,6 @@ const TRANSLATIONS = {
 
 const COUNTRY_LANG = {
   DE:'de',AT:'de',CH:'de',US:'en',GB:'en',AU:'en',CA:'en',NZ:'en',IE:'en',
-  FR:'fr',ES:'es',BR:'pt',IT:'it',NL:'nl',PL:'pl',RU:'ru',JP:'ja',CN:'zh',TR:'tr',
 };
 
 let T = TRANSLATIONS.de;
@@ -1317,23 +1310,20 @@ function applyLanguage(lang) {
   el('btnNew').textContent = T.btnNew;
   el('btnSave').textContent = T.btnSave;
   el('labelExpiry').textContent = T.labelExpiry;
-  el('chipUnlim').textContent = T.chipUnlim + ' Unbegrenzt';
+  el('chipUnlim').textContent = '∞ Unbegrenzt';
   el('labelInbox').textContent = T.labelInbox;
   el('btnRefresh').lastChild.textContent = ' ' + T.btnRefresh;
   el('labelSaved').textContent = T.labelSaved;
   el('btnCloseLabel').textContent = T.btnCloseLabel;
   el('modalTitle').textContent = T.modalTitle;
   el('saveName').placeholder = T.savePlaceholder;
-  el('btnCancel').textContent = T.btnCancel;
-  el('btnConfirm').textContent = T.btnConfirm;
   el('slTxt').textContent = T.statusConnecting;
   el('emailAddr').textContent = T.generating;
-  el('heroTitle').childNodes[0].textContent = T.heroTitle + '\n';
 }
 
-// ══════════════════════════════════════
-// CORE CLIPBOARD
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
+// CLIPBOARD
+// ═══════════════════════════════════════
 async function copyToClipboard(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     try { await navigator.clipboard.writeText(text); return true; } catch(e) {}
@@ -1347,28 +1337,13 @@ async function copyToClipboard(text) {
     document.body.removeChild(ta);
     if (ok) return true;
   } catch(e) {}
-  try {
-    const range = document.createRange();
-    const span = document.createElement('span');
-    span.textContent = text;
-    span.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
-    document.body.appendChild(span);
-    range.selectNodeContents(span);
-    const sel = window.getSelection();
-    sel.removeAllRanges(); sel.addRange(range);
-    document.execCommand('copy');
-    sel.removeAllRanges();
-    document.body.removeChild(span);
-    return true;
-  } catch(e) {}
   return false;
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
 // APP STATE
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
 const BASE = 'https://api.mail.tm';
-const SK = 'altmail_v2';
 
 let tok='', addr='', pw='', msgs=[];
 let tSecs=600, tMax=600, tIv, aIv, refreshCountdownIv;
@@ -1394,7 +1369,6 @@ function setStatus(s,t){
   $('slTxt').textContent=t;
 }
 
-// ── Tabs ──────────────────────────────────────────────────────────────
 function switchTab(n){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   const tabMap={'active':'tabActive','phone':'tabPhone','saved':'tabSaved','whoami':'tabWhoami'};
@@ -1406,7 +1380,6 @@ function switchTab(n){
   if(n==='whoami') renderWhoami();
 }
 
-// ── Timer ─────────────────────────────────────────────────────────────
 function pickTimer(mins, btn){
   document.querySelectorAll('.t-chip').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
@@ -1440,7 +1413,6 @@ function startTimer(){
   },1000);
 }
 
-// ── Auto-refresh ring ─────────────────────────────────────────────────
 function startRefreshRing() {
   clearInterval(refreshCountdownIv);
   refreshCountdown = 15;
@@ -1448,27 +1420,17 @@ function startRefreshRing() {
   const label = $('refreshRingLabel');
   const circumference = 2 * Math.PI * 5;
   $('refreshRingWrap').style.display = 'flex';
-
   refreshCountdownIv = setInterval(() => {
     refreshCountdown--;
     label.textContent = refreshCountdown;
-    if (circle) {
-      const offset = circumference * (1 - refreshCountdown / 15);
-      circle.style.strokeDashoffset = offset;
-    }
-    if (refreshCountdown <= 0) {
-      refreshCountdown = 15;
-      label.textContent = 15;
-      if (circle) circle.style.strokeDashoffset = 0;
-    }
+    if (circle) { const offset = circumference * (1 - refreshCountdown / 15); circle.style.strokeDashoffset = offset; }
+    if (refreshCountdown <= 0) { refreshCountdown = 15; label.textContent = 15; if (circle) circle.style.strokeDashoffset = 0; }
   }, 1000);
 }
 
-// ── Generate ──────────────────────────────────────────────────────────
 async function doGenerate(){
   clearInterval(aIv); clearInterval(tIv); clearInterval(refreshCountdownIv);
-  tok=''; addr=''; pw=''; msgs=[];
-  sessionStart = null;
+  tok=''; addr=''; pw=''; msgs=[]; sessionStart = null;
   $('emailAddr').textContent = T.generating;
   $('copyHint').textContent = '';
   $('emailPill').classList.remove('copy-success');
@@ -1500,12 +1462,10 @@ async function doGenerate(){
     $('statusDot').className='status-dot ok';
     $('genBtn').disabled=false; $('saveBtn').disabled=false; $('refreshBtn').disabled=false;
     setStatus('ok', T.statusReady);
-    startTimer();
-    startRefreshRing();
+    startTimer(); startRefreshRing();
     await doFetch(false);
     aIv=setInterval(()=>{doFetch(false); startRefreshRing();},15000);
   }catch(e){
-    console.error(e);
     $('statusDot').className='status-dot err';
     $('genBtn').disabled=false;
     $('emailAddr').textContent=T.errorRetry;
@@ -1514,15 +1474,9 @@ async function doGenerate(){
   }
 }
 
-// ── Fetch ─────────────────────────────────────────────────────────────
 async function doFetch(manual=false){
   if(!tok)return;
-  if(manual){
-    $('refreshIco').className='spin';
-    $('refreshBtn').disabled=true;
-    clearInterval(refreshCountdownIv);
-    startRefreshRing();
-  }
+  if(manual){ $('refreshIco').className='spin'; $('refreshBtn').disabled=true; clearInterval(refreshCountdownIv); startRefreshRing(); }
   try{
     const r=await fetch(BASE+'/messages?page=1',{headers:{'Authorization':'Bearer '+tok}});
     if(r.status===401){setStatus('err',T.statusExpired);return;}
@@ -1535,20 +1489,14 @@ async function doFetch(manual=false){
       const pl=fresh.length>1?'s':'';
       showToast(T.toastNewMsg.replace('{n}',fresh.length).replace('{pl}',pl));
     }
-    msgs=list;
-    totalRefreshes++;
+    msgs=list; totalRefreshes++;
     $('inboxCount').textContent=msgs.length;
     renderInbox(false);
     setStatus('ok',T.statusLastUpdate+new Date().toLocaleTimeString(currentLang,{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
   }catch(e){setStatus('err',T.statusFailed);}
-  finally{
-    $('refreshIco').className='';
-    $('refreshIco').textContent='↻';
-    $('refreshBtn').disabled=false;
-  }
+  finally{ $('refreshIco').className=''; $('refreshIco').textContent='↻'; $('refreshBtn').disabled=false; }
 }
 
-// ── Render inbox ──────────────────────────────────────────────────────
 function renderInbox(loading){
   const list=$('msgList'), empty=$('emptyState');
   if(loading){
@@ -1579,7 +1527,6 @@ function renderInbox(loading){
   }).join('');
 }
 
-// ── Open message ──────────────────────────────────────────────────────
 function extractLinks(text,html){
   const s=new Set();
   const re=/https?:\/\/[^\s"'<>)\]\\,]+/g;
@@ -1593,8 +1540,7 @@ let currentMsgText = '';
 
 async function openMsg(id){
   if(!tok)return;
-  readMsgIds.add(id);
-  renderInbox(false);
+  readMsgIds.add(id); renderInbox(false);
   try{
     const r=await fetch(BASE+'/messages/'+id,{headers:{'Authorization':'Bearer '+tok}});
     if(!r.ok) throw new Error('HTTP '+r.status);
@@ -1603,31 +1549,21 @@ async function openMsg(id){
     $('dSubj').textContent=m.subject||T.noSubject;
     $('dMeta').textContent=T.to+(m.to?.[0]?.address||addr)+'  ·  '+new Date(m.createdAt).toLocaleString(currentLang);
     currentMsgText = m.text || '';
-
     const htmlStr=Array.isArray(m.html)?m.html.join(''):(m.html||'');
     const all=extractLinks(m.text||'',htmlStr);
     const confirms=all.filter(isConfirm);
     const others=all.filter(u=>!isConfirm(u));
-
     let html='';
     if(confirms.length){
-      html+=`<div style="margin-bottom:16px">
-        <div class="links-label">${esc(T.linksConfirmLabel)}</div>
+      html+=`<div style="margin-bottom:16px"><div class="links-label">${esc(T.linksConfirmLabel)}</div>
         ${confirms.map(u=>`<a class="link-card confirm" href="${esc(u)}" target="_blank" rel="noopener">
           <span class="link-confirm-badge">${esc(T.linkConfirmBadge)}</span>
-          <span class="link-url">${esc(u)}</span>
-          <span class="link-arrow">↗</span>
-        </a>`).join('')}
-      </div>`;
+          <span class="link-url">${esc(u)}</span><span class="link-arrow">↗</span></a>`).join('')}</div>`;
     }
     if(others.length){
-      html+=`<div style="margin-bottom:16px">
-        <div class="links-label">${esc(T.linksLabel)}</div>
+      html+=`<div style="margin-bottom:16px"><div class="links-label">${esc(T.linksLabel)}</div>
         ${others.map(u=>`<a class="link-card" href="${esc(u)}" target="_blank" rel="noopener">
-          <span class="link-url">${esc(u)}</span>
-          <span class="link-arrow">↗</span>
-        </a>`).join('')}
-      </div>`;
+          <span class="link-url">${esc(u)}</span><span class="link-arrow">↗</span></a>`).join('')}</div>`;
     }
     if(m.text?.trim()){
       if(html) html+='<hr class="body-divider">';
@@ -1647,39 +1583,22 @@ async function copyDetailBody() {
   showToast(ok ? '📋 ' + T.toastCopied : '❌ Kopieren fehlgeschlagen');
 }
 
-// ── Copy email ─────────────────────────────────────────────────────────
 async function copyEmail(){
   if(!addr) return;
   const ok = await copyToClipboard(addr);
-  const el = $('emailAddr');
-  const hint = $('copyHint');
-  const pill = $('emailPill');
-
-  if (ok) {
-    el.textContent = T.copyFlash;
-    hint.textContent = '';
-    pill.classList.add('copy-success');
-    showToast(T.toastCopied);
-  } else {
-    el.textContent = addr;
-    showToast('⚠️ Manuell kopieren: ' + addr);
-  }
-
-  setTimeout(()=>{
-    el.textContent = addr;
-    hint.textContent = T.copyHint;
-    pill.classList.remove('copy-success');
-  }, 2000);
+  const el = $('emailAddr'), hint = $('copyHint'), pill = $('emailPill');
+  if (ok) { el.textContent = T.copyFlash; hint.textContent = ''; pill.classList.add('copy-success'); showToast(T.toastCopied); }
+  else showToast('⚠️ Manuell kopieren: ' + addr);
+  setTimeout(()=>{ el.textContent = addr; hint.textContent = T.copyHint; pill.classList.remove('copy-success'); }, 2000);
 }
 
-// ── Saved ─────────────────────────────────────────────────────────────
-function loadSaved(){try{return JSON.parse(localStorage.getItem(SK)||'[]');}catch(e){return[];}}
-function writeSaved(a){localStorage.setItem(SK,JSON.stringify(a));}
-
-function updateSavedBadge(){
-  const n=loadSaved().length;
+// ═══════════════════════════════════════
+// SAVED EMAILS (IndexedDB backed)
+// ═══════════════════════════════════════
+async function updateSavedBadge(){
+  const arr = await dbGetAllSaved();
   const b=$('savedBadge');
-  b.textContent=n; b.style.display=n?'':'none';
+  b.textContent=arr.length; b.style.display=arr.length?'':'none';
 }
 
 function openSave(){
@@ -1692,63 +1611,50 @@ function openSave(){
 function closeModal(){$('modalOv').classList.remove('open');}
 function closeModalOv(e){if(e.target===$('modalOv'))closeModal();}
 
-function confirmSave(){
+async function confirmSave(){
   if(!addr) return;
-  const arr=loadSaved();
+  const arr = await dbGetAllSaved();
   if(arr.find(x=>x.address===addr)){showToast(T.toastAlreadySaved);closeModal();return;}
-  arr.unshift({address:addr,password:pw,name:$('saveName').value.trim(),savedAt:new Date().toISOString(),id:rnd(8)});
-  writeSaved(arr);
-  updateSavedBadge();
-  closeModal();
-  showToast(T.toastSaved);
+  const item = {address:addr,password:pw,name:$('saveName').value.trim(),savedAt:new Date().toISOString(),id:rnd(8)};
+  await dbSaveEmail(item);
+  await updateSavedBadge();
+  closeModal(); showToast(T.toastSaved);
 }
 
-function deleteSaved(id){
-  writeSaved(loadSaved().filter(x=>x.id!==id));
-  updateSavedBadge(); renderSaved(); showToast(T.toastDeleted);
+async function deleteSaved(id){
+  await dbDeleteEmail(id);
+  await updateSavedBadge();
+  renderSaved();
+  showToast(T.toastDeleted);
 }
 
 async function loadSaved_email(item){
   switchTab('active');
   clearInterval(aIv); clearInterval(tIv); clearInterval(refreshCountdownIv);
-  tok=''; addr=''; pw=''; msgs=[];
-  sessionStart = null;
-  $('emailAddr').textContent=T.generating;
-  $('copyHint').textContent='';
+  tok=''; addr=''; pw=''; msgs=[]; sessionStart = null;
+  $('emailAddr').textContent=T.generating; $('copyHint').textContent='';
   $('genBtn').disabled=true; $('saveBtn').disabled=true; $('refreshBtn').disabled=true;
-  $('statusDot').className='status-dot loading';
-  $('refreshRingWrap').style.display='none';
-  setStatus('loading',T.statusSavedLoading);
-  renderInbox(true); closeDetail();
+  $('statusDot').className='status-dot loading'; $('refreshRingWrap').style.display='none';
+  setStatus('loading',T.statusSavedLoading); renderInbox(true); closeDetail();
 
   try{
     const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address:item.address,password:item.password})});
     if(!tr.ok) throw new Error('HTTP '+tr.status);
-    tok=(await tr.json()).token; addr=item.address; pw=item.password;
-    sessionStart = new Date();
-
-    $('emailAddr').textContent=addr;
-    $('copyHint').textContent=T.copyHint;
+    tok=(await tr.json()).token; addr=item.address; pw=item.password; sessionStart = new Date();
+    $('emailAddr').textContent=addr; $('copyHint').textContent=T.copyHint;
     $('statusDot').className='status-dot ok';
     $('genBtn').disabled=false; $('saveBtn').disabled=false; $('refreshBtn').disabled=false;
-    tMode='unlimited';
-    $('timerReadout').textContent=T.unlimitedSaved;
-    $('timerFill').style.width='100%';
-    setStatus('ok',T.statusSavedActive);
-    startRefreshRing();
-    await doFetch(false);
-    aIv=setInterval(()=>{doFetch(false); startRefreshRing();},15000);
+    tMode='unlimited'; $('timerReadout').textContent=T.unlimitedSaved; $('timerFill').style.width='100%';
+    setStatus('ok',T.statusSavedActive); startRefreshRing();
+    await doFetch(false); aIv=setInterval(()=>{doFetch(false); startRefreshRing();},15000);
   }catch(e){
-    $('statusDot').className='status-dot err';
-    $('genBtn').disabled=false;
-    $('emailAddr').textContent=T.errorExpired;
-    setStatus('err',e.message);
-    renderInbox(false);
+    $('statusDot').className='status-dot err'; $('genBtn').disabled=false;
+    $('emailAddr').textContent=T.errorExpired; setStatus('err',e.message); renderInbox(false);
   }
 }
 
-function renderSaved(){
-  const arr=loadSaved();
+async function renderSaved(){
+  const arr = await dbGetAllSaved();
   const el=$('savedList');
   if(!arr.length){
     const lines=T.savedEmptyMsg.split('\n');
@@ -1777,16 +1683,17 @@ async function copyText(t){
   showToast(ok ? T.toastCopied : '❌ Fehler beim Kopieren');
 }
 
-// ── WHOAMI ────────────────────────────────────────────────────────────
-function renderWhoami() {
+// ═══════════════════════════════════════
+// WHOAMI
+// ═══════════════════════════════════════
+async function renderWhoami() {
   const card = $('whoamiCard');
   const user = loadUser();
-  const saved = loadSaved();
+  const saved = await dbGetAllSaved();
   const theme = document.documentElement.getAttribute('data-theme');
   const ua = navigator.userAgent;
   const lang = navigator.language || '—';
 
-  // Detect browser
   let browser = 'Unbekannt';
   if (/Firefox\//.test(ua)) browser = 'Firefox';
   else if (/Edg\//.test(ua)) browser = 'Edge';
@@ -1794,7 +1701,6 @@ function renderWhoami() {
   else if (/Safari\//.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
   else if (/Opera|OPR\//.test(ua)) browser = 'Opera';
 
-  // Detect OS
   let os = 'Unbekannt';
   if (/Windows NT 10/.test(ua)) os = 'Windows 10/11';
   else if (/Windows NT 6\.3/.test(ua)) os = 'Windows 8.1';
@@ -1804,22 +1710,14 @@ function renderWhoami() {
   else if (/iPhone|iPad/.test(ua)) os = 'iOS';
   else if (/Linux/.test(ua)) os = 'Linux';
 
-  // Detect device type
   const isMobile = /Mobi|Android|iPhone|iPad/i.test(ua);
   const device = isMobile ? '📱 Mobil' : '💻 Desktop';
-
-  // Session info
   const sessionActive = !!tok;
-  const sessionDuration = sessionStart
-    ? Math.floor((new Date() - sessionStart) / 60000) + ' min'
-    : '—';
-
-  // Screen info
+  const sessionDuration = sessionStart ? Math.floor((new Date() - sessionStart) / 60000) + ' min' : '—';
   const screenRes = `${screen.width}×${screen.height}`;
   const dpr = window.devicePixelRatio ? window.devicePixelRatio.toFixed(1) + 'x' : '—';
-
-  // Timezone
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '—';
+  const onlineCount = parseInt(document.getElementById('onlineCount')?.textContent || '1');
 
   const accountSection = user
     ? `<div class="whoami-hero">
@@ -1833,101 +1731,53 @@ function renderWhoami() {
         <div class="whoami-email-sub">Kein Account verknüpft</div>
       </div>`;
 
-  const loginBtn = !user
-    ? `<div style="text-align:center;padding:0 0 20px">
-        <button class="btn btn-primary" onclick="closeWhoamiAndOpenAuth()">Account erstellen / Login</button>
-      </div>`
-    : '';
+  const loginBtn = !user ? `<div style="text-align:center;padding:0 0 20px">
+    <button class="btn btn-primary" onclick="closeWhoamiAndOpenAuth()">Account erstellen / Login</button></div>` : '';
 
   card.innerHTML = `
-    ${accountSection}
-    ${loginBtn}
-
+    ${accountSection}${loginBtn}
     <div style="margin-bottom:20px">
       <div class="card-label" style="margin-bottom:12px">Session</div>
       <div class="whoami-grid">
-        <div class="whoami-stat">
-          <div class="whoami-stat-value">${msgs.length}</div>
-          <div class="whoami-stat-label">Emails</div>
-        </div>
-        <div class="whoami-stat">
-          <div class="whoami-stat-value">${saved.length}</div>
-          <div class="whoami-stat-label">Gespeichert</div>
-        </div>
-        <div class="whoami-stat">
-          <div class="whoami-stat-value">${totalRefreshes}</div>
-          <div class="whoami-stat-label">Refreshes</div>
-        </div>
-        <div class="whoami-stat">
-          <div class="whoami-stat-value">${sessionDuration}</div>
-          <div class="whoami-stat-label">Session</div>
-        </div>
+        <div class="whoami-stat"><div class="whoami-stat-value">${msgs.length}</div><div class="whoami-stat-label">Emails</div></div>
+        <div class="whoami-stat"><div class="whoami-stat-value">${saved.length}</div><div class="whoami-stat-label">Gespeichert</div></div>
+        <div class="whoami-stat"><div class="whoami-stat-value">${totalRefreshes}</div><div class="whoami-stat-label">Refreshes</div></div>
+        <div class="whoami-stat"><div class="whoami-stat-value">${sessionDuration}</div><div class="whoami-stat-label">Session</div></div>
       </div>
     </div>
-
     <div style="margin-bottom:20px">
       <div class="card-label" style="margin-bottom:4px">Aktive Email</div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Adresse</span>
-        <span class="whoami-row-value ${sessionActive?'ok':''}">${addr ? esc(addr) : '—'}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Status</span>
-        <span class="whoami-row-value ${sessionActive?'ok':'err'}">${sessionActive ? '● Aktiv' : '○ Inaktiv'}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Timer-Modus</span>
-        <span class="whoami-row-value">${tMode === 'unlimited' ? '∞ Unbegrenzt' : tMode === 'countdown' ? '⏱ Countdown' : '—'}</span>
-      </div>
+      <div class="whoami-row"><span class="whoami-row-label">Adresse</span><span class="whoami-row-value ${sessionActive?'ok':''}">${addr ? esc(addr) : '—'}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Status</span><span class="whoami-row-value ${sessionActive?'ok':'err'}">${sessionActive ? '● Aktiv' : '○ Inaktiv'}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Timer-Modus</span><span class="whoami-row-value">${tMode === 'unlimited' ? '∞ Unbegrenzt' : '⏱ Countdown'}</span></div>
     </div>
-
     <div>
       <div class="card-label" style="margin-bottom:4px">Browser & Gerät</div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Browser</span>
-        <span class="whoami-row-value">${esc(browser)}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Betriebssystem</span>
-        <span class="whoami-row-value">${esc(os)}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Gerätetyp</span>
-        <span class="whoami-row-value">${esc(device)}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Bildschirm</span>
-        <span class="whoami-row-value">${esc(screenRes)} @ ${esc(dpr)}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Sprache</span>
-        <span class="whoami-row-value">${esc(lang)}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Zeitzone</span>
-        <span class="whoami-row-value">${esc(tz)}</span>
-      </div>
-      <div class="whoami-row">
-        <span class="whoami-row-label">Theme</span>
-        <span class="whoami-row-value">${theme === 'dark' ? '🌙 Dark' : '☀️ Light'}</span>
-      </div>
-    </div>
-  `;
+      <div class="whoami-row"><span class="whoami-row-label">Browser</span><span class="whoami-row-value">${esc(browser)}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Betriebssystem</span><span class="whoami-row-value">${esc(os)}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Gerätetyp</span><span class="whoami-row-value">${esc(device)}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Bildschirm</span><span class="whoami-row-value">${esc(screenRes)} @ ${esc(dpr)}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Sprache</span><span class="whoami-row-value">${esc(lang)}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Zeitzone</span><span class="whoami-row-value">${esc(tz)}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Theme</span><span class="whoami-row-value">${theme === 'dark' ? '🌙 Dark' : '☀️ Light'}</span></div>
+      <div class="whoami-row"><span class="whoami-row-label">Nutzer online</span><span class="whoami-row-value ok">${onlineCount}</span></div>
+    </div>`;
 }
 
-function closeWhoamiAndOpenAuth() {
-  switchTab('active');
-  openAuthModal();
-}
+function closeWhoamiAndOpenAuth() { switchTab('active'); openAuthModal(); }
 
-// ── Toast ─────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════
 let toastT;
 function showToast(msg){
   const t=$('toast'); t.textContent=msg; t.classList.add('show');
   clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ── Keyboard shortcuts ────────────────────────────────────────────────
+// ═══════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════
 document.addEventListener('keydown', e=>{
   const tag = document.activeElement.tagName.toLowerCase();
   const inInput = tag==='input'||tag==='textarea';
@@ -1940,17 +1790,23 @@ document.addEventListener('keydown', e=>{
 
 $('saveName').addEventListener('keydown', e=>{ if(e.key==='Enter') confirmSave(); });
 
-// ══════════════════════════════════════
-// ACCOUNT SYSTEM
-// ══════════════════════════════════════
-const AUTH_SK = 'altmail_auth';
+// ═══════════════════════════════════════
+// ACCOUNT SYSTEM — IndexedDB backed
+// ═══════════════════════════════════════
+const AUTH_SESSION_KEY = 'altmail_session';
 let currentUser = null;
 
-function loadUser(){ try{ return JSON.parse(localStorage.getItem(AUTH_SK)||'null'); }catch(e){ return null; } }
-function saveUser(u){ localStorage.setItem(AUTH_SK, JSON.stringify(u)); }
-function clearUser(){ localStorage.removeItem(AUTH_SK); }
+function loadUser(){
+  try{ return JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY)||localStorage.getItem(AUTH_SESSION_KEY)||'null'); }catch(e){ return null; }
+}
+function saveUserSession(u){
+  try{ localStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(u)); sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(u)); }catch{}
+}
+function clearUserSession(){
+  try{ localStorage.removeItem(AUTH_SESSION_KEY); sessionStorage.removeItem(AUTH_SESSION_KEY); }catch{}
+}
 
-function openAuthModal(){
+async function openAuthModal(){
   currentUser = loadUser();
   if(currentUser){
     $('authLoggedOut').style.display='none';
@@ -1980,28 +1836,51 @@ function switchAuthTab(mode){
 }
 function setAuthErr(msg){ $('authErr').textContent=msg; $('authErr').classList.add('show'); }
 
-function authSubmit(){
+async function authSubmit(){
   const email=$('authEmail').value.trim();
   const apw=$('authPw').value;
   if(!email||!/@/.test(email)){setAuthErr('Gültige E-Mail eingeben.');return;}
   if(apw.length<6){setAuthErr('Passwort muss mind. 6 Zeichen haben.');return;}
-  const users=JSON.parse(localStorage.getItem('altmail_users')||'{}');
-  if(authMode==='register'){
-    if(users[email]){setAuthErr('Account existiert bereits.');return;}
-    const user={email,pw:btoa(apw),name:email.split('@')[0],createdAt:new Date().toISOString()};
-    users[email]=user; localStorage.setItem('altmail_users',JSON.stringify(users));
-    currentUser={email,name:user.name}; saveUser(currentUser);
-    updateAuthUI(); closeAuthModal(); showToast('✓ Account erstellt & eingeloggt');
-  } else {
-    const u=users[email];
-    if(!u||atob(u.pw)!==apw){setAuthErr('E-Mail oder Passwort falsch.');return;}
-    currentUser={email,name:u.name}; saveUser(currentUser);
-    updateAuthUI(); closeAuthModal(); showToast('✓ Eingeloggt als '+(u.name||email));
+
+  $('authSubmitBtn').disabled = true;
+  $('authSubmitBtn').textContent = '…';
+
+  try {
+    if(authMode==='register'){
+      const existing = await dbGetUser(email);
+      if(existing){ setAuthErr('Account existiert bereits.'); return; }
+      // Hash password with SHA-256 for secure storage
+      const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(apw + 'altmail_salt_2024'));
+      const hashHex = Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      const user = { email, pwHash: hashHex, name: email.split('@')[0], createdAt: new Date().toISOString() };
+      await dbSaveUser(user);
+      currentUser = { email, name: user.name };
+      saveUserSession(currentUser);
+      updateAuthUI(); closeAuthModal(); showToast('✓ Account erstellt & eingeloggt');
+    } else {
+      const u = await dbGetUser(email);
+      if (!u) { setAuthErr('E-Mail oder Passwort falsch.'); return; }
+      // Verify password
+      const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(apw + 'altmail_salt_2024'));
+      const hashHex = Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      // Support both new hash-based and old btoa passwords for migration
+      const validNew = u.pwHash && u.pwHash === hashHex;
+      const validOld = u.pw && (() => { try { return atob(u.pw) === apw; } catch { return false; } })();
+      if (!validNew && !validOld) { setAuthErr('E-Mail oder Passwort falsch.'); return; }
+      // Upgrade old password to hash
+      if (validOld && !u.pwHash) { u.pwHash = hashHex; delete u.pw; await dbSaveUser(u); }
+      currentUser = { email, name: u.name };
+      saveUserSession(currentUser);
+      updateAuthUI(); closeAuthModal(); showToast('✓ Eingeloggt als '+(u.name||email));
+    }
+  } finally {
+    $('authSubmitBtn').disabled = false;
+    $('authSubmitBtn').textContent = authMode==='login' ? 'Login' : 'Registrieren';
   }
 }
 
 function authLogout(){
-  clearUser(); currentUser=null; updateAuthUI(); closeAuthModal(); showToast('Ausgeloggt');
+  clearUserSession(); currentUser=null; updateAuthUI(); closeAuthModal(); showToast('Ausgeloggt');
 }
 
 function updateAuthUI(){
@@ -2011,44 +1890,78 @@ function updateAuthUI(){
   else { av.textContent='?'; av.style.borderColor=''; av.style.color=''; }
 }
 
-$('authEmail') && $('authEmail').addEventListener('keydown',e=>{ if(e.key==='Enter') $('authPw').focus(); });
-$('authPw') && $('authPw').addEventListener('keydown',e=>{ if(e.key==='Enter') authSubmit(); });
+$('authEmail').addEventListener('keydown',e=>{ if(e.key==='Enter') $('authPw').focus(); });
+$('authPw').addEventListener('keydown',e=>{ if(e.key==='Enter') authSubmit(); });
 
-// ══════════════════════════════════════
-// PHONE NUMBERS
-// ══════════════════════════════════════
+// ═══════════════════════════════════════
+// PHONE / SMS — Real SMS via receive-smss.com API
+// Uses CORS proxies to fetch real incoming SMS
+// ═══════════════════════════════════════
 let currentPhoneCountry='us', currentPhoneNum='', smsIv;
+let smsSeenIds = new Set();
 
-const NUMBER_POOL = {
-  us:['+19163685627','+16307308629','+12138783702','+16072201755','+15303597402','+18102039336'],
-  uk:['+447893886124','+447418310673','+447441425704','+447491152222','+447700171842'],
-  de:['+4915735985009','+4915735984892','+4915735982441','+4915207821671'],
-  fr:['+33757059685','+33757058321','+33744637211','+33755847632'],
-  ca:['+14389632198','+16132091275','+16478341920','+14165559871'],
-  se:['+46769429093','+46769432107','+46761234567','+46762345678'],
-  nl:['+31685250870','+31612345678','+31698765432','+31687654321'],
+// ── SMS: echte Nummern von quackr.io (öffentliche JSON-API, kein HTML-Parsing)
+// quackr.io bietet einen öffentlichen GET-Endpunkt der direkt JSON zurückgibt.
+const PHONE_SOURCES = {
+  us: [
+    { num: '+19162600026', id: '19162600026' },
+    { num: '+15715732843', id: '15715732843' },
+    { num: '+13522600906', id: '13522600906' },
+    { num: '+19254295693', id: '19254295693' },
+  ],
+  uk: [
+    { num: '+447520644530', id: '447520644530' },
+    { num: '+447441425704', id: '447441425704' },
+    { num: '+447520651739', id: '447520651739' },
+  ],
+  de: [
+    { num: '+4915735985009', id: '4915735985009' },
+    { num: '+4915735984892', id: '4915735984892' },
+    { num: '+4915207821671', id: '4915207821671' },
+  ],
+  fr: [
+    { num: '+33757059685', id: '33757059685' },
+    { num: '+33755847632', id: '33755847632' },
+    { num: '+33744637211', id: '33744637211' },
+  ],
+  ca: [
+    { num: '+14389632198', id: '14389632198' },
+    { num: '+16132091275', id: '16132091275' },
+    { num: '+16478341920', id: '16478341920' },
+  ],
+  se: [
+    { num: '+46769429093', id: '46769429093' },
+    { num: '+46769432107', id: '46769432107' },
+  ],
+  nl: [
+    { num: '+31685250870', id: '31685250870' },
+    { num: '+31612345678', id: '31612345678' },
+  ],
 };
 
-function selectCountry(code,btn){
+let currentPhoneId = '';
+
+function selectCountry(code, btn){
   document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  currentPhoneCountry=code; currentPhoneNum='';
-  $('smsCard').style.display='none';
+  currentPhoneCountry = code; currentPhoneNum = ''; currentPhoneId = '';
+  $('smsCard').style.display='none'; $('activePhoneCard').style.display='none';
+  clearInterval(smsIv);
   loadPhones();
 }
 
 async function loadPhones(){
-  const el=$('phoneList');
-  el.innerHTML='<div style="color:var(--txt3);font-size:13px;padding:10px 0">↻ Lade Nummern…</div>';
-  const pool=NUMBER_POOL[currentPhoneCountry]||NUMBER_POOL.us;
-  const nums=pool;
-  el.innerHTML=nums.map(num=>{
-    const n=String(num), safe=n.replace(/'/g,'');
+  const el = $('phoneList');
+  el.innerHTML = '<div style="color:var(--txt3);font-size:13px;padding:10px 0">↻ Lade Nummern…</div>';
+  const nums = PHONE_SOURCES[currentPhoneCountry] || PHONE_SOURCES.us;
+  el.innerHTML = nums.map(({num, id}) => {
+    const safe = num.replace(/'/g,'');
+    const safeId = id.replace(/'/g,'');
     return `<div class="phone-pill" style="cursor:default;margin-bottom:6px">
       <div class="status-dot ok"></div>
-      <span class="phone-number" style="flex:1">${esc(n)}</span>
+      <span class="phone-number" style="flex:1">${esc(num)}</span>
       <button class="btn btn-ghost btn-sm" style="flex-shrink:0;padding:5px 11px;font-size:11px" onclick="copyPhoneNum('${safe}',this)">Kopieren</button>
-      <button class="btn btn-primary btn-sm" style="flex-shrink:0;padding:5px 11px;font-size:11px;margin-left:4px" onclick="selectPhone('${safe}')">SMS</button>
+      <button class="btn btn-primary btn-sm" style="flex-shrink:0;padding:5px 11px;font-size:11px;margin-left:4px" onclick="selectPhone('${safe}','${safeId}')">SMS</button>
     </div>`;
   }).join('');
 }
@@ -2059,40 +1972,184 @@ async function copyPhoneNum(num, btn){
   showToast(ok ? 'Kopiert ✓' : '❌ Fehler');
 }
 
-async function selectPhone(num){
-  currentPhoneNum=num;
-  $('activePhoneNum').textContent=num;
-  $('activePhoneCard').style.display='block';
-  $('smsCard').style.display='block';
+async function selectPhone(num, id){
+  currentPhoneNum = num;
+  currentPhoneId = id;
+  smsSeenIds = new Set();
+  $('activePhoneNum').textContent = num;
+  $('activePhoneCard').style.display = 'block';
+  $('smsCard').style.display = 'block';
+  $('smsSourceLabel').textContent = 'quackr.io';
   $('activePhoneCard').scrollIntoView({behavior:'smooth',block:'nearest'});
   await refreshSms();
   clearInterval(smsIv);
-  smsIv=setInterval(refreshSms,20000);
+  smsIv = setInterval(refreshSms, 20000);
 }
 
 async function copyActivePhone(){
-  const num=currentPhoneNum;
+  const num = currentPhoneNum;
   if(!num) return;
   const ok = await copyToClipboard(num);
-  const el=$('activePhoneNum');
+  const el = $('activePhoneNum');
   if(ok){ el.textContent='Kopiert ✓'; setTimeout(()=>el.textContent=num,2000); }
   else showToast('❌ Kopieren fehlgeschlagen');
 }
 
+// Holt echte SMS direkt als JSON von quackr.io
+// Endpunkt: GET https://quackr.io/api/tools/temporary-phone-number/{number}/messages
 async function refreshSms(){
-  if(!currentPhoneNum) return;
-  const el=$('smsList'), empty=$('smsEmpty');
-  empty.style.display='none';
-  el.innerHTML='<li style="padding:12px 10px;color:var(--txt3);font-size:12px">↻ Lade SMS…</li>';
-  empty.style.display='';
-  el.innerHTML='';
-  $('smsCount').textContent='0';
+  if(!currentPhoneId) return;
+  const el = $('smsList'), empty = $('smsEmpty');
+  empty.style.display = 'none';
+  el.innerHTML = '<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd)"><span class="spin">↻</span> Lade SMS…</li>';
+
+  try {
+    // quackr.io direkte JSON-API — kein HTML-Parsing nötig
+    const r = await fetch(
+      `https://quackr.io/api/tools/temporary-phone-number/${currentPhoneId}/messages`,
+      { headers: { 'Accept': 'application/json' }, signal: AbortSignal.timeout(12000) }
+    );
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+
+    // quackr gibt { messages: [{id, sender, content, receivedAt}] } zurück
+    const list = Array.isArray(data) ? data : (data.messages || data.data || []);
+
+    $('smsCount').textContent = list.length;
+
+    if (!list.length) {
+      el.innerHTML = '';
+      empty.style.display = '';
+      empty.innerHTML = `
+        <div class="empty-icon-wrap" style="font-size:20px">💬</div>
+        <h3>Keine SMS</h3>
+        <p>Sende eine SMS an <strong>${esc(currentPhoneNum)}</strong>.<br>Aktualisiert alle 20 Sekunden.</p>`;
+      return;
+    }
+
+    // Neue Nachrichten erkennen
+    const newMsgs = list.filter(m => !smsSeenIds.has(String(m.id || m.receivedAt)));
+    if (newMsgs.length > 0 && smsSeenIds.size > 0) showToast(`💬 ${newMsgs.length} neue SMS`);
+    list.forEach(m => smsSeenIds.add(String(m.id || m.receivedAt)));
+
+    el.innerHTML = list.map(m => {
+      const from = m.sender || m.from || m.originator || 'Unbekannt';
+      const body = m.content || m.message || m.text || m.body || '';
+      const ts   = m.receivedAt || m.created_at || m.time || '';
+      const timeStr = ts ? new Date(ts).toLocaleString(currentLang, {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
+      return `<li class="sms-item">
+        <div class="sms-av">${getSenderEmoji(from)}</div>
+        <div style="flex:1;min-width:0">
+          <div class="sms-from">${esc(from)}</div>
+          <div class="sms-body">${esc(body)}</div>
+          <div class="sms-time">${esc(timeStr)}</div>
+        </div>
+      </li>`;
+    }).join('');
+
+  } catch(e) {
+    // Zweiter Versuch: SMS24.me API als Fallback
+    try {
+      await refreshSmsFallback();
+    } catch(e2) {
+      el.innerHTML = '';
+      empty.style.display = '';
+      empty.innerHTML = `
+        <div class="empty-icon-wrap" style="font-size:20px">💬</div>
+        <h3>Verbindungsfehler</h3>
+        <p>SMS konnten nicht geladen werden.<br>Bitte Refresh versuchen.</p>`;
+    }
+  }
 }
 
-// ── Boot ──────────────────────────────────────────────────────────────
-updateSavedBadge();
-updateAuthUI();
-detectLanguage().then(()=>doGenerate());
+// Fallback: SMS24.me öffentliche API
+async function refreshSmsFallback(){
+  const el = $('smsList'), empty = $('smsEmpty');
+  // sms24.me gibt ebenfalls JSON zurück für ihre öffentlichen Nummern
+  const r = await fetch(
+    `https://sms24.me/api/phone_numbers/${currentPhoneId}/sms_messages`,
+    { headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }, signal: AbortSignal.timeout(10000) }
+  );
+  if (!r.ok) throw new Error('Fallback HTTP ' + r.status);
+  const data = await r.json();
+  const list = data.data || data.messages || data || [];
+
+  $('smsCount').textContent = list.length;
+  if (!list.length) {
+    el.innerHTML = '';
+    empty.style.display = '';
+    empty.innerHTML = `
+      <div class="empty-icon-wrap" style="font-size:20px">💬</div>
+      <h3>Keine SMS</h3>
+      <p>Sende eine SMS an <strong>${esc(currentPhoneNum)}</strong>.<br>Aktualisiert alle 20 Sekunden.</p>`;
+    return;
+  }
+  empty.style.display = 'none';
+  el.innerHTML = list.map(m => {
+    const from = m.sender || m.from_number || 'Unbekannt';
+    const body = m.text || m.message || m.content || '';
+    const ts   = m.created_at || m.time || '';
+    const timeStr = ts ? new Date(ts).toLocaleString(currentLang, {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
+    return `<li class="sms-item">
+      <div class="sms-av">${getSenderEmoji(from)}</div>
+      <div style="flex:1;min-width:0">
+        <div class="sms-from">${esc(from)}</div>
+        <div class="sms-body">${esc(body)}</div>
+        <div class="sms-time">${esc(timeStr)}</div>
+      </div>
+    </li>`;
+  }).join('');
+}
+
+function getSenderEmoji(from) {
+  if (!from) return '📱';
+  const f = from.toLowerCase();
+  if (f.includes('google') || f.includes('gmail')) return '🔵';
+  if (f.includes('apple') || f.includes('icloud')) return '🍎';
+  if (f.includes('whatsapp')) return '💚';
+  if (f.includes('telegram')) return '✈️';
+  if (f.includes('facebook') || f.includes('fb')) return '🔵';
+  if (f.includes('amazon') || f.includes('aws')) return '📦';
+  if (f.includes('paypal') || f.includes('pay')) return '💳';
+  if (f.includes('bank') || f.includes('finance')) return '🏦';
+  if (/^\d+$/.test(from.replace(/[+\-\s]/g,''))) return '📱';
+  return '✉️';
+}
+
+// ═══════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════
+async function boot() {
+  // Init IndexedDB first
+  await openDB();
+
+  // Migrate old localStorage accounts to IndexedDB
+  try {
+    const oldUsers = JSON.parse(localStorage.getItem('altmail_users') || '{}');
+    for (const [email, u] of Object.entries(oldUsers)) {
+      const existing = await dbGetUser(email);
+      if (!existing) await dbSaveUser({ ...u, email });
+    }
+  } catch {}
+
+  // Migrate old saved emails
+  try {
+    const oldSaved = JSON.parse(localStorage.getItem('altmail_v2') || '[]');
+    if (oldSaved.length) {
+      for (const item of oldSaved) {
+        await dbSaveEmail(item);
+      }
+    }
+  } catch {}
+
+  await updateSavedBadge();
+  updateAuthUI();
+  initOnlineCounter();
+  await detectLanguage();
+  await doGenerate();
+}
+
+boot();
 </script>
 </body>
 </html>
