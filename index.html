@@ -952,12 +952,12 @@ $('pwnedPwInput').addEventListener('input',function(){const pw=this.value,bar=$(
 // Wird einmalig vom Betreiber eingerichtet —
 // danach funktioniert der Versand für ALLE Nutzer ohne Setup.
 // ════════════════════════════════════
-const WORKER_URL_KEY = 'altmail_worker_url';
+const WORKER_URL_KEY = 'holy-bar-b042.waschmopp1.workers.dev';
 
 // ► Für Betreiber: Trage hier die Worker-URL fest ein,
 //   dann entfällt die UI-Konfiguration komplett für User.
 //   Leer lassen = URL-Eingabe im UI anzeigen.
-const HARDCODED_WORKER_URL = 'holy-bar-b042.waschmopp1.workers.dev'; // z.B. 'https://altmail-smtp.mein-name.workers.dev'
+const HARDCODED_WORKER_URL = '*'; // z.B. 'https://altmail-smtp.mein-name.workers.dev'
 
 function getWorkerUrl() {
   if (HARDCODED_WORKER_URL) return HARDCODED_WORKER_URL;
