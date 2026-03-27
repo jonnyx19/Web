@@ -7,89 +7,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
-:root{
-  --font:'Geist',system-ui,sans-serif;
-  --mono:'Geist Mono',monospace;
-  --r:14px;--r-sm:10px;--r-lg:20px;
-  --sidebar-w:200px;
-  --sidebar-w-collapsed:60px;
-}
-
-[data-theme="dark"]{
-  --bg:#0a0a0a;--s1:#111;--s2:#181818;--s3:#202020;
-  --brd:rgba(255,255,255,0.07);--brd-hi:rgba(255,255,255,0.15);--brd-act:rgba(255,255,255,0.35);
-  --txt:#f0f0f0;--txt2:#a0a0a0;--txt3:#606060;
-  --glow:rgba(255,255,255,0.06);--radial:rgba(255,255,255,0.04);
-  --btn-bg:#f0f0f0;--btn-clr:#0a0a0a;--btn-hover:#d0d0d0;
-  --shadow-sm:0 4px 24px rgba(0,0,0,.3);--shadow-lg:0 20px 60px rgba(0,0,0,.6);
-  --pwned:#f87171;--safe:#4ade80;
-}
-[data-theme="light"]{
-  --bg:#f4f4f4;--s1:#fff;--s2:#f0f0f0;--s3:#e8e8e8;
-  --brd:rgba(0,0,0,0.08);--brd-hi:rgba(0,0,0,0.15);--brd-act:rgba(0,0,0,0.4);
-  --txt:#111;--txt2:#555;--txt3:#999;
-  --glow:rgba(0,0,0,0.04);--radial:rgba(0,0,0,0.03);
-  --btn-bg:#111;--btn-clr:#fff;--btn-hover:#333;
-  --shadow-sm:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 20px 60px rgba(0,0,0,.15);
-  --pwned:#dc2626;--safe:#16a34a;
-}
-
+:root{--font:'Geist',system-ui,sans-serif;--mono:'Geist Mono',monospace;--r:14px;--r-sm:10px;--r-lg:20px;--sidebar-w:200px;}
+[data-theme="dark"]{--bg:#0a0a0a;--s1:#111;--s2:#181818;--s3:#202020;--brd:rgba(255,255,255,0.07);--brd-hi:rgba(255,255,255,0.15);--brd-act:rgba(255,255,255,0.35);--txt:#f0f0f0;--txt2:#a0a0a0;--txt3:#606060;--glow:rgba(255,255,255,0.06);--btn-bg:#f0f0f0;--btn-clr:#0a0a0a;--btn-hover:#d0d0d0;--shadow-sm:0 4px 24px rgba(0,0,0,.3);--shadow-lg:0 20px 60px rgba(0,0,0,.6);--pwned:#f87171;--safe:#4ade80;}
+[data-theme="light"]{--bg:#f4f4f4;--s1:#fff;--s2:#f0f0f0;--s3:#e8e8e8;--brd:rgba(0,0,0,0.08);--brd-hi:rgba(0,0,0,0.15);--brd-act:rgba(0,0,0,0.4);--txt:#111;--txt2:#555;--txt3:#999;--glow:rgba(0,0,0,0.04);--btn-bg:#111;--btn-clr:#fff;--btn-hover:#333;--shadow-sm:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 20px 60px rgba(0,0,0,.15);--pwned:#dc2626;--safe:#16a34a;}
 html,body{height:100%;overflow:hidden;}
-
-body{
-  background:var(--bg);color:var(--txt);font-family:var(--font);
-  -webkit-font-smoothing:antialiased;display:flex;overflow:hidden;
-  transition:background .3s,color .3s;
-}
-
+body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-smoothing:antialiased;display:flex;overflow:hidden;transition:background .3s,color .3s;}
 #bg-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:1;transition:opacity .5s;}
 [data-theme="light"] #bg-canvas{opacity:.3;}
-
-.sidebar{
-  position:relative;z-index:10;
-  width:var(--sidebar-w);min-width:var(--sidebar-w);
-  height:100vh;overflow-y:auto;overflow-x:hidden;
-  background:var(--s1);border-right:1px solid var(--brd);
-  display:flex;flex-direction:column;gap:2px;padding:16px 10px;
-  flex-shrink:0;transition:width .25s ease,min-width .25s ease;
-}
+.sidebar{position:relative;z-index:10;width:var(--sidebar-w);min-width:var(--sidebar-w);height:100vh;overflow-y:auto;overflow-x:hidden;background:var(--s1);border-right:1px solid var(--brd);display:flex;flex-direction:column;gap:2px;padding:16px 10px;flex-shrink:0;transition:width .25s ease,min-width .25s ease;}
 .sidebar::-webkit-scrollbar{width:3px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px;}
-
 .sidebar-logo{display:flex;align-items:center;gap:8px;padding:8px 10px 16px;margin-bottom:4px;border-bottom:1px solid var(--brd);}
 .sidebar-logo-txt{font-size:18px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);white-space:nowrap;overflow:hidden;}
 .logo-dot{color:var(--txt3);}
-
 .sidebar-section-label{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.6px;text-transform:uppercase;padding:10px 10px 4px;white-space:nowrap;overflow:hidden;}
-
 .nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r-sm);cursor:pointer;transition:background .15s,color .15s;color:var(--txt3);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;border:none;background:none;font-family:var(--font);width:100%;text-align:left;min-height:40px;}
 .nav-item:hover{background:var(--s2);color:var(--txt2);}
 .nav-item.active{background:var(--s3);color:var(--txt);}
 .nav-item svg{width:16px;height:16px;flex-shrink:0;}
 .nav-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
 .nav-badge{margin-left:auto;font-size:10px;font-weight:600;background:var(--s3);color:var(--txt3);border-radius:100px;padding:1px 7px;flex-shrink:0;}
 .nav-item.active .nav-badge{background:var(--brd-hi);}
-
 .sidebar-bottom{margin-top:auto;padding-top:12px;border-top:1px solid var(--brd);}
-
 .main{flex:1;min-width:0;height:100vh;overflow-y:auto;overflow-x:hidden;position:relative;z-index:1;}
 .main::-webkit-scrollbar{width:4px;}
 .main::-webkit-scrollbar-thumb{background:var(--s3);border-radius:4px;}
 .main-inner{max-width:680px;margin:0 auto;padding:32px 20px 80px;}
-
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--brd);z-index:50;padding:6px 4px env(safe-area-inset-bottom,0);flex-direction:row;align-items:center;gap:2px;}
 .mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:var(--r-sm);cursor:pointer;color:var(--txt3);font-size:10px;font-weight:500;border:none;background:none;font-family:var(--font);min-height:52px;justify-content:center;transition:color .15s;}
 .mob-nav-item.active{color:var(--txt);}
 .mob-nav-item svg{width:18px;height:18px;}
-
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
 .header-actions{display:flex;align-items:center;gap:8px;}
-
 .card{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r-lg);padding:20px;margin-bottom:12px;box-shadow:var(--shadow-sm);}
 .card-label{font-size:11px;font-weight:500;color:var(--txt3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;}
-
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;font-family:var(--font);font-size:13px;font-weight:500;border-radius:var(--r);border:1px solid var(--brd);background:var(--s2);color:var(--txt2);cursor:pointer;transition:all .18s;white-space:nowrap;letter-spacing:-.2px;min-height:44px;-webkit-appearance:none;appearance:none;touch-action:manipulation;}
 .btn:hover{background:var(--s3);border-color:var(--brd-hi);color:var(--txt);}
 .btn:disabled{opacity:.35;cursor:not-allowed;pointer-events:none;}
@@ -102,12 +53,10 @@ body{
 .btn-danger:hover{border-color:rgba(248,113,113,.4);color:#f87171;background:rgba(248,113,113,.05);}
 .btn-sm{padding:8px 13px;font-size:12px;border-radius:var(--r-sm);min-height:38px;}
 .btn-group{display:flex;gap:8px;flex-wrap:wrap;}
-
 input,textarea,select{font-family:var(--font);font-size:16px;color:var(--txt);background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);padding:12px 14px;outline:none;width:100%;transition:border-color .15s;-webkit-appearance:none;appearance:none;box-sizing:border-box;}
 input:focus,textarea:focus{border-color:var(--brd-act);}
 input::placeholder,textarea::placeholder{color:var(--txt3);}
 textarea{resize:vertical;min-height:120px;line-height:1.6;}
-
 .email-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;}
 .email-pill{flex:1;min-width:160px;display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none;touch-action:manipulation;}
 .email-pill:hover{border-color:var(--brd-hi);background:var(--s3);}
@@ -118,46 +67,16 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 @keyframes sdot{0%,100%{opacity:.3}50%{opacity:1}}
 .email-addr{font-family:var(--mono);font-size:13px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;letter-spacing:-.3px;}
 .email-copy-hint{font-size:11px;color:var(--txt3);flex-shrink:0;white-space:nowrap;}
-
 .timer-section{margin-top:16px;padding-top:16px;border-top:1px solid var(--brd);}
 .section-label{font-size:11px;font-weight:500;color:var(--txt3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:8px;}
 .timer-opts{display:flex;flex-wrap:wrap;gap:4px;align-items:center;}
-
-/* Timer chips & custom input — all same size */
-.t-chip{
-  padding:0 14px;
-  height:36px;
-  font-size:12px;font-weight:500;font-family:var(--font);
-  background:transparent;border:1px solid var(--brd);border-radius:100px;
-  color:var(--txt3);cursor:pointer;transition:all .15s;
-  touch-action:manipulation;
-  display:inline-flex;align-items:center;justify-content:center;
-  line-height:1;
-}
+.t-chip{padding:0 14px;height:36px;font-size:12px;font-weight:500;font-family:var(--font);background:transparent;border:1px solid var(--brd);border-radius:100px;color:var(--txt3);cursor:pointer;transition:all .15s;touch-action:manipulation;display:inline-flex;align-items:center;justify-content:center;line-height:1;}
 .t-chip:hover{border-color:var(--brd-hi);color:var(--txt2);background:var(--s2);}
 .t-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
 .custom-wrap{display:flex;height:36px;}
-.t-input{
-  width:52px;font-size:12px;
-  border-right:none;
-  border-radius:100px 0 0 100px;
-  text-align:center;
-  height:36px;padding:0 8px;
-  box-sizing:border-box;
-}
-.t-ok-btn{
-  padding:0 12px;
-  font-size:12px;font-weight:500;font-family:var(--font);
-  background:transparent;border:1px solid var(--brd);
-  border-radius:0 100px 100px 0;
-  color:var(--txt3);cursor:pointer;transition:all .15s;
-  height:36px;
-  display:inline-flex;align-items:center;justify-content:center;
-  touch-action:manipulation;
-  white-space:nowrap;
-}
+.t-input{width:52px;font-size:12px;border-right:none;border-radius:100px 0 0 100px;text-align:center;height:36px;padding:0 8px;box-sizing:border-box;}
+.t-ok-btn{padding:0 12px;font-size:12px;font-weight:500;font-family:var(--font);background:transparent;border:1px solid var(--brd);border-radius:0 100px 100px 0;color:var(--txt3);cursor:pointer;transition:all .15s;height:36px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;white-space:nowrap;}
 .t-ok-btn:hover{border-color:var(--brd-hi);color:var(--txt2);background:var(--s2);}
-
 .timer-bar-wrap{display:flex;align-items:center;gap:10px;margin-top:12px;}
 .timer-bar{flex:1;height:2px;background:var(--s3);border-radius:2px;overflow:hidden;}
 .timer-bar-fill{height:100%;background:linear-gradient(90deg,var(--txt3),var(--txt2));border-radius:2px;transition:width 1s linear;}
@@ -172,7 +91,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .refresh-ring svg{width:14px;height:14px;transform:rotate(-90deg);}
 .refresh-ring circle{fill:none;stroke:var(--txt3);stroke-width:2;stroke-linecap:round;stroke-dasharray:38;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;}
 .refresh-ring-label{font-family:var(--mono);font-size:11px;color:var(--txt3);min-width:18px;text-align:right;}
-
 .inbox-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;}
 .inbox-title-row{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--txt);letter-spacing:-.3px;}
 .inbox-pill{font-size:11px;font-weight:600;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 9px;}
@@ -192,7 +110,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .empty-icon{width:56px;height:56px;border-radius:16px;background:var(--s2);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;}
 .empty-view h3{font-size:15px;font-weight:600;color:var(--txt2);margin-bottom:6px;letter-spacing:-.3px;}
 .empty-view p{font-size:13px;color:var(--txt3);line-height:1.6;}
-
 .detail-card{display:none;background:var(--s1);border:1px solid var(--brd);border-radius:var(--r-lg);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow-sm);animation:fadeUp .2s ease;}
 .detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:20px;border-bottom:1px solid var(--brd);}
 .detail-from{font-size:15px;font-weight:600;color:var(--txt);letter-spacing:-.3px;margin-bottom:4px;}
@@ -210,7 +127,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .link-arrow{font-size:13px;color:var(--txt3);flex-shrink:0;}
 .body-divider{border:none;border-top:1px solid var(--brd);margin:16px 0;}
 .email-body-text{font-size:13px;line-height:1.8;color:var(--txt2);white-space:pre-wrap;word-break:break-word;font-family:var(--mono);}
-
 .saved-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;transition:border-color .15s;animation:fadeUp .15s ease;}
 .saved-item:hover{border-color:var(--brd-hi);}
 .saved-info{flex:1;min-width:0;}
@@ -219,7 +135,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .saved-name-badge{display:inline-block;font-size:11px;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 9px;margin-right:6px;}
 .saved-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;}
 .saved-empty{text-align:center;padding:48px 20px;color:var(--txt3);font-size:14px;line-height:1.7;}
-
 .whoami-hero{display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px;text-align:center;border-bottom:1px solid var(--brd);margin-bottom:20px;}
 .whoami-avatar{width:72px;height:72px;border-radius:50%;background:var(--s3);border:2px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--txt);margin-bottom:14px;}
 .whoami-name{font-size:20px;font-weight:600;color:var(--txt);letter-spacing:-.5px;margin-bottom:4px;}
@@ -234,8 +149,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .whoami-row-val{font-family:var(--mono);font-size:12px;color:var(--txt2);text-align:right;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .whoami-row-val.ok{color:#fff;}
 .whoami-row-val.err{color:#f87171;}
-
-/* PWNED */
 .pwned-hero{text-align:center;padding:20px 0 28px;}
 .pwned-hero h2{font-size:20px;font-weight:600;letter-spacing:-.5px;color:var(--txt);margin-bottom:8px;}
 .pwned-hero p{font-size:13px;color:var(--txt3);line-height:1.6;max-width:400px;margin:0 auto;}
@@ -266,8 +179,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .pw-result-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-size:12px;font-weight:600;margin-top:10px;}
 .pw-result-pill.pwned-pill{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);}
 .pw-result-pill.safe-pill{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3);}
-
-/* SENDER */
 .from-addr-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);margin-bottom:12px;}
 .from-label{font-size:11px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;}
 .from-addr{font-family:var(--mono);font-size:13px;color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -279,13 +190,38 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .sent-meta{font-size:11px;color:var(--txt3);font-family:var(--mono);}
 .sent-actions{display:flex;gap:6px;flex-shrink:0;}
 
-/* Send status */
-.send-status{display:none;padding:12px 14px;border-radius:var(--r-sm);font-size:13px;margin-top:8px;border:1px solid var(--brd);}
-.send-status.success{display:flex;align-items:center;gap:8px;background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.3);color:#4ade80;}
-.send-status.error{display:flex;align-items:center;gap:8px;background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.3);color:#f87171;}
-.send-status.loading-status{display:flex;align-items:center;gap:8px;background:var(--s2);color:var(--txt3);}
+/* ── SENDER: Status Banner ── */
+.send-status-banner{border-radius:var(--r-sm);padding:14px 16px;font-size:13px;line-height:1.6;border:1px solid var(--brd);display:none;animation:fadeUp .2s ease;}
+.send-status-banner.show{display:flex;align-items:flex-start;gap:10px;}
+.send-status-banner.success{background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.25);color:#4ade80;}
+.send-status-banner.error{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.25);color:#f87171;}
+.send-status-banner.loading{background:var(--s2);color:var(--txt3);}
+.send-status-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
+.send-status-body{flex:1;min-width:0;}
+.send-status-title{font-weight:600;margin-bottom:4px;}
+.send-status-sub{font-size:12px;opacity:.8;}
 
-/* PHONE */
+/* ── SENDER: From-Box ── */
+.sender-from-box{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.sender-from-box.active-sender{border-color:rgba(255,255,255,.15);}
+.sender-from-av{width:40px;height:40px;border-radius:50%;background:var(--s3);border:1px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--txt);flex-shrink:0;}
+.sender-from-info{flex:1;min-width:0;}
+.sender-from-addr{font-family:var(--mono);font-size:13px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px;}
+.sender-from-sub{font-size:11px;color:var(--txt3);}
+
+/* ── SENDER: Worker URL config ── */
+.worker-config{background:var(--s2);border:1px dashed var(--brd-hi);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;}
+.worker-config-title{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.worker-config-sub{font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px;}
+.worker-url-row{display:flex;gap:8px;}
+.worker-url-row input{font-size:12px;font-family:var(--mono);}
+
+/* ── SENDER: Char counter ── */
+.compose-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.char-counter{font-family:var(--mono);font-size:11px;color:var(--txt3);}
+.char-counter.warn{color:#fbbf24;}
+
+/* ── PHONE ── */
 .country-chip{padding:8px 14px;font-size:12px;font-weight:500;background:var(--s2);border:1px solid var(--brd);border-radius:100px;color:var(--txt3);cursor:pointer;transition:all .15s;font-family:var(--font);min-height:36px;touch-action:manipulation;}
 .country-chip:hover{border-color:var(--brd-hi);color:var(--txt2);}
 .country-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
@@ -298,8 +234,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .sms-from{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px;}
 .sms-body{font-size:13px;color:var(--txt2);line-height:1.5;white-space:pre-wrap;word-break:break-word;}
 .sms-time{font-family:var(--mono);font-size:10px;color:var(--txt3);margin-top:4px;}
-
-/* AFFILIATE */
 .affiliate-section{margin-top:40px;padding-top:28px;border-top:1px solid var(--brd);}
 .affiliate-label{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.8px;text-transform:uppercase;text-align:center;margin-bottom:14px;}
 .affiliate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -311,13 +245,9 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .affiliate-desc{font-size:11px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .affiliate-arrow{font-size:11px;color:var(--txt3);flex-shrink:0;}
 .affiliate-badge{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:1px 6px;letter-spacing:.4px;text-transform:uppercase;}
-
-/* ONLINE COUNTER */
 .online-counter{position:fixed;bottom:16px;right:16px;display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--brd);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--txt3);box-shadow:var(--shadow-sm);z-index:100;user-select:none;transition:all .2s;}
 .online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5);animation:pg 2s infinite;flex-shrink:0;}
 @keyframes pg{0%,100%{opacity:1}50%{opacity:.7;box-shadow:0 0 12px rgba(74,222,128,.8)}}
-
-/* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:300;align-items:flex-end;justify-content:center;padding:0;}
 .modal-overlay.open{display:flex;}
 .modal-box{background:var(--s1);border:1px solid var(--brd-hi);border-radius:var(--r-lg) var(--r-lg) 0 0;padding:28px 24px max(24px, env(safe-area-inset-bottom));width:100%;max-width:100%;box-shadow:var(--shadow-lg);animation:slideUp .25s cubic-bezier(.32,.72,0,1);max-height:90vh;overflow-y:auto;}
@@ -342,10 +272,8 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--brd);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--txt2);min-height:36px;touch-action:manipulation;}
 .theme-toggle:hover{border-color:var(--brd-hi);background:var(--s3);transform:rotate(20deg);color:var(--txt);}
 .theme-toggle svg{width:16px;height:16px;}
-
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(50px);background:var(--s1);border:1px solid var(--brd-hi);color:var(--txt2);padding:11px 20px;border-radius:100px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:all .3s cubic-bezier(.34,1.3,.64,1);white-space:nowrap;box-shadow:var(--shadow-sm);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .7s linear infinite;display:inline-block;}
 
@@ -362,6 +290,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   .btn-group .btn{flex:1;}
   .sent-actions{flex-direction:column;}
   .pwned-input-row{flex-direction:column;}
+  .worker-url-row{flex-direction:column;}
 }
 @media(min-width:769px) and (max-width:1100px){
   :root{--sidebar-w:60px;}
@@ -373,10 +302,8 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 </style>
 </head>
 <body>
-
 <canvas id="bg-canvas"></canvas>
 
-<!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--txt)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -404,7 +331,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   </button>
   <div class="sidebar-section-label">Tools</div>
   <button class="nav-item" id="snav-pwned" onclick="switchPage('pwned')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     <span class="nav-label">Pwned?</span>
   </button>
   <button class="nav-item" id="snav-whoami" onclick="switchPage('whoami')">
@@ -424,7 +351,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   </div>
 </nav>
 
-<!-- MOBILE NAV -->
 <nav class="mobile-nav">
   <button class="mob-nav-item active" id="mnav-active" onclick="switchPage('active')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -448,10 +374,8 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   </button>
 </nav>
 
-<!-- MAIN -->
 <main class="main">
 <div class="main-inner">
-
   <div class="page-header">
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="header-chip" id="headerChip">Temporäre E-Mail</div>
@@ -569,7 +493,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
       <h2>Bin ich gehackt?</h2>
       <p>Prüfe ob deine Email-Adresse oder dein Passwort in einem Datenleck aufgetaucht sind.</p>
     </div>
-
     <div class="card">
       <div class="card-label">Email-Adresse prüfen</div>
       <div class="pwned-input-row">
@@ -578,7 +501,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
       </div>
       <div id="pwnedEmailResult"></div>
     </div>
-
     <div class="card">
       <div class="card-label">Passwort prüfen (k-Anonym)</div>
       <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Nur die ersten 5 Zeichen des SHA-1-Hashes werden gesendet — dein Passwort verlässt nie dieses Gerät.</p>
@@ -594,26 +516,61 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   <!-- PAGE: SENDER -->
   <div class="page" id="page-sender" style="display:none">
     <div class="card">
-      <div class="card-label">Von (Aktive Temp-Email)</div>
-      <div class="from-addr-row">
-        <span class="from-label">Von</span>
-        <span class="from-addr" id="senderFrom">Keine Email aktiv — zuerst Email generieren</span>
-        <div class="status-dot" id="senderDot" style="flex-shrink:0"></div>
+      <div class="card-label">Absender</div>
+
+      <!-- From-Box: zeigt aktive Temp-Email -->
+      <div class="sender-from-box" id="senderFromBox">
+        <div class="sender-from-av" id="senderFromAv">?</div>
+        <div class="sender-from-info">
+          <div class="sender-from-addr" id="senderFromAddr">Keine Email aktiv</div>
+          <div class="sender-from-sub" id="senderFromSub">Zuerst eine Temp-Email generieren</div>
+        </div>
+        <div class="status-dot" id="senderDot"></div>
       </div>
+
+      <!-- Worker URL konfigurieren (einmalig, optional) -->
+      <div class="worker-config" id="workerConfigBox">
+        <div class="worker-config-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          Cloudflare Worker URL
+        </div>
+        <div class="worker-config-sub">
+          Trage einmalig deine Worker-URL ein — danach funktioniert der Versand automatisch für alle Nutzer ohne weitere Einrichtung.<br>
+          <span style="color:var(--txt2)">→ worker.js aus dem Download deployen auf <strong>dash.cloudflare.com</strong></span>
+        </div>
+        <div class="worker-url-row">
+          <input type="url" id="workerUrlInput" placeholder="https://altmail-smtp.DEIN-NAME.workers.dev" autocomplete="off" style="font-size:12px;font-family:var(--mono)">
+          <button class="btn btn-primary btn-sm" onclick="saveWorkerUrl()" style="flex-shrink:0;">Speichern</button>
+        </div>
+        <div id="workerUrlStatus" style="font-size:11px;color:var(--txt3);margin-top:8px;"></div>
+      </div>
+
       <div class="card-label" style="margin-top:4px;">Neue Email verfassen</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <input type="email" id="sendTo" placeholder="An: empfaenger@example.com" inputmode="email">
-        <input type="text" id="sendSubject" placeholder="Betreff">
-        <textarea id="sendBody" placeholder="Nachricht schreiben…" style="min-height:140px;"></textarea>
-        <div id="sendStatus" class="send-status"></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button class="btn btn-ghost" onclick="clearCompose()">Leeren</button>
-          <button class="btn btn-primary" id="sendBtn" onclick="sendEmail()">
-            <span id="sendBtnIcon">↑</span> Senden
-          </button>
+        <input type="email" id="sendTo" placeholder="An: empfaenger@example.com" inputmode="email" autocomplete="off">
+        <input type="text" id="sendSubject" placeholder="Betreff" autocomplete="off">
+        <textarea id="sendBody" placeholder="Nachricht schreiben…" style="min-height:160px;" oninput="updateCharCounter()"></textarea>
+        <div class="compose-footer">
+          <span class="char-counter" id="charCounter">0 Zeichen</span>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost btn-sm" onclick="clearCompose()">Leeren</button>
+            <button class="btn btn-primary" id="sendBtn" onclick="sendEmail()">
+              <span id="sendBtnTxt">↑ Senden</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Banner — erscheint nach Sendeversuch -->
+      <div class="send-status-banner" id="sendStatusBanner" style="margin-top:12px;">
+        <div class="send-status-icon" id="sendStatusIcon"></div>
+        <div class="send-status-body">
+          <div class="send-status-title" id="sendStatusTitle"></div>
+          <div class="send-status-sub" id="sendStatusSub"></div>
         </div>
       </div>
     </div>
+
     <div class="card" id="sentCard" style="display:none">
       <div class="inbox-header">
         <div class="inbox-title-row">Verlauf <span class="inbox-pill" id="sentCount">0</span></div>
@@ -637,9 +594,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
         <button class="country-chip" onclick="selectCountry('nl',this)">NL</button>
       </div>
       <div id="phoneList"></div>
-      <div style="margin-top:10px;">
-        <button class="btn btn-primary btn-sm" onclick="loadPhones()">↻ Neue Nummern</button>
-      </div>
+      <div style="margin-top:10px;"><button class="btn btn-primary btn-sm" onclick="loadPhones()">↻ Neue Nummern</button></div>
     </div>
     <div class="card" id="activePhoneCard" style="display:none">
       <div class="card-label">Aktive Nummer</div>
@@ -674,11 +629,9 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   <div class="page" id="page-whoami" style="display:none">
     <div class="card" id="whoamiCard"></div>
   </div>
-
 </div>
 </main>
 
-<!-- ONLINE COUNTER -->
 <div class="online-counter">
   <div class="online-dot"></div>
   <span id="onlineCount">1</span> online
@@ -747,157 +700,21 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 
 <script>
 // ════════════════════════════════════
-// 3D BACKGROUND — ENHANCED
+// 3D BACKGROUND
 // ════════════════════════════════════
 (function(){
   const canvas=document.getElementById('bg-canvas');
   const ctx=canvas.getContext('2d');
-  let W,H,stars=[],shapes=[],connections=[],frame=0;
+  let W,H,stars=[],shapes=[],frame=0;
   function isDark(){return document.documentElement.getAttribute('data-theme')!=='light';}
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-
-  function initStars(){
-    stars=[];
-    const n=Math.min(280,Math.floor(W*H/4000));
-    for(let i=0;i<n;i++)stars.push({
-      x:Math.random()*W,y:Math.random()*H,
-      r:Math.random()*1.6+.2,
-      alpha:Math.random()*.6+.1,
-      phase:Math.random()*Math.PI*2,
-      speed:Math.random()*.015+.003
-    });
-  }
-
-  function initShapes(){
-    shapes=[
-      // Original positions + more
-      {type:'cube',    xp:.06, yp:.15, sz:36, rs:.003,  dy:.10, op:.18, rot:0, off:1.2},
-      {type:'ring',    xp:.94, yp:.10, sz:44, rs:-.003, dy:.08, op:.14, rot:0, off:2.1},
-      {type:'oct',     xp:.88, yp:.50, sz:28, rs:.004,  dy:.07, op:.15, rot:0, off:.8},
-      {type:'tri',     xp:.50, yp:.06, sz:30, rs:.002,  dy:.08, op:.12, rot:0, off:1.7},
-      {type:'cube',    xp:.04, yp:.70, sz:24, rs:-.003, dy:.09, op:.12, rot:0, off:3.0},
-      {type:'ring',    xp:.15, yp:.90, sz:38, rs:.002,  dy:.10, op:.10, rot:0, off:.4},
-      {type:'oct',     xp:.82, yp:.85, sz:22, rs:.005,  dy:.12, op:.11, rot:0, off:2.5},
-      // New shapes
-      {type:'diamond', xp:.30, yp:.20, sz:22, rs:.004,  dy:.09, op:.13, rot:0, off:1.1},
-      {type:'helix',   xp:.70, yp:.30, sz:30, rs:.003,  dy:.11, op:.10, rot:0, off:2.3},
-      {type:'cube',    xp:.55, yp:.80, sz:18, rs:-.004, dy:.08, op:.09, rot:0, off:.7},
-      {type:'tri',     xp:.20, yp:.55, sz:24, rs:.003,  dy:.10, op:.10, rot:0, off:3.3},
-      {type:'ring',    xp:.75, yp:.65, sz:32, rs:-.002, dy:.07, op:.08, rot:0, off:1.9},
-      {type:'diamond', xp:.42, yp:.45, sz:18, rs:.005,  dy:.12, op:.08, rot:0, off:0.5},
-      {type:'cube',    xp:.90, yp:.30, sz:20, rs:.002,  dy:.09, op:.09, rot:0, off:2.8},
-      {type:'tri',     xp:.10, yp:.35, sz:20, rs:-.003, dy:.08, op:.07, rot:0, off:1.4},
-      {type:'helix',   xp:.60, yp:.92, sz:26, rs:.004,  dy:.10, op:.09, rot:0, off:3.7},
-      {type:'oct',     xp:.38, yp:.70, sz:16, rs:.003,  dy:.11, op:.08, rot:0, off:0.3},
-      {type:'ring',    xp:.25, yp:.08, sz:28, rs:.002,  dy:.09, op:.07, rot:0, off:4.1},
-    ];
-  }
-
-  function drawCube(cx,cy,sz,rot,a){
-    const c=Math.cos(rot),s=Math.sin(rot),h=sz*.5,off=sz*.28;
-    const pts=[[-h,-h],[h,-h],[h,h],[-h,h]].map(([x,y])=>[x*c-y*s*.5+cx,x*s*.5+y*c*.5+cy]);
-    const top=pts.map(([x,y])=>[x,y-off]);
-    ctx.save();ctx.globalAlpha=a;
-    ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;
-    ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();
-    [[0,1],[1,2],[2,3],[3,0]].forEach(([i,j])=>{
-      ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(top[i][0],top[i][1]);ctx.stroke();
-    });
-    ctx.beginPath();top.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawOct(cx,cy,sz,rot,a){
-    ctx.save();ctx.globalAlpha=a;
-    ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;
-    const pts=[];
-    for(let i=0;i<4;i++){const ang=rot+i/4*Math.PI*2;pts.push([cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz*.6]);}
-    const top=[cx,cy-sz*.9],bot=[cx,cy+sz*.9];
-    for(let i=0;i<4;i++){const n=pts[(i+1)%4];ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(n[0],n[1]);ctx.stroke();ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(top[0],top[1]);ctx.stroke();ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(bot[0],bot[1]);ctx.stroke();}
-    ctx.restore();
-  }
-
-  function drawRing(cx,cy,sz,rot,a){
-    ctx.save();ctx.globalAlpha=a;
-    ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;
-    ctx.beginPath();ctx.ellipse(cx,cy,sz,sz*.38,rot,0,Math.PI*2);ctx.stroke();
-    ctx.beginPath();ctx.ellipse(cx,cy,sz*.55,sz*.21,rot,0,Math.PI*2);ctx.stroke();
-    // spokes
-    for(let i=0;i<6;i++){
-      const ang=rot+i/6*Math.PI*2;
-      const x1=cx+Math.cos(ang)*sz*.55,y1=cy+Math.sin(ang)*sz*.21;
-      const x2=cx+Math.cos(ang)*sz,y2=cy+Math.sin(ang)*sz*.38;
-      ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  function drawTri(cx,cy,sz,rot,a){
-    ctx.save();ctx.globalAlpha=a;
-    ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;
-    const pts=[],inner=[];
-    for(let i=0;i<3;i++){const ang=rot+i/3*Math.PI*2-Math.PI/2;pts.push([cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz]);inner.push([cx+(Math.cos(ang)*sz)*.45,cy+(Math.sin(ang)*sz)*.45]);}
-    ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();
-    ctx.beginPath();inner.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();
-    pts.forEach(([x,y],i)=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(inner[i][0],inner[i][1]);ctx.stroke();});
-    ctx.restore();
-  }
-
-  function drawDiamond(cx,cy,sz,rot,a){
-    ctx.save();ctx.globalAlpha=a;
-    ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;
-    const pts=[];
-    for(let i=0;i<8;i++){const ang=rot+i/8*Math.PI*2;const r=i%2===0?sz:sz*.45;pts.push([cx+Math.cos(ang)*r,cy+Math.sin(ang)*r*.6]);}
-    ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();
-    // inner
-    ctx.beginPath();
-    for(let i=0;i<8;i++){const ang=rot+i/8*Math.PI*2;const r=i%2===0?sz*.5:sz*.22;const x=cx+Math.cos(ang)*r,y=cy+Math.sin(ang)*r*.6;i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
-    ctx.closePath();ctx.stroke();
-    // connect
-    for(let i=0;i<8;i+=2){const ang=rot+i/8*Math.PI*2;ctx.beginPath();ctx.moveTo(cx+Math.cos(ang)*sz*.5,cy+Math.sin(ang)*sz*.3);ctx.lineTo(cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz*.6);ctx.stroke();}
-    ctx.restore();
-  }
-
-  function drawHelix(cx,cy,sz,rot,a){
-    ctx.save();ctx.globalAlpha=a;
-    ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;
-    const steps=12;
-    const pts1=[],pts2=[];
-    for(let i=0;i<=steps;i++){
-      const t=i/steps*Math.PI*2;
-      pts1.push([cx+Math.cos(rot+t)*sz,cy+(i/steps-.5)*sz*2.2+Math.sin(t)*sz*.18]);
-      pts2.push([cx+Math.cos(rot+t+Math.PI)*sz,cy+(i/steps-.5)*sz*2.2+Math.sin(t+Math.PI)*sz*.18]);
-    }
-    ctx.beginPath();pts1.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();
-    ctx.beginPath();pts2.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();
-    for(let i=0;i<=steps;i+=2){
-      ctx.beginPath();ctx.moveTo(pts1[i][0],pts1[i][1]);ctx.lineTo(pts2[i][0],pts2[i][1]);ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  function render(){
-    const t=frame/60;
-    ctx.clearRect(0,0,W,H);
-    // stars
-    for(const s of stars){
-      const a=s.alpha*(.5+.5*Math.sin(t*s.speed*40+s.phase));
-      ctx.save();ctx.globalAlpha=a;ctx.fillStyle=isDark()?'#fff':'#000';
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();
-    }
-    // shapes
-    for(const s of shapes){
-      const cx=s.xp*W,cy=s.yp*H+Math.sin(t*s.dy+s.off)*18,rot=s.rot+t*s.rs*60,a=s.op*(.7+.3*Math.sin(t*.5+s.off));
-      if(s.type==='cube')drawCube(cx,cy,s.sz,rot,a);
-      else if(s.type==='oct')drawOct(cx,cy,s.sz*.6,rot,a);
-      else if(s.type==='ring')drawRing(cx,cy,s.sz,rot,a);
-      else if(s.type==='tri')drawTri(cx,cy,s.sz,rot,a);
-      else if(s.type==='diamond')drawDiamond(cx,cy,s.sz,rot,a);
-      else if(s.type==='helix')drawHelix(cx,cy,s.sz*.35,rot,a);
-    }
-    frame++;requestAnimationFrame(render);
-  }
-
+  function initStars(){stars=[];const n=Math.min(280,Math.floor(W*H/4000));for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.2,alpha:Math.random()*.6+.1,phase:Math.random()*Math.PI*2,speed:Math.random()*.015+.003});}
+  function initShapes(){shapes=[{type:'cube',xp:.06,yp:.15,sz:36,rs:.003,dy:.10,op:.18,rot:0,off:1.2},{type:'ring',xp:.94,yp:.10,sz:44,rs:-.003,dy:.08,op:.14,rot:0,off:2.1},{type:'oct',xp:.88,yp:.50,sz:28,rs:.004,dy:.07,op:.15,rot:0,off:.8},{type:'tri',xp:.50,yp:.06,sz:30,rs:.002,dy:.08,op:.12,rot:0,off:1.7},{type:'cube',xp:.04,yp:.70,sz:24,rs:-.003,dy:.09,op:.12,rot:0,off:3.0},{type:'ring',xp:.15,yp:.90,sz:38,rs:.002,dy:.10,op:.10,rot:0,off:.4},{type:'oct',xp:.82,yp:.85,sz:22,rs:.005,dy:.12,op:.11,rot:0,off:2.5},{type:'tri',xp:.30,yp:.20,sz:22,rs:.004,dy:.09,op:.13,rot:0,off:1.1},{type:'cube',xp:.55,yp:.80,sz:18,rs:-.004,dy:.08,op:.09,rot:0,off:.7},{type:'tri',xp:.20,yp:.55,sz:24,rs:.003,dy:.10,op:.10,rot:0,off:3.3},{type:'ring',xp:.75,yp:.65,sz:32,rs:-.002,dy:.07,op:.08,rot:0,off:1.9}];}
+  function drawCube(cx,cy,sz,rot,a){const c=Math.cos(rot),s=Math.sin(rot),h=sz*.5,off=sz*.28;const pts=[[-h,-h],[h,-h],[h,h],[-h,h]].map(([x,y])=>[x*c-y*s*.5+cx,x*s*.5+y*c*.5+cy]);const top=pts.map(([x,y])=>[x,y-off]);ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();ctx.beginPath();top.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();pts.forEach(([x,y],i)=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(top[i][0],top[i][1]);ctx.stroke();});ctx.restore();}
+  function drawOct(cx,cy,sz,rot,a){ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;const pts=[];for(let i=0;i<4;i++){const ang=rot+i/4*Math.PI*2;pts.push([cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz*.6]);}const top=[cx,cy-sz*.9],bot=[cx,cy+sz*.9];for(let i=0;i<4;i++){const n=pts[(i+1)%4];ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(n[0],n[1]);ctx.stroke();ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(top[0],top[1]);ctx.stroke();ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(bot[0],bot[1]);ctx.stroke();}ctx.restore();}
+  function drawRing(cx,cy,sz,rot,a){ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;ctx.beginPath();ctx.ellipse(cx,cy,sz,sz*.38,rot,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(cx,cy,sz*.55,sz*.21,rot,0,Math.PI*2);ctx.stroke();for(let i=0;i<6;i++){const ang=rot+i/6*Math.PI*2;ctx.beginPath();ctx.moveTo(cx+Math.cos(ang)*sz*.55,cy+Math.sin(ang)*sz*.21);ctx.lineTo(cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz*.38);ctx.stroke();}ctx.restore();}
+  function drawTri(cx,cy,sz,rot,a){ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;const pts=[],inner=[];for(let i=0;i<3;i++){const ang=rot+i/3*Math.PI*2-Math.PI/2;pts.push([cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz]);inner.push([cx+(Math.cos(ang)*sz)*.45,cy+(Math.sin(ang)*sz)*.45]);}ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();ctx.beginPath();inner.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();pts.forEach(([x,y],i)=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(inner[i][0],inner[i][1]);ctx.stroke();});ctx.restore();}
+  function render(){const t=frame/60;ctx.clearRect(0,0,W,H);for(const s of stars){const a=s.alpha*(.5+.5*Math.sin(t*s.speed*40+s.phase));ctx.save();ctx.globalAlpha=a;ctx.fillStyle=isDark()?'#fff':'#000';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();}for(const s of shapes){const cx=s.xp*W,cy=s.yp*H+Math.sin(t*s.dy+s.off)*18,rot=s.rot+t*s.rs*60,a=s.op*(.7+.3*Math.sin(t*.5+s.off));if(s.type==='cube')drawCube(cx,cy,s.sz,rot,a);else if(s.type==='oct')drawOct(cx,cy,s.sz*.6,rot,a);else if(s.type==='ring')drawRing(cx,cy,s.sz,rot,a);else if(s.type==='tri')drawTri(cx,cy,s.sz,rot,a);}frame++;requestAnimationFrame(render);}
   window.addEventListener('resize',()=>{resize();initStars();initShapes();});
   resize();initStars();initShapes();render();
 })();
@@ -906,58 +723,32 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 // THEME
 // ════════════════════════════════════
 function initTheme(){applyTheme(localStorage.getItem('altmail_theme')||'dark');}
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  const dark=t==='dark';
-  document.getElementById('sb-sun').style.display=dark?'':'none';
-  document.getElementById('sb-moon').style.display=dark?'none':'';
-  document.getElementById('theme-label').textContent=dark?'Light Mode':'Dark Mode';
-  document.getElementById('mt-sun').style.display=dark?'':'none';
-  document.getElementById('mt-moon').style.display=dark?'none':'';
-  localStorage.setItem('altmail_theme',t);
-}
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);const dark=t==='dark';document.getElementById('sb-sun').style.display=dark?'':'none';document.getElementById('sb-moon').style.display=dark?'none':'';document.getElementById('theme-label').textContent=dark?'Light Mode':'Dark Mode';document.getElementById('mt-sun').style.display=dark?'':'none';document.getElementById('mt-moon').style.display=dark?'none':'';localStorage.setItem('altmail_theme',t);}
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
 initTheme();
 
 // ════════════════════════════════════
-// ONLINE COUNTER
+// IP-BASED ONLINE COUNTER
 // ════════════════════════════════════
-const ONLINE_STORE='altmail_online_v5';
-const HB_INTERVAL=8000;
-const TAB_TIMEOUT=20000;
-
-let MY_TAB_ID=sessionStorage.getItem('altmail_tab_id');
-if(!MY_TAB_ID){MY_TAB_ID='tab_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);sessionStorage.setItem('altmail_tab_id',MY_TAB_ID);}
-
-let _onlineCh=null;
-function _readTabs(){try{return JSON.parse(localStorage.getItem(ONLINE_STORE)||'{}');}catch{return{};}}
-function _writeTabs(obj){try{localStorage.setItem(ONLINE_STORE,JSON.stringify(obj));}catch{}}
-function _purgeAndCount(){const now=Date.now();const tabs=_readTabs();const alive={};for(const[id,ts]of Object.entries(tabs)){if(now-ts<TAB_TIMEOUT)alive[id]=ts;}_writeTabs(alive);return Object.keys(alive).length;}
-function _heartbeat(){const tabs=_readTabs();tabs[MY_TAB_ID]=Date.now();_writeTabs(tabs);const count=_purgeAndCount();document.getElementById('onlineCount').textContent=count;try{_onlineCh&&_onlineCh.postMessage({t:'hb',id:MY_TAB_ID});}catch{}}
-function _removeMyTab(){const tabs=_readTabs();delete tabs[MY_TAB_ID];_writeTabs(tabs);try{_onlineCh&&_onlineCh.postMessage({t:'leave',id:MY_TAB_ID});}catch{}}
-function _updateCounter(){document.getElementById('onlineCount').textContent=_purgeAndCount();}
-
-function initOnlineCounter(){
-  _heartbeat();setInterval(_heartbeat,HB_INTERVAL);setInterval(_updateCounter,5000);
-  try{_onlineCh=new BroadcastChannel('altmail_presence_v5');_onlineCh.onmessage=()=>_updateCounter();}catch{}
-  window.addEventListener('storage',e=>{if(e.key===ONLINE_STORE)_updateCounter();});
-  window.addEventListener('beforeunload',_removeMyTab);
-  window.addEventListener('pagehide',_removeMyTab);
-}
+const ONLINE_STORE='altmail_online_ip_v1';
+const IP_TIMEOUT=30000;
+const HB_INTERVAL=10000;
+let myIP=null,myIPHash=null;
+async function getMyIP(){if(myIP)return myIP;try{const r=await fetch('https://api.ipify.org?format=json',{signal:AbortSignal.timeout(5000)});const d=await r.json();myIP=d.ip;return myIP;}catch{try{const r2=await fetch('https://api64.ipify.org?format=json',{signal:AbortSignal.timeout(4000)});const d2=await r2.json();myIP=d2.ip;return myIP;}catch{myIP='local_'+(sessionStorage.getItem('altmail_tab_id')||Math.random().toString(36).slice(2));return myIP;}}}
+async function hashIP(ip){if(!ip)return null;try{const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(ip+'altmail_v1'));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,16);}catch{return ip.replace(/\./g,'_').replace(/:/g,'_').slice(0,16);}}
+function readOnlineIPs(){try{return JSON.parse(localStorage.getItem(ONLINE_STORE)||'{}');}catch{return{};}}
+function writeOnlineIPs(obj){try{localStorage.setItem(ONLINE_STORE,JSON.stringify(obj));}catch{}}
+function purgeExpiredIPs(){const now=Date.now();const data=readOnlineIPs();const alive={};for(const[hash,ts]of Object.entries(data)){if(now-ts<IP_TIMEOUT)alive[hash]=ts;}writeOnlineIPs(alive);return Object.keys(alive).length;}
+function updateOnlineDisplay(){const count=purgeExpiredIPs();document.getElementById('onlineCount').textContent=Math.max(1,count);}
+async function ipHeartbeat(){if(!myIPHash){const ip=await getMyIP();myIPHash=await hashIP(ip);}if(myIPHash){const data=readOnlineIPs();data[myIPHash]=Date.now();writeOnlineIPs(data);}updateOnlineDisplay();}
+function removeMyIP(){if(!myIPHash)return;const data=readOnlineIPs();delete data[myIPHash];writeOnlineIPs(data);}
+function initOnlineCounter(){document.getElementById('onlineCount').textContent='1';ipHeartbeat();setInterval(ipHeartbeat,HB_INTERVAL);setInterval(updateOnlineDisplay,5000);try{const ch=new BroadcastChannel('altmail_online_ip_v1');ch.onmessage=()=>updateOnlineDisplay();}catch{}window.addEventListener('storage',e=>{if(e.key===ONLINE_STORE)updateOnlineDisplay();});window.addEventListener('beforeunload',removeMyIP);window.addEventListener('pagehide',removeMyIP);}
 
 // ════════════════════════════════════
 // INDEXEDDB
 // ════════════════════════════════════
 let db=null;
-function openDB(){
-  return new Promise(resolve=>{
-    if(!window.indexedDB){resolve(null);return;}
-    const req=indexedDB.open('AltMailDB',2);
-    req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('users'))d.createObjectStore('users',{keyPath:'email'});if(!d.objectStoreNames.contains('saved_emails'))d.createObjectStore('saved_emails',{keyPath:'id'});if(!d.objectStoreNames.contains('sent_emails'))d.createObjectStore('sent_emails',{keyPath:'id'});};
-    req.onsuccess=e=>{db=e.target.result;resolve(db);};
-    req.onerror=()=>resolve(null);
-  });
-}
+function openDB(){return new Promise(resolve=>{if(!window.indexedDB){resolve(null);return;}const req=indexedDB.open('AltMailDB',2);req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('users'))d.createObjectStore('users',{keyPath:'email'});if(!d.objectStoreNames.contains('saved_emails'))d.createObjectStore('saved_emails',{keyPath:'id'});if(!d.objectStoreNames.contains('sent_emails'))d.createObjectStore('sent_emails',{keyPath:'id'});};req.onsuccess=e=>{db=e.target.result;resolve(db);};req.onerror=()=>resolve(null);});}
 function dbGet(store,key){return new Promise(r=>{if(!db){r(null);return;}const req=db.transaction(store,'readonly').objectStore(store).get(key);req.onsuccess=()=>r(req.result||null);req.onerror=()=>r(null);});}
 function dbPut(store,item){return new Promise(r=>{if(!db){r();return;}const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(item);tx.oncomplete=r;tx.onerror=r;});}
 function dbDel(store,key){return new Promise(r=>{if(!db){r();return;}const tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(key);tx.oncomplete=r;tx.onerror=r;});}
@@ -987,35 +778,17 @@ function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('sh
 const PAGES=['active','sender','phone','saved','whoami','pwned'];
 const SNAV_IDS={active:'snav-active',sender:'snav-sender',phone:'snav-phone',saved:'snav-saved',whoami:'snav-whoami',pwned:'snav-pwned'};
 const MNAV_IDS={active:'mnav-active',sender:'mnav-sender',phone:'mnav-phone',saved:'mnav-saved',whoami:'mnav-whoami',pwned:'mnav-pwned'};
-function switchPage(name){
-  PAGES.forEach(p=>{const el=$('page-'+p);if(el)el.style.display='none';const sn=$(SNAV_IDS[p]);if(sn)sn.classList.remove('active');const mn=$(MNAV_IDS[p]);if(mn)mn.classList.remove('active');});
-  const el=$('page-'+name);if(el)el.style.display='block';
-  const sn=$(SNAV_IDS[name]);if(sn)sn.classList.add('active');
-  const mn=$(MNAV_IDS[name]);if(mn)mn.classList.add('active');
-  if(name==='saved')renderSaved();
-  if(name==='phone')loadPhones();
-  if(name==='whoami')renderWhoami();
-  if(name==='sender'){updateSenderFrom();renderSentList();}
-  document.querySelector('.main').scrollTop=0;
-}
+function switchPage(name){PAGES.forEach(p=>{const el=$('page-'+p);if(el)el.style.display='none';const sn=$(SNAV_IDS[p]);if(sn)sn.classList.remove('active');const mn=$(MNAV_IDS[p]);if(mn)mn.classList.remove('active');});const el=$('page-'+name);if(el)el.style.display='block';const sn=$(SNAV_IDS[name]);if(sn)sn.classList.add('active');const mn=$(MNAV_IDS[name]);if(mn)mn.classList.add('active');if(name==='saved')renderSaved();if(name==='phone')loadPhones();if(name==='whoami')renderWhoami();if(name==='sender'){updateSenderFrom();renderSentList();}document.querySelector('.main').scrollTop=0;}
 
 // ════════════════════════════════════
 // CLIPBOARD
 // ════════════════════════════════════
-async function copyToClipboard(text){
-  try{await navigator.clipboard.writeText(text);return true;}catch{}
-  try{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();const ok=document.execCommand('copy');document.body.removeChild(ta);if(ok)return true;}catch{}
-  return false;
-}
+async function copyToClipboard(text){try{await navigator.clipboard.writeText(text);return true;}catch{}try{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();const ok=document.execCommand('copy');document.body.removeChild(ta);if(ok)return true;}catch{}return false;}
 
 // ════════════════════════════════════
 // TIMER
 // ════════════════════════════════════
-function pickTimer(mins,btn){
-  document.querySelectorAll('.t-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  if(mins===0){tMode='unlimited';clearInterval(tIv);$('timerReadout').textContent='∞';$('timerFill').style.width='100%';}
-  else{tMode='countdown';tMax=mins*60;if(tok)startTimer();}
-}
+function pickTimer(mins,btn){document.querySelectorAll('.t-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');if(mins===0){tMode='unlimited';clearInterval(tIv);$('timerReadout').textContent='∞';$('timerFill').style.width='100%';}else{tMode='countdown';tMax=mins*60;if(tok)startTimer();}}
 function applyCustom(){const v=parseInt($('customMin').value.replace(/\D/g,''));if(!v||v<1)return;document.querySelectorAll('.t-chip').forEach(b=>b.classList.remove('on'));tMode='countdown';tMax=v*60;if(tok)startTimer();showToast('Timer: '+v+' Min.');}
 function startTimer(){clearInterval(tIv);if(tMode==='unlimited'){$('timerReadout').textContent='∞';$('timerFill').style.width='100%';return;}tSecs=tMax;tIv=setInterval(()=>{tSecs--;const m=Math.floor(tSecs/60),s=tSecs%60;$('timerReadout').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');$('timerFill').style.width=(tSecs/tMax*100)+'%';if(tSecs<=0){clearInterval(tIv);doGenerate();}},1000);}
 function startRefreshRing(){clearInterval(rcIv);rcVal=15;$('refreshRingWrap').style.display='flex';const circle=$('refreshRingCircle'),label=$('refreshRingLabel'),circ=2*Math.PI*5;rcIv=setInterval(()=>{rcVal--;label.textContent=rcVal;if(circle)circle.style.strokeDashoffset=circ*(1-rcVal/15);if(rcVal<=0){rcVal=15;label.textContent=15;if(circle)circle.style.strokeDashoffset=0;}},1000);}
@@ -1142,377 +915,301 @@ async function checkEmail(){
     const d=await r.json();
     if(r.status===404||d.Error==='Not found'||d.exposed===false){
       res.innerHTML=`<div class="pwned-result safe" style="display:block"><div class="pwned-status-row"><div class="pwned-icon good">✅</div><div class="pwned-status-txt"><h3 style="color:var(--safe)">Nicht gefunden!</h3><p>Diese Email wurde in keiner bekannten Datenpanne gefunden.</p></div></div></div>`;
-    } else if(d.breaches||d.ExposedBreaches||d.exposed_breaches){
+    }else if(d.breaches||d.ExposedBreaches||d.exposed_breaches){
       const breachList=d.ExposedBreaches?.breaches_details||d.breaches||[];
       const count=Array.isArray(breachList)?breachList.length:(d.exposed_breaches||1);
       const items=Array.isArray(breachList)?breachList:[];
-      res.innerHTML=`<div class="pwned-result pwned" style="display:block">
-        <div class="pwned-status-row"><div class="pwned-icon bad">⚠️</div>
-        <div class="pwned-status-txt"><h3 style="color:var(--pwned)">${count} Datenpanne${count!==1?'n':''} gefunden!</h3>
-        <p>Passwörter für diese Dienste sofort ändern!</p></div></div>
-        ${items.length?`<ul class="breach-list">${items.slice(0,10).map(b=>{const name=b.domain||b.name||b.breach||b||'Unbekannt';return`<li class="breach-item"><div class="breach-logo">${String(name)[0]?.toUpperCase()||'?'}</div><div class="breach-info"><div class="breach-name">${esc(String(name))}</div></div></li>`;}).join('')}</ul>`:''}
-        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--brd)"><p style="font-size:12px;color:var(--txt3)">Details: <a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:underline;text-underline-offset:2px">haveibeenpwned.com ↗</a></p></div>
-      </div>`;
-    } else {
-      _showHibpFallback(email,res);
-    }
+      res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad">⚠️</div><div class="pwned-status-txt"><h3 style="color:var(--pwned)">${count} Datenpanne${count!==1?'n':''} gefunden!</h3><p>Passwörter für diese Dienste sofort ändern!</p></div></div>${items.length?`<ul class="breach-list">${items.slice(0,10).map(b=>{const name=b.domain||b.name||b.breach||b||'Unbekannt';return`<li class="breach-item"><div class="breach-logo">${String(name)[0]?.toUpperCase()||'?'}</div><div class="breach-info"><div class="breach-name">${esc(String(name))}</div></div></li>`;}).join('')}</ul>`:''}<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--brd)"><p style="font-size:12px;color:var(--txt3)">Details: <a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:underline;text-underline-offset:2px">haveibeenpwned.com ↗</a></p></div></div>`;
+    }else{_showHibpFallback(email,res);}
   }catch(e){_showHibpFallback(email,res);}
   btn.disabled=false;btn.textContent='Prüfen';
 }
-
-function _showHibpFallback(email,res){
-  res.innerHTML=`<div class="pwned-result" style="display:block;border-color:var(--brd)">
-    <div class="pwned-status-row"><div class="pwned-icon" style="background:var(--s3);font-size:20px">🔍</div>
-    <div class="pwned-status-txt"><h3>API nicht erreichbar</h3>
-    <p>Bitte direkt auf HaveIBeenPwned prüfen.</p></div></div>
-    <a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;display:flex;justify-content:center;text-decoration:none;margin-top:12px;">Auf HaveIBeenPwned.com prüfen ↗</a>
-  </div>`;
-}
+function _showHibpFallback(email,res){res.innerHTML=`<div class="pwned-result" style="display:block;border-color:var(--brd)"><div class="pwned-status-row"><div class="pwned-icon" style="background:var(--s3);font-size:20px">🔍</div><div class="pwned-status-txt"><h3>API nicht erreichbar</h3><p>Bitte direkt auf HaveIBeenPwned prüfen.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;display:flex;justify-content:center;text-decoration:none;margin-top:12px;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
 
 async function checkPassword(){
-  const pw=$('pwnedPwInput').value;
-  if(!pw||pw.length<1){showToast('Bitte Passwort eingeben');return;}
-  const btn=$('checkPwBtn'),res=$('pwnedPwResult');
-  btn.disabled=true;btn.textContent='Prüfe…';
+  const pw=$('pwnedPwInput').value;if(!pw||pw.length<1){showToast('Bitte Passwort eingeben');return;}
+  const btn=$('checkPwBtn'),res=$('pwnedPwResult');btn.disabled=true;btn.textContent='Prüfe…';
   res.innerHTML='<div class="pwned-loading"><span class="spin" style="font-size:18px;display:inline-block">↻</span><br><br>Prüfe sicher…</div>';
-  const bar=$('pwStrengthBar');
-  const strength=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';
+  const bar=$('pwStrengthBar');const strength=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';
   bar.style.width=strength==='weak'?'30%':strength==='medium'?'60%':'100%';bar.className='pw-strength-bar '+strength;
   try{
-    const msgBuffer=new TextEncoder().encode(pw);
-    const hashBuffer=await crypto.subtle.digest('SHA-1',msgBuffer);
+    const msgBuffer=new TextEncoder().encode(pw);const hashBuffer=await crypto.subtle.digest('SHA-1',msgBuffer);
     const hashHex=Array.from(new Uint8Array(hashBuffer)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
     const prefix=hashHex.slice(0,5);const suffix=hashHex.slice(5);
     const r=await fetch(`https://api.pwnedpasswords.com/range/${prefix}`,{signal:AbortSignal.timeout(8000)});
     if(!r.ok)throw new Error('HTTP '+r.status);
-    const text=await r.text();
-    let count=0;
+    const text=await r.text();let count=0;
     for(const line of text.split('\n')){const[h,c]=line.trim().split(':');if(h===suffix){count=parseInt(c);break;}}
-    if(count>0){
-      res.innerHTML=`<div style="margin-top:10px"><span class="pw-result-pill pwned-pill">⚠️ ${count.toLocaleString('de')}× geleakt</span><p style="font-size:12px;color:var(--txt3);margin-top:10px;line-height:1.6">Dieses Passwort wurde <strong style="color:var(--pwned)">${count.toLocaleString('de')}-mal</strong> gefunden. Sofort ändern!</p></div>`;
-    }else{
-      res.innerHTML=`<div style="margin-top:10px"><span class="pw-result-pill safe-pill">✅ Sicher</span><p style="font-size:12px;color:var(--txt3);margin-top:10px;line-height:1.6">Nicht in bekannten Datenlecks gefunden.</p></div>`;
-    }
-  }catch(e){
-    res.innerHTML=`<p style="font-size:13px;color:var(--txt3);margin-top:10px">Prüfung fehlgeschlagen: ${esc(e.message)}<br><a href="https://haveibeenpwned.com/Passwords" target="_blank" rel="noopener" style="color:var(--txt2)">Manuell prüfen ↗</a></p>`;
-  }
+    if(count>0){res.innerHTML=`<div style="margin-top:10px"><span class="pw-result-pill pwned-pill">⚠️ ${count.toLocaleString('de')}× geleakt</span><p style="font-size:12px;color:var(--txt3);margin-top:10px;line-height:1.6">Dieses Passwort wurde <strong style="color:var(--pwned)">${count.toLocaleString('de')}-mal</strong> gefunden. Sofort ändern!</p></div>`;}
+    else{res.innerHTML=`<div style="margin-top:10px"><span class="pw-result-pill safe-pill">✅ Sicher</span><p style="font-size:12px;color:var(--txt3);margin-top:10px;line-height:1.6">Nicht in bekannten Datenlecks gefunden.</p></div>`;}
+  }catch(e){res.innerHTML=`<p style="font-size:13px;color:var(--txt3);margin-top:10px">Prüfung fehlgeschlagen: ${esc(e.message)}<br><a href="https://haveibeenpwned.com/Passwords" target="_blank" rel="noopener" style="color:var(--txt2)">Manuell prüfen ↗</a></p>`;}
   btn.disabled=false;btn.textContent='Prüfen';
 }
-
-$('pwnedPwInput').addEventListener('input',function(){
-  const pw=this.value,bar=$('pwStrengthBar');
-  if(!pw){bar.style.width='0';bar.className='pw-strength-bar';return;}
-  const s=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';
-  bar.style.width=s==='weak'?'30%':s==='medium'?'60%':'100%';bar.className='pw-strength-bar '+s;
-});
+$('pwnedPwInput').addEventListener('input',function(){const pw=this.value,bar=$('pwStrengthBar');if(!pw){bar.style.width='0';bar.className='pw-strength-bar';return;}const s=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';bar.style.width=s==='weak'?'30%':s==='medium'?'60%':'100%';bar.className='pw-strength-bar '+s;});
 
 // ════════════════════════════════════
-// EMAIL SENDER — direkt via mail.tm SMTP/API reply oder
-// freie SMTP Relay-API (smtp.js / smtpjs.com)
-// Wir nutzen mail.tm's eigene "send" Funktion falls verfügbar,
-// sonst als Fallback smtp2go free tier via fetch.
+// WORKER URL MANAGEMENT
+// Wird einmalig vom Betreiber eingerichtet —
+// danach funktioniert der Versand für ALLE Nutzer ohne Setup.
 // ════════════════════════════════════
-let sentEmails=[];
+const WORKER_URL_KEY = 'altmail_worker_url';
 
-function updateSenderFrom(){
-  const el=$('senderFrom'),dot=$('senderDot');
-  if(addr){el.textContent=addr;dot.className='status-dot ok';}
-  else{el.textContent='Keine Email aktiv — zuerst Email generieren';dot.className='status-dot';}
+// ► Für Betreiber: Trage hier die Worker-URL fest ein,
+//   dann entfällt die UI-Konfiguration komplett für User.
+//   Leer lassen = URL-Eingabe im UI anzeigen.
+const HARDCODED_WORKER_URL = 'holy-bar-b042.waschmopp1.workers.dev'; // z.B. 'https://altmail-smtp.mein-name.workers.dev'
+
+function getWorkerUrl() {
+  if (HARDCODED_WORKER_URL) return HARDCODED_WORKER_URL;
+  return localStorage.getItem(WORKER_URL_KEY) || '';
 }
 
-function setSendStatus(type, msg) {
-  const el = $('sendStatus');
-  el.className = 'send-status ' + type;
-  el.innerHTML = msg;
+function saveWorkerUrl() {
+  const url = $('workerUrlInput').value.trim();
+  if (!url.startsWith('https://')) {
+    showToast('URL muss mit https:// beginnen');
+    return;
+  }
+  localStorage.setItem(WORKER_URL_KEY, url);
+  $('workerUrlStatus').innerHTML = '✓ Gespeichert — Worker URL ist jetzt aktiv';
+  $('workerUrlStatus').style.color = '#4ade80';
+  showToast('✓ Worker URL gespeichert');
+  // Kurz testen
+  pingWorker(url);
 }
 
-async function sendEmail(){
-  if(!addr){showToast('Zuerst eine Email generieren!');switchPage('active');return;}
-  const to=$('sendTo').value.trim();
-  const subject=$('sendSubject').value.trim();
-  const body=$('sendBody').value.trim();
-  if(!to||!to.includes('@')){showToast('Empfänger-Email ungültig');return;}
-  if(!subject){showToast('Betreff eingeben');return;}
-  if(!body){showToast('Nachricht eingeben');return;}
-  if(!tok){showToast('Keine aktive Session');return;}
+async function pingWorker(url) {
+  try {
+    const r = await fetch(url, { method: 'OPTIONS', signal: AbortSignal.timeout(5000) });
+    if (r.ok || r.status === 204 || r.status === 405) {
+      $('workerUrlStatus').innerHTML = '✓ Worker erreichbar und bereit';
+      $('workerUrlStatus').style.color = '#4ade80';
+    }
+  } catch {
+    $('workerUrlStatus').innerHTML = '⚠ Worker nicht erreichbar — URL prüfen';
+    $('workerUrlStatus').style.color = '#fbbf24';
+  }
+}
 
-  const btn=$('sendBtn');
-  btn.disabled=true;
-  setSendStatus('loading-status','<span class="spin">↻</span> Sende…');
+function initWorkerConfig() {
+  const url = getWorkerUrl();
+  const box = $('workerConfigBox');
+  
+  if (HARDCODED_WORKER_URL) {
+    // Betreiber hat URL fest eingetragen — Config-Box verstecken
+    if (box) box.style.display = 'none';
+    return;
+  }
+  
+  if (url) {
+    $('workerUrlInput').value = url;
+    $('workerUrlStatus').innerHTML = '✓ Worker URL konfiguriert';
+    $('workerUrlStatus').style.color = '#4ade80';
+  }
+}
 
-  // Versuch 1: mail.tm hat keinen öffentlichen send-Endpoint für ausgehende Mails.
-  // Wir nutzen https://api.smtp2go.com/v3/email/send (free tier, kein Konto nötig für Test-Modus)
-  // Als zuverlässige Alternative: smtpjs.com (client-seitig, kein Server)
-  // Beste kostenlose Lösung ohne Key: emailjs.com public key oder formspree.
-  // 
-  // Wir nutzen EmailJS mit einem öffentlichen Service-Template ODER
-  // direkt die mail.tm interne Weiterleitung über ihre /messages endpoint (nur Empfang).
-  //
-  // ECHTE Lösung: Wir bauen einen eigenen mini-relay per fetch zu einem CORS-fähigen
-  // kostenlosen SMTP-Relay. Bestes Option: https://formsubmit.co (no signup, POST)
-  // aber das ist für Forms. 
-  //
-  // Tatsächlich bester Ansatz ohne Backend: 
-  // https://api.emailjs.com/api/v1.0/email/send mit public key
-  // Wir nutzen eine eigene EmailJS-ähnliche Anfrage.
-  //
-  // Wir verwenden smtpjs.com (email.js CDN-frei approach):
-  // POST to https://smtpjs.com/v3/smtpjs.aspx — braucht Account.
-  //
-  // FAZIT: Einzig wirklich kostenlos + kein Signup + CORS = 
-  // https://api.web3forms.com/submit mit access_key
-  // ODER wir cachen den Versand lokal und simulieren ihn mit einer echten 
-  // Email über einen öffentlichen SMTP-Relay.
-  //
-  // BESTE LÖSUNG: Wir nutzen die "mailto:" API des Betriebssystems NICHT,
-  // sondern bauen echtes Senden via https://api.brevo.com (Brevo/Sendinblue)
-  // free tier ODER via https://api.resend.com (Resend).
-  // 
-  // Da kein API-Key vorhanden: wir nutzen smtpjs.com mit Demo-SMTP (SSL).
-  // smtpjs hat einen öffentlichen Demo-Server: Host: smtp.elasticemail.com
-  // Das braucht aber Credentials.
-  //
-  // REALSTE LÖSUNG OHNE JEDE REGISTRIERUNG:
-  // POST zu https://formspree.io/f/{id} — braucht ID.
-  //
-  // ►  Wir bauen es so: Wir verwenden den freien SMTP-Relay von
-  //    https://api.mailersend.com/v1/email mit Trial-Token,
-  //    ODER direkt per fetch zu smtp.js (CDN-basiert).
-  //
-  // ► TATSÄCHLICHE IMPLEMENTIERUNG: 
-  //    Wir nutzen SMTP.js (smtpjs.com) im "SecureToken" Modus,
-  //    der ohne eigenes Konto mit einem Demo-Token funktioniert.
-  //    Demo-Token gibt es auf smtp.js.com.
-  //    
-  //    Da wir keinen echten Token haben: wir nutzen die
-  //    EmailJS API mit Public Key "user_demo" was einen
-  //    "From: AltMail" absender macht und an die echte Adresse schickt.
-  //
-  // ► FINAL: Wir nutzen https://api.emailjs.com/api/v1.0/email/send
-  //   mit public key. EmailJS hat einen kostenlosen Plan mit 200 Emails/Monat.
-  //   Wir bauen es ohne festen Key, aber geben dem User eine Fehlermeldung
-  //   wenn kein Key konfiguriert ist, mit Option zum selbst-konfigurieren.
-  //
-  // ► ECHTEST FUNKTIONIERENDE LÖSUNG:
-  //   mail.tm unterstützt keinen Versand. Aber wir können
-  //   https://api.smtp2go.com/v3/email/send nutzen — free, 1000/month.
-  //   Braucht aber API Key.
-  //
-  // ► Wirklich ohne Setup funktionierende Methode:
-  //   https://formsubmit.co/ajax/{email} — schickt an eine Adresse, nicht VON einer.
-  //
-  // ENDLÖSUNG: Wir nutzen smtpjs.com mit dem öffentlichen
-  // AltMail-Relay-Konzept: User konfiguriert einmalig seinen SMTP,
-  // oder wir bieten mailto als primär + lokal gespeicherten Verlauf.
-  //
-  // Für diese Implementation: wir nutzen eine echte fetch-basierte Lösung
-  // via https://api.emailjs.com mit einem konfigurierbaren Public Key,
-  // mit Fallback auf mailto wenn nicht konfiguriert.
+// ════════════════════════════════════
+// SENDER — via Cloudflare Worker
+// ════════════════════════════════════
+function updateSenderFrom() {
+  const box = $('senderFromBox');
+  const avEl = $('senderFromAv');
+  const addrEl = $('senderFromAddr');
+  const subEl = $('senderFromSub');
+  const dot = $('senderDot');
 
-  // Versuche über EmailJS (user muss seinen eigenen public key eingeben ODER wir nutzen einen demo)
-  // EmailJS Demo / ohne Account: nicht möglich.
-  //
-  // ═══ ENDGÜLTIGE ENTSCHEIDUNG ═══
-  // Wir nutzen https://smtpjs.com v3 mit "from" als aktuelle temp-email.
-  // Da ohne Account nur Demo möglich: wir zeigen dem User klar was passiert
-  // und nutzen als echten kostenlosen Weg: 
-  // POST https://api.sendgrid.com/v3/mail/send — braucht Key.
-  // 
-  // WIRKLICH KOSTENLOS + KEIN SETUP: 
-  // https://freeemailapi.com oder ähnliche freie Relay-Dienste.
-  //
-  // Wir implementieren es mit smtp.js + User-konfigurierbarem Token
-  // UND einem direkten Fallback der mailto öffnet aber auch im Verlauf speichert.
+  if (addr) {
+    avEl.textContent = addr[0].toUpperCase();
+    addrEl.textContent = addr;
+    subEl.textContent = 'Aktive Temp-Email · Versand via Worker';
+    dot.className = 'status-dot ok';
+    box.classList.add('active-sender');
+  } else {
+    avEl.textContent = '?';
+    addrEl.textContent = 'Keine Email aktiv';
+    subEl.textContent = 'Zuerst eine Temp-Email generieren';
+    dot.className = 'status-dot';
+    box.classList.remove('active-sender');
+  }
+}
+
+function updateCharCounter() {
+  const len = $('sendBody').value.length;
+  const el = $('charCounter');
+  el.textContent = len.toLocaleString('de') + ' Zeichen';
+  el.className = 'char-counter' + (len > 10000 ? ' warn' : '');
+}
+
+function setSendBanner(type, icon, title, sub) {
+  const banner = $('sendStatusBanner');
+  const iconEl = $('sendStatusIcon');
+  const titleEl = $('sendStatusTitle');
+  const subEl = $('sendStatusSub');
+  
+  banner.className = 'send-status-banner show ' + type;
+  iconEl.textContent = icon;
+  titleEl.textContent = title;
+  subEl.innerHTML = sub || '';
+}
+
+function hideSendBanner() {
+  $('sendStatusBanner').className = 'send-status-banner';
+}
+
+let sentEmails = [];
+
+async function sendEmail() {
+  if (!addr || !tok) {
+    showToast('Zuerst eine Temp-Email generieren!');
+    switchPage('active');
+    return;
+  }
+
+  const to = $('sendTo').value.trim();
+  const subject = $('sendSubject').value.trim();
+  const body = $('sendBody').value.trim();
+
+  // Validierung
+  if (!to || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+    showToast('Empfänger-Email ungültig');
+    $('sendTo').focus();
+    return;
+  }
+  if (!subject) {
+    showToast('Betreff eingeben');
+    $('sendSubject').focus();
+    return;
+  }
+  if (!body) {
+    showToast('Nachricht eingeben');
+    $('sendBody').focus();
+    return;
+  }
+
+  const workerUrl = getWorkerUrl();
+  if (!workerUrl) {
+    setSendBanner('error', '⚙', 'Worker URL fehlt',
+      'Trage oben deine Cloudflare Worker URL ein — einmalig, dann funktioniert der Versand automatisch.');
+    $('workerUrlInput')?.focus();
+    return;
+  }
+
+  const btn = $('sendBtn');
+  btn.disabled = true;
+  $('sendBtnTxt').textContent = '↻ Sende…';
+  setSendBanner('loading', '↻', 'Sende…', 'Verbinde mit Cloudflare Worker');
 
   try {
-    // Versuche über kostenlosen SMTP-Relay (smtp2go.com free, kein Key für interne Domains)
-    // Wir nutzen web3forms als Relay - schickt aber immer an eine feste Empfängeradresse.
-    
-    // Realste Lösung: wir nutzen https://api.smtp2go.com/v3/email/send
-    // mit dem kostenlosen smtpjs Demo-Setup:
-    const smtpData = {
-      SecureToken: "demo", // Demo-Token
-      To: to,
-      From: addr,
-      Subject: subject,
-      Body: body,
-    };
-    
-    // smtpjs.com Demo-Endpoint (funktioniert für Demo-Zwecke)
-    const smtpResponse = await fetch('https://smtpjs.com/v3/smtpjs.aspx', {
+    const response = await fetch(workerUrl, {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: new URLSearchParams({
-        SecureToken: 'demo',
-        Username: 'altmail-demo',
-        Password: 'demo',
-        To: to,
-        From: addr,
-        Subject: subject,
-        Body: body
-      }),
-      signal: AbortSignal.timeout(8000)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: addr, password: pw, to, subject, text: body }),
+      signal: AbortSignal.timeout(20000),
     });
 
-    if (smtpResponse.ok) {
-      const txt = await smtpResponse.text();
-      if (txt === 'OK' || txt.includes('OK')) {
-        setSendStatus('success', '✓ Email erfolgreich gesendet!');
-        await saveSentEmail({id:rnd(8),to,subject,body,from:addr,sentAt:new Date().toISOString(),status:'sent'});
-        clearCompose();
-        renderSentList();
-        showToast('✓ Email gesendet');
-        btn.disabled=false;
-        return;
-      }
-    }
-    throw new Error('SMTP Demo nicht verfügbar');
-  } catch(e1) {
-    // Fallback: Nutze einen echten freien SMTP via fetch an einen CORS-Proxy
-    try {
-      // Versuche über cors-anywhere oder ähnlich mit smtp
-      // Nutze stattdessen: https://api.mailersend.com trial (braucht Key)
-      // ECHTER FALLBACK: wir speichern und öffnen mailto, aber zeigen es klar an
-      
-      // Wir versuchen über einen öffentlichen Email-API-Relay
-      const response = await fetch('https://api.smtp2go.com/v3/email/send', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          api_key: 'api-demo',
-          to: [{address: to}],
-          sender: addr,
-          subject: subject,
-          text_body: body
-        }),
-        signal: AbortSignal.timeout(8000)
-      });
-      
-      const data = await response.json();
-      if (data.data?.succeeded === 1) {
-        setSendStatus('success', '✓ Email erfolgreich gesendet!');
-        await saveSentEmail({id:rnd(8),to,subject,body,from:addr,sentAt:new Date().toISOString(),status:'sent'});
-        clearCompose();
-        renderSentList();
-        showToast('✓ Email gesendet');
-        btn.disabled=false;
-        return;
-      }
-      throw new Error('API Fehler');
-    } catch(e2) {
-      // Finaler Fallback: mailto + lokaler Verlauf
-      setSendStatus('success', '✓ Im Verlauf gespeichert · Mail-App wird geöffnet');
-      
-      const fullBody=`Von: ${addr}\n\n${body}`;
-      const mailtoLink=`mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
-      window.open(mailtoLink, '_blank');
-      
-      await saveSentEmail({id:rnd(8),to,subject,body,from:addr,sentAt:new Date().toISOString(),status:'via-app'});
+    const data = await response.json().catch(() => ({}));
+
+    if (response.ok && data.ok) {
+      // Erfolg
+      setSendBanner('success', '✓',
+        'Email gesendet!',
+        `Von <strong>${addr}</strong> an <strong>${to}</strong>`
+      );
+      await saveSentEmail({ id: rnd(8), to, subject, body, from: addr, sentAt: new Date().toISOString(), status: 'gesendet' });
+      clearCompose();
       renderSentList();
-      showToast('Gespeichert · Mail-App geöffnet');
+      showToast('✓ Email gesendet!');
+    } else {
+      // Worker hat Fehler zurückgegeben
+      const errMsg = data.error || `HTTP ${response.status}`;
+      setSendBanner('error', '⚠', 'Versand fehlgeschlagen', escHtml(errMsg));
+      await saveSentEmail({ id: rnd(8), to, subject, body, from: addr, sentAt: new Date().toISOString(), status: 'fehlgeschlagen' });
+      renderSentList();
+      showToast('⚠ Versand fehlgeschlagen');
     }
-  }
-  btn.disabled=false;
-}
-
-function clearCompose(){$('sendTo').value='';$('sendSubject').value='';$('sendBody').value='';const el=$('sendStatus');el.className='send-status';el.innerHTML='';}
-
-async function saveSentEmail(item){
-  await dbPut('sent_emails',item);
-  sentEmails=await dbGetAll('sent_emails');
-  const b=$('snav-sender-badge');if(b){b.textContent=sentEmails.length;b.style.display=sentEmails.length?'':'none';}
-}
-
-async function renderSentList(){
-  sentEmails=await dbGetAll('sent_emails');sentEmails.sort((a,b)=>new Date(b.sentAt)-new Date(a.sentAt));
-  const el=$('sentList'),card=$('sentCard');$('sentCount').textContent=sentEmails.length;
-  if(!sentEmails.length){card.style.display='none';return;}
-  card.style.display='block';
-  el.innerHTML=sentEmails.map(s=>`<div class="sent-item"><div class="sent-info"><div class="sent-to">${esc(s.to)}</div><div class="sent-subj">${esc(s.subject)}</div><div class="sent-meta">${new Date(s.sentAt).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}${s.status?' · '+esc(s.status):''}</div></div><div class="sent-actions"><button class="btn btn-ghost btn-sm" onclick="showSentDetail('${s.id}')">Ansehen</button><button class="btn btn-danger btn-sm" onclick="deleteSent('${s.id}')">&#x2715;</button></div></div>`).join('');
-}
-function showSentDetail(id){const s=sentEmails.find(x=>x.id===id);if(!s)return;$('sdTitle').textContent=s.subject;$('sdMeta').textContent='An: '+s.to+' · Von: '+s.from+' · '+new Date(s.sentAt).toLocaleString('de');$('sdBody').textContent=s.body;$('sentDetailOv').classList.add('open');}
-async function deleteSent(id){await dbDel('sent_emails',id);await renderSentList();}
-async function clearSentHistory(){const all=await dbGetAll('sent_emails');for(const s of all)await dbDel('sent_emails',s.id);await renderSentList();showToast('Verlauf geleert');}
-
-// ════════════════════════════════════
-// WHOAMI — with IP
-// ════════════════════════════════════
-let cachedIP = null;
-
-async function fetchIP() {
-  if (cachedIP) return cachedIP;
-  try {
-    const r = await fetch('https://api.ipify.org?format=json', {signal: AbortSignal.timeout(5000)});
-    const d = await r.json();
-    cachedIP = d.ip;
-    return cachedIP;
-  } catch {
-    try {
-      const r2 = await fetch('https://api64.ipify.org?format=json', {signal: AbortSignal.timeout(5000)});
-      const d2 = await r2.json();
-      cachedIP = d2.ip;
-      return cachedIP;
-    } catch {
-      return '—';
-    }
+  } catch (err) {
+    // Netzwerkfehler / Timeout
+    const isTimeout = err.name === 'TimeoutError' || err.message.includes('timeout');
+    setSendBanner('error', '⚠',
+      isTimeout ? 'Timeout' : 'Verbindungsfehler',
+      isTimeout
+        ? 'Der Worker hat zu lange gebraucht. Worker-URL prüfen oder erneut versuchen.'
+        : `Konnte Worker nicht erreichen: ${escHtml(err.message)}`
+    );
+    showToast('⚠ Verbindung fehlgeschlagen');
+  } finally {
+    btn.disabled = false;
+    $('sendBtnTxt').textContent = '↑ Senden';
   }
 }
 
-async function renderWhoami(){
-  const card=$('whoamiCard');const user=loadUser();const saved=await dbGetAll('saved_emails');
-  const ua=navigator.userAgent;let browser='Unbekannt',os='Unbekannt';
-  if(/Firefox\//.test(ua))browser='Firefox';else if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome/.test(ua))browser='Safari';
-  if(/Windows NT 10/.test(ua))os='Windows 10/11';else if(/Mac OS X/.test(ua))os='macOS';else if(/Android/.test(ua))os='Android';else if(/iPhone|iPad/.test(ua))os='iOS';else if(/Linux/.test(ua))os='Linux';
-  const isMobile=/Mobi|Android|iPhone|iPad/i.test(ua);
-  const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';
-  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';
-  const onlineCount=parseInt($('onlineCount')?.textContent||'1');
-  const loginBtn=!user?`<div style="text-align:center;padding:0 0 20px"><button class="btn btn-primary" onclick="closeWhoamiAndOpenAuth()">Account erstellen / Login</button></div>`:'';
-
-  // Show placeholder first, then fill IP async
-  card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}`+loginBtn+
-  `<div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div>
-  <div class="whoami-grid">
-    <div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div>
-    <div class="whoami-stat"><div class="whoami-stat-val">${saved.length}</div><div class="whoami-stat-lbl">Gespeichert</div></div>
-    <div class="whoami-stat"><div class="whoami-stat-val">${totalRef}</div><div class="whoami-stat-lbl">Refreshes</div></div>
-    <div class="whoami-stat"><div class="whoami-stat-val">${sessionDuration}</div><div class="whoami-stat-lbl">Session</div></div>
-  </div></div>
-  <div><div class="card-label" style="margin-bottom:4px">Browser & Gerät</div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Browser</span><span class="whoami-row-val">${esc(browser)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">OS</span><span class="whoami-row-val">${esc(os)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Gerät</span><span class="whoami-row-val">${isMobile?'Mobil':'Desktop'}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">IP-Adresse</span><span class="whoami-row-val ok" id="whoami-ip"><span class="spin" style="font-size:10px">↻</span> Laden…</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Online</span><span class="whoami-row-val ok">${onlineCount}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;
-
-  // Fetch IP asynchronously and fill in
-  fetchIP().then(ip => {
-    const ipEl = document.getElementById('whoami-ip');
-    if (ipEl) ipEl.innerHTML = esc(ip || '—');
-  });
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-function closeWhoamiAndOpenAuth(){switchPage('active');openAuthModal();}
+
+function clearCompose() {
+  $('sendTo').value = '';
+  $('sendSubject').value = '';
+  $('sendBody').value = '';
+  updateCharCounter();
+  hideSendBanner();
+}
+
+async function saveSentEmail(item) {
+  await dbPut('sent_emails', item);
+  sentEmails = await dbGetAll('sent_emails');
+  const b = $('snav-sender-badge');
+  if (b) { b.textContent = sentEmails.length; b.style.display = sentEmails.length ? '' : 'none'; }
+}
+
+async function renderSentList() {
+  sentEmails = await dbGetAll('sent_emails');
+  sentEmails.sort((a, b) => new Date(b.sentAt) - new Date(a.sentAt));
+  const el = $('sentList'), card = $('sentCard');
+  $('sentCount').textContent = sentEmails.length;
+  if (!sentEmails.length) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  el.innerHTML = sentEmails.map(s => {
+    const color = s.status === 'gesendet' ? '#4ade80' : s.status === 'fehlgeschlagen' ? '#f87171' : 'var(--txt3)';
+    return `<div class="sent-item">
+      <div class="sent-info">
+        <div class="sent-to">${esc(s.to)}</div>
+        <div class="sent-subj">${esc(s.subject)}</div>
+        <div class="sent-meta" style="color:${color}">${s.status} · ${new Date(s.sentAt).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</div>
+      </div>
+      <div class="sent-actions">
+        <button class="btn btn-ghost btn-sm" onclick="showSentDetail('${s.id}')">Ansehen</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSent('${s.id}')">&#x2715;</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showSentDetail(id) {
+  const s = sentEmails.find(x => x.id === id);
+  if (!s) return;
+  $('sdTitle').textContent = s.subject;
+  $('sdMeta').textContent = 'An: ' + s.to + ' · Von: ' + s.from + ' · ' + new Date(s.sentAt).toLocaleString('de');
+  $('sdBody').textContent = s.body;
+  $('sentDetailOv').classList.add('open');
+}
+async function deleteSent(id) { await dbDel('sent_emails', id); await renderSentList(); }
+async function clearSentHistory() {
+  const all = await dbGetAll('sent_emails');
+  for (const s of all) await dbDel('sent_emails', s.id);
+  await renderSentList();
+  showToast('Verlauf geleert');
+}
 
 // ════════════════════════════════════
 // PHONE
 // ════════════════════════════════════
-let currentPhoneCountry='us',currentPhoneNum='',currentPhoneId='',smsIv,smsSeenIds=new Set();
-const PHONE_SOURCES={
-  us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],
-  uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],
-  de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],
-  fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],
-  ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],
-  se:[{num:'+46769429093',id:'46769429093'}],
-  nl:[{num:'+31685250870',id:'31685250870'}],
-};
+let currentPhoneCountry='us',currentPhoneNum='',currentPhoneId='',smsIv;
+const PHONE_SOURCES={us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],se:[{num:'+46769429093',id:'46769429093'}],nl:[{num:'+31685250870',id:'31685250870'}]};
 function selectCountry(code,btn){document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneId='';$('smsCard').style.display='none';$('activePhoneCard').style.display='none';clearInterval(smsIv);loadPhones();}
 function loadPhones(){const el=$('phoneList');const nums=PHONE_SOURCES[currentPhoneCountry]||PHONE_SOURCES.us;el.innerHTML=nums.map(({num,id})=>`<div class="phone-pill"><div class="status-dot ok"></div><span class="phone-number">${esc(num)}</span><button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${num.replace(/'/g,'')}',this)">Kopieren</button><button class="btn btn-primary btn-sm" style="margin-left:4px" onclick="selectPhone('${num.replace(/'/g,'')}','${id}')">SMS</button></div>`).join('');}
 async function copyPhoneNum(num,btn){const ok=await copyToClipboard(num);if(ok){const o=btn.textContent;btn.textContent='✓';setTimeout(()=>btn.textContent=o,1500);}showToast(ok?'Kopiert ✓':'❌ Fehler');}
-async function selectPhone(num,id){currentPhoneNum=num;currentPhoneId=id;smsSeenIds=new Set();$('activePhoneNum').textContent=num;$('activePhoneCard').style.display='block';$('smsCard').style.display='block';$('activePhoneCard').scrollIntoView({behavior:'smooth',block:'nearest'});await refreshSms();clearInterval(smsIv);smsIv=setInterval(refreshSms,20000);}
+async function selectPhone(num,id){currentPhoneNum=num;currentPhoneId=id;$('activePhoneNum').textContent=num;$('activePhoneCard').style.display='block';$('smsCard').style.display='block';$('activePhoneCard').scrollIntoView({behavior:'smooth',block:'nearest'});await refreshSms();clearInterval(smsIv);smsIv=setInterval(refreshSms,20000);}
 async function copyActivePhone(){if(!currentPhoneNum)return;const ok=await copyToClipboard(currentPhoneNum);const el=$('activePhoneNum');if(ok){el.textContent='Kopiert ✓';setTimeout(()=>el.textContent=currentPhoneNum,2000);}else showToast('❌ Fehler');}
 async function refreshSms(){
   if(!currentPhoneId)return;
@@ -1529,6 +1226,40 @@ async function refreshSms(){
 }
 
 // ════════════════════════════════════
+// WHOAMI
+// ════════════════════════════════════
+async function renderWhoami(){
+  const card=$('whoamiCard');const user=loadUser();const saved=await dbGetAll('saved_emails');
+  const ua=navigator.userAgent;let browser='Unbekannt',os='Unbekannt';
+  if(/Firefox\//.test(ua))browser='Firefox';else if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome/.test(ua))browser='Safari';
+  if(/Windows NT 10/.test(ua))os='Windows 10/11';else if(/Mac OS X/.test(ua))os='macOS';else if(/Android/.test(ua))os='Android';else if(/iPhone|iPad/.test(ua))os='iOS';else if(/Linux/.test(ua))os='Linux';
+  const isMobile=/Mobi|Android|iPhone|iPad/i.test(ua);
+  const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';
+  const onlineCount=parseInt($('onlineCount')?.textContent||'1');
+  const loginBtn=!user?`<div style="text-align:center;padding:0 0 20px"><button class="btn btn-primary" onclick="closeWhoamiAndOpenAuth()">Account erstellen / Login</button></div>`:'';
+  card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}`+loginBtn+
+  `<div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div>
+  <div class="whoami-grid">
+    <div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div>
+    <div class="whoami-stat"><div class="whoami-stat-val">${saved.length}</div><div class="whoami-stat-lbl">Gespeichert</div></div>
+    <div class="whoami-stat"><div class="whoami-stat-val">${totalRef}</div><div class="whoami-stat-lbl">Refreshes</div></div>
+    <div class="whoami-stat"><div class="whoami-stat-val">${sessionDuration}</div><div class="whoami-stat-lbl">Session</div></div>
+  </div></div>
+  <div><div class="card-label" style="margin-bottom:4px">Browser & Gerät</div>
+  <div class="whoami-row"><span class="whoami-row-lbl">Browser</span><span class="whoami-row-val">${esc(browser)}</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">OS</span><span class="whoami-row-val">${esc(os)}</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">Gerät</span><span class="whoami-row-val">${isMobile?'Mobil':'Desktop'}</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">IP-Adresse</span><span class="whoami-row-val ok" id="whoami-ip"><span class="spin" style="font-size:10px">↻</span> Laden…</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">Unique IPs online</span><span class="whoami-row-val ok">${onlineCount}</span></div>
+  <div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;
+  getMyIP().then(ip=>{const ipEl=document.getElementById('whoami-ip');if(ipEl)ipEl.innerHTML=esc(ip||'—');});
+}
+function closeWhoamiAndOpenAuth(){switchPage('active');openAuthModal();}
+
+// ════════════════════════════════════
 // AUTH
 // ════════════════════════════════════
 const AUTH_KEY='altmail_session';
@@ -1536,45 +1267,22 @@ let currentUser=null;
 function loadUser(){try{return JSON.parse(sessionStorage.getItem(AUTH_KEY)||localStorage.getItem(AUTH_KEY)||'null');}catch{return null;}}
 function saveUserSession(u){try{localStorage.setItem(AUTH_KEY,JSON.stringify(u));sessionStorage.setItem(AUTH_KEY,JSON.stringify(u));}catch{}}
 function clearUserSession(){try{localStorage.removeItem(AUTH_KEY);sessionStorage.removeItem(AUTH_KEY);}catch{}}
-
-async function openAuthModal(){
-  currentUser=loadUser();
-  if(currentUser){$('authLoggedOut').style.display='none';$('authLoggedIn').style.display='';$('authUserName').textContent=currentUser.name||currentUser.email.split('@')[0];$('authUserEmail').textContent=currentUser.email;$('authAvatarBig').textContent=(currentUser.email[0]||'?').toUpperCase();}
-  else{$('authLoggedOut').style.display='';$('authLoggedIn').style.display='none';$('authErr').classList.remove('show');$('authEmail').value='';$('authPw').value='';}
-  $('authModalOv').classList.add('open');
-  setTimeout(()=>{try{$('authEmail').focus();}catch{}},300);
-}
+async function openAuthModal(){currentUser=loadUser();if(currentUser){$('authLoggedOut').style.display='none';$('authLoggedIn').style.display='';$('authUserName').textContent=currentUser.name||currentUser.email.split('@')[0];$('authUserEmail').textContent=currentUser.email;$('authAvatarBig').textContent=(currentUser.email[0]||'?').toUpperCase();}else{$('authLoggedOut').style.display='';$('authLoggedIn').style.display='none';$('authErr').classList.remove('show');$('authEmail').value='';$('authPw').value='';}$('authModalOv').classList.add('open');setTimeout(()=>{try{$('authEmail').focus();}catch{}},300);}
 function closeAuthModal(){$('authModalOv').classList.remove('open');}
 function closeAuthModalOv(e){if(e.target===$('authModalOv'))closeAuthModal();}
-
 let authMode='login';
 function switchAuthTab(mode){authMode=mode;$('authTabLogin').classList.toggle('active',mode==='login');$('authTabReg').classList.toggle('active',mode==='register');$('authSubmitBtn').textContent=mode==='login'?'Login':'Registrieren';$('authErr').classList.remove('show');}
 function setAuthErr(msg){$('authErr').textContent=msg;$('authErr').classList.add('show');}
-
 async function authSubmit(){
   const email=$('authEmail').value.trim();const apw=$('authPw').value;
   if(!email||!/@/.test(email)){setAuthErr('Gültige E-Mail eingeben.');return;}
   if(apw.length<6){setAuthErr('Passwort muss mind. 6 Zeichen haben.');return;}
   const btn=$('authSubmitBtn');btn.disabled=true;btn.textContent='…';
   try{
-    if(authMode==='register'){
-      const existing=await dbGet('users',email);if(existing){setAuthErr('Account existiert bereits.');return;}
-      const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));
-      const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-      const user={email,pwHash:hashHex,name:email.split('@')[0],createdAt:new Date().toISOString()};
-      await dbPut('users',user);currentUser={email,name:user.name};saveUserSession(currentUser);
-      updateAuthUI();closeAuthModal();showToast('✓ Account erstellt & eingeloggt');
-    }else{
-      const u=await dbGet('users',email);if(!u){setAuthErr('E-Mail oder Passwort falsch.');return;}
-      const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));
-      const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-      if(u.pwHash!==hashHex){setAuthErr('E-Mail oder Passwort falsch.');return;}
-      currentUser={email,name:u.name};saveUserSession(currentUser);
-      updateAuthUI();closeAuthModal();showToast('✓ Eingeloggt als '+(u.name||email));
-    }
+    if(authMode==='register'){const existing=await dbGet('users',email);if(existing){setAuthErr('Account existiert bereits.');return;}const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');const user={email,pwHash:hashHex,name:email.split('@')[0],createdAt:new Date().toISOString()};await dbPut('users',user);currentUser={email,name:user.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('✓ Account erstellt & eingeloggt');}
+    else{const u=await dbGet('users',email);if(!u){setAuthErr('E-Mail oder Passwort falsch.');return;}const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(u.pwHash!==hashHex){setAuthErr('E-Mail oder Passwort falsch.');return;}currentUser={email,name:u.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('✓ Eingeloggt als '+(u.name||email));}
   }finally{btn.disabled=false;btn.textContent=authMode==='login'?'Login':'Registrieren';}
 }
-
 function authLogout(){clearUserSession();currentUser=null;updateAuthUI();closeAuthModal();showToast('Ausgeloggt');}
 function updateAuthUI(){const u=loadUser();const av=$('authAvatar');if(u){av.textContent=(u.email[0]||'?').toUpperCase();av.style.borderColor='var(--brd-act)';av.style.color='var(--txt)';}else{av.textContent='?';av.style.borderColor='';av.style.color='';}$('auth-nav-label').textContent=u?(u.name||u.email.split('@')[0]):'Account';}
 
@@ -1603,6 +1311,7 @@ async function boot(){
   await renderSentList();
   updateAuthUI();
   initOnlineCounter();
+  initWorkerConfig();
   await doGenerate();
 }
 boot();
