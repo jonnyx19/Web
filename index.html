@@ -33,6 +33,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-
 .main::-webkit-scrollbar{width:4px;}
 .main::-webkit-scrollbar-thumb{background:var(--s3);border-radius:4px;}
 .main-inner{max-width:680px;margin:0 auto;padding:32px 20px 80px;}
+/* ── MOBILE NAV: 4 items only (kein Gespeichert-Tab) ── */
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--brd);z-index:50;padding:6px 4px env(safe-area-inset-bottom,0);flex-direction:row;align-items:center;gap:2px;}
 .mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:var(--r-sm);cursor:pointer;color:var(--txt3);font-size:10px;font-weight:500;border:none;background:none;font-family:var(--font);min-height:52px;justify-content:center;transition:color .15s;}
 .mob-nav-item.active{color:var(--txt);}
@@ -395,6 +396,7 @@ select{cursor:pointer;}
   </div>
 </nav>
 
+<!-- MOBILE NAV: nur 4 Tabs — kein Gespeichert -->
 <nav class="mobile-nav">
   <button class="mob-nav-item active" id="mnav-active" onclick="switchPage('active')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -414,7 +416,7 @@ select{cursor:pointer;}
   </button>
   <button class="mob-nav-item" id="mnav-whoami" onclick="switchPage('whoami')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    More
+    Mehr
   </button>
 </nav>
 
@@ -440,7 +442,6 @@ select{cursor:pointer;}
       <p style="font-size:14px;color:var(--txt3);line-height:1.6;">Anonym, keine Registrierung. Links klickbar, Emails speicherbar.</p>
     </div>
 
-    <!-- Multi-inbox tabs -->
     <div class="card">
       <div class="card-label">E-Mail Adresse</div>
       <div class="email-row">
@@ -712,7 +713,6 @@ select{cursor:pointer;}
       </div>
     </div>
 
-    <!-- Tool panels -->
     <div class="tool-panel" id="tp-pwgen">
       <div class="card">
         <div class="card-label">Passwort-Generator</div>
@@ -987,8 +987,20 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
 // STATE
 // ════════════════════════════════════
 const BASE='https://api.mail.tm';
-// Multi-inbox state
-let inboxes=[]; // [{tok,addr,pw,msgs,id,name}]
+const BASE_GW='https://api.mail.gw'; // zweite API als Fallback
+
+// ── IMPROVED DOMAIN POOL ──
+// Mehrere Backends + viele Domains für bessere Anonymität
+// Zufällige Domain-Rotation verhindert Erkennung durch Websites
+const KNOWN_GOOD_DOMAINS=[
+  // mail.tm Domains (werden live geladen + durch diese ergänzt)
+  'laymac.com','adavis.info','bsidegames.com','raheers.info',
+  'mailtm.eu','smtvs.net','zetgets.net','nexuze.net',
+  // mail.gw Domains
+  'mailgw.net','tgwmail.net',
+];
+
+let inboxes=[];
 let activeInboxIdx=0;
 let tok='',addr='',pw='',msgs=[];
 let tSecs=600,tMax=600,tIv,aIv,rcIv;
@@ -996,14 +1008,35 @@ let tMode='countdown',rcVal=15,totalRef=0,readIds=new Set(),sessionStart=null;
 let currentMsgText='';
 let rules=[];
 let fwdTarget='';
-let availDomains=[];
+let availDomains=[];   // live from mail.tm
+let availDomains2=[];  // live from mail.gw
 let currentToolPanel=null;
-let b64CurrentMode='b64enc';
 let ugenCurrentStyle='normal';
 
 const $=id=>document.getElementById(id);
-initTheme();
 function rnd(n){return Array.from({length:n},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('')}
+// Realistic-looking username prefixes to blend in better
+const REAL_PREFIXES=['max','tom','jan','alex','mike','chris','anna','lena','julia','sarah','david','peter','frank','mark','paul','nina','lisa','kate','emma','leon','felix','noah','ben','tim','kai'];
+const REAL_SUFFIXES=['1990','1992','1994','1995','1996','1997','1998','1999','2000','2001','2002','86','87','88','89','91','93','95','97','99'];
+function rndUsername(){
+  // Mix of realistic-looking names and random strings to avoid bot-detection patterns
+  const style=Math.random();
+  if(style<0.35){
+    // firstname + year → looks like real person
+    const p=REAL_PREFIXES[Math.floor(Math.random()*REAL_PREFIXES.length)];
+    const s=REAL_SUFFIXES[Math.floor(Math.random()*REAL_SUFFIXES.length)];
+    return p+s;
+  } else if(style<0.65){
+    // firstname + random 3-4 digits
+    const p=REAL_PREFIXES[Math.floor(Math.random()*REAL_PREFIXES.length)];
+    return p+(Math.floor(Math.random()*900)+100);
+  } else {
+    // random lowercase 8-12 chars (still avoids obvious patterns)
+    const len=8+Math.floor(Math.random()*5);
+    return rnd(len);
+  }
+}
+
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function fmt(iso){if(!iso)return'';const d=new Date(iso),now=new Date(),df=now-d;if(df<60000)return'Gerade';if(df<3600000)return Math.floor(df/60000)+' Min.';if(d.toDateString()===now.toDateString())return d.toLocaleTimeString('de',{hour:'2-digit',minute:'2-digit'});return d.toLocaleDateString('de',{day:'2-digit',month:'2-digit',year:'2-digit'});}
 function setStatus(s,t){$('slDot').className='sl-dot '+(s==='ok'?'ok':s==='err'?'err':'loading');$('slTxt').textContent=t;}
@@ -1013,19 +1046,20 @@ function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('sh
 // ════════════════════════════════════
 // NAVIGATION
 // ════════════════════════════════════
+// "saved" ist kein Mobile-Nav-Tab mehr, aber als Page weiterhin über Desktop-Sidebar erreichbar
 const PAGES=['active','sender','phone','saved','whoami','pwned','tools'];
 const SNAV={active:'snav-active',sender:'snav-sender',phone:'snav-phone',saved:'snav-saved',whoami:'snav-whoami',pwned:'snav-pwned',tools:'snav-tools'};
-const MNAV={active:'mnav-active',sender:'mnav-sender',phone:'mnav-phone',saved:'mnav-saved',whoami:'mnav-whoami',pwned:'mnav-pwned',tools:'mnav-tools'};
+const MNAV={active:'mnav-active',sender:'mnav-sender',whoami:'mnav-whoami',pwned:'mnav-pwned',tools:'mnav-tools'};
 const CHIPS={active:'Temporäre E-Mail',sender:'Email senden',phone:'Temporäre Telefonnummer',saved:'Gespeichert',whoami:'WHOAMI',pwned:'Pwned?',tools:'Tools'};
 function switchPage(name){
   PAGES.forEach(p=>{
     const el=$('page-'+p);if(el)el.style.display='none';
     const sn=$(SNAV[p]);if(sn)sn.classList.remove('active');
-    const mn=$(MNAV[p]);if(mn)mn.classList.remove('active');
+    const mn=MNAV[p]?$(MNAV[p]):null;if(mn)mn.classList.remove('active');
   });
   const el=$('page-'+name);if(el)el.style.display='block';
   const sn=$(SNAV[name]);if(sn)sn.classList.add('active');
-  const mn=$(MNAV[name]);if(mn)mn.classList.add('active');
+  const mn=MNAV[name]?$(MNAV[name]):null;if(mn)mn.classList.add('active');
   $('headerChip').textContent=CHIPS[name]||name;
   if(name==='saved')renderSaved();
   if(name==='phone'){initCountryChips();loadPhones();}
@@ -1048,20 +1082,42 @@ function startTimer(){clearInterval(tIv);if(tMode==='unlimited'){$('timerReadout
 function startRefreshRing(){clearInterval(rcIv);rcVal=15;$('refreshRingWrap').style.display='flex';const circle=$('refreshRingCircle'),label=$('refreshRingLabel'),circ=2*Math.PI*5;rcIv=setInterval(()=>{rcVal--;label.textContent=rcVal;if(circle)circle.style.strokeDashoffset=circ*(1-rcVal/15);if(rcVal<=0){rcVal=15;label.textContent=15;if(circle)circle.style.strokeDashoffset=0;}},1000);}
 
 // ════════════════════════════════════
-// DOMAINS
+// DOMAINS — dual-API mit Rotation
 // ════════════════════════════════════
 async function loadDomains(){
-  try{
-    const r=await fetch(BASE+'/domains?page=1');
-    const d=await r.json();
-    availDomains=(d['hydra:member']||d).map(x=>x.domain).filter(Boolean);
-    const sel=$('domainSelect');
-    sel.innerHTML=availDomains.map(d=>`<option value="${esc(d)}">@${esc(d)}</option>`).join('');
-  }catch{}
+  // Lade Domains von beiden APIs parallel
+  const [r1,r2]=await Promise.allSettled([
+    fetch(BASE+'/domains?page=1',{signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
+    fetch(BASE_GW+'/domains?page=1',{signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
+  ]);
+  if(r1.status==='fulfilled'){
+    const list=(r1.value['hydra:member']||r1.value||[]);
+    availDomains=list.map(x=>x.domain).filter(Boolean);
+  }
+  if(r2.status==='fulfilled'){
+    const list=(r2.value['hydra:member']||r2.value||[]);
+    availDomains2=list.map(x=>x.domain).filter(Boolean);
+  }
+}
+
+// Wählt zufällig zwischen mail.tm und mail.gw API + Domain
+function pickBackend(){
+  // 50/50 zwischen den zwei APIs wenn beide verfügbar
+  const useTM=availDomains2.length===0||Math.random()<0.5;
+  if(useTM&&availDomains.length){
+    // Rotiere zufällig durch alle verfügbaren Domains
+    const d=availDomains[Math.floor(Math.random()*availDomains.length)];
+    return{base:BASE,domain:d};
+  } else if(availDomains2.length){
+    const d=availDomains2[Math.floor(Math.random()*availDomains2.length)];
+    return{base:BASE_GW,domain:d};
+  } else {
+    return{base:BASE,domain:'mail.tm'};
+  }
 }
 
 // ════════════════════════════════════
-// EMAIL CORE
+// EMAIL CORE — verbesserte Generierung
 // ════════════════════════════════════
 async function doGenerate(){
   clearInterval(aIv);clearInterval(tIv);clearInterval(rcIv);
@@ -1070,39 +1126,68 @@ async function doGenerate(){
   $('genBtn').disabled=true;$('saveBtn').disabled=true;$('refreshBtn').disabled=true;
   $('statusDot').className='status-dot loading';$('refreshRingWrap').style.display='none';
   setStatus('loading','Verbinde…');renderInbox(true);closeDetail();
-  try{
-    if(!availDomains.length)await loadDomains();
-    const selDomain=availDomains[0]||'mail.tm';
-    const user=rnd(10);
-    const password=rnd(14)+'Aa1!';
-    const address=user+'@'+selDomain;
-    const ar=await fetch(BASE+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
-    if(!ar.ok){const e=await ar.json().catch(()=>({}));throw new Error(e['hydra:description']||ar.status);}
-    const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
-    if(!tr.ok)throw new Error('Token: '+tr.status);
-    tok=(await tr.json()).token;addr=address;pw=password;sessionStart=new Date();
-    $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
-    $('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
-    setStatus('ok','Bereit · aktualisiert alle 15 Sek.');
-    updateSenderFrom();startTimer();startRefreshRing();renderInboxTabs();
-    await doFetch(false);aIv=setInterval(()=>{doFetch(false);startRefreshRing();},15000);
-  }catch(e){
-    $('statusDot').className='status-dot err';$('genBtn').disabled=false;
-    $('emailAddr').textContent='Fehler – erneut versuchen';setStatus('err','Fehler: '+e.message);renderInbox(false);
+
+  // Lade Domains falls noch nicht geladen
+  if(!availDomains.length&&!availDomains2.length) await loadDomains();
+
+  // Versuche bis zu 3 verschiedene Backend/Domain-Kombinationen
+  let lastErr='';
+  for(let attempt=0;attempt<3;attempt++){
+    try{
+      const {base,domain}=pickBackend();
+      const username=rndUsername();
+      const password=rnd(10)+'Aa1!'+rnd(4); // stärker, weniger pattern
+      const address=username+'@'+domain;
+
+      const ar=await fetch(base+'/accounts',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({address,password}),
+        signal:AbortSignal.timeout(10000)
+      });
+      if(!ar.ok){
+        const e=await ar.json().catch(()=>({}));
+        lastErr=e['hydra:description']||String(ar.status);
+        continue; // nächsten Versuch
+      }
+      const tr=await fetch(base+'/token',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({address,password}),
+        signal:AbortSignal.timeout(10000)
+      });
+      if(!tr.ok){lastErr='Token: '+tr.status;continue;}
+
+      tok=(await tr.json()).token;addr=address;pw=password;sessionStart=new Date();
+      // Speichere aktive API-Base für Fetches
+      window._activeTmBase=base;
+
+      $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
+      $('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
+      setStatus('ok','Bereit · aktualisiert alle 15 Sek.');
+      updateSenderFrom();startTimer();startRefreshRing();renderInboxTabs();
+      await doFetch(false);aIv=setInterval(()=>{doFetch(false);startRefreshRing();},15000);
+      return; // Erfolg
+
+    }catch(e){lastErr=e.message;}
   }
+
+  // Alle Versuche fehlgeschlagen
+  $('statusDot').className='status-dot err';$('genBtn').disabled=false;
+  $('emailAddr').textContent='Fehler – erneut versuchen';
+  setStatus('err','Fehler: '+lastErr);renderInbox(false);
 }
 
 async function doFetch(manual=false){
   if(!tok)return;
   if(manual){$('refreshIco').classList.add('spin');$('refreshBtn').disabled=true;clearInterval(rcIv);startRefreshRing();}
+  const base=window._activeTmBase||BASE;
   try{
-    const r=await fetch(BASE+'/messages?page=1',{headers:{'Authorization':'Bearer '+tok}});
+    const r=await fetch(base+'/messages?page=1',{headers:{'Authorization':'Bearer '+tok}});
     if(r.status===401){setStatus('err','Session abgelaufen');return;}if(!r.ok)throw new Error('HTTP '+r.status);
     const d=await r.json();const list=d['hydra:member']||[];
     const old=new Set(msgs.map(m=>m.id));const fresh=list.filter(m=>!old.has(m.id));
-    if(fresh.length>0&&msgs.length>0){
-      showToast(fresh.length+' neue Nachricht'+(fresh.length>1?'en':''));
-    }
+    if(fresh.length>0&&msgs.length>0){showToast(fresh.length+' neue Nachricht'+(fresh.length>1?'en':''));}
     msgs=list;totalRef++;$('inboxCount').textContent=msgs.length;renderInbox(false);
     setStatus('ok','Zuletzt: '+new Date().toLocaleTimeString('de',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
     updateSavedBadge();
@@ -1111,43 +1196,9 @@ async function doFetch(manual=false){
 }
 
 // Rules
-function applyRules(msg){
-  for(const r of rules){
-    const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;
-    if(field&&field.toLowerCase().includes(r.value.toLowerCase())){
-      if(r.action==='notify'&&Notification.permission==='granted'){
-        new Notification('AltMail · Regel: '+r.value,{body:msg.subject||''});
-      }
-    }
-  }
-}
-
-function shouldHideMsg(msg){
-  for(const r of rules){
-    if(r.action!=='delete')continue;
-    const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;
-    if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;
-  }
-  return false;
-}
-
-function highlightRule(msg){
-  for(const r of rules){
-    if(r.action!=='highlight')continue;
-    const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;
-    if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;
-  }
-  return false;
-}
-
-async function forwardEmail(msg){
-  const workerUrl=getWorkerUrl();
-  if(!workerUrl||!fwdTarget)return;
-  try{
-    await fetch(workerUrl,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({from:addr,password:pw,to:fwdTarget,subject:'Fwd: '+(msg.subject||''),text:'--- Weitergeleitet von '+addr+' ---\n\n'+(msg.intro||'')})});
-  }catch{}
-}
+function applyRules(msg){for(const r of rules){const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;if(field&&field.toLowerCase().includes(r.value.toLowerCase())){if(r.action==='notify'&&Notification.permission==='granted'){new Notification('AltMail · Regel: '+r.value,{body:msg.subject||''});}}}}
+function shouldHideMsg(msg){for(const r of rules){if(r.action!=='delete')continue;const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;}return false;}
+function highlightRule(msg){for(const r of rules){if(r.action!=='highlight')continue;const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;}return false;}
 
 function renderInbox(loading){
   const list=$('msgList'),empty=$('emptyState');
@@ -1171,11 +1222,7 @@ function renderInboxTabs(){
   const el=$('inboxTabs');
   if(!el)return;
   if(!inboxes.length&&!addr){el.innerHTML='';return;}
-  // Sync current inbox into list
-  if(addr&&!inboxes.find(i=>i.addr===addr)){
-    inboxes.push({id:rnd(6),addr,tok,pw,msgs:[],name:addr.split('@')[0]});
-    activeInboxIdx=inboxes.length-1;
-  }
+  if(addr&&!inboxes.find(i=>i.addr===addr)){inboxes.push({id:rnd(6),addr,tok,pw,msgs:[],name:addr.split('@')[0]});activeInboxIdx=inboxes.length-1;}
   el.innerHTML=inboxes.map((ix,i)=>`
     <button class="inbox-tab ${i===activeInboxIdx?'active':''}" onclick="switchInbox(${i})">
       <div class="tab-dot"></div>
@@ -1191,52 +1238,44 @@ function renderInboxTabs(){
 
 async function addInbox(){
   showToast('Generiere zweiten Posteingang…');
-  if(!availDomains.length)await loadDomains();
-  const domain=availDomains[0];
-  const user=rnd(10),password=rnd(14)+'Aa1!',address=user+'@'+domain;
+  if(!availDomains.length&&!availDomains2.length)await loadDomains();
+  const{base,domain}=pickBackend();
+  const username=rndUsername();
+  const password=rnd(10)+'Aa1!'+rnd(4);
+  const address=username+'@'+domain;
   try{
-    const ar=await fetch(BASE+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
+    const ar=await fetch(base+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});
     if(!ar.ok)throw new Error('Account');
-    const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
+    const tr=await fetch(base+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});
     if(!tr.ok)throw new Error('Token');
     const t=(await tr.json()).token;
-    inboxes.push({id:rnd(6),addr:address,tok:t,pw:password,msgs:[],name:address.split('@')[0]});
-    renderInboxTabs();
-    showToast('Posteingang hinzugefügt');
+    inboxes.push({id:rnd(6),addr:address,tok:t,pw:password,msgs:[],name:address.split('@')[0],base});
+    renderInboxTabs();showToast('Posteingang hinzugefügt');
   }catch(e){showToast('Fehler: '+e.message);}
 }
 
 function switchInbox(i){
-  // Save current state
   if(inboxes[activeInboxIdx]){inboxes[activeInboxIdx].msgs=msgs;inboxes[activeInboxIdx].tok=tok;}
-  activeInboxIdx=i;
-  const ix=inboxes[i];
+  activeInboxIdx=i;const ix=inboxes[i];
   tok=ix.tok;addr=ix.addr;pw=ix.pw;msgs=ix.msgs||[];
+  window._activeTmBase=ix.base||BASE;
   $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
-  $('statusDot').className='status-dot ok';
-  $('inboxCount').textContent=msgs.length;
-  renderInbox(false);renderInboxTabs();
-  updateSenderFrom();
+  $('statusDot').className='status-dot ok';$('inboxCount').textContent=msgs.length;
+  renderInbox(false);renderInboxTabs();updateSenderFrom();
 }
-
-function removeInbox(i){
-  inboxes.splice(i,1);
-  if(activeInboxIdx>=inboxes.length)activeInboxIdx=Math.max(0,inboxes.length-1);
-  if(inboxes.length>0)switchInbox(activeInboxIdx);
-  else renderInboxTabs();
-}
+function removeInbox(i){inboxes.splice(i,1);if(activeInboxIdx>=inboxes.length)activeInboxIdx=Math.max(0,inboxes.length-1);if(inboxes.length>0)switchInbox(activeInboxIdx);else renderInboxTabs();}
 
 function extractLinks(text,html){const s=new Set();const re=/https?:\/\/[^\s"'<>)\]\\,]+/g;(text||'').match(re)?.forEach(u=>s.add(u.replace(/[.,;!?)>]+$/,'')));(html||'').match(re)?.forEach(u=>s.add(u.replace(/[.,;!?)>]+$/,'')));return[...s].filter(u=>!/(\.png|\.gif|\.jpg|\.jpeg|\.svg|\.ico|\.css|\.woff|unsubscribe)/i.test(u));}
 function isConfirm(u){return/confirm|verif|activat|token|auth|validate|magic|click|email.*link/i.test(u);}
 
 async function openMsg(id){
   if(!tok)return;readIds.add(id);renderInbox(false);
+  const base=window._activeTmBase||BASE;
   try{
-    const r=await fetch(BASE+'/messages/'+id,{headers:{'Authorization':'Bearer '+tok}});if(!r.ok)throw new Error('HTTP '+r.status);
+    const r=await fetch(base+'/messages/'+id,{headers:{'Authorization':'Bearer '+tok}});if(!r.ok)throw new Error('HTTP '+r.status);
     const m=await r.json();$('dFrom').textContent=m.from?.address||'Unbekannt';$('dSubj').textContent=m.subject||'(Kein Betreff)';$('dMeta').textContent='An: '+(m.to?.[0]?.address||addr)+'  ·  '+new Date(m.createdAt).toLocaleString('de');
     currentMsgText=m.text||'';const htmlStr=Array.isArray(m.html)?m.html.join(''):(m.html||'');
     const all=extractLinks(m.text||'',htmlStr),confirms=all.filter(isConfirm),others=all.filter(u=>!isConfirm(u));
-    // 2FA extraction inline
     const otps=extractOTPCodes(m.text||'');
     let html='';
     if(otps.length)html+=`<div style="margin-bottom:16px"><div class="links-label">2FA Code</div>${otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Tippen zum Kopieren</span></div>`).join('')}</div>`;
@@ -1255,43 +1294,9 @@ async function copyEmail(){if(!addr)return;const ok=await copyToClipboard(addr);
 // RULES
 // ════════════════════════════════════
 function openRuleModal(){$('ruleModalOv').classList.add('open');}
-async function saveRule(){
-  const type=$('ruleType').value,value=$('ruleValue').value.trim(),action=$('ruleAction').value;
-  if(!value){showToast('Suchbegriff eingeben');return;}
-  const rule={id:rnd(6),type,value,action};
-  rules.push(rule);
-  await dbPut('rules',rule);
-  renderRules();
-  $('ruleModalOv').classList.remove('open');
-  showToast('Regel gespeichert');
-}
+async function saveRule(){const type=$('ruleType').value,value=$('ruleValue').value.trim(),action=$('ruleAction').value;if(!value){showToast('Suchbegriff eingeben');return;}const rule={id:rnd(6),type,value,action};rules.push(rule);await dbPut('rules',rule);renderRules();$('ruleModalOv').classList.remove('open');showToast('Regel gespeichert');}
 async function deleteRule(id){rules=rules.filter(r=>r.id!==id);await dbDel('rules',id);renderRules();}
-function renderRules(){
-  const el=$('ruleList');
-  if(!el)return;
-  if(!rules.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3);padding:8px 0;">Keine Regeln.</div>';return;}
-  const typeLabel={from:'Absender',subject:'Betreff',body:'Text'};
-  const actionLabel={highlight:'Hervorheben',delete:'Löschen',notify:'Benachrichtigung'};
-  el.innerHTML=rules.map(r=>`<div class="rule-item">
-    <div class="rule-info">
-      <div class="rule-cond"><span style="color:var(--txt3);font-size:11px">${typeLabel[r.type]||r.type}</span> · ${esc(r.value)}</div>
-      <div class="rule-meta">${actionLabel[r.action]||r.action}</div>
-    </div>
-    <button class="btn btn-danger btn-sm" onclick="deleteRule('${r.id}')">✕</button>
-  </div>`).join('');
-}
-
-// ════════════════════════════════════
-// FORWARD
-// ════════════════════════════════════
-function toggleForward(){const c=$('fwdConfig');c.style.display=c.style.display==='none'?'block':'none';}
-function saveForward(){
-  const t=$('fwdTarget').value.trim();
-  if(!t||!t.includes('@')){showToast('Gültige Email eingeben');return;}
-  fwdTarget=t;$('fwdStatus').textContent='An: '+t;$('fwdStatus').style.color='#4ade80';
-  $('fwdConfig').style.display='none';
-  showToast('Weiterleitung aktiviert');
-}
+function renderRules(){const el=$('ruleList');if(!el)return;if(!rules.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3);padding:8px 0;">Keine Regeln.</div>';return;}const typeLabel={from:'Absender',subject:'Betreff',body:'Text'};const actionLabel={highlight:'Hervorheben',delete:'Löschen',notify:'Benachrichtigung'};el.innerHTML=rules.map(r=>`<div class="rule-item"><div class="rule-info"><div class="rule-cond"><span style="color:var(--txt3);font-size:11px">${typeLabel[r.type]||r.type}</span> · ${esc(r.value)}</div><div class="rule-meta">${actionLabel[r.action]||r.action}</div></div><button class="btn btn-danger btn-sm" onclick="deleteRule('${r.id}')">✕</button></div>`).join('');}
 
 // ════════════════════════════════════
 // SAVED EMAILS
@@ -1300,17 +1305,18 @@ async function updateSavedBadge(){const arr=await dbGetAll('saved_emails');const
 function openSave(){if(!addr)return;$('modalAddr').textContent=addr;$('saveName').value='';$('modalOv').classList.add('open');setTimeout(()=>$('saveName').focus(),150);}
 function closeModal(){$('modalOv').classList.remove('open');}
 function closeModalOv(e){if(e.target===$('modalOv'))closeModal();}
-async function confirmSave(){if(!addr)return;const arr=await dbGetAll('saved_emails');if(arr.find(x=>x.address===addr)){showToast('Bereits gespeichert');closeModal();return;}await dbPut('saved_emails',{id:rnd(8),address:addr,password:pw,name:$('saveName').value.trim(),savedAt:new Date().toISOString()});await updateSavedBadge();closeModal();showToast('Gespeichert');}
+async function confirmSave(){if(!addr)return;const arr=await dbGetAll('saved_emails');if(arr.find(x=>x.address===addr)){showToast('Bereits gespeichert');closeModal();return;}await dbPut('saved_emails',{id:rnd(8),address:addr,password:pw,name:$('saveName').value.trim(),savedAt:new Date().toISOString(),tmBase:window._activeTmBase||BASE});await updateSavedBadge();closeModal();showToast('Gespeichert');}
 async function deleteSaved(id){await dbDel('saved_emails',id);await updateSavedBadge();renderSaved();showToast('Gelöscht');}
 async function loadSavedEmail(item){
   switchPage('active');clearInterval(aIv);clearInterval(tIv);clearInterval(rcIv);
   tok='';addr='';pw='';msgs=[];sessionStart=null;
   $('emailAddr').textContent='Wird geladen…';$('statusDot').className='status-dot loading';
   setStatus('loading','Lade gespeicherte Email…');renderInbox(true);closeDetail();
+  const base=item.tmBase||BASE;
   try{
-    const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address:item.address,password:item.password})});
+    const tr=await fetch(base+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address:item.address,password:item.password}),signal:AbortSignal.timeout(10000)});
     if(!tr.ok)throw new Error('HTTP '+tr.status);
-    tok=(await tr.json()).token;addr=item.address;pw=item.password;sessionStart=new Date();
+    tok=(await tr.json()).token;addr=item.address;pw=item.password;sessionStart=new Date();window._activeTmBase=base;
     $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
     $('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
     tMode='unlimited';$('timerReadout').textContent='∞';$('timerFill').style.width='100%';
@@ -1337,11 +1343,8 @@ async function checkEmail(){
     const r=await fetch(`https://api.xposedornot.com/v1/check-email/${encodeURIComponent(email)}`,{signal:AbortSignal.timeout(10000)});
     const d=await r.json();
     if(r.status===404||d.Error==='Not found'){res.innerHTML=`<div class="pwned-result safe" style="display:block"><div class="pwned-status-row"><div class="pwned-icon good"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pwned-status-txt"><h3 style="color:#4ade80">Nicht gefunden</h3><p>Keine bekannten Datenpannen.</p></div></div></div>`;}
-    else if(d.breaches||d.ExposedBreaches){
-      const breachList=d.ExposedBreaches?.breaches_details||d.breaches||[];
-      const count=Array.isArray(breachList)?breachList.length:1;
-      res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="pwned-status-txt"><h3 style="color:#f87171">${count} Datenpanne${count!==1?'n':''}</h3><p>Passwörter sofort ändern.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;margin-top:8px;">Details auf HIBP ↗</a></div>`;
-    }else{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
+    else if(d.breaches||d.ExposedBreaches){const breachList=d.ExposedBreaches?.breaches_details||d.breaches||[];const count=Array.isArray(breachList)?breachList.length:1;res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="pwned-status-txt"><h3 style="color:#f87171">${count} Datenpanne${count!==1?'n':''}</h3><p>Passwörter sofort ändern.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;margin-top:8px;">Details auf HIBP ↗</a></div>`;}
+    else{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
   }catch{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
   btn.disabled=false;btn.textContent='Prüfen';
 }
@@ -1404,34 +1407,9 @@ async function clearSentHistory(){const all=await dbGetAll('sent_emails');for(co
 // PHONE
 // ════════════════════════════════════
 let currentPhoneCountry='us',currentPhoneNum='',currentPhoneId='',smsIv;
-const COUNTRIES=[
-  {code:'us',label:'US'},{code:'uk',label:'UK'},{code:'de',label:'DE'},{code:'fr',label:'FR'},
-  {code:'ca',label:'CA'},{code:'se',label:'SE'},{code:'nl',label:'NL'},{code:'at',label:'AT'},
-  {code:'ch',label:'CH'},{code:'it',label:'IT'},{code:'es',label:'ES'},{code:'pl',label:'PL'},
-  {code:'au',label:'AU'},{code:'br',label:'BR'},{code:'in',label:'IN'},
-];
-const PHONE_SOURCES={
-  us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],
-  uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],
-  de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],
-  fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],
-  ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],
-  se:[{num:'+46769429093',id:'46769429093'}],
-  nl:[{num:'+31685250870',id:'31685250870'}],
-  at:[{num:'+43720115609',id:'43720115609'}],
-  ch:[{num:'+41798075406',id:'41798075406'}],
-  it:[{num:'+393511104574',id:'393511104574'}],
-  es:[{num:'+34911599232',id:'34911599232'}],
-  pl:[{num:'+48732167890',id:'48732167890'}],
-  au:[{num:'+61488814729',id:'61488814729'}],
-  br:[{num:'+5511942556781',id:'5511942556781'}],
-  in:[{num:'+918048080505',id:'918048080505'}],
-};
-function initCountryChips(){
-  const el=$('countryChips');
-  if(el.children.length>0)return;
-  el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');
-}
+const COUNTRIES=[{code:'us',label:'US'},{code:'uk',label:'UK'},{code:'de',label:'DE'},{code:'fr',label:'FR'},{code:'ca',label:'CA'},{code:'se',label:'SE'},{code:'nl',label:'NL'},{code:'at',label:'AT'},{code:'ch',label:'CH'},{code:'it',label:'IT'},{code:'es',label:'ES'},{code:'pl',label:'PL'},{code:'au',label:'AU'},{code:'br',label:'BR'},{code:'in',label:'IN'}];
+const PHONE_SOURCES={us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],se:[{num:'+46769429093',id:'46769429093'}],nl:[{num:'+31685250870',id:'31685250870'}],at:[{num:'+43720115609',id:'43720115609'}],ch:[{num:'+41798075406',id:'41798075406'}],it:[{num:'+393511104574',id:'393511104574'}],es:[{num:'+34911599232',id:'34911599232'}],pl:[{num:'+48732167890',id:'48732167890'}],au:[{num:'+61488814729',id:'61488814729'}],br:[{num:'+5511942556781',id:'5511942556781'}],in:[{num:'+918048080505',id:'918048080505'}]};
+function initCountryChips(){const el=$('countryChips');if(el.children.length>0)return;el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');}
 function selectCountry(code,btn){document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneId='';$('smsCard').style.display='none';$('activePhoneCard').style.display='none';clearInterval(smsIv);loadPhones();}
 function loadPhones(){const el=$('phoneList');const nums=PHONE_SOURCES[currentPhoneCountry]||PHONE_SOURCES.us;el.innerHTML=nums.map(({num,id})=>`<div class="phone-pill"><div class="status-dot ok"></div><span class="phone-number">${esc(num)}</span><button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${num}',this)">Kopieren</button><button class="btn btn-primary btn-sm" style="margin-left:4px" onclick="selectPhone('${num}','${id}')">SMS</button></div>`).join('');}
 async function copyPhoneNum(num,btn){const ok=await copyToClipboard(num);if(ok){const o=btn.textContent;btn.textContent='✓';setTimeout(()=>btn.textContent=o,1500);}showToast(ok?'Kopiert ✓':'Fehler');}
@@ -1447,400 +1425,60 @@ async function refreshSms(){
     const data=await r.json();const list=Array.isArray(data)?data:(data.messages||data.data||[]);
     $('smsCount').textContent=list.length;
     if(!list.length){el.innerHTML='';empty.style.display='';return;}
-    el.innerHTML=list.map(m=>{
-      const from=m.sender||m.from||'Unbekannt',body=m.content||m.message||m.text||'',ts=m.receivedAt||m.created_at||'';
-      const t=ts?new Date(ts).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
-      const otps=extractOTPCodes(body);
-      return`<li class="sms-item">
-        <div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div style="flex:1;min-width:0">
-          <div class="sms-from">${esc(from)}</div>
-          <div class="sms-body">${esc(body)}</div>
-          ${otps.length?otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join(''):''}
-          <div class="sms-time">${esc(t)}</div>
-        </div>
-      </li>`;
-    }).join('');
+    el.innerHTML=list.map(m=>{const from=m.sender||m.from||'Unbekannt',body=m.content||m.message||m.text||'',ts=m.receivedAt||m.created_at||'';const t=ts?new Date(ts).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';const otps=extractOTPCodes(body);return`<li class="sms-item"><div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div style="flex:1;min-width:0"><div class="sms-from">${esc(from)}</div><div class="sms-body">${esc(body)}</div>${otps.length?otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join(''):''}<div class="sms-time">${esc(t)}</div></div></li>`;}).join('');
   }catch{el.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Verbindungsfehler</h3><p>Bitte erneut versuchen.</p>';}
 }
 
 // ════════════════════════════════════
 // 2FA EXTRACTOR
 // ════════════════════════════════════
-function extractOTPCodes(text){
-  // Priority: labeled codes first, then bare 6-digit, then 4/8-digit
-  const found=new Map(); // code -> label
-  const labeled=[
-    [/(?:code|otp|pin|token|passcode|verification)[\s:=]+([A-Z0-9]{4,8})/gi,'Code'],
-    [/(?:your|dein|ihr)\s+(?:code|otp|pin)[\s:]+([\d]{4,8})/gi,'Code'],
-    [/([\d]{6})\s+is\s+your/gi,'Code'],
-    [/(?:einmal|one.?time)[^\d]{0,20}([\d]{4,8})/gi,'OTP'],
-  ];
-  for(const[p,label]of labeled){let m;const re=new RegExp(p.source,p.flags);while((m=re.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],label);}}
-  // bare 6-digit
-  const bare6=/\b(\d{6})\b/g;let m;
-  while((m=bare6.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],'6-stellig');}
-  // bare 4/8 digit only if nothing else found
-  if(!found.size){
-    const bare48=/\b(\d{4}|\d{8})\b/g;
-    while((m=bare48.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],m[1].length+'-stellig');}
-  }
-  return[...found.entries()].slice(0,5);
-}
-function extract2FA(){
-  const text=$('otpInput').value;const res=$('otpResult');
-  if(!text){res.innerHTML='';return;}
-  const codes=extractOTPCodes(text);
-  if(!codes.length){res.innerHTML='<p style="font-size:12px;color:var(--txt3);">Kein Code gefunden.</p>';return;}
-  res.innerHTML=codes.map(([c,label])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))">
-    <div><span class="otp-code">${esc(c)}</span><div style="font-size:10px;color:var(--txt3);margin-top:2px;">${esc(label)}</div></div>
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3);flex-shrink:0"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-  </div>`).join('');
-}
+function extractOTPCodes(text){const found=new Map();const labeled=[[/(?:code|otp|pin|token|passcode|verification)[\s:=]+([A-Z0-9]{4,8})/gi,'Code'],[/(?:your|dein|ihr)\s+(?:code|otp|pin)[\s:]+([\d]{4,8})/gi,'Code'],[/([\d]{6})\s+is\s+your/gi,'Code'],[/(?:einmal|one.?time)[^\d]{0,20}([\d]{4,8})/gi,'OTP']];for(const[p,label]of labeled){let m;const re=new RegExp(p.source,p.flags);while((m=re.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],label);}}const bare6=/\b(\d{6})\b/g;let m;while((m=bare6.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],'6-stellig');}if(!found.size){const bare48=/\b(\d{4}|\d{8})\b/g;while((m=bare48.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],m[1].length+'-stellig');}}return[...found.entries()].slice(0,5);}
 
 // ════════════════════════════════════
 // TOOLS
 // ════════════════════════════════════
-function openTool(id){
-  document.querySelectorAll('.tool-card').forEach(c=>c.classList.remove('active'));
-  document.querySelectorAll('.tool-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});
-  const card=$('tc-'+id);if(card)card.classList.add('active');
-  const panel=$('tp-'+id);
-  if(panel){
-    panel.style.display='block';
-    setTimeout(()=>panel.classList.add('active'),10);
-    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
-  }
-  currentToolPanel=id;
-}
+function openTool(id){document.querySelectorAll('.tool-card').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.tool-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});const card=$('tc-'+id);if(card)card.classList.add('active');const panel=$('tp-'+id);if(panel){panel.style.display='block';setTimeout(()=>panel.classList.add('active'),10);panel.scrollIntoView({behavior:'smooth',block:'nearest'});}currentToolPanel=id;}
 
 // ── PASSWORD GENERATOR ──
 const WORDS=['apple','brave','cloud','dance','ember','frost','grace','horse','ivory','jewel','knack','lemon','maple','nerve','ocean','pearl','quest','river','stone','tiger','ultra','vivid','water','xenon','yacht','zebra','amber','blaze','cedar','drill','eagle','flint','globe','haven','index','joker','karma','lunar','magic','noble','orbit','plank','quiet','radar','solar','tower','unity','vault','woven','xerox','yield'];
-function genPassword(){
-  const len=parseInt($('pwLen').value),useWords=$('pwWords').checked;
-  let result='';
-  if(useWords){
-    const wCount=Math.max(3,Math.round(len/6));
-    result=Array.from({length:wCount},()=>WORDS[Math.floor(Math.random()*WORDS.length)]).join('-');
-    if($('pwNum').checked)result+='-'+Math.floor(Math.random()*9000+1000);
-  }else{
-    let chars='abcdefghijklmnopqrstuvwxyz';
-    if($('pwUpper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if($('pwNum').checked)chars+='0123456789';
-    if($('pwSym').checked)chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';
-    const arr=new Uint8Array(len);crypto.getRandomValues(arr);
-    result=Array.from(arr).map(b=>chars[b%chars.length]).join('');
-  }
-  const el=$('pwResult');el.textContent=result;el.style.display='block';
-}
+function genPassword(){const len=parseInt($('pwLen').value),useWords=$('pwWords').checked;let result='';if(useWords){const wCount=Math.max(3,Math.round(len/6));result=Array.from({length:wCount},()=>WORDS[Math.floor(Math.random()*WORDS.length)]).join('-');if($('pwNum').checked)result+='-'+Math.floor(Math.random()*9000+1000);}else{let chars='abcdefghijklmnopqrstuvwxyz';if($('pwUpper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';if($('pwNum').checked)chars+='0123456789';if($('pwSym').checked)chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';const arr=new Uint8Array(len);crypto.getRandomValues(arr);result=Array.from(arr).map(b=>chars[b%chars.length]).join('');}const el=$('pwResult');el.textContent=result;el.style.display='block';}
 
 // ── USERNAME GENERATOR ──
-const UGEN={
-  normal:{pre:['cool','dark','swift','night','neo','grey','void','silent','iron','ghost'],suf:['wolf','hawk','blade','storm','byte','code','net','dev','hub','core']},
-  tech:{pre:['null','void','0x','bin','hex','root','sudo','git','api','srv'],suf:['404','_dev','_io','_net','x86','v2','_sys','_ops','_cfg','_bin']},
-  anon:{pre:['anon','user','guest','hidden','masked','private','stealth','shadow','cipher','proxy'],suf:Array.from({length:10},()=>Math.floor(Math.random()*9000+1000).toString())},
-  real:{pre:['max','lena','felix','anna','david','julia','tom','sarah','jan','maria'],suf:['1992','1995','1998','2001','_h','_m','real','pro','net','web']},
-};
+const UGEN={normal:{pre:['cool','dark','swift','night','neo','grey','void','silent','iron','ghost'],suf:['wolf','hawk','blade','storm','byte','code','net','dev','hub','core']},tech:{pre:['null','void','0x','bin','hex','root','sudo','git','api','srv'],suf:['404','_dev','_io','_net','x86','v2','_sys','_ops','_cfg','_bin']},anon:{pre:['anon','user','guest','hidden','masked','private','stealth','shadow','cipher','proxy'],suf:Array.from({length:10},()=>Math.floor(Math.random()*9000+1000).toString())},real:{pre:['max','lena','felix','anna','david','julia','tom','sarah','jan','maria'],suf:['1992','1995','1998','2001','_h','_m','real','pro','net','web']}};
 function setUgenStyle(s,btn){document.querySelectorAll('[id^="ugenStyle-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');ugenCurrentStyle=s;}
-function genUsernames(){
-  const s=UGEN[ugenCurrentStyle]||UGEN.normal;
-  const results=Array.from({length:8},()=>{
-    const p=s.pre[Math.floor(Math.random()*s.pre.length)];
-    const su=s.suf[Math.floor(Math.random()*s.suf.length)];
-    return p+su;
-  });
-  const el=$('ugenResult');el.textContent=results.join('\n');el.style.display='block';
-}
+function genUsernames(){const s=UGEN[ugenCurrentStyle]||UGEN.normal;const results=Array.from({length:8},()=>{const p=s.pre[Math.floor(Math.random()*s.pre.length)];const su=s.suf[Math.floor(Math.random()*s.suf.length)];return p+su;});const el=$('ugenResult');el.textContent=results.join('\n');el.style.display='block';}
 
 // ── FAKE ID GENERATOR ──
-const FAKE_DATA={
-  de:{
-    fn:['Max','Anna','Felix','Laura','Jonas','Emma','Leon','Sophie','Lukas','Mia','Paul','Lena','Finn','Hannah','Noah'],
-    ln:['Müller','Schmidt','Schneider','Fischer','Weber','Meyer','Wagner','Becker','Schulz','Hoffmann'],
-    city:['Berlin','Hamburg','München','Köln','Frankfurt','Stuttgart','Düsseldorf','Leipzig','Bremen','Dresden'],
-    street:['Hauptstraße','Bahnhofstraße','Gartenweg','Kirchgasse','Rosenweg','Birkenallee','Feldweg','Marktplatz'],
-  },
-  en:{
-    fn:['James','Emily','Oliver','Charlotte','William','Amelia','Noah','Ava','Liam','Isabella','Mason','Sophia'],
-    ln:['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Martinez','Wilson'],
-    city:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego'],
-    street:['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine Rd','Elm St','Washington Blvd','Park Ave'],
-  },
-  fr:{
-    fn:['Lucas','Emma','Hugo','Chloé','Nathan','Léa','Thomas','Camille','Louis','Manon'],
-    ln:['Martin','Bernard','Thomas','Petit','Robert','Richard','Durand','Dubois','Moreau','Laurent'],
-    city:['Paris','Marseille','Lyon','Toulouse','Nice','Nantes','Strasbourg','Montpellier','Bordeaux'],
-    street:['Rue de la Paix','Avenue Foch','Boulevard Saint-Michel','Rue du Commerce','Place de la République'],
-  },
-  es:{
-    fn:['Alejandro','María','Carlos','Ana','Juan','Laura','David','Carmen','Pedro','Isabel'],
-    ln:['García','Martínez','López','Sánchez','González','Pérez','Rodríguez','Fernández','Díaz','Torres'],
-    city:['Madrid','Barcelona','Valencia','Sevilla','Zaragoza','Málaga','Murcia','Palma','Bilbao'],
-    street:['Calle Mayor','Paseo de la Castellana','Gran Vía','Avenida de América','Calle Alcalá'],
-  },
-};
+const FAKE_DATA={de:{fn:['Max','Anna','Felix','Laura','Jonas','Emma','Leon','Sophie','Lukas','Mia','Paul','Lena','Finn','Hannah','Noah'],ln:['Müller','Schmidt','Schneider','Fischer','Weber','Meyer','Wagner','Becker','Schulz','Hoffmann'],city:['Berlin','Hamburg','München','Köln','Frankfurt','Stuttgart','Düsseldorf','Leipzig','Bremen','Dresden'],street:['Hauptstraße','Bahnhofstraße','Gartenweg','Kirchgasse','Rosenweg','Birkenallee','Feldweg','Marktplatz']},en:{fn:['James','Emily','Oliver','Charlotte','William','Amelia','Noah','Ava','Liam','Isabella','Mason','Sophia'],ln:['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Martinez','Wilson'],city:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego'],street:['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine Rd','Elm St','Washington Blvd','Park Ave']},fr:{fn:['Lucas','Emma','Hugo','Chloé','Nathan','Léa','Thomas','Camille','Louis','Manon'],ln:['Martin','Bernard','Thomas','Petit','Robert','Richard','Durand','Dubois','Moreau','Laurent'],city:['Paris','Marseille','Lyon','Toulouse','Nice','Nantes','Strasbourg','Montpellier','Bordeaux'],street:['Rue de la Paix','Avenue Foch','Boulevard Saint-Michel','Rue du Commerce','Place de la République']},es:{fn:['Alejandro','María','Carlos','Ana','Juan','Laura','David','Carmen','Pedro','Isabel'],ln:['García','Martínez','López','Sánchez','González','Pérez','Rodríguez','Fernández','Díaz','Torres'],city:['Madrid','Barcelona','Valencia','Sevilla','Zaragoza','Málaga','Murcia','Palma','Bilbao'],street:['Calle Mayor','Paseo de la Castellana','Gran Vía','Avenida de América','Calle Alcalá']}};
 function rndFrom(arr){return arr[Math.floor(Math.random()*arr.length)];}
-function genFakeId(){
-  const locale=$('fakeLocale').value;const d=FAKE_DATA[locale]||FAKE_DATA.de;
-  const fn=rndFrom(d.fn),ln=rndFrom(d.ln);
-  const year=1960+Math.floor(Math.random()*40),month=String(1+Math.floor(Math.random()*12)).padStart(2,'0'),day=String(1+Math.floor(Math.random()*28)).padStart(2,'0');
-  const dob=`${day}.${month}.${year}`;
-  const city=rndFrom(d.city),street=rndFrom(d.street),nr=1+Math.floor(Math.random()*200);
-  const plz=String(10000+Math.floor(Math.random()*89999));
-  const phone='+'+Math.floor(Math.random()*9e11+1e11);
-  const user=(fn.toLowerCase()+'.'+ln.toLowerCase()).replace(/[^a-z.]/g,'');
-  const domains=['gmail.com','outlook.com','yahoo.com','proton.me','web.de'];
-  const email=user+(1990+Math.floor(Math.random()*30))+'@'+rndFrom(domains);
-  const el=$('fakeIdResult');
-  el.style.display='block';
-  el.innerHTML=`<div class="result-box" style="padding:0;">
-    ${[
-      ['Name',fn+' '+ln],['Geburtsdatum',dob],['Adresse',street+' '+nr+', '+plz+' '+city],
-      ['Telefon',phone],['Email',email],['Benutzername',user+(Math.floor(Math.random()*9000+1000))],
-    ].map(([l,v])=>`<div class="result-row"><span class="result-label">${l}</span><span class="result-val" style="cursor:pointer;" onclick="copyToClipboard('${v.replace(/'/g,"\\'")}').then(()=>showToast('Kopiert'))">${esc(v)}</span></div>`).join('')}
-  </div>`;
-}
+function genFakeId(){const locale=$('fakeLocale').value;const d=FAKE_DATA[locale]||FAKE_DATA.de;const fn=rndFrom(d.fn),ln=rndFrom(d.ln);const year=1960+Math.floor(Math.random()*40),month=String(1+Math.floor(Math.random()*12)).padStart(2,'0'),day=String(1+Math.floor(Math.random()*28)).padStart(2,'0');const dob=`${day}.${month}.${year}`;const city=rndFrom(d.city),street=rndFrom(d.street),nr=1+Math.floor(Math.random()*200);const plz=String(10000+Math.floor(Math.random()*89999));const phone='+'+Math.floor(Math.random()*9e11+1e11);const user=(fn.toLowerCase()+'.'+ln.toLowerCase()).replace(/[^a-z.]/g,'');const domains=['gmail.com','outlook.com','yahoo.com','proton.me','web.de'];const email=user+(1990+Math.floor(Math.random()*30))+'@'+rndFrom(domains);const el=$('fakeIdResult');el.style.display='block';el.innerHTML=`<div class="result-box" style="padding:0;">${[['Name',fn+' '+ln],['Geburtsdatum',dob],['Adresse',street+' '+nr+', '+plz+' '+city],['Telefon',phone],['Email',email],['Benutzername',user+(Math.floor(Math.random()*9000+1000))]].map(([l,v])=>`<div class="result-row"><span class="result-label">${l}</span><span class="result-val" style="cursor:pointer;" onclick="copyToClipboard('${v.replace(/'/g,"\\'")}').then(()=>showToast('Kopiert'))">${esc(v)}</span></div>`).join('')}</div>`;}
 
 // ── URL SCANNER ──
-async function scanUrl(){
-  const url=$('urlInput').value.trim();if(!url){showToast('URL eingeben');return;}
-  const btn=$('urlScanBtn'),res=$('urlResult');btn.disabled=true;btn.textContent='Scanne…';
-  res.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';
-  try{
-    let hostname='';try{hostname=new URL(url).hostname;}catch{res.innerHTML='<p style="font-size:12px;color:#f87171;">Ungültige URL</p>';btn.disabled=false;btn.textContent='Scannen';return;}
-    // URLhaus check
-    let urlhausResult='Nicht erreichbar',urlhausColor='var(--txt3)';
-    try{
-      const r=await fetch('https://urlhaus-api.abuse.ch/v1/url/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'url='+encodeURIComponent(url),signal:AbortSignal.timeout(8000)});
-      const d=await r.json();
-      if(d.query_status==='is_found'){urlhausResult='Gemeldet (URLhaus)';urlhausColor='#f87171';}
-      else if(d.query_status==='no_results'){urlhausResult='Nicht gemeldet';urlhausColor='#4ade80';}
-    }catch{urlhausResult='API nicht erreichbar';}
-    // Google Safe Browsing (client-side heuristic)
-    const suspicious=/phish|malware|hack|porn|free-money|click-here|virus|trojan|ransom/i.test(url);
-    const isSuspicious=suspicious||urlhausColor==='#f87171';
-    res.innerHTML=`<div class="result-box" style="padding:0;">
-      <div class="result-row"><span class="result-label">URL</span><span class="result-val">${esc(hostname)}</span></div>
-      <div class="result-row"><span class="result-label">URLhaus</span><span class="result-val" style="color:${urlhausColor}">${esc(urlhausResult)}</span></div>
-      <div class="result-row"><span class="result-label">Muster</span><span class="result-val" style="color:${suspicious?'#f87171':'#4ade80'}">${suspicious?'Verdächtig':'Unauffällig'}</span></div>
-      <div class="result-row"><span class="result-label">HTTPS</span><span class="result-val" style="color:${url.startsWith('https://')?'#4ade80':'#fbbf24'}">${url.startsWith('https://')?'Ja':'Nein'}</span></div>
-      <div class="result-row"><span class="result-label">Gesamt</span><span class="result-val" style="color:${isSuspicious?'#f87171':'#4ade80'};font-weight:600;">${isSuspicious?'Potenziell gefährlich':'Unauffällig'}</span></div>
-    </div>
-    <div style="margin-top:8px;display:flex;gap:8px;">
-      <a href="https://www.virustotal.com/gui/url/${btoa(url)}/detection" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">VirusTotal ↗</a>
-      <a href="https://urlscan.io/search/#${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">urlscan.io ↗</a>
-    </div>`;
-  }catch(e){res.innerHTML=`<p style="font-size:12px;color:#f87171;">${esc(e.message)}</p>`;}
-  btn.disabled=false;btn.textContent='Scannen';
-}
+async function scanUrl(){const url=$('urlInput').value.trim();if(!url){showToast('URL eingeben');return;}const btn=$('urlScanBtn'),res=$('urlResult');btn.disabled=true;btn.textContent='Scanne…';res.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';try{let hostname='';try{hostname=new URL(url).hostname;}catch{res.innerHTML='<p style="font-size:12px;color:#f87171;">Ungültige URL</p>';btn.disabled=false;btn.textContent='Scannen';return;}let urlhausResult='Nicht erreichbar',urlhausColor='var(--txt3)';try{const r=await fetch('https://urlhaus-api.abuse.ch/v1/url/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'url='+encodeURIComponent(url),signal:AbortSignal.timeout(8000)});const d=await r.json();if(d.query_status==='is_found'){urlhausResult='Gemeldet (URLhaus)';urlhausColor='#f87171';}else if(d.query_status==='no_results'){urlhausResult='Nicht gemeldet';urlhausColor='#4ade80';}}catch{urlhausResult='API nicht erreichbar';}const suspicious=/phish|malware|hack|porn|free-money|click-here|virus|trojan|ransom/i.test(url);const isSuspicious=suspicious||urlhausColor==='#f87171';res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">URL</span><span class="result-val">${esc(hostname)}</span></div><div class="result-row"><span class="result-label">URLhaus</span><span class="result-val" style="color:${urlhausColor}">${esc(urlhausResult)}</span></div><div class="result-row"><span class="result-label">Muster</span><span class="result-val" style="color:${suspicious?'#f87171':'#4ade80'}">${suspicious?'Verdächtig':'Unauffällig'}</span></div><div class="result-row"><span class="result-label">HTTPS</span><span class="result-val" style="color:${url.startsWith('https://')?'#4ade80':'#fbbf24'}">${url.startsWith('https://')?'Ja':'Nein'}</span></div><div class="result-row"><span class="result-label">Gesamt</span><span class="result-val" style="color:${isSuspicious?'#f87171':'#4ade80'};font-weight:600;">${isSuspicious?'Potenziell gefährlich':'Unauffällig'}</span></div></div><div style="margin-top:8px;display:flex;gap:8px;"><a href="https://www.virustotal.com/gui/url/${btoa(url)}/detection" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">VirusTotal ↗</a><a href="https://urlscan.io/search/#${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">urlscan.io ↗</a></div>`;}catch(e){res.innerHTML=`<p style="font-size:12px;color:#f87171;">${esc(e.message)}</p>`;}btn.disabled=false;btn.textContent='Scannen';}
 
 // ── TRACKER DETECTOR ──
-const KNOWN_TRACKERS={
-  'google-analytics.com':'Google Analytics','gtag':'Google Tag Manager','doubleclick.net':'Google Ads',
-  'facebook.net':'Meta Pixel','fbevents':'Meta Pixel','twitter.com/i/adsct':'Twitter Ads',
-  'hotjar.com':'Hotjar','clarity.ms':'Microsoft Clarity','mixpanel.com':'Mixpanel',
-  'segment.com':'Segment','amplitude.com':'Amplitude','intercom.io':'Intercom',
-  'hubspot.com':'HubSpot','salesforce.com':'Salesforce','marketo.com':'Marketo',
-  'cloudflare.com':'Cloudflare','jsdelivr.net':'jsDelivr CDN','cdnjs.cloudflare':'Cloudflare CDN',
-  'disqus.com':'Disqus','gravatar.com':'Gravatar','wordpress.com':'WordPress',
-};
-function openTrackerTools(){
-  const url=$('trackerInput').value.trim();
-  const res=$('trackerResult');
-  if(!url){showToast('URL eingeben');return;}
-  let hostname='';
-  try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}
-  res.innerHTML=`<div style="margin-top:4px;">
-    <div class="links-label" style="margin-bottom:8px;">Externe Scanner für <span style="color:var(--txt)">${esc(hostname)}</span></div>
-    <div style="display:flex;flex-direction:column;gap:6px;">
-      <a href="https://themarkup.org/blacklight?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">Blacklight (Markup)</span><span style="font-size:11px;color:var(--txt3)">Ad/Tracker-Scanner</span><span class="link-arrow">↗</span>
-      </a>
-      <a href="https://webbkoll.dataskydd.net/en/check?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">Webbkoll (GDPR)</span><span style="font-size:11px;color:var(--txt3)">Datenschutz-Check</span><span class="link-arrow">↗</span>
-      </a>
-      <a href="https://urlscan.io/search/#page.domain:${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">urlscan.io</span><span style="font-size:11px;color:var(--txt3)">Request-Scanner</span><span class="link-arrow">↗</span>
-      </a>
-      <a href="https://observatory.mozilla.org/analyze/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">Mozilla Observatory</span><span style="font-size:11px;color:var(--txt3)">Security-Headers</span><span class="link-arrow">↗</span>
-      </a>
-    </div>
-  </div>`;
-}
+function openTrackerTools(){const url=$('trackerInput').value.trim();const res=$('trackerResult');if(!url){showToast('URL eingeben');return;}let hostname='';try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}res.innerHTML=`<div style="margin-top:4px;"><div class="links-label" style="margin-bottom:8px;">Externe Scanner für <span style="color:var(--txt)">${esc(hostname)}</span></div><div style="display:flex;flex-direction:column;gap:6px;"><a href="https://themarkup.org/blacklight?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Blacklight (Markup)</span><span style="font-size:11px;color:var(--txt3)">Ad/Tracker-Scanner</span><span class="link-arrow">↗</span></a><a href="https://webbkoll.dataskydd.net/en/check?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Webbkoll (GDPR)</span><span style="font-size:11px;color:var(--txt3)">Datenschutz-Check</span><span class="link-arrow">↗</span></a><a href="https://urlscan.io/search/#page.domain:${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">urlscan.io</span><span style="font-size:11px;color:var(--txt3)">Request-Scanner</span><span class="link-arrow">↗</span></a><a href="https://observatory.mozilla.org/analyze/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Mozilla Observatory</span><span style="font-size:11px;color:var(--txt3)">Security-Headers</span><span class="link-arrow">↗</span></a></div></div>`;}
 
 // ── META SCRAPER ──
-function analyzeUrlLocal(){
-  const url=$('metaInput').value.trim();
-  if(!url)return;
-  const res=$('metaResult');
-  try{
-    const u=new URL(url);
-    const isHttps=u.protocol==='https:';
-    const hasWWW=u.hostname.startsWith('www.');
-    const parts=u.hostname.replace(/^www\./,'').split('.');
-    const tld=parts.slice(-1)[0];
-    const domain=parts.slice(-2).join('.');
-    const hasPath=u.pathname!=='/'&&u.pathname!=='';
-    const hasQuery=u.search!=='';
-    const hasFragment=u.hash!=='';
-    res.innerHTML=`<div class="result-box" style="padding:0;">
-      <div class="result-row"><span class="result-label">Protokoll</span><span class="result-val${isHttps?' ok':' err'}">${isHttps?'HTTPS':'HTTP (unsicher)'}</span></div>
-      <div class="result-row"><span class="result-label">Domain</span><span class="result-val">${esc(domain)}</span></div>
-      <div class="result-row"><span class="result-label">TLD</span><span class="result-val">.${esc(tld)}</span></div>
-      <div class="result-row"><span class="result-label">Subdomain</span><span class="result-val">${hasWWW?'www':u.hostname.replace('.'+domain,'').replace(domain,'')||'—'}</span></div>
-      <div class="result-row"><span class="result-label">Pfad</span><span class="result-val">${hasPath?esc(u.pathname):'—'}</span></div>
-      <div class="result-row"><span class="result-label">Parameter</span><span class="result-val">${hasQuery?esc(u.search):'—'}</span></div>
-    </div>`;
-  }catch{}
-}
-
-async function scrapeMeta(){
-  const url=$('metaInput').value.trim();
-  const btn=$('metaBtn'),res=$('metaResult');
-  if(!url){showToast('URL eingeben');return;}
-  let hostname='';
-  try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}
-  // First show local analysis
-  analyzeUrlLocal();
-  // Then append external tool links
-  const existing=$('metaResult').innerHTML;
-  res.innerHTML=existing+`<div style="margin-top:10px;">
-    <div class="links-label" style="margin-bottom:8px;">Metadaten via externe Dienste</div>
-    <div style="display:flex;flex-direction:column;gap:6px;">
-      <a href="https://metatags.io/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">metatags.io</span><span style="font-size:11px;color:var(--txt3)">OG, Twitter, SEO Tags</span><span class="link-arrow">↗</span>
-      </a>
-      <a href="https://www.opengraph.xyz/url/${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">opengraph.xyz</span><span style="font-size:11px;color:var(--txt3)">Open Graph Preview</span><span class="link-arrow">↗</span>
-      </a>
-      <a href="https://builtwith.com/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">builtwith.com</span><span style="font-size:11px;color:var(--txt3)">Technologien erkennen</span><span class="link-arrow">↗</span>
-      </a>
-      <a href="https://securityheaders.com/?q=${encodeURIComponent(url)}&followRedirects=on" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
-        <span class="link-url">securityheaders.com</span><span style="font-size:11px;color:var(--txt3)">HTTP-Header-Analyse</span><span class="link-arrow">↗</span>
-      </a>
-    </div>
-  </div>`;
-}
+function analyzeUrlLocal(){const url=$('metaInput').value.trim();if(!url)return;const res=$('metaResult');try{const u=new URL(url);const isHttps=u.protocol==='https:';const hasWWW=u.hostname.startsWith('www.');const parts=u.hostname.replace(/^www\./,'').split('.');const tld=parts.slice(-1)[0];const domain=parts.slice(-2).join('.');const hasPath=u.pathname!=='/'&&u.pathname!=='';const hasQuery=u.search!=='';res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Protokoll</span><span class="result-val${isHttps?' ok':' err'}">${isHttps?'HTTPS':'HTTP (unsicher)'}</span></div><div class="result-row"><span class="result-label">Domain</span><span class="result-val">${esc(domain)}</span></div><div class="result-row"><span class="result-label">TLD</span><span class="result-val">.${esc(tld)}</span></div><div class="result-row"><span class="result-label">Subdomain</span><span class="result-val">${hasWWW?'www':u.hostname.replace('.'+domain,'').replace(domain,'')||'—'}</span></div><div class="result-row"><span class="result-label">Pfad</span><span class="result-val">${hasPath?esc(u.pathname):'—'}</span></div><div class="result-row"><span class="result-label">Parameter</span><span class="result-val">${hasQuery?esc(u.search):'—'}</span></div></div>`;}catch{}}
+async function scrapeMeta(){const url=$('metaInput').value.trim();const btn=$('metaBtn'),res=$('metaResult');if(!url){showToast('URL eingeben');return;}let hostname='';try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}analyzeUrlLocal();const existing=$('metaResult').innerHTML;res.innerHTML=existing+`<div style="margin-top:10px;"><div class="links-label" style="margin-bottom:8px;">Metadaten via externe Dienste</div><div style="display:flex;flex-direction:column;gap:6px;"><a href="https://metatags.io/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">metatags.io</span><span style="font-size:11px;color:var(--txt3)">OG, Twitter, SEO Tags</span><span class="link-arrow">↗</span></a><a href="https://www.opengraph.xyz/url/${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">opengraph.xyz</span><span style="font-size:11px;color:var(--txt3)">Open Graph Preview</span><span class="link-arrow">↗</span></a><a href="https://builtwith.com/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">builtwith.com</span><span style="font-size:11px;color:var(--txt3)">Technologien erkennen</span><span class="link-arrow">↗</span></a><a href="https://securityheaders.com/?q=${encodeURIComponent(url)}&followRedirects=on" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">securityheaders.com</span><span style="font-size:11px;color:var(--txt3)">HTTP-Header-Analyse</span><span class="link-arrow">↗</span></a></div></div>`;}
 
 // ── IP LOOKUP ──
-async function lookupIP(){
-  const input=$('ipInput').value.trim();
-  const btn=$('ipBtn'),res=$('ipResult');
-  btn.disabled=true;btn.textContent='…';
-  res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';
-  // ip-api.com has CORS enabled on HTTP fields endpoint
-  const target=input||'';
-  const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;
-  try{
-    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const d=await r.json();
-    if(d.status==='fail')throw new Error(d.message||'Ungültige IP');
-    const isVPN=d.proxy||d.hosting;
-    const rows=[
-      ['IP',d.query],
-      ['Land',`${d.country||'—'} (${d.countryCode||'—'})`],
-      ['Stadt',d.city||'—'],
-      ['Region',d.regionName||'—'],
-      ['Timezone',d.timezone||'—'],
-      ['ISP',d.isp||'—'],
-      ['Org / ASN',d.as||'—'],
-      ['Proxy/VPN',d.proxy?'Ja':'Nein'],
-      ['Hosting/DC',d.hosting?'Ja':'Nein'],
-    ];
-    const ipCopy=d.query;
-    res.innerHTML=`<div class="result-box" style="padding:0;">
-      ${rows.map(([l,v])=>{
-        let cls='';
-        if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';
-        if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';
-        return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;
-      }).join('')}
-    </div>
-    <div style="margin-top:8px;display:flex;gap:8px;">
-      <button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button>
-      <a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a>
-    </div>`;
-  }catch(e){
-    res.innerHTML=`<div class="result-box" style="padding:0;">
-      <div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div>
-    </div>
-    <p style="font-size:12px;color:var(--txt3);margin-top:8px;">Hinweis: ip-api.com funktioniert nur über HTTP, nicht HTTPS. Wenn die Seite über HTTPS läuft, direkt auf <a href="https://ip-api.com" target="_blank" rel="noopener noreferrer" style="color:var(--txt2)">ip-api.com ↗</a> prüfen.</p>`;
-  }
-  btn.disabled=false;btn.textContent='Lookup';
-}
+async function lookupIP(){const input=$('ipInput').value.trim();const btn=$('ipBtn'),res=$('ipResult');btn.disabled=true;btn.textContent='…';res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';const target=input||'';const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;try{const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(d.status==='fail')throw new Error(d.message||'Ungültige IP');const rows=[['IP',d.query],['Land',`${d.country||'—'} (${d.countryCode||'—'})`],['Stadt',d.city||'—'],['Region',d.regionName||'—'],['Timezone',d.timezone||'—'],['ISP',d.isp||'—'],['Org / ASN',d.as||'—'],['Proxy/VPN',d.proxy?'Ja':'Nein'],['Hosting/DC',d.hosting?'Ja':'Nein']];const ipCopy=d.query;res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;}).join('')}</div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button><a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a></div>`;}catch(e){res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div></div><p style="font-size:12px;color:var(--txt3);margin-top:8px;">Hinweis: ip-api.com funktioniert nur über HTTP. Direkt auf <a href="https://ip-api.com" target="_blank" rel="noopener noreferrer" style="color:var(--txt2)">ip-api.com ↗</a> prüfen.</p>`;}btn.disabled=false;btn.textContent='Lookup';}
 
 // ── EMAIL REPUTATION ──
-// Known disposable domains (local list — no API needed)
 const DISPOSABLE_DOMAINS=new Set(['mailnull.com','guerrillamail.com','throwam.com','yopmail.com','tempmail.com','temp-mail.org','10minutemail.com','sharklasers.com','guerrillamailblock.com','grr.la','guerrillamail.info','guerrillamail.biz','guerrillamail.de','guerrillamail.net','guerrillamail.org','spam4.me','trashmail.com','trashmail.me','trashmail.net','trashmail.org','trashmail.io','dispostable.com','mailnesia.com','mailnull.com','maildrop.cc','spamgourmet.com','spamgourmet.net','spamgourmet.org','spamspot.com','spamthis.co.uk','spamtrap.ro','fakeinbox.com','fakeinbox.net','discard.email','discardmail.com','discardmail.de','spamfree24.org','spamgob.com','spamhereplease.com','spamoff.de','spamwc.de','trash-mail.com','trashdevil.com','trashdevil.de','trashmailer.com','mailsiphon.com','mail.tm','mail.gw','inboxkitten.com','owlpic.com','tempinbox.com','tempr.email','temp-mail.ru','jetable.fr.nf','notsharingmy.info','spamgourmet.com','spamgourmet.net','speed.1s.fr','spamify.com']);
-
 const BLACKLISTED_DOMAINS=new Set(['mailinator.com','guerrillamail.com','trashmail.com','yopmail.com','spam4.me']);
-
 const FREE_PROVIDERS=new Set(['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','proton.me','protonmail.com','web.de','gmx.de','gmx.net','gmx.com','t-online.de','freenet.de','posteo.de','tutanota.com','tutanota.de','mailfence.com','disroot.org','riseup.net','fastmail.com','aol.com','live.com','msn.com','yahoo.de','yahoo.co.uk','yahoo.fr']);
+async function checkEmailRep(){const val=$('emailRepInput').value.trim().toLowerCase();const btn=$('emailRepBtn'),res=$('emailRepResult');if(!val||!val.includes('@')){showToast('Gültige Email eingeben');return;}btn.disabled=true;btn.textContent='Prüfe…';const domain=val.split('@')[1]||'';const isDisposable=DISPOSABLE_DOMAINS.has(domain);const isBlacklisted=BLACKLISTED_DOMAINS.has(domain);const isFree=FREE_PROVIDERS.has(domain);const isCustom=!isDisposable&&!isFree;let hasMX=null,mxRecords=[];try{const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,{signal:AbortSignal.timeout(5000)});const d=await r.json();mxRecords=(d.Answer||[]).filter(a=>a.type===15).map(a=>a.data);hasMX=mxRecords.length>0;}catch{hasMX=null;}let risk=0,riskLabel='Niedrig',riskColor='#4ade80';if(isBlacklisted){risk=3;}else if(isDisposable){risk=2;}else if(!hasMX){risk=2;}else if(!isFree&&!isCustom){risk=1;}if(risk>=3){riskLabel='Kritisch';riskColor='#f87171';}else if(risk===2){riskLabel='Hoch';riskColor='#f87171';}else if(risk===1){riskLabel='Mittel';riskColor='#fbbf24';}const rows=[['Domain',domain],['Typ',isDisposable?'Wegwerf-Adresse':isBlacklisted?'Blacklisted':isFree?'Free Provider':'Custom/Business'],['MX Records',hasMX===null?'Unbekannt':hasMX?mxRecords[0]?.split(' ').pop()||'Vorhanden':'Keine (ungültig)'],['Blacklist',isBlacklisted?'Eingetragen':'Nicht eingetragen'],['Risiko',riskLabel]];res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Blacklist')cls=isBlacklisted?' err':' ok';if(l==='Risiko')cls=risk>=2?' err':risk===1?' warn':' ok';if(l==='MX Records')cls=hasMX===false?' err':'';if(l==='Typ')cls=isDisposable||isBlacklisted?' err':isFree?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(v)}</span></div>`;}).join('')}</div>${mxRecords.length?`<div style="margin-top:8px;"><div class="links-label" style="margin-bottom:4px;">MX Records</div>${mxRecords.slice(0,3).map(mx=>`<div class="tag">${esc(mx)}</div>`).join('')}</div>`:''}`;btn.disabled=false;btn.textContent='Prüfen';}
 
-async function checkEmailRep(){
-  const val=$('emailRepInput').value.trim().toLowerCase();
-  const btn=$('emailRepBtn'),res=$('emailRepResult');
-  if(!val||!val.includes('@')){showToast('Gültige Email eingeben');return;}
-  btn.disabled=true;btn.textContent='Prüfe…';
-  const domain=val.split('@')[1]||'';
-  const isDisposable=DISPOSABLE_DOMAINS.has(domain);
-  const isBlacklisted=BLACKLISTED_DOMAINS.has(domain);
-  const isFree=FREE_PROVIDERS.has(domain);
-  const isCustom=!isDisposable&&!isFree;
-  // Check MX records via DNS-over-HTTPS
-  let hasMX=null,mxRecords=[];
-  try{
-    const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,{signal:AbortSignal.timeout(5000)});
-    const d=await r.json();
-    mxRecords=(d.Answer||[]).filter(a=>a.type===15).map(a=>a.data);
-    hasMX=mxRecords.length>0;
-  }catch{hasMX=null;}
-  // Risk score
-  let risk=0,riskLabel='Niedrig',riskColor='#4ade80';
-  if(isBlacklisted){risk=3;}
-  else if(isDisposable){risk=2;}
-  else if(!hasMX){risk=2;}
-  else if(!isFree&&!isCustom){risk=1;}
-  if(risk>=3){riskLabel='Kritisch';riskColor='#f87171';}
-  else if(risk===2){riskLabel='Hoch';riskColor='#f87171';}
-  else if(risk===1){riskLabel='Mittel';riskColor='#fbbf24';}
-  const rows=[
-    ['Domain',domain],
-    ['Typ',isDisposable?'Wegwerf-Adresse':isBlacklisted?'Blacklisted':isFree?'Free Provider':'Custom/Business'],
-    ['MX Records',hasMX===null?'Unbekannt':hasMX?mxRecords[0]?.split(' ').pop()||'Vorhanden':'Keine (ungültig)'],
-    ['Blacklist',isBlacklisted?'Eingetragen':'Nicht eingetragen'],
-    ['Risiko',riskLabel],
-  ];
-  res.innerHTML=`<div class="result-box" style="padding:0;">
-    ${rows.map(([l,v])=>{
-      let cls='';
-      if(l==='Blacklist')cls=isBlacklisted?' err':' ok';
-      if(l==='Risiko')cls=risk>=2?' err':risk===1?' warn':' ok';
-      if(l==='MX Records')cls=hasMX===false?' err':'';
-      if(l==='Typ')cls=isDisposable||isBlacklisted?' err':isFree?' warn':' ok';
-      return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(v)}</span></div>`;
-    }).join('')}
-  </div>
-  ${mxRecords.length?`<div style="margin-top:8px;"><div class="links-label" style="margin-bottom:4px;">MX Records</div>${mxRecords.slice(0,3).map(mx=>`<div class="tag">${esc(mx)}</div>`).join('')}</div>`:''}`;
-  btn.disabled=false;btn.textContent='Prüfen';
-}
+// Tool result copy helper
+async function copyToolResult(id){const el=$(id);if(!el||!el.textContent)return;const ok=await copyToClipboard(el.textContent.trim());showToast(ok?'Kopiert ✓':'Fehler');}
 
 // ════════════════════════════════════
 // WHOAMI
 // ════════════════════════════════════
-async function renderWhoami(){
-  const card=$('whoamiCard');const user=loadUser();const saved=await dbGetAll('saved_emails');
-  const ua=navigator.userAgent;let browser='Unbekannt',os='Unbekannt';
-  if(/Firefox\//.test(ua))browser='Firefox';else if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome/.test(ua))browser='Safari';
-  if(/Windows NT 10/.test(ua))os='Windows 10/11';else if(/Mac OS X/.test(ua))os='macOS';else if(/Android/.test(ua))os='Android';else if(/iPhone|iPad/.test(ua))os='iOS';else if(/Linux/.test(ua))os='Linux';
-  const isMobile=/Mobi|Android|iPhone|iPad/i.test(ua);
-  const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';
-  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';
-  const onlineCount=parseInt($('onlineCount')?.textContent||'1');
-  card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}
+async function renderWhoami(){const card=$('whoamiCard');const user=loadUser();const saved=await dbGetAll('saved_emails');const ua=navigator.userAgent;let browser='Unbekannt',os='Unbekannt';if(/Firefox\//.test(ua))browser='Firefox';else if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome/.test(ua))browser='Safari';if(/Windows NT 10/.test(ua))os='Windows 10/11';else if(/Mac OS X/.test(ua))os='macOS';else if(/Android/.test(ua))os='Android';else if(/iPhone|iPad/.test(ua))os='iOS';else if(/Linux/.test(ua))os='Linux';const isMobile=/Mobi|Android|iPhone|iPad/i.test(ua);const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';const onlineCount=parseInt($('onlineCount')?.textContent||'1');card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}
   <div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div>
   <div class="whoami-grid">
     <div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div>
@@ -1855,8 +1493,7 @@ async function renderWhoami(){
   <div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div>
   <div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div>
   <div class="whoami-row"><span class="whoami-row-lbl">Unique IPs online</span><span class="whoami-row-val ok">${onlineCount}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;
-}
+  <div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;}
 
 // ════════════════════════════════════
 // AUTH
@@ -1871,32 +1508,14 @@ function closeAuthModalOv(e){if(e.target===$('authModalOv'))closeAuthModal();}
 let authMode='login';
 function switchAuthTab(mode){authMode=mode;$('authTabLogin').classList.toggle('active',mode==='login');$('authTabReg').classList.toggle('active',mode==='register');$('authSubmitBtn').textContent=mode==='login'?'Login':'Registrieren';$('authErr').classList.remove('show');}
 function setAuthErr(msg){$('authErr').textContent=msg;$('authErr').classList.add('show');}
-async function authSubmit(){
-  const email=$('authEmail').value.trim();const apw=$('authPw').value;
-  if(!email||!/@/.test(email)){setAuthErr('Gültige E-Mail eingeben.');return;}
-  if(apw.length<6){setAuthErr('Passwort mind. 6 Zeichen.');return;}
-  const btn=$('authSubmitBtn');btn.disabled=true;btn.textContent='…';
-  try{
-    const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));
-    const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    if(authMode==='register'){const existing=await dbGet('users',email);if(existing){setAuthErr('Account existiert bereits.');return;}await dbPut('users',{id:email,email,pwHash:hashHex,name:email.split('@')[0],createdAt:new Date().toISOString()});currentUser={email,name:email.split('@')[0]};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('Account erstellt');}
-    else{const u=await dbGet('users',email);if(!u||u.pwHash!==hashHex){setAuthErr('E-Mail oder Passwort falsch.');return;}currentUser={email,name:u.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('Eingeloggt');}
-  }finally{btn.disabled=false;btn.textContent=authMode==='login'?'Login':'Registrieren';}
-}
+async function authSubmit(){const email=$('authEmail').value.trim();const apw=$('authPw').value;if(!email||!/@/.test(email)){setAuthErr('Gültige E-Mail eingeben.');return;}if(apw.length<6){setAuthErr('Passwort mind. 6 Zeichen.');return;}const btn=$('authSubmitBtn');btn.disabled=true;btn.textContent='…';try{const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(authMode==='register'){const existing=await dbGet('users',email);if(existing){setAuthErr('Account existiert bereits.');return;}await dbPut('users',{id:email,email,pwHash:hashHex,name:email.split('@')[0],createdAt:new Date().toISOString()});currentUser={email,name:email.split('@')[0]};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('Account erstellt');}else{const u=await dbGet('users',email);if(!u||u.pwHash!==hashHex){setAuthErr('E-Mail oder Passwort falsch.');return;}currentUser={email,name:u.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('Eingeloggt');}}finally{btn.disabled=false;btn.textContent=authMode==='login'?'Login':'Registrieren';}}
 function authLogout(){clearUserSession();currentUser=null;updateAuthUI();closeAuthModal();showToast('Ausgeloggt');}
 function updateAuthUI(){const u=loadUser();const av=$('authAvatar');if(u){av.textContent=(u.email[0]||'?').toUpperCase();av.style.borderColor='var(--brd-act)';}else{av.textContent='?';av.style.borderColor='';}$('auth-nav-label').textContent=u?(u.name||u.email.split('@')[0]):'Account';}
 
 // ════════════════════════════════════
 // KEYBOARD
 // ════════════════════════════════════
-document.addEventListener('keydown',e=>{
-  const tag=document.activeElement.tagName.toLowerCase();
-  if(tag==='input'||tag==='textarea'||tag==='select')return;
-  if(e.key==='Escape'){closeDetail();closeModal();closeAuthModal();document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
-  if(e.key.toLowerCase()==='n'&&!e.ctrlKey&&!e.metaKey&&!$('genBtn').disabled)doGenerate();
-  if(e.key.toLowerCase()==='c'&&!e.ctrlKey&&!e.metaKey&&addr)copyEmail();
-  if(e.key.toLowerCase()==='r'&&!e.ctrlKey&&!e.metaKey&&!$('refreshBtn').disabled)doFetch(true);
-});
+document.addEventListener('keydown',e=>{const tag=document.activeElement.tagName.toLowerCase();if(tag==='input'||tag==='textarea'||tag==='select')return;if(e.key==='Escape'){closeDetail();closeModal();closeAuthModal();document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}if(e.key.toLowerCase()==='n'&&!e.ctrlKey&&!e.metaKey&&!$('genBtn').disabled)doGenerate();if(e.key.toLowerCase()==='c'&&!e.ctrlKey&&!e.metaKey&&addr)copyEmail();if(e.key.toLowerCase()==='r'&&!e.ctrlKey&&!e.metaKey&&!$('refreshBtn').disabled)doFetch(true);});
 $('authEmail').addEventListener('keydown',e=>{if(e.key==='Enter')$('authPw').focus();});
 $('authPw').addEventListener('keydown',e=>{if(e.key==='Enter')authSubmit();});
 $('saveName').addEventListener('keydown',e=>{if(e.key==='Enter')confirmSave();});
