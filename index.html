@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>AltMail</title>
+
+<!-- ═══ SEO ═══ -->
+<title>AltMail – Kostenlose Wegwerf-Email & temporäre Handynummer sofort</title>
+<meta name="description" content="AltMail: Kostenlose Wegwerf-Email und temporäre Telefonnummer sofort – anonym, ohne Registrierung. Einweg-Email, Fake-Mail, Temp-Mail und SMS online empfangen.">
+<meta name="keywords" content="wegwerf email, temporäre email, fake email, einweg email, temp mail, disposable email, temporäre telefonnummer, wegwerf nummer, SMS empfangen online, virtuelle nummer, einweg SMS, anonyme email, datenschutz tools, passwort generator, datenleck prüfen">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="AltMail">
+<link rel="canonical" href="https://altmail.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AltMail – Wegwerf-Email & Temp-Nummer kostenlos">
+<meta property="og:description" content="Sofortige anonyme Wegwerf-Email und temporäre Telefonnummer. Keine Registrierung. Datenschutz leicht gemacht.">
+<meta property="og:url" content="https://altmail.app/">
+<meta property="og:site_name" content="AltMail">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AltMail – Wegwerf-Email & Temp-Nummer kostenlos">
+<meta name="twitter:description" content="Sofortige anonyme Wegwerf-Email und temporäre Telefonnummer. Keine Registrierung.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AltMail","url":"https://altmail.app/","description":"Kostenlose Wegwerf-Email und temporäre Telefonnummer sofort, anonym, ohne Registrierung.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"featureList":["Kostenlose Wegwerf-Email","Temporäre Telefonnummer","SMS empfangen online","Datenleck-Check","Passwort-Generator","Anonymes Surfen"]}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
@@ -33,11 +53,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-
 .main::-webkit-scrollbar{width:4px;}
 .main::-webkit-scrollbar-thumb{background:var(--s3);border-radius:4px;}
 .main-inner{max-width:680px;margin:0 auto;padding:32px 20px 80px;}
-/* ── MOBILE NAV: 4 items only (kein Gespeichert-Tab) ── */
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--brd);z-index:50;padding:6px 4px env(safe-area-inset-bottom,0);flex-direction:row;align-items:center;gap:2px;}
-.mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:var(--r-sm);cursor:pointer;color:var(--txt3);font-size:10px;font-weight:500;border:none;background:none;font-family:var(--font);min-height:52px;justify-content:center;transition:color .15s;}
+
+/* ── MOBILE NAV: 5 Tabs inkl. Gespeichert ── */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--brd);z-index:50;padding:4px 0 env(safe-area-inset-bottom,0);flex-direction:row;align-items:center;}
+.mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:var(--r-sm);cursor:pointer;color:var(--txt3);font-size:9px;font-weight:500;border:none;background:none;font-family:var(--font);min-height:50px;justify-content:center;transition:color .15s;position:relative;}
 .mob-nav-item.active{color:var(--txt);}
-.mob-nav-item svg{width:18px;height:18px;}
+.mob-nav-item svg{width:17px;height:17px;}
+/* Badge auf Gespeichert-Tab */
+.mob-badge{position:absolute;top:5px;right:calc(50% - 18px);min-width:14px;height:14px;background:var(--txt);color:var(--bg);border-radius:100px;font-size:9px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 3px;line-height:1;}
+.mob-badge.visible{display:flex;}
+
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
 .header-actions{display:flex;align-items:center;gap:8px;}
 .card{background:var(--s1);border:1px solid var(--brd);border-radius:var(--r-lg);padding:20px;margin-bottom:12px;box-shadow:var(--shadow-sm);}
@@ -129,7 +154,6 @@ select{cursor:pointer;}
 .link-arrow{font-size:13px;color:var(--txt3);flex-shrink:0;}
 .body-divider{border:none;border-top:1px solid var(--brd);margin:16px 0;}
 .email-body-text{font-size:13px;line-height:1.8;color:var(--txt2);white-space:pre-wrap;word-break:break-word;font-family:var(--mono);}
-/* Multi-inbox tabs */
 .inbox-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;}
 .inbox-tab{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--brd);background:var(--s2);color:var(--txt3);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;font-family:var(--font);}
 .inbox-tab:hover{border-color:var(--brd-hi);color:var(--txt2);}
@@ -139,13 +163,11 @@ select{cursor:pointer;}
 .inbox-tab .tab-count{font-size:10px;background:var(--s3);border-radius:100px;padding:1px 6px;color:var(--txt3);}
 .add-inbox-btn{padding:6px 10px;border-radius:var(--r-sm);border:1px dashed var(--brd);background:transparent;color:var(--txt3);font-size:12px;cursor:pointer;transition:all .15s;font-family:var(--font);display:flex;align-items:center;gap:4px;}
 .add-inbox-btn:hover{border-color:var(--brd-hi);color:var(--txt2);}
-/* Rules */
 .rule-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;animation:fadeUp .15s ease;}
 .rule-item:hover{border-color:var(--brd-hi);}
 .rule-info{flex:1;min-width:0;}
 .rule-cond{font-size:13px;color:var(--txt);margin-bottom:3px;}
 .rule-meta{font-size:11px;color:var(--txt3);font-family:var(--mono);}
-/* Saved */
 .saved-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;transition:border-color .15s;animation:fadeUp .15s ease;}
 .saved-item:hover{border-color:var(--brd-hi);}
 .saved-info{flex:1;min-width:0;}
@@ -154,7 +176,6 @@ select{cursor:pointer;}
 .saved-name-badge{display:inline-block;font-size:11px;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 9px;margin-right:6px;}
 .saved-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;}
 .saved-empty{text-align:center;padding:48px 20px;color:var(--txt3);font-size:14px;line-height:1.7;}
-/* Sender */
 .send-status-banner{border-radius:var(--r-sm);padding:14px 16px;font-size:13px;line-height:1.6;border:1px solid var(--brd);display:none;animation:fadeUp .2s ease;}
 .send-status-banner.show{display:flex;align-items:flex-start;gap:10px;}
 .send-status-banner.success{background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.25);color:#4ade80;}
@@ -178,24 +199,22 @@ select{cursor:pointer;}
 .compose-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
 .char-counter{font-family:var(--mono);font-size:11px;color:var(--txt3);}
 .char-counter.warn{color:#fbbf24;}
-/* Phone */
 .country-chip{padding:8px 14px;font-size:12px;font-weight:500;background:var(--s2);border:1px solid var(--brd);border-radius:100px;color:var(--txt3);cursor:pointer;transition:all .15s;font-family:var(--font);min-height:36px;touch-action:manipulation;}
 .country-chip:hover{border-color:var(--brd-hi);color:var(--txt2);}
 .country-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
 .phone-select-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
 .phone-pill{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;margin-bottom:6px;transition:border-color .2s;}
 .phone-number{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--txt);flex:1;letter-spacing:.5px;}
+.sms-src-tag{font-size:10px;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 7px;white-space:nowrap;}
 .sms-item{display:flex;align-items:flex-start;gap:10px;padding:14px 10px;border-top:1px solid var(--brd);border-radius:var(--r-sm);transition:background .15s;margin:0 -10px;animation:fadeUp .2s ease;}
 .sms-item:hover{background:var(--glow);}
 .sms-av{width:34px;height:34px;border-radius:9px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .sms-from{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px;}
 .sms-body{font-size:13px;color:var(--txt2);line-height:1.5;white-space:pre-wrap;word-break:break-word;}
 .sms-time{font-family:var(--mono);font-size:10px;color:var(--txt3);margin-top:4px;}
-/* OTP highlight */
 .otp-badge{display:inline-flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--brd-hi);border-radius:var(--r-sm);padding:6px 12px;margin-top:6px;cursor:pointer;}
 .otp-code{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--txt);letter-spacing:2px;}
 .otp-label{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;}
-/* WHOAMI */
 .whoami-hero{display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px;text-align:center;border-bottom:1px solid var(--brd);margin-bottom:20px;}
 .whoami-avatar{width:72px;height:72px;border-radius:50%;background:var(--s3);border:2px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--txt);margin-bottom:14px;}
 .whoami-name{font-size:20px;font-weight:600;color:var(--txt);letter-spacing:-.5px;margin-bottom:4px;}
@@ -209,7 +228,6 @@ select{cursor:pointer;}
 .whoami-row-lbl{font-size:12px;color:var(--txt3);}
 .whoami-row-val{font-family:var(--mono);font-size:12px;color:var(--txt2);text-align:right;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .whoami-row-val.ok{color:#fff;}
-/* Pwned */
 .pwned-hero{text-align:center;padding:20px 0 28px;}
 .pwned-hero h2{font-size:20px;font-weight:600;letter-spacing:-.5px;color:var(--txt);margin-bottom:8px;}
 .pwned-hero p{font-size:13px;color:var(--txt3);line-height:1.6;max-width:400px;margin:0 auto;}
@@ -224,12 +242,6 @@ select{cursor:pointer;}
 .pwned-icon.good{background:rgba(74,222,128,.15);}
 .pwned-status-txt h3{font-size:16px;font-weight:600;color:var(--txt);letter-spacing:-.3px;margin-bottom:3px;}
 .pwned-status-txt p{font-size:13px;color:var(--txt3);}
-.breach-list{list-style:none;}
-.breach-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid var(--brd);}
-.breach-logo{width:36px;height:36px;border-radius:8px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--txt2);flex-shrink:0;font-family:var(--mono);}
-.breach-info{flex:1;min-width:0;}
-.breach-name{font-size:13px;font-weight:600;color:var(--txt);letter-spacing:-.2px;margin-bottom:3px;}
-.breach-meta{font-size:12px;color:var(--txt3);}
 .pw-strength-bar{height:3px;border-radius:3px;margin-top:8px;transition:all .3s;background:var(--s3);}
 .pw-strength-bar.weak{background:#f87171;}
 .pw-strength-bar.medium{background:#fbbf24;}
@@ -237,7 +249,6 @@ select{cursor:pointer;}
 .pw-result-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-size:12px;font-weight:600;margin-top:10px;}
 .pw-result-pill.pwned-pill{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);}
 .pw-result-pill.safe-pill{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3);}
-/* Tools page */
 .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
 .tool-card{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;cursor:pointer;transition:all .15s;}
 .tool-card:hover{border-color:var(--brd-hi);background:var(--s3);}
@@ -248,7 +259,6 @@ select{cursor:pointer;}
 .tool-card-desc{font-size:11px;color:var(--txt3);}
 .tool-panel{display:none;animation:fadeUp .2s ease;}
 .tool-panel.active{display:block;}
-/* Result boxes */
 .result-box{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-top:12px;animation:fadeUp .2s ease;}
 .result-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--brd);}
 .result-row:last-child{border-bottom:none;}
@@ -260,11 +270,8 @@ select{cursor:pointer;}
 .tag-list{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
 .tag{font-size:11px;padding:3px 9px;border-radius:100px;background:var(--s3);border:1px solid var(--brd);color:var(--txt3);}
 .tag.bad{border-color:rgba(248,113,113,.3);color:#f87171;background:rgba(248,113,113,.08);}
-.tag.warn{border-color:rgba(251,191,36,.3);color:#fbbf24;background:rgba(251,191,36,.08);}
 .tag.ok{border-color:rgba(74,222,128,.3);color:#4ade80;background:rgba(74,222,128,.08);}
-/* Gen output */
 .gen-output{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-top:12px;font-family:var(--mono);font-size:13px;color:var(--txt);line-height:1.8;white-space:pre-wrap;word-break:break-word;}
-/* Sent */
 .sent-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;transition:border-color .15s;animation:fadeUp .15s ease;}
 .sent-item:hover{border-color:var(--brd-hi);}
 .sent-info{flex:1;min-width:0;}
@@ -272,11 +279,9 @@ select{cursor:pointer;}
 .sent-subj{font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px;}
 .sent-meta{font-size:11px;color:var(--txt3);font-family:var(--mono);}
 .sent-actions{display:flex;gap:6px;flex-shrink:0;}
-/* Online counter */
 .online-counter{position:fixed;bottom:16px;right:16px;display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--brd);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--txt3);box-shadow:var(--shadow-sm);z-index:100;user-select:none;}
 .online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5);animation:pg 2s infinite;flex-shrink:0;}
 @keyframes pg{0%,100%{opacity:1}50%{opacity:.7;box-shadow:0 0 12px rgba(74,222,128,.8)}}
-/* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:300;align-items:flex-end;justify-content:center;padding:0;}
 .modal-overlay.open{display:flex;}
 .modal-box{background:var(--s1);border:1px solid var(--brd-hi);border-radius:var(--r-lg) var(--r-lg) 0 0;padding:28px 24px max(24px,env(safe-area-inset-bottom));width:100%;max-width:100%;box-shadow:var(--shadow-lg);animation:slideUp .25s cubic-bezier(.32,.72,0,1);max-height:90vh;overflow-y:auto;}
@@ -305,7 +310,6 @@ select{cursor:pointer;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .7s linear infinite;display:inline-block;}
-/* Affiliate */
 .affiliate-section{margin-top:40px;padding-top:28px;border-top:1px solid var(--brd);}
 .affiliate-label{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.8px;text-transform:uppercase;text-align:center;margin-bottom:14px;}
 .affiliate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -317,14 +321,15 @@ select{cursor:pointer;}
 .affiliate-desc{font-size:11px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .affiliate-arrow{font-size:11px;color:var(--txt3);flex-shrink:0;}
 .affiliate-badge{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:1px 6px;letter-spacing:.4px;text-transform:uppercase;}
-/* Responsive */
+/* SEO keyword block – crawlable aber visuell unsichtbar */
+.seo-block{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;left:-9999px;top:-9999px;}
 @media(max-width:768px){
   .sidebar{display:none;}
   .mobile-nav{display:flex;}
-  .main{height:calc(100vh - 60px);}
+  .main{height:calc(100vh - 54px);}
   .main-inner{padding:20px 14px 80px;}
-  .online-counter{bottom:72px;right:12px;padding:5px 10px;font-size:11px;}
-  .toast{bottom:76px;}
+  .online-counter{bottom:66px;right:12px;padding:5px 10px;font-size:11px;}
+  .toast{bottom:70px;}
   .affiliate-grid{grid-template-columns:1fr;}
   .email-row{flex-direction:column;}
   .email-pill{min-width:unset;}
@@ -343,6 +348,31 @@ select{cursor:pointer;}
 </style>
 </head>
 <body>
+
+<!-- SEO: Keyword-Block, nur für Suchmaschinen sichtbar -->
+<div class="seo-block" aria-hidden="true">
+  <h1>AltMail – Kostenlose Wegwerf-Email und temporäre Telefonnummer</h1>
+  <p>Mit AltMail erstellst du sofort eine kostenlose Wegwerf-Email-Adresse ohne Registrierung. Perfekt für Einweg-Emails, anonymes Surfen, Fake-Mail, Temp-Mail und Disposable-Email-Adressen. Zusätzlich bietet AltMail temporäre Telefonnummern zum kostenlosen SMS-Empfang online – ohne SIM-Karte, ohne Datenweitergabe.</p>
+  <ul>
+    <li>Wegwerf Email kostenlos erstellen</li>
+    <li>Temporäre Email-Adresse ohne Anmeldung</li>
+    <li>Fake Email Adresse für Registrierungen</li>
+    <li>Einweg Email sofort verfügbar</li>
+    <li>Anonymous Email ohne Konto</li>
+    <li>Temp Mail Deutsch</li>
+    <li>10 Minuten Mail Alternative</li>
+    <li>Temporäre Handynummer kostenlos</li>
+    <li>SMS empfangen online ohne SIM</li>
+    <li>Virtuelle Telefonnummer gratis</li>
+    <li>Einweg SMS Nummer Deutschland</li>
+    <li>Datenleck prüfen kostenlos</li>
+    <li>Have I Been Pwned Deutsch</li>
+    <li>Sicherer Passwort Generator</li>
+    <li>Datenschutz Tools online kostenlos</li>
+    <li>Anonyme Identität erstellen</li>
+  </ul>
+</div>
+
 <canvas id="bg-canvas"></canvas>
 
 <nav class="sidebar" id="sidebar">
@@ -396,8 +426,8 @@ select{cursor:pointer;}
   </div>
 </nav>
 
-<!-- MOBILE NAV: nur 4 Tabs — kein Gespeichert -->
-<nav class="mobile-nav">
+<!-- ═══ MOBILE NAV – 5 Tabs inkl. Gespeichert ═══ -->
+<nav class="mobile-nav" aria-label="Navigation">
   <button class="mob-nav-item active" id="mnav-active" onclick="switchPage('active')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     Email
@@ -406,21 +436,22 @@ select{cursor:pointer;}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     Senden
   </button>
-  <button class="mob-nav-item" id="mnav-pwned" onclick="switchPage('pwned')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Pwned?
+  <button class="mob-nav-item" id="mnav-phone" onclick="switchPage('phone')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.35 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Telefon
+  </button>
+  <button class="mob-nav-item" id="mnav-saved" onclick="switchPage('saved')">
+    <span class="mob-badge" id="mob-saved-badge"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+    Gespeichert
   </button>
   <button class="mob-nav-item" id="mnav-tools" onclick="switchPage('tools')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
     Tools
   </button>
-  <button class="mob-nav-item" id="mnav-whoami" onclick="switchPage('whoami')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    Mehr
-  </button>
 </nav>
 
-<main class="main">
+<main class="main" role="main">
 <div class="main-inner">
   <div class="page-header">
     <div style="display:flex;align-items:center;gap:10px;">
@@ -441,7 +472,6 @@ select{cursor:pointer;}
       <h1 style="font-size:36px;font-weight:300;letter-spacing:-1.8px;color:var(--txt);margin-bottom:10px;">Wegwerf-Emails,<br><strong style="font-weight:600;">sofort bereit.</strong></h1>
       <p style="font-size:14px;color:var(--txt3);line-height:1.6;">Anonym, keine Registrierung. Links klickbar, Emails speicherbar.</p>
     </div>
-
     <div class="card">
       <div class="card-label">E-Mail Adresse</div>
       <div class="email-row">
@@ -458,7 +488,6 @@ select{cursor:pointer;}
           <button class="btn btn-ghost" id="saveBtn" onclick="openSave()" disabled>+ Speichern</button>
         </div>
       </div>
-
       <div class="timer-section">
         <div class="section-label">Ablaufzeit</div>
         <div class="timer-opts">
@@ -486,7 +515,6 @@ select{cursor:pointer;}
         </div>
       </div>
     </div>
-
     <div class="card">
       <div class="inbox-header">
         <div class="inbox-title-row">Posteingang <span class="inbox-pill" id="inboxCount">0</span></div>
@@ -517,7 +545,6 @@ select{cursor:pointer;}
       </div>
       <div class="detail-body" id="dBody"></div>
     </div>
-
     <div class="affiliate-section">
       <div class="affiliate-label">Empfehlungen</div>
       <div class="affiliate-grid">
@@ -547,10 +574,7 @@ select{cursor:pointer;}
 
   <!-- PAGE: PWNED -->
   <div class="page" id="page-pwned" style="display:none">
-    <div class="pwned-hero">
-      <h2>Bin ich gehackt?</h2>
-      <p>Email-Adresse oder Passwort in einem Datenleck prüfen.</p>
-    </div>
+    <div class="pwned-hero"><h2>Bin ich gehackt?</h2><p>Email-Adresse oder Passwort in einem Datenleck prüfen.</p></div>
     <div class="card">
       <div class="card-label">Email prüfen</div>
       <div class="pwned-input-row">
@@ -628,12 +652,12 @@ select{cursor:pointer;}
   <!-- PAGE: PHONE -->
   <div class="page" id="page-phone" style="display:none">
     <div class="card">
-      <div class="card-label">Temporäre Telefonnummer</div>
+      <div class="card-label">Land wählen</div>
       <div class="phone-select-wrap" id="countryChips"></div>
       <div id="phoneList"></div>
       <div style="margin-top:10px;"><button class="btn btn-primary btn-sm" onclick="loadPhones()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
-        Neue Nummern
+        Nummern laden
       </button></div>
     </div>
     <div class="card" id="activePhoneCard" style="display:none">
@@ -647,15 +671,17 @@ select{cursor:pointer;}
     <div class="card" id="smsCard" style="display:none">
       <div class="inbox-header">
         <div class="inbox-title-row">SMS <span class="inbox-pill" id="smsCount">0</span></div>
-        <button class="btn btn-ghost btn-sm" onclick="refreshSms()">
+        <button class="btn btn-ghost btn-sm" onclick="refreshSms(true)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
           Refresh
         </button>
       </div>
-      <ul class="sms-list" id="smsList"></ul>
-      <div id="smsEmpty" class="empty-view" style="padding:28px 20px">
+      <ul class="msg-list" id="smsList"></ul>
+      <div id="smsEmpty" class="empty-view" style="padding:28px 20px;display:none">
         <div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <h3>Keine SMS</h3><p>Sende eine SMS an diese Nummer.<br>Aktualisiert alle 20 Sekunden.</p>
+        <h3 id="smsEmptyTitle">Keine SMS</h3>
+        <p id="smsEmptyText">Sende eine SMS an diese Nummer.<br>Aktualisiert alle 20 Sekunden.</p>
+        <a id="smsDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;display:inline-flex;margin-top:12px;">Direkt öffnen ↗</a>
       </div>
     </div>
   </div>
@@ -712,122 +738,14 @@ select{cursor:pointer;}
         <div class="tool-card-desc">Spam, Disposable, Blacklist</div>
       </div>
     </div>
-
-    <div class="tool-panel" id="tp-pwgen">
-      <div class="card">
-        <div class="card-label">Passwort-Generator</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:13px;color:var(--txt2);">Länge: <span id="pwLenVal">20</span></span>
-            <input type="range" id="pwLen" min="8" max="64" value="20" style="width:55%;height:3px;" oninput="document.getElementById('pwLenVal').textContent=this.value">
-          </div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;">
-            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwUpper" checked> Großbuchstaben</label>
-            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwNum" checked> Zahlen</label>
-            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwSym" checked> Sonderzeichen</label>
-            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwWords"> Wörter (Passphrase)</label>
-          </div>
-          <div style="display:flex;gap:8px;">
-            <button class="btn btn-primary" onclick="genPassword()">Generieren</button>
-            <button class="btn btn-ghost" onclick="copyToolResult('pwResult')">Kopieren</button>
-          </div>
-        </div>
-        <div class="gen-output" id="pwResult" style="display:none;"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-ugen">
-      <div class="card">
-        <div class="card-label">Username-Generator</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-          <button class="t-chip on" id="ugenStyle-normal" onclick="setUgenStyle('normal',this)">Normal</button>
-          <button class="t-chip" id="ugenStyle-tech" onclick="setUgenStyle('tech',this)">Tech</button>
-          <button class="t-chip" id="ugenStyle-anon" onclick="setUgenStyle('anon',this)">Anonym</button>
-          <button class="t-chip" id="ugenStyle-real" onclick="setUgenStyle('real',this)">Realistisch</button>
-        </div>
-        <div style="display:flex;gap:8px;">
-          <button class="btn btn-primary" onclick="genUsernames()">Generieren</button>
-          <button class="btn btn-ghost" onclick="copyToolResult('ugenResult')">Kopieren</button>
-        </div>
-        <div class="gen-output" id="ugenResult" style="display:none;"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-fakeid">
-      <div class="card">
-        <div class="card-label">Fake-Identität</div>
-        <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-          <select id="fakeLocale" style="height:36px;padding:0 10px;font-size:13px;width:auto;">
-            <option value="de">Deutsch</option>
-            <option value="en">Englisch</option>
-            <option value="fr">Französisch</option>
-            <option value="es">Spanisch</option>
-          </select>
-          <button class="btn btn-primary" onclick="genFakeId()">Generieren</button>
-          <button class="btn btn-ghost" onclick="copyToolResult('fakeIdResult')">Kopieren</button>
-        </div>
-        <div id="fakeIdResult" style="display:none;"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-urlscan">
-      <div class="card">
-        <div class="card-label">URL-Scanner</div>
-        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft Links via Google Safe Browsing & URLhaus auf Phishing, Malware und Spam.</p>
-        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-          <input type="url" id="urlInput" placeholder="https://example.com" style="flex:1;min-width:200px;">
-          <button class="btn btn-primary" onclick="scanUrl()" id="urlScanBtn" style="flex-shrink:0;">Scannen</button>
-        </div>
-        <div id="urlResult"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-tracker">
-      <div class="card">
-        <div class="card-label">Tracker-Detector</div>
-        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Browser blockieren direkte Analyse fremder Seiten. Diese Tools scannen zuverlässig ohne CORS-Probleme.</p>
-        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-          <input type="url" id="trackerInput" placeholder="https://example.com" style="flex:1;min-width:200px;">
-          <button class="btn btn-primary" onclick="openTrackerTools()" id="trackerBtn" style="flex-shrink:0;">Öffnen</button>
-        </div>
-        <div id="trackerResult"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-meta">
-      <div class="card">
-        <div class="card-label">Meta-Scraper</div>
-        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">URL-Analyse: Domain-Infos lokal, Metadaten via externer Dienst.</p>
-        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-          <input type="url" id="metaInput" placeholder="https://example.com" style="flex:1;min-width:200px;" oninput="analyzeUrlLocal()">
-          <button class="btn btn-primary" onclick="scrapeMeta()" id="metaBtn" style="flex-shrink:0;">Analysieren</button>
-        </div>
-        <div id="metaResult"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-ipinfo">
-      <div class="card">
-        <div class="card-label">IP-Lookup</div>
-        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-          <input type="text" id="ipInput" placeholder="IP-Adresse oder leer lassen für eigene IP" style="flex:1;min-width:200px;font-family:var(--mono);font-size:13px;">
-          <button class="btn btn-primary" onclick="lookupIP()" id="ipBtn" style="flex-shrink:0;">Lookup</button>
-        </div>
-        <div id="ipResult"></div>
-      </div>
-    </div>
-
-    <div class="tool-panel" id="tp-emailrep">
-      <div class="card">
-        <div class="card-label">Email-Reputation</div>
-        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft ob eine Domain als Spam, Wegwerf-Adresse oder Blacklist-Eintrag bekannt ist — komplett lokal, kein API-Key nötig.</p>
-        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-          <input type="email" id="emailRepInput" placeholder="adresse@domain.com" style="flex:1;min-width:200px;" inputmode="email">
-          <button class="btn btn-primary" onclick="checkEmailRep()" id="emailRepBtn" style="flex-shrink:0;">Prüfen</button>
-        </div>
-        <div id="emailRepResult"></div>
-      </div>
-    </div>
+    <div class="tool-panel" id="tp-pwgen"><div class="card"><div class="card-label">Passwort-Generator</div><div style="display:flex;flex-direction:column;gap:10px;"><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:13px;color:var(--txt2);">Länge: <span id="pwLenVal">20</span></span><input type="range" id="pwLen" min="8" max="64" value="20" style="width:55%;height:3px;" oninput="document.getElementById('pwLenVal').textContent=this.value"></div><div style="display:flex;gap:16px;flex-wrap:wrap;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwUpper" checked> Großbuchstaben</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwNum" checked> Zahlen</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwSym" checked> Sonderzeichen</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwWords"> Wörter (Passphrase)</label></div><div style="display:flex;gap:8px;"><button class="btn btn-primary" onclick="genPassword()">Generieren</button><button class="btn btn-ghost" onclick="copyToolResult('pwResult')">Kopieren</button></div></div><div class="gen-output" id="pwResult" style="display:none;"></div></div></div>
+    <div class="tool-panel" id="tp-ugen"><div class="card"><div class="card-label">Username-Generator</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;"><button class="t-chip on" id="ugenStyle-normal" onclick="setUgenStyle('normal',this)">Normal</button><button class="t-chip" id="ugenStyle-tech" onclick="setUgenStyle('tech',this)">Tech</button><button class="t-chip" id="ugenStyle-anon" onclick="setUgenStyle('anon',this)">Anonym</button><button class="t-chip" id="ugenStyle-real" onclick="setUgenStyle('real',this)">Realistisch</button></div><div style="display:flex;gap:8px;"><button class="btn btn-primary" onclick="genUsernames()">Generieren</button><button class="btn btn-ghost" onclick="copyToolResult('ugenResult')">Kopieren</button></div><div class="gen-output" id="ugenResult" style="display:none;"></div></div></div>
+    <div class="tool-panel" id="tp-fakeid"><div class="card"><div class="card-label">Fake-Identität</div><div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;"><select id="fakeLocale" style="height:36px;padding:0 10px;font-size:13px;width:auto;"><option value="de">Deutsch</option><option value="en">Englisch</option><option value="fr">Französisch</option><option value="es">Spanisch</option></select><button class="btn btn-primary" onclick="genFakeId()">Generieren</button><button class="btn btn-ghost" onclick="copyToolResult('fakeIdResult')">Kopieren</button></div><div id="fakeIdResult" style="display:none;"></div></div></div>
+    <div class="tool-panel" id="tp-urlscan"><div class="card"><div class="card-label">URL-Scanner</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft Links via URLhaus auf Phishing, Malware und Spam.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="urlInput" placeholder="https://example.com" style="flex:1;min-width:200px;"><button class="btn btn-primary" onclick="scanUrl()" id="urlScanBtn" style="flex-shrink:0;">Scannen</button></div><div id="urlResult"></div></div></div>
+    <div class="tool-panel" id="tp-tracker"><div class="card"><div class="card-label">Tracker-Detector</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Browser blockieren direkte Analyse fremder Seiten. Diese Tools scannen zuverlässig ohne CORS-Probleme.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="trackerInput" placeholder="https://example.com" style="flex:1;min-width:200px;"><button class="btn btn-primary" onclick="openTrackerTools()" id="trackerBtn" style="flex-shrink:0;">Öffnen</button></div><div id="trackerResult"></div></div></div>
+    <div class="tool-panel" id="tp-meta"><div class="card"><div class="card-label">Meta-Scraper</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">URL-Analyse: Domain-Infos lokal, Metadaten via externer Dienst.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="metaInput" placeholder="https://example.com" style="flex:1;min-width:200px;" oninput="analyzeUrlLocal()"><button class="btn btn-primary" onclick="scrapeMeta()" id="metaBtn" style="flex-shrink:0;">Analysieren</button></div><div id="metaResult"></div></div></div>
+    <div class="tool-panel" id="tp-ipinfo"><div class="card"><div class="card-label">IP-Lookup</div><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="text" id="ipInput" placeholder="IP-Adresse oder leer lassen für eigene IP" style="flex:1;min-width:200px;font-family:var(--mono);font-size:13px;"><button class="btn btn-primary" onclick="lookupIP()" id="ipBtn" style="flex-shrink:0;">Lookup</button></div><div id="ipResult"></div></div></div>
+    <div class="tool-panel" id="tp-emailrep"><div class="card"><div class="card-label">Email-Reputation</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft ob eine Domain als Spam, Wegwerf-Adresse oder Blacklist-Eintrag bekannt ist — komplett lokal, kein API-Key nötig.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="email" id="emailRepInput" placeholder="adresse@domain.com" style="flex:1;min-width:200px;" inputmode="email"><button class="btn btn-primary" onclick="checkEmailRep()" id="emailRepBtn" style="flex-shrink:0;">Prüfen</button></div><div id="emailRepResult"></div></div></div>
   </div>
 
   <!-- PAGE: WHOAMI -->
@@ -894,17 +812,9 @@ select{cursor:pointer;}
     <div class="modal-handle"></div>
     <div class="modal-title">Neue Regel</div>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
-      <select id="ruleType" style="height:44px;padding:0 14px;">
-        <option value="from">Absender enthält</option>
-        <option value="subject">Betreff enthält</option>
-        <option value="body">Text enthält</option>
-      </select>
+      <select id="ruleType" style="height:44px;padding:0 14px;"><option value="from">Absender enthält</option><option value="subject">Betreff enthält</option><option value="body">Text enthält</option></select>
       <input type="text" id="ruleValue" placeholder="Suchbegriff…">
-      <select id="ruleAction" style="height:44px;padding:0 14px;">
-        <option value="highlight">Hervorheben</option>
-        <option value="delete">Löschen</option>
-        <option value="notify">Benachrichtigung</option>
-      </select>
+      <select id="ruleAction" style="height:44px;padding:0 14px;"><option value="highlight">Hervorheben</option><option value="delete">Löschen</option><option value="notify">Benachrichtigung</option></select>
     </div>
     <div class="modal-btns">
       <button class="btn btn-ghost" onclick="document.getElementById('ruleModalOv').classList.remove('open')">Abbrechen</button>
@@ -920,9 +830,7 @@ select{cursor:pointer;}
     <div class="modal-title" id="sdTitle"></div>
     <div class="modal-sub" id="sdMeta"></div>
     <div id="sdBody" style="font-size:13px;color:var(--txt2);line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:40vh;overflow-y:auto;background:var(--s2);border-radius:var(--r-sm);padding:14px;border:1px solid var(--brd);margin-bottom:16px;font-family:var(--mono);"></div>
-    <div class="modal-btns">
-      <button class="btn btn-ghost" onclick="document.getElementById('sentDetailOv').classList.remove('open')">Schließen</button>
-    </div>
+    <div class="modal-btns"><button class="btn btn-ghost" onclick="document.getElementById('sentDetailOv').classList.remove('open')">Schließen</button></div>
   </div>
 </div>
 
@@ -987,56 +895,22 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
 // STATE
 // ════════════════════════════════════
 const BASE='https://api.mail.tm';
-const BASE_GW='https://api.mail.gw'; // zweite API als Fallback
-
-// ── IMPROVED DOMAIN POOL ──
-// Mehrere Backends + viele Domains für bessere Anonymität
-// Zufällige Domain-Rotation verhindert Erkennung durch Websites
-const KNOWN_GOOD_DOMAINS=[
-  // mail.tm Domains (werden live geladen + durch diese ergänzt)
-  'laymac.com','adavis.info','bsidegames.com','raheers.info',
-  'mailtm.eu','smtvs.net','zetgets.net','nexuze.net',
-  // mail.gw Domains
-  'mailgw.net','tgwmail.net',
-];
-
-let inboxes=[];
-let activeInboxIdx=0;
+const BASE_GW='https://api.mail.gw';
+let inboxes=[],activeInboxIdx=0;
 let tok='',addr='',pw='',msgs=[];
 let tSecs=600,tMax=600,tIv,aIv,rcIv;
 let tMode='countdown',rcVal=15,totalRef=0,readIds=new Set(),sessionStart=null;
 let currentMsgText='';
 let rules=[];
-let fwdTarget='';
-let availDomains=[];   // live from mail.tm
-let availDomains2=[];  // live from mail.gw
+let availDomains=[],availDomains2=[];
 let currentToolPanel=null;
 let ugenCurrentStyle='normal';
 
 const $=id=>document.getElementById(id);
 function rnd(n){return Array.from({length:n},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('')}
-// Realistic-looking username prefixes to blend in better
 const REAL_PREFIXES=['max','tom','jan','alex','mike','chris','anna','lena','julia','sarah','david','peter','frank','mark','paul','nina','lisa','kate','emma','leon','felix','noah','ben','tim','kai'];
 const REAL_SUFFIXES=['1990','1992','1994','1995','1996','1997','1998','1999','2000','2001','2002','86','87','88','89','91','93','95','97','99'];
-function rndUsername(){
-  // Mix of realistic-looking names and random strings to avoid bot-detection patterns
-  const style=Math.random();
-  if(style<0.35){
-    // firstname + year → looks like real person
-    const p=REAL_PREFIXES[Math.floor(Math.random()*REAL_PREFIXES.length)];
-    const s=REAL_SUFFIXES[Math.floor(Math.random()*REAL_SUFFIXES.length)];
-    return p+s;
-  } else if(style<0.65){
-    // firstname + random 3-4 digits
-    const p=REAL_PREFIXES[Math.floor(Math.random()*REAL_PREFIXES.length)];
-    return p+(Math.floor(Math.random()*900)+100);
-  } else {
-    // random lowercase 8-12 chars (still avoids obvious patterns)
-    const len=8+Math.floor(Math.random()*5);
-    return rnd(len);
-  }
-}
-
+function rndUsername(){const style=Math.random();if(style<0.35){const p=REAL_PREFIXES[Math.floor(Math.random()*REAL_PREFIXES.length)];const s=REAL_SUFFIXES[Math.floor(Math.random()*REAL_SUFFIXES.length)];return p+s;}else if(style<0.65){const p=REAL_PREFIXES[Math.floor(Math.random()*REAL_PREFIXES.length)];return p+(Math.floor(Math.random()*900)+100);}else{const len=8+Math.floor(Math.random()*5);return rnd(len);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function fmt(iso){if(!iso)return'';const d=new Date(iso),now=new Date(),df=now-d;if(df<60000)return'Gerade';if(df<3600000)return Math.floor(df/60000)+' Min.';if(d.toDateString()===now.toDateString())return d.toLocaleTimeString('de',{hour:'2-digit',minute:'2-digit'});return d.toLocaleDateString('de',{day:'2-digit',month:'2-digit',year:'2-digit'});}
 function setStatus(s,t){$('slDot').className='sl-dot '+(s==='ok'?'ok':s==='err'?'err':'loading');$('slTxt').textContent=t;}
@@ -1046,17 +920,12 @@ function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('sh
 // ════════════════════════════════════
 // NAVIGATION
 // ════════════════════════════════════
-// "saved" ist kein Mobile-Nav-Tab mehr, aber als Page weiterhin über Desktop-Sidebar erreichbar
 const PAGES=['active','sender','phone','saved','whoami','pwned','tools'];
 const SNAV={active:'snav-active',sender:'snav-sender',phone:'snav-phone',saved:'snav-saved',whoami:'snav-whoami',pwned:'snav-pwned',tools:'snav-tools'};
-const MNAV={active:'mnav-active',sender:'mnav-sender',whoami:'mnav-whoami',pwned:'mnav-pwned',tools:'mnav-tools'};
+const MNAV={active:'mnav-active',sender:'mnav-sender',phone:'mnav-phone',saved:'mnav-saved',tools:'mnav-tools'};
 const CHIPS={active:'Temporäre E-Mail',sender:'Email senden',phone:'Temporäre Telefonnummer',saved:'Gespeichert',whoami:'WHOAMI',pwned:'Pwned?',tools:'Tools'};
 function switchPage(name){
-  PAGES.forEach(p=>{
-    const el=$('page-'+p);if(el)el.style.display='none';
-    const sn=$(SNAV[p]);if(sn)sn.classList.remove('active');
-    const mn=MNAV[p]?$(MNAV[p]):null;if(mn)mn.classList.remove('active');
-  });
+  PAGES.forEach(p=>{const el=$('page-'+p);if(el)el.style.display='none';const sn=$(SNAV[p]);if(sn)sn.classList.remove('active');const mn=MNAV[p]?$(MNAV[p]):null;if(mn)mn.classList.remove('active');});
   const el=$('page-'+name);if(el)el.style.display='block';
   const sn=$(SNAV[name]);if(sn)sn.classList.add('active');
   const mn=MNAV[name]?$(MNAV[name]):null;if(mn)mn.classList.add('active');
@@ -1082,42 +951,17 @@ function startTimer(){clearInterval(tIv);if(tMode==='unlimited'){$('timerReadout
 function startRefreshRing(){clearInterval(rcIv);rcVal=15;$('refreshRingWrap').style.display='flex';const circle=$('refreshRingCircle'),label=$('refreshRingLabel'),circ=2*Math.PI*5;rcIv=setInterval(()=>{rcVal--;label.textContent=rcVal;if(circle)circle.style.strokeDashoffset=circ*(1-rcVal/15);if(rcVal<=0){rcVal=15;label.textContent=15;if(circle)circle.style.strokeDashoffset=0;}},1000);}
 
 // ════════════════════════════════════
-// DOMAINS — dual-API mit Rotation
+// DOMAINS
 // ════════════════════════════════════
 async function loadDomains(){
-  // Lade Domains von beiden APIs parallel
-  const [r1,r2]=await Promise.allSettled([
-    fetch(BASE+'/domains?page=1',{signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
-    fetch(BASE_GW+'/domains?page=1',{signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
-  ]);
-  if(r1.status==='fulfilled'){
-    const list=(r1.value['hydra:member']||r1.value||[]);
-    availDomains=list.map(x=>x.domain).filter(Boolean);
-  }
-  if(r2.status==='fulfilled'){
-    const list=(r2.value['hydra:member']||r2.value||[]);
-    availDomains2=list.map(x=>x.domain).filter(Boolean);
-  }
+  const [r1,r2]=await Promise.allSettled([fetch(BASE+'/domains?page=1',{signal:AbortSignal.timeout(6000)}).then(r=>r.json()),fetch(BASE_GW+'/domains?page=1',{signal:AbortSignal.timeout(6000)}).then(r=>r.json())]);
+  if(r1.status==='fulfilled'){availDomains=(r1.value['hydra:member']||r1.value||[]).map(x=>x.domain).filter(Boolean);}
+  if(r2.status==='fulfilled'){availDomains2=(r2.value['hydra:member']||r2.value||[]).map(x=>x.domain).filter(Boolean);}
 }
-
-// Wählt zufällig zwischen mail.tm und mail.gw API + Domain
-function pickBackend(){
-  // 50/50 zwischen den zwei APIs wenn beide verfügbar
-  const useTM=availDomains2.length===0||Math.random()<0.5;
-  if(useTM&&availDomains.length){
-    // Rotiere zufällig durch alle verfügbaren Domains
-    const d=availDomains[Math.floor(Math.random()*availDomains.length)];
-    return{base:BASE,domain:d};
-  } else if(availDomains2.length){
-    const d=availDomains2[Math.floor(Math.random()*availDomains2.length)];
-    return{base:BASE_GW,domain:d};
-  } else {
-    return{base:BASE,domain:'mail.tm'};
-  }
-}
+function pickBackend(){const useTM=availDomains2.length===0||Math.random()<0.5;if(useTM&&availDomains.length){return{base:BASE,domain:availDomains[Math.floor(Math.random()*availDomains.length)]};}else if(availDomains2.length){return{base:BASE_GW,domain:availDomains2[Math.floor(Math.random()*availDomains2.length)]};}else{return{base:BASE,domain:'mail.tm'};}}
 
 // ════════════════════════════════════
-// EMAIL CORE — verbesserte Generierung
+// EMAIL CORE
 // ════════════════════════════════════
 async function doGenerate(){
   clearInterval(aIv);clearInterval(tIv);clearInterval(rcIv);
@@ -1126,53 +970,25 @@ async function doGenerate(){
   $('genBtn').disabled=true;$('saveBtn').disabled=true;$('refreshBtn').disabled=true;
   $('statusDot').className='status-dot loading';$('refreshRingWrap').style.display='none';
   setStatus('loading','Verbinde…');renderInbox(true);closeDetail();
-
-  // Lade Domains falls noch nicht geladen
-  if(!availDomains.length&&!availDomains2.length) await loadDomains();
-
-  // Versuche bis zu 3 verschiedene Backend/Domain-Kombinationen
+  if(!availDomains.length&&!availDomains2.length)await loadDomains();
   let lastErr='';
   for(let attempt=0;attempt<3;attempt++){
     try{
-      const {base,domain}=pickBackend();
-      const username=rndUsername();
-      const password=rnd(10)+'Aa1!'+rnd(4); // stärker, weniger pattern
-      const address=username+'@'+domain;
-
-      const ar=await fetch(base+'/accounts',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({address,password}),
-        signal:AbortSignal.timeout(10000)
-      });
-      if(!ar.ok){
-        const e=await ar.json().catch(()=>({}));
-        lastErr=e['hydra:description']||String(ar.status);
-        continue; // nächsten Versuch
-      }
-      const tr=await fetch(base+'/token',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({address,password}),
-        signal:AbortSignal.timeout(10000)
-      });
+      const{base,domain}=pickBackend();
+      const username=rndUsername(),password=rnd(10)+'Aa1!'+rnd(4),address=username+'@'+domain;
+      const ar=await fetch(base+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});
+      if(!ar.ok){const e=await ar.json().catch(()=>({}));lastErr=e['hydra:description']||String(ar.status);continue;}
+      const tr=await fetch(base+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});
       if(!tr.ok){lastErr='Token: '+tr.status;continue;}
-
-      tok=(await tr.json()).token;addr=address;pw=password;sessionStart=new Date();
-      // Speichere aktive API-Base für Fetches
-      window._activeTmBase=base;
-
+      tok=(await tr.json()).token;addr=address;pw=password;sessionStart=new Date();window._activeTmBase=base;
       $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
       $('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
       setStatus('ok','Bereit · aktualisiert alle 15 Sek.');
       updateSenderFrom();startTimer();startRefreshRing();renderInboxTabs();
       await doFetch(false);aIv=setInterval(()=>{doFetch(false);startRefreshRing();},15000);
-      return; // Erfolg
-
+      return;
     }catch(e){lastErr=e.message;}
   }
-
-  // Alle Versuche fehlgeschlagen
   $('statusDot').className='status-dot err';$('genBtn').disabled=false;
   $('emailAddr').textContent='Fehler – erneut versuchen';
   setStatus('err','Fehler: '+lastErr);renderInbox(false);
@@ -1187,7 +1003,7 @@ async function doFetch(manual=false){
     if(r.status===401){setStatus('err','Session abgelaufen');return;}if(!r.ok)throw new Error('HTTP '+r.status);
     const d=await r.json();const list=d['hydra:member']||[];
     const old=new Set(msgs.map(m=>m.id));const fresh=list.filter(m=>!old.has(m.id));
-    if(fresh.length>0&&msgs.length>0){showToast(fresh.length+' neue Nachricht'+(fresh.length>1?'en':''));}
+    if(fresh.length>0&&msgs.length>0)showToast(fresh.length+' neue Nachricht'+(fresh.length>1?'en':''));
     msgs=list;totalRef++;$('inboxCount').textContent=msgs.length;renderInbox(false);
     setStatus('ok','Zuletzt: '+new Date().toLocaleTimeString('de',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
     updateSavedBadge();
@@ -1195,18 +1011,12 @@ async function doFetch(manual=false){
   finally{$('refreshIco').classList.remove('spin');$('refreshBtn').disabled=false;}
 }
 
-// Rules
-function applyRules(msg){for(const r of rules){const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;if(field&&field.toLowerCase().includes(r.value.toLowerCase())){if(r.action==='notify'&&Notification.permission==='granted'){new Notification('AltMail · Regel: '+r.value,{body:msg.subject||''});}}}}
-function shouldHideMsg(msg){for(const r of rules){if(r.action!=='delete')continue;const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;}return false;}
-function highlightRule(msg){for(const r of rules){if(r.action!=='highlight')continue;const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;}return false;}
-
 function renderInbox(loading){
   const list=$('msgList'),empty=$('emptyState');
   if(loading){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="spin" style="color:var(--txt3)"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div><h3>Verbinde…</h3><p>Einen Moment bitte.</p>';return;}
-  const visible=msgs;
-  if(!visible.length){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l9 6 9-6"/></svg></div><h3>Noch keine Nachrichten</h3><p>Sende eine E-Mail an deine Adresse.</p>';return;}
+  if(!msgs.length){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l9 6 9-6"/></svg></div><h3>Noch keine Nachrichten</h3><p>Sende eine E-Mail an deine Adresse.</p>';return;}
   empty.style.display='none';
-  list.innerHTML=visible.map(m=>{const u=!readIds.has(m.id);return`<li class="msg-item${u?' unread':''}" onclick="openMsg('${m.id}')">
+  list.innerHTML=msgs.map(m=>{const u=!readIds.has(m.id);return`<li class="msg-item${u?' unread':''}" onclick="openMsg('${m.id}')">
     ${u?'<div class="msg-unread-dot"></div>':''}
     <div class="msg-av">${(m.from?.address||'?')[0].toUpperCase()}</div>
     <div class="msg-content">
@@ -1217,57 +1027,14 @@ function renderInbox(loading){
   </li>`;}).join('');
 }
 
-// Multi-inbox tabs
-function renderInboxTabs(){
-  const el=$('inboxTabs');
-  if(!el)return;
-  if(!inboxes.length&&!addr){el.innerHTML='';return;}
-  if(addr&&!inboxes.find(i=>i.addr===addr)){inboxes.push({id:rnd(6),addr,tok,pw,msgs:[],name:addr.split('@')[0]});activeInboxIdx=inboxes.length-1;}
-  el.innerHTML=inboxes.map((ix,i)=>`
-    <button class="inbox-tab ${i===activeInboxIdx?'active':''}" onclick="switchInbox(${i})">
-      <div class="tab-dot"></div>
-      <span style="font-family:var(--mono);max-width:100px;overflow:hidden;text-overflow:ellipsis;">${esc(ix.addr.split('@')[0])}</span>
-      <span class="tab-count">${ix.msgs.length}</span>
-      ${inboxes.length>1?`<span onclick="event.stopPropagation();removeInbox(${i})" style="margin-left:2px;color:var(--txt3);cursor:pointer;">✕</span>`:''}
-    </button>
-  `).join('')+`<button class="add-inbox-btn" onclick="addInbox()" title="Weiteren Posteingang öffnen">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    Hinzufügen
-  </button>`;
-}
+function renderInboxTabs(){const el=$('inboxTabs');if(!el)return;if(!inboxes.length&&!addr){el.innerHTML='';return;}if(addr&&!inboxes.find(i=>i.addr===addr)){inboxes.push({id:rnd(6),addr,tok,pw,msgs:[],name:addr.split('@')[0]});activeInboxIdx=inboxes.length-1;}el.innerHTML=inboxes.map((ix,i)=>`<button class="inbox-tab ${i===activeInboxIdx?'active':''}" onclick="switchInbox(${i})"><div class="tab-dot"></div><span style="font-family:var(--mono);max-width:100px;overflow:hidden;text-overflow:ellipsis;">${esc(ix.addr.split('@')[0])}</span><span class="tab-count">${ix.msgs.length}</span>${inboxes.length>1?`<span onclick="event.stopPropagation();removeInbox(${i})" style="margin-left:2px;color:var(--txt3);cursor:pointer;">✕</span>`:''}</button>`).join('')+`<button class="add-inbox-btn" onclick="addInbox()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Hinzufügen</button>`;}
 
-async function addInbox(){
-  showToast('Generiere zweiten Posteingang…');
-  if(!availDomains.length&&!availDomains2.length)await loadDomains();
-  const{base,domain}=pickBackend();
-  const username=rndUsername();
-  const password=rnd(10)+'Aa1!'+rnd(4);
-  const address=username+'@'+domain;
-  try{
-    const ar=await fetch(base+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});
-    if(!ar.ok)throw new Error('Account');
-    const tr=await fetch(base+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});
-    if(!tr.ok)throw new Error('Token');
-    const t=(await tr.json()).token;
-    inboxes.push({id:rnd(6),addr:address,tok:t,pw:password,msgs:[],name:address.split('@')[0],base});
-    renderInboxTabs();showToast('Posteingang hinzugefügt');
-  }catch(e){showToast('Fehler: '+e.message);}
-}
-
-function switchInbox(i){
-  if(inboxes[activeInboxIdx]){inboxes[activeInboxIdx].msgs=msgs;inboxes[activeInboxIdx].tok=tok;}
-  activeInboxIdx=i;const ix=inboxes[i];
-  tok=ix.tok;addr=ix.addr;pw=ix.pw;msgs=ix.msgs||[];
-  window._activeTmBase=ix.base||BASE;
-  $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
-  $('statusDot').className='status-dot ok';$('inboxCount').textContent=msgs.length;
-  renderInbox(false);renderInboxTabs();updateSenderFrom();
-}
+async function addInbox(){showToast('Generiere zweiten Posteingang…');if(!availDomains.length&&!availDomains2.length)await loadDomains();const{base,domain}=pickBackend();const username=rndUsername(),password=rnd(10)+'Aa1!'+rnd(4),address=username+'@'+domain;try{const ar=await fetch(base+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});if(!ar.ok)throw new Error('Account');const tr=await fetch(base+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password}),signal:AbortSignal.timeout(10000)});if(!tr.ok)throw new Error('Token');const t=(await tr.json()).token;inboxes.push({id:rnd(6),addr:address,tok:t,pw:password,msgs:[],name:address.split('@')[0],base});renderInboxTabs();showToast('Posteingang hinzugefügt');}catch(e){showToast('Fehler: '+e.message);}}
+function switchInbox(i){if(inboxes[activeInboxIdx]){inboxes[activeInboxIdx].msgs=msgs;inboxes[activeInboxIdx].tok=tok;}activeInboxIdx=i;const ix=inboxes[i];tok=ix.tok;addr=ix.addr;pw=ix.pw;msgs=ix.msgs||[];window._activeTmBase=ix.base||BASE;$('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';$('statusDot').className='status-dot ok';$('inboxCount').textContent=msgs.length;renderInbox(false);renderInboxTabs();updateSenderFrom();}
 function removeInbox(i){inboxes.splice(i,1);if(activeInboxIdx>=inboxes.length)activeInboxIdx=Math.max(0,inboxes.length-1);if(inboxes.length>0)switchInbox(activeInboxIdx);else renderInboxTabs();}
 
 function extractLinks(text,html){const s=new Set();const re=/https?:\/\/[^\s"'<>)\]\\,]+/g;(text||'').match(re)?.forEach(u=>s.add(u.replace(/[.,;!?)>]+$/,'')));(html||'').match(re)?.forEach(u=>s.add(u.replace(/[.,;!?)>]+$/,'')));return[...s].filter(u=>!/(\.png|\.gif|\.jpg|\.jpeg|\.svg|\.ico|\.css|\.woff|unsubscribe)/i.test(u));}
 function isConfirm(u){return/confirm|verif|activat|token|auth|validate|magic|click|email.*link/i.test(u);}
-
 async function openMsg(id){
   if(!tok)return;readIds.add(id);renderInbox(false);
   const base=window._activeTmBase||BASE;
@@ -1288,7 +1055,7 @@ async function openMsg(id){
 }
 function closeDetail(){$('detailCard').style.display='none';}
 async function copyDetailBody(){if(!currentMsgText)return;const ok=await copyToClipboard(currentMsgText);showToast(ok?'Kopiert ✓':'Fehler');}
-async function copyEmail(){if(!addr)return;const ok=await copyToClipboard(addr);const el=$('emailAddr'),hint=$('copyHint');if(ok){el.textContent='Kopiert ✓';hint.textContent='';showToast('Kopiert ✓');}setTimeout(()=>{el.textContent=addr;hint.textContent='Tippen zum Kopieren';},2000);}
+async function copyEmail(){if(!addr)return;const ok=await copyToClipboard(addr);const el=$('emailAddr'),hint=$('copyHint');if(ok){el.textContent='Kopiert ✓';hint.textContent='';}showToast(ok?'Kopiert ✓':'Fehler');setTimeout(()=>{el.textContent=addr;hint.textContent='Tippen zum Kopieren';},2000);}
 
 // ════════════════════════════════════
 // RULES
@@ -1299,9 +1066,16 @@ async function deleteRule(id){rules=rules.filter(r=>r.id!==id);await dbDel('rule
 function renderRules(){const el=$('ruleList');if(!el)return;if(!rules.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3);padding:8px 0;">Keine Regeln.</div>';return;}const typeLabel={from:'Absender',subject:'Betreff',body:'Text'};const actionLabel={highlight:'Hervorheben',delete:'Löschen',notify:'Benachrichtigung'};el.innerHTML=rules.map(r=>`<div class="rule-item"><div class="rule-info"><div class="rule-cond"><span style="color:var(--txt3);font-size:11px">${typeLabel[r.type]||r.type}</span> · ${esc(r.value)}</div><div class="rule-meta">${actionLabel[r.action]||r.action}</div></div><button class="btn btn-danger btn-sm" onclick="deleteRule('${r.id}')">✕</button></div>`).join('');}
 
 // ════════════════════════════════════
-// SAVED EMAILS
+// SAVED EMAILS + Badge (Desktop + Mobile)
 // ════════════════════════════════════
-async function updateSavedBadge(){const arr=await dbGetAll('saved_emails');const b=$('snav-saved-badge');if(!b)return;b.textContent=arr.length;b.style.display=arr.length?'':'none';}
+async function updateSavedBadge(){
+  const arr=await dbGetAll('saved_emails');
+  const n=arr.length;
+  // Sidebar badge
+  const b=$('snav-saved-badge');if(b){b.textContent=n;b.style.display=n?'':'none';}
+  // Mobile badge
+  const mb=$('mob-saved-badge');if(mb){mb.textContent=n;mb.className='mob-badge'+(n?' visible':'');}
+}
 function openSave(){if(!addr)return;$('modalAddr').textContent=addr;$('saveName').value='';$('modalOv').classList.add('open');setTimeout(()=>$('saveName').focus(),150);}
 function closeModal(){$('modalOv').classList.remove('open');}
 function closeModalOv(e){if(e.target===$('modalOv'))closeModal();}
@@ -1343,7 +1117,7 @@ async function checkEmail(){
     const r=await fetch(`https://api.xposedornot.com/v1/check-email/${encodeURIComponent(email)}`,{signal:AbortSignal.timeout(10000)});
     const d=await r.json();
     if(r.status===404||d.Error==='Not found'){res.innerHTML=`<div class="pwned-result safe" style="display:block"><div class="pwned-status-row"><div class="pwned-icon good"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pwned-status-txt"><h3 style="color:#4ade80">Nicht gefunden</h3><p>Keine bekannten Datenpannen.</p></div></div></div>`;}
-    else if(d.breaches||d.ExposedBreaches){const breachList=d.ExposedBreaches?.breaches_details||d.breaches||[];const count=Array.isArray(breachList)?breachList.length:1;res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="pwned-status-txt"><h3 style="color:#f87171">${count} Datenpanne${count!==1?'n':''}</h3><p>Passwörter sofort ändern.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;margin-top:8px;">Details auf HIBP ↗</a></div>`;}
+    else if(d.breaches||d.ExposedBreaches){const count=Array.isArray(d.ExposedBreaches?.breaches_details||d.breaches||[])?(d.ExposedBreaches?.breaches_details||d.breaches||[]).length:1;res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="pwned-status-txt"><h3 style="color:#f87171">${count} Datenpanne${count!==1?'n':''}</h3><p>Passwörter sofort ändern.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;margin-top:8px;">Details auf HIBP ↗</a></div>`;}
     else{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
   }catch{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
   btn.disabled=false;btn.textContent='Prüfen';
@@ -1404,29 +1178,272 @@ async function deleteSent(id){await dbDel('sent_emails',id);await renderSentList
 async function clearSentHistory(){const all=await dbGetAll('sent_emails');for(const s of all)await dbDel('sent_emails',s.id);await renderSentList();showToast('Verlauf geleert');}
 
 // ════════════════════════════════════
-// PHONE
+// PHONE — Echte Nummern via CORS-Proxy
+// Quellen: receive-smss.com · sms24.me · receivesms.co
 // ════════════════════════════════════
-let currentPhoneCountry='us',currentPhoneNum='',currentPhoneId='',smsIv;
-const COUNTRIES=[{code:'us',label:'US'},{code:'uk',label:'UK'},{code:'de',label:'DE'},{code:'fr',label:'FR'},{code:'ca',label:'CA'},{code:'se',label:'SE'},{code:'nl',label:'NL'},{code:'at',label:'AT'},{code:'ch',label:'CH'},{code:'it',label:'IT'},{code:'es',label:'ES'},{code:'pl',label:'PL'},{code:'au',label:'AU'},{code:'br',label:'BR'},{code:'in',label:'IN'}];
-const PHONE_SOURCES={us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],se:[{num:'+46769429093',id:'46769429093'}],nl:[{num:'+31685250870',id:'31685250870'}],at:[{num:'+43720115609',id:'43720115609'}],ch:[{num:'+41798075406',id:'41798075406'}],it:[{num:'+393511104574',id:'393511104574'}],es:[{num:'+34911599232',id:'34911599232'}],pl:[{num:'+48732167890',id:'48732167890'}],au:[{num:'+61488814729',id:'61488814729'}],br:[{num:'+5511942556781',id:'5511942556781'}],in:[{num:'+918048080505',id:'918048080505'}]};
-function initCountryChips(){const el=$('countryChips');if(el.children.length>0)return;el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');}
-function selectCountry(code,btn){document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneId='';$('smsCard').style.display='none';$('activePhoneCard').style.display='none';clearInterval(smsIv);loadPhones();}
-function loadPhones(){const el=$('phoneList');const nums=PHONE_SOURCES[currentPhoneCountry]||PHONE_SOURCES.us;el.innerHTML=nums.map(({num,id})=>`<div class="phone-pill"><div class="status-dot ok"></div><span class="phone-number">${esc(num)}</span><button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${num}',this)">Kopieren</button><button class="btn btn-primary btn-sm" style="margin-left:4px" onclick="selectPhone('${num}','${id}')">SMS</button></div>`).join('');}
+let currentPhoneCountry='de',currentPhoneNum='',currentPhoneMeta=null,smsIv;
+
+// Echte öffentliche Nummern von SMS-Empfangsdiensten.
+// Format: {num, url} — url ist die echte Seite mit den SMS.
+const COUNTRIES=[
+  {code:'de',label:'🇩🇪 DE'},{code:'us',label:'🇺🇸 US'},{code:'uk',label:'🇬🇧 UK'},
+  {code:'fr',label:'🇫🇷 FR'},{code:'se',label:'🇸🇪 SE'},{code:'nl',label:'🇳🇱 NL'},
+  {code:'ca',label:'🇨🇦 CA'},{code:'at',label:'🇦🇹 AT'},{code:'ch',label:'🇨🇭 CH'},
+  {code:'pl',label:'🇵🇱 PL'},{code:'ro',label:'🇷🇴 RO'},{code:'be',label:'🇧🇪 BE'},
+  {code:'es',label:'🇪🇸 ES'},{code:'fi',label:'🇫🇮 FI'},{code:'no',label:'🇳🇴 NO'},
+];
+
+// Jede Nummer mit ihrer echten URL beim Anbieter
+const PHONE_DB = {
+  de: [
+    {num:'+4915735982513', url:'https://receive-smss.com/sms/4915735982513/'},
+    {num:'+4915735984892', url:'https://receive-smss.com/sms/4915735984892/'},
+    {num:'+4917631765494', url:'https://sms24.me/en/numbers/4917631765494/'},
+    {num:'+4915207757250', url:'https://sms24.me/en/numbers/4915207757250/'},
+    {num:'+4915901822700', url:'https://sms24.me/en/numbers/4915901822700/'},
+    {num:'+4915208166521', url:'https://receive-smss.com/sms/4915208166521/'},
+  ],
+  us: [
+    {num:'+12027368558', url:'https://receive-smss.com/sms/12027368558/'},
+    {num:'+13127571994', url:'https://receive-smss.com/sms/13127571994/'},
+    {num:'+15417543010', url:'https://sms24.me/en/numbers/15417543010/'},
+    {num:'+14235867958', url:'https://sms24.me/en/numbers/14235867958/'},
+    {num:'+19377021936', url:'https://receivesms.co/sms/19377021936/'},
+    {num:'+12069917072', url:'https://receivesms.co/sms/12069917072/'},
+    {num:'+17752944227', url:'https://receive-smss.com/sms/17752944227/'},
+  ],
+  uk: [
+    {num:'+447893953422', url:'https://receive-smss.com/sms/447893953422/'},
+    {num:'+447441429554', url:'https://receive-smss.com/sms/447441429554/'},
+    {num:'+447418310024', url:'https://sms24.me/en/numbers/447418310024/'},
+    {num:'+447441422480', url:'https://sms24.me/en/numbers/447441422480/'},
+    {num:'+447723491428', url:'https://receive-smss.com/sms/447723491428/'},
+  ],
+  fr: [
+    {num:'+33757055814', url:'https://receive-smss.com/sms/33757055814/'},
+    {num:'+33644637665', url:'https://sms24.me/en/numbers/33644637665/'},
+    {num:'+33757059685', url:'https://receive-smss.com/sms/33757059685/'},
+    {num:'+33756948598', url:'https://sms24.me/en/numbers/33756948598/'},
+  ],
+  se: [
+    {num:'+46769429093', url:'https://receive-smss.com/sms/46769429093/'},
+    {num:'+46727273878', url:'https://sms24.me/en/numbers/46727273878/'},
+    {num:'+46812450020', url:'https://sms24.me/en/numbers/46812450020/'},
+    {num:'+46793064747', url:'https://receive-smss.com/sms/46793064747/'},
+  ],
+  nl: [
+    {num:'+3197010520865', url:'https://receive-smss.com/sms/3197010520865/'},
+    {num:'+31685250870',   url:'https://sms24.me/en/numbers/31685250870/'},
+    {num:'+31970102045',   url:'https://receivesms.co/sms/31970102045/'},
+    {num:'+31616599406',   url:'https://receive-smss.com/sms/31616599406/'},
+  ],
+  ca: [
+    {num:'+14166681520', url:'https://receive-smss.com/sms/14166681520/'},
+    {num:'+16132091275', url:'https://sms24.me/en/numbers/16132091275/'},
+    {num:'+14164184706', url:'https://sms24.me/en/numbers/14164184706/'},
+    {num:'+16476500232', url:'https://receive-smss.com/sms/16476500232/'},
+  ],
+  at: [
+    {num:'+43720115609',    url:'https://sms24.me/en/numbers/43720115609/'},
+    {num:'+43676800122998', url:'https://receive-smss.com/sms/43676800122998/'},
+  ],
+  ch: [
+    {num:'+41798075406', url:'https://sms24.me/en/numbers/41798075406/'},
+    {num:'+41775436304', url:'https://receive-smss.com/sms/41775436304/'},
+    {num:'+41795468145', url:'https://sms24.me/en/numbers/41795468145/'},
+  ],
+  pl: [
+    {num:'+48732167890', url:'https://sms24.me/en/numbers/48732167890/'},
+    {num:'+48792861697', url:'https://receive-smss.com/sms/48792861697/'},
+    {num:'+48730608096', url:'https://sms24.me/en/numbers/48730608096/'},
+  ],
+  ro: [
+    {num:'+40724522407', url:'https://sms24.me/en/numbers/40724522407/'},
+    {num:'+40773201850', url:'https://receive-smss.com/sms/40773201850/'},
+  ],
+  be: [
+    {num:'+3223002130', url:'https://receive-smss.com/sms/3223002130/'},
+    {num:'+3285880148', url:'https://sms24.me/en/numbers/3285880148/'},
+  ],
+  es: [
+    {num:'+34632600034', url:'https://receive-smss.com/sms/34632600034/'},
+    {num:'+34654275030', url:'https://sms24.me/en/numbers/34654275030/'},
+    {num:'+34910770372', url:'https://receive-smss.com/sms/34910770372/'},
+  ],
+  fi: [
+    {num:'+358441084565', url:'https://sms24.me/en/numbers/358441084565/'},
+    {num:'+358441588574', url:'https://receive-smss.com/sms/358441588574/'},
+  ],
+  no: [
+    {num:'+4759441131', url:'https://sms24.me/en/numbers/4759441131/'},
+    {num:'+4748158393', url:'https://receive-smss.com/sms/4748158393/'},
+  ],
+};
+
+// Erkennt Quelle anhand der URL
+function detectSource(url){
+  if(url.includes('receive-smss.com'))return 'receive-smss';
+  if(url.includes('sms24.me'))return 'sms24';
+  if(url.includes('receivesms.co'))return 'receivesms';
+  return 'unknown';
+}
+
+// Holt HTML der Nummer via CORS-Proxy
+async function fetchViaProxy(targetUrl){
+  const proxies=[
+    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
+  ];
+  for(const proxy of proxies){
+    try{
+      const r=await fetch(proxy,{signal:AbortSignal.timeout(10000)});
+      if(!r.ok)continue;
+      const ct=r.headers.get('content-type')||'';
+      if(ct.includes('json')){const j=await r.json();if(j.contents&&j.contents.length>200)return j.contents;}
+      else{const t=await r.text();if(t.length>200)return t;}
+    }catch{}
+  }
+  return null;
+}
+
+// Parst SMS aus dem HTML der jeweiligen Seite
+function parseSms(html, source){
+  const msgs=[];
+  if(!html)return msgs;
+  const doc=new DOMParser().parseFromString(html,'text/html');
+
+  if(source==='receive-smss'){
+    // SMS stehen in .sms-content Divs oder Tabellenzeilen
+    doc.querySelectorAll('.row.border-bottom, .sms-object, .receive-block, tr').forEach(el=>{
+      const tds=[...el.querySelectorAll('td')];
+      if(tds.length>=2){
+        const from=tds[0]?.textContent?.trim()||'';
+        const body=tds[1]?.textContent?.trim()||'';
+        const time=tds[tds.length-1]?.textContent?.trim()||'';
+        if(body.length>1)msgs.push({from,body,time});
+      }
+      // Div-basiertes Layout
+      const fromEl=el.querySelector('.sendfrom,.from-number,[class*="from"]');
+      const bodyEl=el.querySelector('.sms-body,.message-body,[class*="message"],[class*="content"]');
+      if(bodyEl&&bodyEl.textContent.trim().length>1){
+        msgs.push({from:fromEl?.textContent?.trim()||'SMS',body:bodyEl.textContent.trim(),time:''});
+      }
+    });
+  }
+
+  if(source==='sms24'){
+    doc.querySelectorAll('.panel-body .row, .sms_msg, tr').forEach(el=>{
+      const tds=[...el.querySelectorAll('td')];
+      if(tds.length>=2){
+        msgs.push({from:tds[0]?.textContent?.trim()||'SMS',body:tds[1]?.textContent?.trim()||'',time:tds[tds.length-1]?.textContent?.trim()||''});
+      }
+      const cols=[...el.querySelectorAll('.col-xs-12,.col-md-3,.col-md-9')];
+      if(cols.length>=2&&cols[1]?.textContent?.trim().length>1){
+        msgs.push({from:cols[0]?.textContent?.trim()||'SMS',body:cols[1].textContent.trim(),time:''});
+      }
+    });
+  }
+
+  if(source==='receivesms'){
+    doc.querySelectorAll('tr, .sms-list-item').forEach(el=>{
+      const tds=[...el.querySelectorAll('td')];
+      if(tds.length>=2){
+        msgs.push({from:tds[0]?.textContent?.trim()||'SMS',body:tds[1]?.textContent?.trim()||'',time:tds[tds.length-1]?.textContent?.trim()||''});
+      }
+    });
+  }
+
+  // Generischer Fallback: alle Tabellenzeilen
+  if(!msgs.length){
+    doc.querySelectorAll('table tr').forEach(row=>{
+      const cells=[...row.querySelectorAll('td')];
+      if(cells.length>=2){
+        const body=cells[1]?.textContent?.trim()||cells[cells.length-1]?.textContent?.trim()||'';
+        if(body.length>2)msgs.push({from:cells[0]?.textContent?.trim()||'SMS',body,time:''});
+      }
+    });
+  }
+
+  // Deduplizieren nach body
+  const seen=new Set();
+  return msgs.filter(m=>{
+    const key=m.body.slice(0,50);
+    if(seen.has(key)||m.body.length<2)return false;
+    seen.add(key);return true;
+  }).slice(0,25);
+}
+
+function initCountryChips(){
+  const el=$('countryChips');
+  if(el.children.length>0)return;
+  el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');
+}
+function selectCountry(code,btn){
+  document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneMeta=null;
+  $('smsCard').style.display='none';$('activePhoneCard').style.display='none';
+  clearInterval(smsIv);loadPhones();
+}
+function loadPhones(){
+  const el=$('phoneList');
+  const nums=PHONE_DB[currentPhoneCountry]||PHONE_DB.de;
+  el.innerHTML=nums.map(p=>`
+    <div class="phone-pill">
+      <div class="status-dot ok"></div>
+      <span class="phone-number">${esc(p.num)}</span>
+      <span class="sms-src-tag">${detectSource(p.url)}</span>
+      <button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${p.num}',this)">Kopieren</button>
+      <button class="btn btn-primary btn-sm" style="margin-left:4px" onclick='selectPhone(${JSON.stringify(p)})'>SMS</button>
+    </div>`).join('');
+}
 async function copyPhoneNum(num,btn){const ok=await copyToClipboard(num);if(ok){const o=btn.textContent;btn.textContent='✓';setTimeout(()=>btn.textContent=o,1500);}showToast(ok?'Kopiert ✓':'Fehler');}
-async function selectPhone(num,id){currentPhoneNum=num;currentPhoneId=id;$('activePhoneNum').textContent=num;$('activePhoneCard').style.display='block';$('smsCard').style.display='block';await refreshSms();clearInterval(smsIv);smsIv=setInterval(refreshSms,20000);}
+
+async function selectPhone(p){
+  currentPhoneNum=p.num;currentPhoneMeta=p;
+  $('activePhoneNum').textContent=p.num;
+  $('activePhoneCard').style.display='block';
+  $('smsCard').style.display='block';
+  // Direktlink immer sichtbar
+  const dl=$('smsDirectLink');if(dl){dl.href=p.url;dl.style.display='inline-flex';}
+  await refreshSms(true);
+  clearInterval(smsIv);smsIv=setInterval(()=>refreshSms(false),20000);
+}
 async function copyActivePhone(){if(!currentPhoneNum)return;const ok=await copyToClipboard(currentPhoneNum);const el=$('activePhoneNum');if(ok){el.textContent='Kopiert ✓';setTimeout(()=>el.textContent=currentPhoneNum,2000);}else showToast('Fehler');}
-async function refreshSms(){
-  if(!currentPhoneId)return;
-  const el=$('smsList'),empty=$('smsEmpty');empty.style.display='none';
-  el.innerHTML='<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd)"><svg width="13" height="13" class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg> Lade SMS…</li>';
-  try{
-    const r=await fetch(`https://quackr.io/api/tools/temporary-phone-number/${currentPhoneId}/messages`,{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(12000)});
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const data=await r.json();const list=Array.isArray(data)?data:(data.messages||data.data||[]);
-    $('smsCount').textContent=list.length;
-    if(!list.length){el.innerHTML='';empty.style.display='';return;}
-    el.innerHTML=list.map(m=>{const from=m.sender||m.from||'Unbekannt',body=m.content||m.message||m.text||'',ts=m.receivedAt||m.created_at||'';const t=ts?new Date(ts).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';const otps=extractOTPCodes(body);return`<li class="sms-item"><div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div style="flex:1;min-width:0"><div class="sms-from">${esc(from)}</div><div class="sms-body">${esc(body)}</div>${otps.length?otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join(''):''}<div class="sms-time">${esc(t)}</div></div></li>`;}).join('');
-  }catch{el.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Verbindungsfehler</h3><p>Bitte erneut versuchen.</p>';}
+
+async function refreshSms(showLoader=false){
+  if(!currentPhoneMeta)return;
+  const listEl=$('smsList'),emptyEl=$('smsEmpty');
+  if(showLoader){
+    listEl.innerHTML=`<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd);display:flex;align-items:center;gap:8px"><svg width="13" height="13" class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg> Lade SMS…</li>`;
+    emptyEl.style.display='none';
+  }
+  const source=detectSource(currentPhoneMeta.url);
+  const html=await fetchViaProxy(currentPhoneMeta.url);
+  const list=parseSms(html,source);
+  $('smsCount').textContent=list.length;
+
+  if(!list.length){
+    listEl.innerHTML='';
+    emptyEl.style.display='';
+    $('smsEmptyTitle').textContent=html?'Noch keine SMS':'Proxy-Fehler';
+    $('smsEmptyText').textContent=html?'Sende eine SMS an diese Nummer. Aktualisiert alle 20 Sek.':'Direktlink öffnen für SMS.';
+    const dl=$('smsDirectLink');if(dl){dl.href=currentPhoneMeta.url;dl.style.display='inline-flex';}
+    return;
+  }
+  emptyEl.style.display='none';
+  listEl.innerHTML=list.map(m=>{
+    const otps=extractOTPCodes(m.body);
+    return`<li class="sms-item">
+      <div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div style="flex:1;min-width:0">
+        <div class="sms-from">${esc(m.from||'SMS')}</div>
+        <div class="sms-body">${esc(m.body)}</div>
+        ${otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join('')}
+        ${m.time?`<div class="sms-time">${esc(m.time)}</div>`:''}
+      </div>
+    </li>`;
+  }).join('');
 }
 
 // ════════════════════════════════════
@@ -1438,62 +1455,31 @@ function extractOTPCodes(text){const found=new Map();const labeled=[[/(?:code|ot
 // TOOLS
 // ════════════════════════════════════
 function openTool(id){document.querySelectorAll('.tool-card').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.tool-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});const card=$('tc-'+id);if(card)card.classList.add('active');const panel=$('tp-'+id);if(panel){panel.style.display='block';setTimeout(()=>panel.classList.add('active'),10);panel.scrollIntoView({behavior:'smooth',block:'nearest'});}currentToolPanel=id;}
-
-// ── PASSWORD GENERATOR ──
 const WORDS=['apple','brave','cloud','dance','ember','frost','grace','horse','ivory','jewel','knack','lemon','maple','nerve','ocean','pearl','quest','river','stone','tiger','ultra','vivid','water','xenon','yacht','zebra','amber','blaze','cedar','drill','eagle','flint','globe','haven','index','joker','karma','lunar','magic','noble','orbit','plank','quiet','radar','solar','tower','unity','vault','woven','xerox','yield'];
 function genPassword(){const len=parseInt($('pwLen').value),useWords=$('pwWords').checked;let result='';if(useWords){const wCount=Math.max(3,Math.round(len/6));result=Array.from({length:wCount},()=>WORDS[Math.floor(Math.random()*WORDS.length)]).join('-');if($('pwNum').checked)result+='-'+Math.floor(Math.random()*9000+1000);}else{let chars='abcdefghijklmnopqrstuvwxyz';if($('pwUpper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';if($('pwNum').checked)chars+='0123456789';if($('pwSym').checked)chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';const arr=new Uint8Array(len);crypto.getRandomValues(arr);result=Array.from(arr).map(b=>chars[b%chars.length]).join('');}const el=$('pwResult');el.textContent=result;el.style.display='block';}
-
-// ── USERNAME GENERATOR ──
 const UGEN={normal:{pre:['cool','dark','swift','night','neo','grey','void','silent','iron','ghost'],suf:['wolf','hawk','blade','storm','byte','code','net','dev','hub','core']},tech:{pre:['null','void','0x','bin','hex','root','sudo','git','api','srv'],suf:['404','_dev','_io','_net','x86','v2','_sys','_ops','_cfg','_bin']},anon:{pre:['anon','user','guest','hidden','masked','private','stealth','shadow','cipher','proxy'],suf:Array.from({length:10},()=>Math.floor(Math.random()*9000+1000).toString())},real:{pre:['max','lena','felix','anna','david','julia','tom','sarah','jan','maria'],suf:['1992','1995','1998','2001','_h','_m','real','pro','net','web']}};
 function setUgenStyle(s,btn){document.querySelectorAll('[id^="ugenStyle-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');ugenCurrentStyle=s;}
 function genUsernames(){const s=UGEN[ugenCurrentStyle]||UGEN.normal;const results=Array.from({length:8},()=>{const p=s.pre[Math.floor(Math.random()*s.pre.length)];const su=s.suf[Math.floor(Math.random()*s.suf.length)];return p+su;});const el=$('ugenResult');el.textContent=results.join('\n');el.style.display='block';}
-
-// ── FAKE ID GENERATOR ──
-const FAKE_DATA={de:{fn:['Max','Anna','Felix','Laura','Jonas','Emma','Leon','Sophie','Lukas','Mia','Paul','Lena','Finn','Hannah','Noah'],ln:['Müller','Schmidt','Schneider','Fischer','Weber','Meyer','Wagner','Becker','Schulz','Hoffmann'],city:['Berlin','Hamburg','München','Köln','Frankfurt','Stuttgart','Düsseldorf','Leipzig','Bremen','Dresden'],street:['Hauptstraße','Bahnhofstraße','Gartenweg','Kirchgasse','Rosenweg','Birkenallee','Feldweg','Marktplatz']},en:{fn:['James','Emily','Oliver','Charlotte','William','Amelia','Noah','Ava','Liam','Isabella','Mason','Sophia'],ln:['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Martinez','Wilson'],city:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego'],street:['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine Rd','Elm St','Washington Blvd','Park Ave']},fr:{fn:['Lucas','Emma','Hugo','Chloé','Nathan','Léa','Thomas','Camille','Louis','Manon'],ln:['Martin','Bernard','Thomas','Petit','Robert','Richard','Durand','Dubois','Moreau','Laurent'],city:['Paris','Marseille','Lyon','Toulouse','Nice','Nantes','Strasbourg','Montpellier','Bordeaux'],street:['Rue de la Paix','Avenue Foch','Boulevard Saint-Michel','Rue du Commerce','Place de la République']},es:{fn:['Alejandro','María','Carlos','Ana','Juan','Laura','David','Carmen','Pedro','Isabel'],ln:['García','Martínez','López','Sánchez','González','Pérez','Rodríguez','Fernández','Díaz','Torres'],city:['Madrid','Barcelona','Valencia','Sevilla','Zaragoza','Málaga','Murcia','Palma','Bilbao'],street:['Calle Mayor','Paseo de la Castellana','Gran Vía','Avenida de América','Calle Alcalá']}};
+const FAKE_DATA={de:{fn:['Max','Anna','Felix','Laura','Jonas','Emma','Leon','Sophie','Lukas','Mia','Paul','Lena','Finn','Hannah','Noah'],ln:['Müller','Schmidt','Schneider','Fischer','Weber','Meyer','Wagner','Becker','Schulz','Hoffmann'],city:['Berlin','Hamburg','München','Köln','Frankfurt','Stuttgart','Düsseldorf','Leipzig','Bremen','Dresden'],street:['Hauptstraße','Bahnhofstraße','Gartenweg','Kirchgasse','Rosenweg','Birkenallee','Feldweg','Marktplatz']},en:{fn:['James','Emily','Oliver','Charlotte','William','Amelia','Noah','Ava','Liam','Isabella'],ln:['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Martinez','Wilson'],city:['New York','Los Angeles','Chicago','Houston','Phoenix'],street:['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine Rd']},fr:{fn:['Lucas','Emma','Hugo','Chloé','Nathan','Léa','Thomas','Camille','Louis','Manon'],ln:['Martin','Bernard','Thomas','Petit','Robert','Richard','Durand','Dubois','Moreau','Laurent'],city:['Paris','Marseille','Lyon','Toulouse','Nice'],street:['Rue de la Paix','Avenue Foch','Boulevard Saint-Michel']},es:{fn:['Alejandro','María','Carlos','Ana','Juan','Laura'],ln:['García','Martínez','López','Sánchez','González'],city:['Madrid','Barcelona','Valencia','Sevilla'],street:['Calle Mayor','Paseo de la Castellana','Gran Vía']}};
 function rndFrom(arr){return arr[Math.floor(Math.random()*arr.length)];}
 function genFakeId(){const locale=$('fakeLocale').value;const d=FAKE_DATA[locale]||FAKE_DATA.de;const fn=rndFrom(d.fn),ln=rndFrom(d.ln);const year=1960+Math.floor(Math.random()*40),month=String(1+Math.floor(Math.random()*12)).padStart(2,'0'),day=String(1+Math.floor(Math.random()*28)).padStart(2,'0');const dob=`${day}.${month}.${year}`;const city=rndFrom(d.city),street=rndFrom(d.street),nr=1+Math.floor(Math.random()*200);const plz=String(10000+Math.floor(Math.random()*89999));const phone='+'+Math.floor(Math.random()*9e11+1e11);const user=(fn.toLowerCase()+'.'+ln.toLowerCase()).replace(/[^a-z.]/g,'');const domains=['gmail.com','outlook.com','yahoo.com','proton.me','web.de'];const email=user+(1990+Math.floor(Math.random()*30))+'@'+rndFrom(domains);const el=$('fakeIdResult');el.style.display='block';el.innerHTML=`<div class="result-box" style="padding:0;">${[['Name',fn+' '+ln],['Geburtsdatum',dob],['Adresse',street+' '+nr+', '+plz+' '+city],['Telefon',phone],['Email',email],['Benutzername',user+(Math.floor(Math.random()*9000+1000))]].map(([l,v])=>`<div class="result-row"><span class="result-label">${l}</span><span class="result-val" style="cursor:pointer;" onclick="copyToClipboard('${v.replace(/'/g,"\\'")}').then(()=>showToast('Kopiert'))">${esc(v)}</span></div>`).join('')}</div>`;}
-
-// ── URL SCANNER ──
 async function scanUrl(){const url=$('urlInput').value.trim();if(!url){showToast('URL eingeben');return;}const btn=$('urlScanBtn'),res=$('urlResult');btn.disabled=true;btn.textContent='Scanne…';res.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';try{let hostname='';try{hostname=new URL(url).hostname;}catch{res.innerHTML='<p style="font-size:12px;color:#f87171;">Ungültige URL</p>';btn.disabled=false;btn.textContent='Scannen';return;}let urlhausResult='Nicht erreichbar',urlhausColor='var(--txt3)';try{const r=await fetch('https://urlhaus-api.abuse.ch/v1/url/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'url='+encodeURIComponent(url),signal:AbortSignal.timeout(8000)});const d=await r.json();if(d.query_status==='is_found'){urlhausResult='Gemeldet (URLhaus)';urlhausColor='#f87171';}else if(d.query_status==='no_results'){urlhausResult='Nicht gemeldet';urlhausColor='#4ade80';}}catch{urlhausResult='API nicht erreichbar';}const suspicious=/phish|malware|hack|porn|free-money|click-here|virus|trojan|ransom/i.test(url);const isSuspicious=suspicious||urlhausColor==='#f87171';res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">URL</span><span class="result-val">${esc(hostname)}</span></div><div class="result-row"><span class="result-label">URLhaus</span><span class="result-val" style="color:${urlhausColor}">${esc(urlhausResult)}</span></div><div class="result-row"><span class="result-label">Muster</span><span class="result-val" style="color:${suspicious?'#f87171':'#4ade80'}">${suspicious?'Verdächtig':'Unauffällig'}</span></div><div class="result-row"><span class="result-label">HTTPS</span><span class="result-val" style="color:${url.startsWith('https://')?'#4ade80':'#fbbf24'}">${url.startsWith('https://')?'Ja':'Nein'}</span></div><div class="result-row"><span class="result-label">Gesamt</span><span class="result-val" style="color:${isSuspicious?'#f87171':'#4ade80'};font-weight:600;">${isSuspicious?'Potenziell gefährlich':'Unauffällig'}</span></div></div><div style="margin-top:8px;display:flex;gap:8px;"><a href="https://www.virustotal.com/gui/url/${btoa(url)}/detection" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">VirusTotal ↗</a><a href="https://urlscan.io/search/#${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">urlscan.io ↗</a></div>`;}catch(e){res.innerHTML=`<p style="font-size:12px;color:#f87171;">${esc(e.message)}</p>`;}btn.disabled=false;btn.textContent='Scannen';}
-
-// ── TRACKER DETECTOR ──
 function openTrackerTools(){const url=$('trackerInput').value.trim();const res=$('trackerResult');if(!url){showToast('URL eingeben');return;}let hostname='';try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}res.innerHTML=`<div style="margin-top:4px;"><div class="links-label" style="margin-bottom:8px;">Externe Scanner für <span style="color:var(--txt)">${esc(hostname)}</span></div><div style="display:flex;flex-direction:column;gap:6px;"><a href="https://themarkup.org/blacklight?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Blacklight (Markup)</span><span style="font-size:11px;color:var(--txt3)">Ad/Tracker-Scanner</span><span class="link-arrow">↗</span></a><a href="https://webbkoll.dataskydd.net/en/check?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Webbkoll (GDPR)</span><span style="font-size:11px;color:var(--txt3)">Datenschutz-Check</span><span class="link-arrow">↗</span></a><a href="https://urlscan.io/search/#page.domain:${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">urlscan.io</span><span style="font-size:11px;color:var(--txt3)">Request-Scanner</span><span class="link-arrow">↗</span></a><a href="https://observatory.mozilla.org/analyze/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Mozilla Observatory</span><span style="font-size:11px;color:var(--txt3)">Security-Headers</span><span class="link-arrow">↗</span></a></div></div>`;}
-
-// ── META SCRAPER ──
 function analyzeUrlLocal(){const url=$('metaInput').value.trim();if(!url)return;const res=$('metaResult');try{const u=new URL(url);const isHttps=u.protocol==='https:';const hasWWW=u.hostname.startsWith('www.');const parts=u.hostname.replace(/^www\./,'').split('.');const tld=parts.slice(-1)[0];const domain=parts.slice(-2).join('.');const hasPath=u.pathname!=='/'&&u.pathname!=='';const hasQuery=u.search!=='';res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Protokoll</span><span class="result-val${isHttps?' ok':' err'}">${isHttps?'HTTPS':'HTTP (unsicher)'}</span></div><div class="result-row"><span class="result-label">Domain</span><span class="result-val">${esc(domain)}</span></div><div class="result-row"><span class="result-label">TLD</span><span class="result-val">.${esc(tld)}</span></div><div class="result-row"><span class="result-label">Subdomain</span><span class="result-val">${hasWWW?'www':u.hostname.replace('.'+domain,'').replace(domain,'')||'—'}</span></div><div class="result-row"><span class="result-label">Pfad</span><span class="result-val">${hasPath?esc(u.pathname):'—'}</span></div><div class="result-row"><span class="result-label">Parameter</span><span class="result-val">${hasQuery?esc(u.search):'—'}</span></div></div>`;}catch{}}
 async function scrapeMeta(){const url=$('metaInput').value.trim();const btn=$('metaBtn'),res=$('metaResult');if(!url){showToast('URL eingeben');return;}let hostname='';try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}analyzeUrlLocal();const existing=$('metaResult').innerHTML;res.innerHTML=existing+`<div style="margin-top:10px;"><div class="links-label" style="margin-bottom:8px;">Metadaten via externe Dienste</div><div style="display:flex;flex-direction:column;gap:6px;"><a href="https://metatags.io/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">metatags.io</span><span style="font-size:11px;color:var(--txt3)">OG, Twitter, SEO Tags</span><span class="link-arrow">↗</span></a><a href="https://www.opengraph.xyz/url/${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">opengraph.xyz</span><span style="font-size:11px;color:var(--txt3)">Open Graph Preview</span><span class="link-arrow">↗</span></a><a href="https://builtwith.com/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">builtwith.com</span><span style="font-size:11px;color:var(--txt3)">Technologien erkennen</span><span class="link-arrow">↗</span></a><a href="https://securityheaders.com/?q=${encodeURIComponent(url)}&followRedirects=on" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">securityheaders.com</span><span style="font-size:11px;color:var(--txt3)">HTTP-Header-Analyse</span><span class="link-arrow">↗</span></a></div></div>`;}
-
-// ── IP LOOKUP ──
-async function lookupIP(){const input=$('ipInput').value.trim();const btn=$('ipBtn'),res=$('ipResult');btn.disabled=true;btn.textContent='…';res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';const target=input||'';const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;try{const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(d.status==='fail')throw new Error(d.message||'Ungültige IP');const rows=[['IP',d.query],['Land',`${d.country||'—'} (${d.countryCode||'—'})`],['Stadt',d.city||'—'],['Region',d.regionName||'—'],['Timezone',d.timezone||'—'],['ISP',d.isp||'—'],['Org / ASN',d.as||'—'],['Proxy/VPN',d.proxy?'Ja':'Nein'],['Hosting/DC',d.hosting?'Ja':'Nein']];const ipCopy=d.query;res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;}).join('')}</div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button><a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a></div>`;}catch(e){res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div></div><p style="font-size:12px;color:var(--txt3);margin-top:8px;">Hinweis: ip-api.com funktioniert nur über HTTP. Direkt auf <a href="https://ip-api.com" target="_blank" rel="noopener noreferrer" style="color:var(--txt2)">ip-api.com ↗</a> prüfen.</p>`;}btn.disabled=false;btn.textContent='Lookup';}
-
-// ── EMAIL REPUTATION ──
-const DISPOSABLE_DOMAINS=new Set(['mailnull.com','guerrillamail.com','throwam.com','yopmail.com','tempmail.com','temp-mail.org','10minutemail.com','sharklasers.com','guerrillamailblock.com','grr.la','guerrillamail.info','guerrillamail.biz','guerrillamail.de','guerrillamail.net','guerrillamail.org','spam4.me','trashmail.com','trashmail.me','trashmail.net','trashmail.org','trashmail.io','dispostable.com','mailnesia.com','mailnull.com','maildrop.cc','spamgourmet.com','spamgourmet.net','spamgourmet.org','spamspot.com','spamthis.co.uk','spamtrap.ro','fakeinbox.com','fakeinbox.net','discard.email','discardmail.com','discardmail.de','spamfree24.org','spamgob.com','spamhereplease.com','spamoff.de','spamwc.de','trash-mail.com','trashdevil.com','trashdevil.de','trashmailer.com','mailsiphon.com','mail.tm','mail.gw','inboxkitten.com','owlpic.com','tempinbox.com','tempr.email','temp-mail.ru','jetable.fr.nf','notsharingmy.info','spamgourmet.com','spamgourmet.net','speed.1s.fr','spamify.com']);
+async function lookupIP(){const input=$('ipInput').value.trim();const btn=$('ipBtn'),res=$('ipResult');btn.disabled=true;btn.textContent='…';res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';const target=input||'';const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;try{const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(d.status==='fail')throw new Error(d.message||'Ungültige IP');const rows=[['IP',d.query],['Land',`${d.country||'—'} (${d.countryCode||'—'})`],['Stadt',d.city||'—'],['Region',d.regionName||'—'],['Timezone',d.timezone||'—'],['ISP',d.isp||'—'],['Org / ASN',d.as||'—'],['Proxy/VPN',d.proxy?'Ja':'Nein'],['Hosting/DC',d.hosting?'Ja':'Nein']];const ipCopy=d.query;res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;}).join('')}</div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button><a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a></div>`;}catch(e){res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div></div><p style="font-size:12px;color:var(--txt3);margin-top:8px;">Hinweis: ip-api.com funktioniert nur über HTTP.</p>`;}btn.disabled=false;btn.textContent='Lookup';}
+const DISPOSABLE_DOMAINS=new Set(['mailnull.com','guerrillamail.com','throwam.com','yopmail.com','tempmail.com','temp-mail.org','10minutemail.com','sharklasers.com','guerrillamailblock.com','grr.la','guerrillamail.info','guerrillamail.biz','guerrillamail.de','guerrillamail.net','guerrillamail.org','spam4.me','trashmail.com','trashmail.me','trashmail.net','trashmail.org','trashmail.io','dispostable.com','mailnesia.com','maildrop.cc','spamgourmet.com','spamgourmet.net','spamgourmet.org','fakeinbox.com','fakeinbox.net','discard.email','discardmail.com','discardmail.de','trash-mail.com','trashdevil.com','trashmailer.com','mailsiphon.com','mail.tm','mail.gw','inboxkitten.com','tempr.email','temp-mail.ru','jetable.fr.nf','spamify.com']);
 const BLACKLISTED_DOMAINS=new Set(['mailinator.com','guerrillamail.com','trashmail.com','yopmail.com','spam4.me']);
 const FREE_PROVIDERS=new Set(['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','proton.me','protonmail.com','web.de','gmx.de','gmx.net','gmx.com','t-online.de','freenet.de','posteo.de','tutanota.com','tutanota.de','mailfence.com','disroot.org','riseup.net','fastmail.com','aol.com','live.com','msn.com','yahoo.de','yahoo.co.uk','yahoo.fr']);
-async function checkEmailRep(){const val=$('emailRepInput').value.trim().toLowerCase();const btn=$('emailRepBtn'),res=$('emailRepResult');if(!val||!val.includes('@')){showToast('Gültige Email eingeben');return;}btn.disabled=true;btn.textContent='Prüfe…';const domain=val.split('@')[1]||'';const isDisposable=DISPOSABLE_DOMAINS.has(domain);const isBlacklisted=BLACKLISTED_DOMAINS.has(domain);const isFree=FREE_PROVIDERS.has(domain);const isCustom=!isDisposable&&!isFree;let hasMX=null,mxRecords=[];try{const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,{signal:AbortSignal.timeout(5000)});const d=await r.json();mxRecords=(d.Answer||[]).filter(a=>a.type===15).map(a=>a.data);hasMX=mxRecords.length>0;}catch{hasMX=null;}let risk=0,riskLabel='Niedrig',riskColor='#4ade80';if(isBlacklisted){risk=3;}else if(isDisposable){risk=2;}else if(!hasMX){risk=2;}else if(!isFree&&!isCustom){risk=1;}if(risk>=3){riskLabel='Kritisch';riskColor='#f87171';}else if(risk===2){riskLabel='Hoch';riskColor='#f87171';}else if(risk===1){riskLabel='Mittel';riskColor='#fbbf24';}const rows=[['Domain',domain],['Typ',isDisposable?'Wegwerf-Adresse':isBlacklisted?'Blacklisted':isFree?'Free Provider':'Custom/Business'],['MX Records',hasMX===null?'Unbekannt':hasMX?mxRecords[0]?.split(' ').pop()||'Vorhanden':'Keine (ungültig)'],['Blacklist',isBlacklisted?'Eingetragen':'Nicht eingetragen'],['Risiko',riskLabel]];res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Blacklist')cls=isBlacklisted?' err':' ok';if(l==='Risiko')cls=risk>=2?' err':risk===1?' warn':' ok';if(l==='MX Records')cls=hasMX===false?' err':'';if(l==='Typ')cls=isDisposable||isBlacklisted?' err':isFree?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(v)}</span></div>`;}).join('')}</div>${mxRecords.length?`<div style="margin-top:8px;"><div class="links-label" style="margin-bottom:4px;">MX Records</div>${mxRecords.slice(0,3).map(mx=>`<div class="tag">${esc(mx)}</div>`).join('')}</div>`:''}`;btn.disabled=false;btn.textContent='Prüfen';}
-
-// Tool result copy helper
+async function checkEmailRep(){const val=$('emailRepInput').value.trim().toLowerCase();const btn=$('emailRepBtn'),res=$('emailRepResult');if(!val||!val.includes('@')){showToast('Gültige Email eingeben');return;}btn.disabled=true;btn.textContent='Prüfe…';const domain=val.split('@')[1]||'';const isDisposable=DISPOSABLE_DOMAINS.has(domain);const isBlacklisted=BLACKLISTED_DOMAINS.has(domain);const isFree=FREE_PROVIDERS.has(domain);const isCustom=!isDisposable&&!isFree;let hasMX=null,mxRecords=[];try{const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,{signal:AbortSignal.timeout(5000)});const d=await r.json();mxRecords=(d.Answer||[]).filter(a=>a.type===15).map(a=>a.data);hasMX=mxRecords.length>0;}catch{hasMX=null;}let risk=0,riskLabel='Niedrig';if(isBlacklisted)risk=3;else if(isDisposable)risk=2;else if(!hasMX)risk=2;else if(!isFree&&!isCustom)risk=1;if(risk>=3)riskLabel='Kritisch';else if(risk===2)riskLabel='Hoch';else if(risk===1)riskLabel='Mittel';const rows=[['Domain',domain],['Typ',isDisposable?'Wegwerf-Adresse':isBlacklisted?'Blacklisted':isFree?'Free Provider':'Custom/Business'],['MX Records',hasMX===null?'Unbekannt':hasMX?mxRecords[0]?.split(' ').pop()||'Vorhanden':'Keine (ungültig)'],['Blacklist',isBlacklisted?'Eingetragen':'Nicht eingetragen'],['Risiko',riskLabel]];res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Blacklist')cls=isBlacklisted?' err':' ok';if(l==='Risiko')cls=risk>=2?' err':risk===1?' warn':' ok';if(l==='MX Records')cls=hasMX===false?' err':'';if(l==='Typ')cls=isDisposable||isBlacklisted?' err':isFree?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(v)}</span></div>`;}).join('')}</div>${mxRecords.length?`<div style="margin-top:8px;"><div class="links-label" style="margin-bottom:4px;">MX Records</div>${mxRecords.slice(0,3).map(mx=>`<div class="tag">${esc(mx)}</div>`).join('')}</div>`:''}`;btn.disabled=false;btn.textContent='Prüfen';}
 async function copyToolResult(id){const el=$(id);if(!el||!el.textContent)return;const ok=await copyToClipboard(el.textContent.trim());showToast(ok?'Kopiert ✓':'Fehler');}
 
 // ════════════════════════════════════
 // WHOAMI
 // ════════════════════════════════════
 async function renderWhoami(){const card=$('whoamiCard');const user=loadUser();const saved=await dbGetAll('saved_emails');const ua=navigator.userAgent;let browser='Unbekannt',os='Unbekannt';if(/Firefox\//.test(ua))browser='Firefox';else if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome/.test(ua))browser='Safari';if(/Windows NT 10/.test(ua))os='Windows 10/11';else if(/Mac OS X/.test(ua))os='macOS';else if(/Android/.test(ua))os='Android';else if(/iPhone|iPad/.test(ua))os='iOS';else if(/Linux/.test(ua))os='Linux';const isMobile=/Mobi|Android|iPhone|iPad/i.test(ua);const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';const onlineCount=parseInt($('onlineCount')?.textContent||'1');card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}
-  <div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div>
-  <div class="whoami-grid">
-    <div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div>
-    <div class="whoami-stat"><div class="whoami-stat-val">${saved.length}</div><div class="whoami-stat-lbl">Gespeichert</div></div>
-    <div class="whoami-stat"><div class="whoami-stat-val">${totalRef}</div><div class="whoami-stat-lbl">Refreshes</div></div>
-    <div class="whoami-stat"><div class="whoami-stat-val">${sessionDuration}</div><div class="whoami-stat-lbl">Session</div></div>
-  </div></div>
-  <div><div class="card-label" style="margin-bottom:4px">Browser & Gerät</div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Browser</span><span class="whoami-row-val">${esc(browser)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">OS</span><span class="whoami-row-val">${esc(os)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Gerät</span><span class="whoami-row-val">${isMobile?'Mobil':'Desktop'}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Unique IPs online</span><span class="whoami-row-val ok">${onlineCount}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;}
+  <div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div><div class="whoami-grid"><div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div><div class="whoami-stat"><div class="whoami-stat-val">${saved.length}</div><div class="whoami-stat-lbl">Gespeichert</div></div><div class="whoami-stat"><div class="whoami-stat-val">${totalRef}</div><div class="whoami-stat-lbl">Refreshes</div></div><div class="whoami-stat"><div class="whoami-stat-val">${sessionDuration}</div><div class="whoami-stat-lbl">Session</div></div></div></div>
+  <div><div class="card-label" style="margin-bottom:4px">Browser & Gerät</div><div class="whoami-row"><span class="whoami-row-lbl">Browser</span><span class="whoami-row-val">${esc(browser)}</span></div><div class="whoami-row"><span class="whoami-row-lbl">OS</span><span class="whoami-row-val">${esc(os)}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Gerät</span><span class="whoami-row-val">${isMobile?'Mobil':'Desktop'}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Unique IPs online</span><span class="whoami-row-val ok">${onlineCount}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;}
 
 // ════════════════════════════════════
 // AUTH
@@ -1519,7 +1505,6 @@ document.addEventListener('keydown',e=>{const tag=document.activeElement.tagName
 $('authEmail').addEventListener('keydown',e=>{if(e.key==='Enter')$('authPw').focus();});
 $('authPw').addEventListener('keydown',e=>{if(e.key==='Enter')authSubmit();});
 $('saveName').addEventListener('keydown',e=>{if(e.key==='Enter')confirmSave();});
-
 if(window.innerWidth<=768){$('mobile-theme-toggle').style.display='flex';}
 window.addEventListener('resize',()=>{$('mobile-theme-toggle').style.display=window.innerWidth<=768?'flex':'none';});
 
