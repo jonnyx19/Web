@@ -8,8 +8,8 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{--font:'Geist',system-ui,sans-serif;--mono:'Geist Mono',monospace;--r:14px;--r-sm:10px;--r-lg:20px;--sidebar-w:200px;}
-[data-theme="dark"]{--bg:#0a0a0a;--s1:#111;--s2:#181818;--s3:#202020;--brd:rgba(255,255,255,0.07);--brd-hi:rgba(255,255,255,0.15);--brd-act:rgba(255,255,255,0.35);--txt:#f0f0f0;--txt2:#a0a0a0;--txt3:#606060;--glow:rgba(255,255,255,0.06);--btn-bg:#f0f0f0;--btn-clr:#0a0a0a;--btn-hover:#d0d0d0;--shadow-sm:0 4px 24px rgba(0,0,0,.3);--shadow-lg:0 20px 60px rgba(0,0,0,.6);--pwned:#f87171;--safe:#4ade80;}
-[data-theme="light"]{--bg:#f4f4f4;--s1:#fff;--s2:#f0f0f0;--s3:#e8e8e8;--brd:rgba(0,0,0,0.08);--brd-hi:rgba(0,0,0,0.15);--brd-act:rgba(0,0,0,0.4);--txt:#111;--txt2:#555;--txt3:#999;--glow:rgba(0,0,0,0.04);--btn-bg:#111;--btn-clr:#fff;--btn-hover:#333;--shadow-sm:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 20px 60px rgba(0,0,0,.15);--pwned:#dc2626;--safe:#16a34a;}
+[data-theme="dark"]{--bg:#0a0a0a;--s1:#111;--s2:#181818;--s3:#202020;--brd:rgba(255,255,255,0.07);--brd-hi:rgba(255,255,255,0.15);--brd-act:rgba(255,255,255,0.35);--txt:#f0f0f0;--txt2:#a0a0a0;--txt3:#606060;--glow:rgba(255,255,255,0.06);--btn-bg:#f0f0f0;--btn-clr:#0a0a0a;--btn-hover:#d0d0d0;--shadow-sm:0 4px 24px rgba(0,0,0,.3);--shadow-lg:0 20px 60px rgba(0,0,0,.6);}
+[data-theme="light"]{--bg:#f4f4f4;--s1:#fff;--s2:#f0f0f0;--s3:#e8e8e8;--brd:rgba(0,0,0,0.08);--brd-hi:rgba(0,0,0,0.15);--brd-act:rgba(0,0,0,0.4);--txt:#111;--txt2:#555;--txt3:#999;--glow:rgba(0,0,0,0.04);--btn-bg:#111;--btn-clr:#fff;--btn-hover:#333;--shadow-sm:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 20px 60px rgba(0,0,0,.15);}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-smoothing:antialiased;display:flex;overflow:hidden;transition:background .3s,color .3s;}
 #bg-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:1;transition:opacity .5s;}
@@ -54,9 +54,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-
 .btn-sm{padding:8px 13px;font-size:12px;border-radius:var(--r-sm);min-height:38px;}
 .btn-group{display:flex;gap:8px;flex-wrap:wrap;}
 input,textarea,select{font-family:var(--font);font-size:16px;color:var(--txt);background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);padding:12px 14px;outline:none;width:100%;transition:border-color .15s;-webkit-appearance:none;appearance:none;box-sizing:border-box;}
-input:focus,textarea:focus{border-color:var(--brd-act);}
+input:focus,textarea:focus,select:focus{border-color:var(--brd-act);}
 input::placeholder,textarea::placeholder{color:var(--txt3);}
 textarea{resize:vertical;min-height:120px;line-height:1.6;}
+select{cursor:pointer;}
 .email-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;}
 .email-pill{flex:1;min-width:160px;display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none;touch-action:manipulation;}
 .email-pill:hover{border-color:var(--brd-hi);background:var(--s3);}
@@ -75,7 +76,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .t-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
 .custom-wrap{display:flex;height:36px;}
 .t-input{width:52px;font-size:12px;border-right:none;border-radius:100px 0 0 100px;text-align:center;height:36px;padding:0 8px;box-sizing:border-box;}
-.t-ok-btn{padding:0 12px;font-size:12px;font-weight:500;font-family:var(--font);background:transparent;border:1px solid var(--brd);border-radius:0 100px 100px 0;color:var(--txt3);cursor:pointer;transition:all .15s;height:36px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;white-space:nowrap;}
+.t-ok-btn{padding:0 12px;font-size:12px;font-weight:500;font-family:var(--font);background:transparent;border:1px solid var(--brd);border-radius:0 100px 100px 0;color:var(--txt3);cursor:pointer;transition:all .15s;height:36px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;}
 .t-ok-btn:hover{border-color:var(--brd-hi);color:var(--txt2);background:var(--s2);}
 .timer-bar-wrap{display:flex;align-items:center;gap:10px;margin-top:12px;}
 .timer-bar{flex:1;height:2px;background:var(--s3);border-radius:2px;overflow:hidden;}
@@ -107,7 +108,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .msg-subject{font-size:13px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px;}
 .msg-preview{font-size:12px;color:var(--txt3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .empty-view{padding:48px 20px;text-align:center;}
-.empty-icon{width:56px;height:56px;border-radius:16px;background:var(--s2);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;}
+.empty-icon{width:56px;height:56px;border-radius:16px;background:var(--s2);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
 .empty-view h3{font-size:15px;font-weight:600;color:var(--txt2);margin-bottom:6px;letter-spacing:-.3px;}
 .empty-view p{font-size:13px;color:var(--txt3);line-height:1.6;}
 .detail-card{display:none;background:var(--s1);border:1px solid var(--brd);border-radius:var(--r-lg);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow-sm);animation:fadeUp .2s ease;}
@@ -127,6 +128,23 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .link-arrow{font-size:13px;color:var(--txt3);flex-shrink:0;}
 .body-divider{border:none;border-top:1px solid var(--brd);margin:16px 0;}
 .email-body-text{font-size:13px;line-height:1.8;color:var(--txt2);white-space:pre-wrap;word-break:break-word;font-family:var(--mono);}
+/* Multi-inbox tabs */
+.inbox-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;}
+.inbox-tab{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--brd);background:var(--s2);color:var(--txt3);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;font-family:var(--font);}
+.inbox-tab:hover{border-color:var(--brd-hi);color:var(--txt2);}
+.inbox-tab.active{background:var(--s3);border-color:var(--brd-hi);color:var(--txt);}
+.inbox-tab .tab-dot{width:5px;height:5px;border-radius:50%;background:var(--txt3);}
+.inbox-tab.active .tab-dot{background:#fff;}
+.inbox-tab .tab-count{font-size:10px;background:var(--s3);border-radius:100px;padding:1px 6px;color:var(--txt3);}
+.add-inbox-btn{padding:6px 10px;border-radius:var(--r-sm);border:1px dashed var(--brd);background:transparent;color:var(--txt3);font-size:12px;cursor:pointer;transition:all .15s;font-family:var(--font);display:flex;align-items:center;gap:4px;}
+.add-inbox-btn:hover{border-color:var(--brd-hi);color:var(--txt2);}
+/* Rules */
+.rule-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;animation:fadeUp .15s ease;}
+.rule-item:hover{border-color:var(--brd-hi);}
+.rule-info{flex:1;min-width:0;}
+.rule-cond{font-size:13px;color:var(--txt);margin-bottom:3px;}
+.rule-meta{font-size:11px;color:var(--txt3);font-family:var(--mono);}
+/* Saved */
 .saved-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;transition:border-color .15s;animation:fadeUp .15s ease;}
 .saved-item:hover{border-color:var(--brd-hi);}
 .saved-info{flex:1;min-width:0;}
@@ -135,6 +153,48 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .saved-name-badge{display:inline-block;font-size:11px;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 9px;margin-right:6px;}
 .saved-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;}
 .saved-empty{text-align:center;padding:48px 20px;color:var(--txt3);font-size:14px;line-height:1.7;}
+/* Sender */
+.send-status-banner{border-radius:var(--r-sm);padding:14px 16px;font-size:13px;line-height:1.6;border:1px solid var(--brd);display:none;animation:fadeUp .2s ease;}
+.send-status-banner.show{display:flex;align-items:flex-start;gap:10px;}
+.send-status-banner.success{background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.25);color:#4ade80;}
+.send-status-banner.error{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.25);color:#f87171;}
+.send-status-banner.loading{background:var(--s2);color:var(--txt3);}
+.send-status-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
+.send-status-body{flex:1;min-width:0;}
+.send-status-title{font-weight:600;margin-bottom:4px;}
+.send-status-sub{font-size:12px;opacity:.8;}
+.sender-from-box{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.sender-from-box.active-sender{border-color:rgba(255,255,255,.15);}
+.sender-from-av{width:40px;height:40px;border-radius:50%;background:var(--s3);border:1px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--txt);flex-shrink:0;}
+.sender-from-info{flex:1;min-width:0;}
+.sender-from-addr{font-family:var(--mono);font-size:13px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px;}
+.sender-from-sub{font-size:11px;color:var(--txt3);}
+.worker-config{background:var(--s2);border:1px dashed var(--brd-hi);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;}
+.worker-config-title{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.worker-config-sub{font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px;}
+.worker-url-row{display:flex;gap:8px;}
+.worker-url-row input{font-size:12px;font-family:var(--mono);}
+.compose-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.char-counter{font-family:var(--mono);font-size:11px;color:var(--txt3);}
+.char-counter.warn{color:#fbbf24;}
+/* Phone */
+.country-chip{padding:8px 14px;font-size:12px;font-weight:500;background:var(--s2);border:1px solid var(--brd);border-radius:100px;color:var(--txt3);cursor:pointer;transition:all .15s;font-family:var(--font);min-height:36px;touch-action:manipulation;}
+.country-chip:hover{border-color:var(--brd-hi);color:var(--txt2);}
+.country-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
+.phone-select-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.phone-pill{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;margin-bottom:6px;transition:border-color .2s;}
+.phone-number{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--txt);flex:1;letter-spacing:.5px;}
+.sms-item{display:flex;align-items:flex-start;gap:10px;padding:14px 10px;border-top:1px solid var(--brd);border-radius:var(--r-sm);transition:background .15s;margin:0 -10px;animation:fadeUp .2s ease;}
+.sms-item:hover{background:var(--glow);}
+.sms-av{width:34px;height:34px;border-radius:9px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sms-from{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px;}
+.sms-body{font-size:13px;color:var(--txt2);line-height:1.5;white-space:pre-wrap;word-break:break-word;}
+.sms-time{font-family:var(--mono);font-size:10px;color:var(--txt3);margin-top:4px;}
+/* OTP highlight */
+.otp-badge{display:inline-flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--brd-hi);border-radius:var(--r-sm);padding:6px 12px;margin-top:6px;cursor:pointer;}
+.otp-code{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--txt);letter-spacing:2px;}
+.otp-label{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;}
+/* WHOAMI */
 .whoami-hero{display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px;text-align:center;border-bottom:1px solid var(--brd);margin-bottom:20px;}
 .whoami-avatar{width:72px;height:72px;border-radius:50%;background:var(--s3);border:2px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--txt);margin-bottom:14px;}
 .whoami-name{font-size:20px;font-weight:600;color:var(--txt);letter-spacing:-.5px;margin-bottom:4px;}
@@ -148,7 +208,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .whoami-row-lbl{font-size:12px;color:var(--txt3);}
 .whoami-row-val{font-family:var(--mono);font-size:12px;color:var(--txt2);text-align:right;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .whoami-row-val.ok{color:#fff;}
-.whoami-row-val.err{color:#f87171;}
+/* Pwned */
 .pwned-hero{text-align:center;padding:20px 0 28px;}
 .pwned-hero h2{font-size:20px;font-weight:600;letter-spacing:-.5px;color:var(--txt);margin-bottom:8px;}
 .pwned-hero p{font-size:13px;color:var(--txt3);line-height:1.6;max-width:400px;margin:0 auto;}
@@ -158,7 +218,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .pwned-result.pwned{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.05);}
 .pwned-result.safe{border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.05);}
 .pwned-status-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.pwned-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.pwned-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .pwned-icon.bad{background:rgba(248,113,113,.15);}
 .pwned-icon.good{background:rgba(74,222,128,.15);}
 .pwned-status-txt h3{font-size:16px;font-weight:600;color:var(--txt);letter-spacing:-.3px;margin-bottom:3px;}
@@ -168,10 +228,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .breach-logo{width:36px;height:36px;border-radius:8px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--txt2);flex-shrink:0;font-family:var(--mono);}
 .breach-info{flex:1;min-width:0;}
 .breach-name{font-size:13px;font-weight:600;color:var(--txt);letter-spacing:-.2px;margin-bottom:3px;}
-.breach-meta{font-size:12px;color:var(--txt3);margin-bottom:4px;}
-.breach-types{display:flex;flex-wrap:wrap;gap:4px;}
-.breach-type{font-size:10px;font-weight:500;background:var(--s3);color:var(--txt3);border:1px solid var(--brd);border-radius:100px;padding:2px 8px;}
-.pwned-loading{text-align:center;padding:32px 20px;color:var(--txt3);}
+.breach-meta{font-size:12px;color:var(--txt3);}
 .pw-strength-bar{height:3px;border-radius:3px;margin-top:8px;transition:all .3s;background:var(--s3);}
 .pw-strength-bar.weak{background:#f87171;}
 .pw-strength-bar.medium{background:#fbbf24;}
@@ -179,9 +236,34 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .pw-result-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-size:12px;font-weight:600;margin-top:10px;}
 .pw-result-pill.pwned-pill{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);}
 .pw-result-pill.safe-pill{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3);}
-.from-addr-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);margin-bottom:12px;}
-.from-label{font-size:11px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;}
-.from-addr{font-family:var(--mono);font-size:13px;color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* Tools page */
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.tool-card{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;cursor:pointer;transition:all .15s;}
+.tool-card:hover{border-color:var(--brd-hi);background:var(--s3);}
+.tool-card.active{border-color:var(--brd-act);background:var(--s3);}
+.tool-card-icon{width:32px;height:32px;border-radius:8px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.tool-card-icon svg{width:16px;height:16px;color:var(--txt2);}
+.tool-card-name{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px;}
+.tool-card-desc{font-size:11px;color:var(--txt3);}
+.tool-panel{display:none;animation:fadeUp .2s ease;}
+.tool-panel.active{display:block;}
+/* Result boxes */
+.result-box{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-top:12px;animation:fadeUp .2s ease;}
+.result-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--brd);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:12px;color:var(--txt3);}
+.result-val{font-family:var(--mono);font-size:12px;color:var(--txt2);text-align:right;max-width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.result-val.ok{color:#4ade80;}
+.result-val.warn{color:#fbbf24;}
+.result-val.err{color:#f87171;}
+.tag-list{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+.tag{font-size:11px;padding:3px 9px;border-radius:100px;background:var(--s3);border:1px solid var(--brd);color:var(--txt3);}
+.tag.bad{border-color:rgba(248,113,113,.3);color:#f87171;background:rgba(248,113,113,.08);}
+.tag.warn{border-color:rgba(251,191,36,.3);color:#fbbf24;background:rgba(251,191,36,.08);}
+.tag.ok{border-color:rgba(74,222,128,.3);color:#4ade80;background:rgba(74,222,128,.08);}
+/* Gen output */
+.gen-output{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-top:12px;font-family:var(--mono);font-size:13px;color:var(--txt);line-height:1.8;white-space:pre-wrap;word-break:break-word;}
+/* Sent */
 .sent-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;transition:border-color .15s;animation:fadeUp .15s ease;}
 .sent-item:hover{border-color:var(--brd-hi);}
 .sent-info{flex:1;min-width:0;}
@@ -189,55 +271,44 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .sent-subj{font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px;}
 .sent-meta{font-size:11px;color:var(--txt3);font-family:var(--mono);}
 .sent-actions{display:flex;gap:6px;flex-shrink:0;}
-
-/* ── SENDER: Status Banner ── */
-.send-status-banner{border-radius:var(--r-sm);padding:14px 16px;font-size:13px;line-height:1.6;border:1px solid var(--brd);display:none;animation:fadeUp .2s ease;}
-.send-status-banner.show{display:flex;align-items:flex-start;gap:10px;}
-.send-status-banner.success{background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.25);color:#4ade80;}
-.send-status-banner.error{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.25);color:#f87171;}
-.send-status-banner.loading{background:var(--s2);color:var(--txt3);}
-.send-status-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
-.send-status-body{flex:1;min-width:0;}
-.send-status-title{font-weight:600;margin-bottom:4px;}
-.send-status-sub{font-size:12px;opacity:.8;}
-
-/* ── SENDER: From-Box ── */
-.sender-from-box{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.sender-from-box.active-sender{border-color:rgba(255,255,255,.15);}
-.sender-from-av{width:40px;height:40px;border-radius:50%;background:var(--s3);border:1px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--txt);flex-shrink:0;}
-.sender-from-info{flex:1;min-width:0;}
-.sender-from-addr{font-family:var(--mono);font-size:13px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px;}
-.sender-from-sub{font-size:11px;color:var(--txt3);}
-
-/* ── SENDER: Worker URL config ── */
-.worker-config{background:var(--s2);border:1px dashed var(--brd-hi);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;}
-.worker-config-title{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.worker-config-sub{font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px;}
-.worker-url-row{display:flex;gap:8px;}
-.worker-url-row input{font-size:12px;font-family:var(--mono);}
-
-/* ── SENDER: Char counter ── */
-.compose-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
-.char-counter{font-family:var(--mono);font-size:11px;color:var(--txt3);}
-.char-counter.warn{color:#fbbf24;}
-
-/* ── PHONE ── */
-.country-chip{padding:8px 14px;font-size:12px;font-weight:500;background:var(--s2);border:1px solid var(--brd);border-radius:100px;color:var(--txt3);cursor:pointer;transition:all .15s;font-family:var(--font);min-height:36px;touch-action:manipulation;}
-.country-chip:hover{border-color:var(--brd-hi);color:var(--txt2);}
-.country-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
-.phone-select-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
-.phone-pill{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;margin-bottom:6px;transition:border-color .2s;}
-.phone-number{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--txt);flex:1;letter-spacing:.5px;}
-.sms-item{display:flex;align-items:flex-start;gap:10px;padding:14px 10px;border-top:1px solid var(--brd);border-radius:var(--r-sm);transition:background .15s;margin:0 -10px;animation:fadeUp .2s ease;}
-.sms-item:hover{background:var(--glow);}
-.sms-av{width:34px;height:34px;border-radius:9px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.sms-from{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px;}
-.sms-body{font-size:13px;color:var(--txt2);line-height:1.5;white-space:pre-wrap;word-break:break-word;}
-.sms-time{font-family:var(--mono);font-size:10px;color:var(--txt3);margin-top:4px;}
+/* Online counter */
+.online-counter{position:fixed;bottom:16px;right:16px;display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--brd);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--txt3);box-shadow:var(--shadow-sm);z-index:100;user-select:none;}
+.online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5);animation:pg 2s infinite;flex-shrink:0;}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.7;box-shadow:0 0 12px rgba(74,222,128,.8)}}
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:300;align-items:flex-end;justify-content:center;padding:0;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--s1);border:1px solid var(--brd-hi);border-radius:var(--r-lg) var(--r-lg) 0 0;padding:28px 24px max(24px,env(safe-area-inset-bottom));width:100%;max-width:100%;box-shadow:var(--shadow-lg);animation:slideUp .25s cubic-bezier(.32,.72,0,1);max-height:90vh;overflow-y:auto;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(min-width:640px){.modal-overlay{align-items:center;padding:20px;}.modal-box{border-radius:var(--r-lg);max-width:480px;animation:fadeUp .2s ease;}}
+.modal-handle{width:36px;height:4px;background:var(--s3);border-radius:2px;margin:0 auto 20px;}
+.modal-title{font-size:16px;font-weight:600;color:var(--txt);letter-spacing:-.4px;margin-bottom:6px;}
+.modal-sub{font-family:var(--mono);font-size:12px;color:var(--txt3);margin-bottom:20px;overflow:hidden;text-overflow:ellipsis;}
+.modal-input{margin-bottom:12px;}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px;}
+.modal-tabs{display:flex;gap:2px;background:var(--s2);border-radius:9px;padding:3px;margin-bottom:18px;}
+.modal-tab{flex:1;padding:9px;font-size:13px;font-weight:500;color:var(--txt3);background:none;border:none;border-radius:7px;cursor:pointer;font-family:var(--font);transition:all .18s;min-height:40px;}
+.modal-tab.active{background:var(--s3);color:var(--txt);}
+.modal-err{font-size:12px;color:#f87171;margin-bottom:10px;display:none;}
+.modal-err.show{display:block;}
+.user-info{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:12px 14px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);}
+.user-info-name{font-size:14px;font-weight:600;color:var(--txt);}
+.user-info-sub{font-size:12px;color:var(--txt3);}
+.auth-avatar{width:32px;height:32px;border-radius:50%;background:var(--s3);border:1px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--txt2);cursor:pointer;flex-shrink:0;transition:border-color .2s;min-height:32px;}
+.auth-avatar:hover{border-color:var(--brd-act);}
+.header-chip{font-size:11px;font-weight:500;color:var(--txt3);background:var(--s2);border:1px solid var(--brd);border-radius:100px;padding:4px 12px;letter-spacing:.3px;white-space:nowrap;}
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--brd);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--txt2);}
+.theme-toggle:hover{border-color:var(--brd-hi);background:var(--s3);transform:rotate(20deg);}
+.theme-toggle svg{width:16px;height:16px;}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(50px);background:var(--s1);border:1px solid var(--brd-hi);color:var(--txt2);padding:11px 20px;border-radius:100px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:all .3s cubic-bezier(.34,1.3,.64,1);white-space:nowrap;box-shadow:var(--shadow-sm);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin .7s linear infinite;display:inline-block;}
+/* Affiliate */
 .affiliate-section{margin-top:40px;padding-top:28px;border-top:1px solid var(--brd);}
 .affiliate-label{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.8px;text-transform:uppercase;text-align:center;margin-bottom:14px;}
 .affiliate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.affiliate-card{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;text-decoration:none;color:var(--txt);cursor:pointer;transition:border-color .18s,background .18s,transform .15s;position:relative;overflow:hidden;touch-action:manipulation;}
+.affiliate-card{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;text-decoration:none;color:var(--txt);cursor:pointer;transition:border-color .18s,background .18s,transform .15s;position:relative;overflow:hidden;}
 .affiliate-card:hover{border-color:var(--brd-hi);background:var(--s2);transform:translateY(-1px);}
 .affiliate-icon{width:32px;height:32px;border-radius:8px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--txt2);}
 .affiliate-info{flex:1;min-width:0;}
@@ -245,42 +316,11 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 .affiliate-desc{font-size:11px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .affiliate-arrow{font-size:11px;color:var(--txt3);flex-shrink:0;}
 .affiliate-badge{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:1px 6px;letter-spacing:.4px;text-transform:uppercase;}
-.online-counter{position:fixed;bottom:16px;right:16px;display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--brd);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--txt3);box-shadow:var(--shadow-sm);z-index:100;user-select:none;transition:all .2s;}
-.online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5);animation:pg 2s infinite;flex-shrink:0;}
-@keyframes pg{0%,100%{opacity:1}50%{opacity:.7;box-shadow:0 0 12px rgba(74,222,128,.8)}}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:300;align-items:flex-end;justify-content:center;padding:0;}
-.modal-overlay.open{display:flex;}
-.modal-box{background:var(--s1);border:1px solid var(--brd-hi);border-radius:var(--r-lg) var(--r-lg) 0 0;padding:28px 24px max(24px, env(safe-area-inset-bottom));width:100%;max-width:100%;box-shadow:var(--shadow-lg);animation:slideUp .25s cubic-bezier(.32,.72,0,1);max-height:90vh;overflow-y:auto;}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-@media(min-width:640px){.modal-overlay{align-items:center;padding:20px;}.modal-box{border-radius:var(--r-lg);max-width:420px;animation:fadeUp .2s ease;}}
-.modal-handle{width:36px;height:4px;background:var(--s3);border-radius:2px;margin:0 auto 20px;}
-.modal-title{font-size:16px;font-weight:600;color:var(--txt);letter-spacing:-.4px;margin-bottom:6px;}
-.modal-sub{font-family:var(--mono);font-size:12px;color:var(--txt3);margin-bottom:20px;overflow:hidden;text-overflow:ellipsis;}
-.modal-input{margin-bottom:12px;}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px;}
-.modal-tabs{display:flex;gap:2px;background:var(--s2);border-radius:9px;padding:3px;margin-bottom:18px;}
-.modal-tab{flex:1;padding:9px;font-size:13px;font-weight:500;color:var(--txt3);background:none;border:none;border-radius:7px;cursor:pointer;font-family:var(--font);transition:all .18s;min-height:40px;touch-action:manipulation;}
-.modal-tab.active{background:var(--s3);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.2);}
-.modal-err{font-size:12px;color:#f87171;margin-bottom:10px;display:none;}
-.modal-err.show{display:block;}
-.user-info{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:12px 14px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);}
-.user-info-name{font-size:14px;font-weight:600;color:var(--txt);}
-.user-info-sub{font-size:12px;color:var(--txt3);}
-.auth-avatar{width:32px;height:32px;border-radius:50%;background:var(--s3);border:1px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--txt2);cursor:pointer;flex-shrink:0;transition:border-color .2s;min-height:32px;touch-action:manipulation;}
-.auth-avatar:hover{border-color:var(--brd-act);}
-.header-chip{font-size:11px;font-weight:500;color:var(--txt3);background:var(--s2);border:1px solid var(--brd);border-radius:100px;padding:4px 12px;letter-spacing:.3px;white-space:nowrap;}
-.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--brd);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--txt2);min-height:36px;touch-action:manipulation;}
-.theme-toggle:hover{border-color:var(--brd-hi);background:var(--s3);transform:rotate(20deg);color:var(--txt);}
-.theme-toggle svg{width:16px;height:16px;}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(50px);background:var(--s1);border:1px solid var(--brd-hi);color:var(--txt2);padding:11px 20px;border-radius:100px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:all .3s cubic-bezier(.34,1.3,.64,1);white-space:nowrap;box-shadow:var(--shadow-sm);}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spin{animation:spin .7s linear infinite;display:inline-block;}
-
+/* Responsive */
 @media(max-width:768px){
   .sidebar{display:none;}
   .mobile-nav{display:flex;}
-  .main{height:calc(100vh - 60px);padding-bottom:0;}
+  .main{height:calc(100vh - 60px);}
   .main-inner{padding:20px 14px 80px;}
   .online-counter{bottom:72px;right:12px;padding:5px 10px;font-size:11px;}
   .toast{bottom:76px;}
@@ -288,7 +328,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   .email-row{flex-direction:column;}
   .email-pill{min-width:unset;}
   .btn-group .btn{flex:1;}
-  .sent-actions{flex-direction:column;}
+  .tool-grid{grid-template-columns:1fr;}
   .pwned-input-row{flex-direction:column;}
   .worker-url-row{flex-direction:column;}
 }
@@ -334,6 +374,10 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     <span class="nav-label">Pwned?</span>
   </button>
+  <button class="nav-item" id="snav-tools" onclick="switchPage('tools')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+    <span class="nav-label">Tools</span>
+  </button>
   <button class="nav-item" id="snav-whoami" onclick="switchPage('whoami')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
     <span class="nav-label">WHOAMI</span>
@@ -364,9 +408,9 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Pwned?
   </button>
-  <button class="mob-nav-item" id="mnav-saved" onclick="switchPage('saved')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-    Saved
+  <button class="mob-nav-item" id="mnav-tools" onclick="switchPage('tools')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+    Tools
   </button>
   <button class="mob-nav-item" id="mnav-whoami" onclick="switchPage('whoami')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -395,6 +439,8 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
       <h1 style="font-size:36px;font-weight:300;letter-spacing:-1.8px;color:var(--txt);margin-bottom:10px;">Wegwerf-Emails,<br><strong style="font-weight:600;">sofort bereit.</strong></h1>
       <p style="font-size:14px;color:var(--txt3);line-height:1.6;">Anonym, keine Registrierung. Links klickbar, Emails speicherbar.</p>
     </div>
+
+    <!-- Multi-inbox tabs -->
     <div class="card">
       <div class="card-label">E-Mail Adresse</div>
       <div class="email-row">
@@ -404,10 +450,14 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
           <span class="email-copy-hint" id="copyHint"></span>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary" id="genBtn" onclick="doGenerate()" disabled><span id="genIcon">↻</span> Neue Email</button>
+          <button class="btn btn-primary" id="genBtn" onclick="doGenerate()" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+            Neue Email
+          </button>
           <button class="btn btn-ghost" id="saveBtn" onclick="openSave()" disabled>+ Speichern</button>
         </div>
       </div>
+
       <div class="timer-section">
         <div class="section-label">Ablaufzeit</div>
         <div class="timer-opts">
@@ -435,14 +485,18 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
         </div>
       </div>
     </div>
+
     <div class="card">
       <div class="inbox-header">
         <div class="inbox-title-row">Posteingang <span class="inbox-pill" id="inboxCount">0</span></div>
-        <button class="btn btn-ghost btn-sm" id="refreshBtn" onclick="doFetch(true)" disabled><span id="refreshIco">↻</span> Refresh</button>
+        <button class="btn btn-ghost btn-sm" id="refreshBtn" onclick="doFetch(true)" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="refreshIco"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+          Refresh
+        </button>
       </div>
       <ul class="msg-list" id="msgList"></ul>
       <div id="emptyState" class="empty-view">
-        <div class="empty-icon"><span class="spin" style="font-size:18px">↻</span></div>
+        <div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="spin" style="color:var(--txt3)"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>
         <h3>Verbinde…</h3><p>Einen Moment bitte.</p>
       </div>
     </div>
@@ -454,31 +508,34 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
           <div class="detail-meta" id="dMeta"></div>
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0">
-          <button class="btn btn-ghost btn-sm" onclick="copyDetailBody()">&#x1F4CB;</button>
-          <button class="btn btn-ghost btn-sm" onclick="closeDetail()">&#x2715;</button>
+          <button class="btn btn-ghost btn-sm" onclick="copyDetailBody()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="closeDetail()">✕</button>
         </div>
       </div>
       <div class="detail-body" id="dBody"></div>
     </div>
+
     <div class="affiliate-section">
       <div class="affiliate-label">Empfehlungen</div>
       <div class="affiliate-grid">
-        <a class="affiliate-card" href="https://nordvpn.com" target="_blank" rel="noopener nofollow">
+        <a class="affiliate-card" href="https://nordvpn.com" target="_blank" rel="noopener noreferrer nofollow">
           <div class="affiliate-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <div class="affiliate-info"><div class="affiliate-name">NordVPN</div><div class="affiliate-desc">Anonym surfen</div></div>
           <div class="affiliate-arrow">↗</div><div class="affiliate-badge">VPN</div>
         </a>
-        <a class="affiliate-card" href="https://proton.me/vpn" target="_blank" rel="noopener nofollow">
+        <a class="affiliate-card" href="https://proton.me/vpn" target="_blank" rel="noopener noreferrer nofollow">
           <div class="affiliate-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <div class="affiliate-info"><div class="affiliate-name">Proton VPN</div><div class="affiliate-desc">Open Source, gratis</div></div>
           <div class="affiliate-arrow">↗</div><div class="affiliate-badge">VPN</div>
         </a>
-        <a class="affiliate-card" href="https://bitwarden.com" target="_blank" rel="noopener nofollow">
+        <a class="affiliate-card" href="https://bitwarden.com" target="_blank" rel="noopener noreferrer nofollow">
           <div class="affiliate-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v7c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V2z"/></svg></div>
           <div class="affiliate-info"><div class="affiliate-name">Bitwarden</div><div class="affiliate-desc">Passwort-Manager</div></div>
           <div class="affiliate-arrow">↗</div><div class="affiliate-badge">Security</div>
         </a>
-        <a class="affiliate-card" href="https://simplelogin.io" target="_blank" rel="noopener nofollow">
+        <a class="affiliate-card" href="https://simplelogin.io" target="_blank" rel="noopener noreferrer nofollow">
           <div class="affiliate-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div class="affiliate-info"><div class="affiliate-name">SimpleLogin</div><div class="affiliate-desc">Email-Aliase dauerhaft</div></div>
           <div class="affiliate-arrow">↗</div><div class="affiliate-badge">Email</div>
@@ -491,10 +548,10 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   <div class="page" id="page-pwned" style="display:none">
     <div class="pwned-hero">
       <h2>Bin ich gehackt?</h2>
-      <p>Prüfe ob deine Email-Adresse oder dein Passwort in einem Datenleck aufgetaucht sind.</p>
+      <p>Email-Adresse oder Passwort in einem Datenleck prüfen.</p>
     </div>
     <div class="card">
-      <div class="card-label">Email-Adresse prüfen</div>
+      <div class="card-label">Email prüfen</div>
       <div class="pwned-input-row">
         <input type="email" id="pwnedEmailInput" placeholder="deine@email.com" inputmode="email">
         <button class="btn btn-primary" onclick="checkEmail()" id="checkEmailBtn" style="flex-shrink:0;">Prüfen</button>
@@ -503,9 +560,9 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
     </div>
     <div class="card">
       <div class="card-label">Passwort prüfen (k-Anonym)</div>
-      <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Nur die ersten 5 Zeichen des SHA-1-Hashes werden gesendet — dein Passwort verlässt nie dieses Gerät.</p>
+      <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Nur die ersten 5 Zeichen des SHA-1-Hashes werden gesendet — das Passwort verlässt nie dieses Gerät.</p>
       <div class="pwned-input-row">
-        <input type="password" id="pwnedPwInput" placeholder="Passwort eingeben..." autocomplete="new-password">
+        <input type="password" id="pwnedPwInput" placeholder="Passwort eingeben…" autocomplete="new-password">
         <button class="btn btn-primary" onclick="checkPassword()" id="checkPwBtn" style="flex-shrink:0;">Prüfen</button>
       </div>
       <div class="pw-strength-bar" id="pwStrengthBar" style="width:0"></div>
@@ -517,8 +574,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   <div class="page" id="page-sender" style="display:none">
     <div class="card">
       <div class="card-label">Absender</div>
-
-      <!-- From-Box: zeigt aktive Temp-Email -->
       <div class="sender-from-box" id="senderFromBox">
         <div class="sender-from-av" id="senderFromAv">?</div>
         <div class="sender-from-info">
@@ -527,25 +582,19 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
         </div>
         <div class="status-dot" id="senderDot"></div>
       </div>
-
-      <!-- Worker URL konfigurieren (einmalig, optional) -->
       <div class="worker-config" id="workerConfigBox">
         <div class="worker-config-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
           Cloudflare Worker URL
         </div>
-        <div class="worker-config-sub">
-          Trage einmalig deine Worker-URL ein — danach funktioniert der Versand automatisch für alle Nutzer ohne weitere Einrichtung.<br>
-          <span style="color:var(--txt2)">→ worker.js aus dem Download deployen auf <strong>dash.cloudflare.com</strong></span>
-        </div>
+        <div class="worker-config-sub">Einmalig deine Worker-URL eintragen.</div>
         <div class="worker-url-row">
           <input type="url" id="workerUrlInput" placeholder="https://altmail-smtp.DEIN-NAME.workers.dev" autocomplete="off" style="font-size:12px;font-family:var(--mono)">
           <button class="btn btn-primary btn-sm" onclick="saveWorkerUrl()" style="flex-shrink:0;">Speichern</button>
         </div>
         <div id="workerUrlStatus" style="font-size:11px;color:var(--txt3);margin-top:8px;"></div>
       </div>
-
-      <div class="card-label" style="margin-top:4px;">Neue Email verfassen</div>
+      <div class="card-label" style="margin-top:4px;">Verfassen</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <input type="email" id="sendTo" placeholder="An: empfaenger@example.com" inputmode="email" autocomplete="off">
         <input type="text" id="sendSubject" placeholder="Betreff" autocomplete="off">
@@ -554,14 +603,10 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
           <span class="char-counter" id="charCounter">0 Zeichen</span>
           <div style="display:flex;gap:8px;">
             <button class="btn btn-ghost btn-sm" onclick="clearCompose()">Leeren</button>
-            <button class="btn btn-primary" id="sendBtn" onclick="sendEmail()">
-              <span id="sendBtnTxt">↑ Senden</span>
-            </button>
+            <button class="btn btn-primary" id="sendBtn" onclick="sendEmail()"><span id="sendBtnTxt">↑ Senden</span></button>
           </div>
         </div>
       </div>
-
-      <!-- Status Banner — erscheint nach Sendeversuch -->
       <div class="send-status-banner" id="sendStatusBanner" style="margin-top:12px;">
         <div class="send-status-icon" id="sendStatusIcon"></div>
         <div class="send-status-body">
@@ -570,7 +615,6 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
         </div>
       </div>
     </div>
-
     <div class="card" id="sentCard" style="display:none">
       <div class="inbox-header">
         <div class="inbox-title-row">Verlauf <span class="inbox-pill" id="sentCount">0</span></div>
@@ -584,17 +628,12 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   <div class="page" id="page-phone" style="display:none">
     <div class="card">
       <div class="card-label">Temporäre Telefonnummer</div>
-      <div class="phone-select-wrap" id="countryChips">
-        <button class="country-chip on" onclick="selectCountry('us',this)">US</button>
-        <button class="country-chip" onclick="selectCountry('uk',this)">UK</button>
-        <button class="country-chip" onclick="selectCountry('de',this)">DE</button>
-        <button class="country-chip" onclick="selectCountry('fr',this)">FR</button>
-        <button class="country-chip" onclick="selectCountry('ca',this)">CA</button>
-        <button class="country-chip" onclick="selectCountry('se',this)">SE</button>
-        <button class="country-chip" onclick="selectCountry('nl',this)">NL</button>
-      </div>
+      <div class="phone-select-wrap" id="countryChips"></div>
       <div id="phoneList"></div>
-      <div style="margin-top:10px;"><button class="btn btn-primary btn-sm" onclick="loadPhones()">↻ Neue Nummern</button></div>
+      <div style="margin-top:10px;"><button class="btn btn-primary btn-sm" onclick="loadPhones()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+        Neue Nummern
+      </button></div>
     </div>
     <div class="card" id="activePhoneCard" style="display:none">
       <div class="card-label">Aktive Nummer</div>
@@ -607,11 +646,14 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
     <div class="card" id="smsCard" style="display:none">
       <div class="inbox-header">
         <div class="inbox-title-row">SMS <span class="inbox-pill" id="smsCount">0</span></div>
-        <button class="btn btn-ghost btn-sm" onclick="refreshSms()">↻ Refresh</button>
+        <button class="btn btn-ghost btn-sm" onclick="refreshSms()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+          Refresh
+        </button>
       </div>
       <ul class="sms-list" id="smsList"></ul>
       <div id="smsEmpty" class="empty-view" style="padding:28px 20px">
-        <div class="empty-icon" style="font-size:20px">💬</div>
+        <div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3>Keine SMS</h3><p>Sende eine SMS an diese Nummer.<br>Aktualisiert alle 20 Sekunden.</p>
       </div>
     </div>
@@ -622,6 +664,169 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
     <div class="card">
       <div class="card-label">Gespeicherte Adressen</div>
       <div id="savedList"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: TOOLS -->
+  <div class="page" id="page-tools" style="display:none">
+    <div class="tool-grid" id="toolGrid">
+      <div class="tool-card" onclick="openTool('pwgen')" id="tc-pwgen">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="tool-card-name">Passwort-Generator</div>
+        <div class="tool-card-desc">Sicher, anpassbar</div>
+      </div>
+      <div class="tool-card" onclick="openTool('ugen')" id="tc-ugen">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <div class="tool-card-name">Username-Generator</div>
+        <div class="tool-card-desc">Glaubwürdige Pseudonyme</div>
+      </div>
+      <div class="tool-card" onclick="openTool('fakeid')" id="tc-fakeid">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <div class="tool-card-name">Fake-Identität</div>
+        <div class="tool-card-desc">Name, Adresse, Daten</div>
+      </div>
+      <div class="tool-card" onclick="openTool('urlscan')" id="tc-urlscan">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="tool-card-name">URL-Scanner</div>
+        <div class="tool-card-desc">Links auf Phishing prüfen</div>
+      </div>
+      <div class="tool-card" onclick="openTool('tracker')" id="tc-tracker">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="tool-card-name">Tracker-Detector</div>
+        <div class="tool-card-desc">Website-Tracker erkennen</div>
+      </div>
+      <div class="tool-card" onclick="openTool('meta')" id="tc-meta">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <div class="tool-card-name">Meta-Scraper</div>
+        <div class="tool-card-desc">Website-Metadaten</div>
+      </div>
+      <div class="tool-card" onclick="openTool('ipinfo')" id="tc-ipinfo">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="tool-card-name">IP-Lookup</div>
+        <div class="tool-card-desc">Standort, ASN, VPN-Check</div>
+      </div>
+      <div class="tool-card" onclick="openTool('emailrep')" id="tc-emailrep">
+        <div class="tool-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="tool-card-name">Email-Reputation</div>
+        <div class="tool-card-desc">Spam, Disposable, Blacklist</div>
+      </div>
+    </div>
+
+    <!-- Tool panels -->
+    <div class="tool-panel" id="tp-pwgen">
+      <div class="card">
+        <div class="card-label">Passwort-Generator</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13px;color:var(--txt2);">Länge: <span id="pwLenVal">20</span></span>
+            <input type="range" id="pwLen" min="8" max="64" value="20" style="width:55%;height:3px;" oninput="document.getElementById('pwLenVal').textContent=this.value">
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwUpper" checked> Großbuchstaben</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwNum" checked> Zahlen</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwSym" checked> Sonderzeichen</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--txt2);cursor:pointer;"><input type="checkbox" id="pwWords"> Wörter (Passphrase)</label>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="genPassword()">Generieren</button>
+            <button class="btn btn-ghost" onclick="copyToolResult('pwResult')">Kopieren</button>
+          </div>
+        </div>
+        <div class="gen-output" id="pwResult" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-ugen">
+      <div class="card">
+        <div class="card-label">Username-Generator</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <button class="t-chip on" id="ugenStyle-normal" onclick="setUgenStyle('normal',this)">Normal</button>
+          <button class="t-chip" id="ugenStyle-tech" onclick="setUgenStyle('tech',this)">Tech</button>
+          <button class="t-chip" id="ugenStyle-anon" onclick="setUgenStyle('anon',this)">Anonym</button>
+          <button class="t-chip" id="ugenStyle-real" onclick="setUgenStyle('real',this)">Realistisch</button>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" onclick="genUsernames()">Generieren</button>
+          <button class="btn btn-ghost" onclick="copyToolResult('ugenResult')">Kopieren</button>
+        </div>
+        <div class="gen-output" id="ugenResult" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-fakeid">
+      <div class="card">
+        <div class="card-label">Fake-Identität</div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+          <select id="fakeLocale" style="height:36px;padding:0 10px;font-size:13px;width:auto;">
+            <option value="de">Deutsch</option>
+            <option value="en">Englisch</option>
+            <option value="fr">Französisch</option>
+            <option value="es">Spanisch</option>
+          </select>
+          <button class="btn btn-primary" onclick="genFakeId()">Generieren</button>
+          <button class="btn btn-ghost" onclick="copyToolResult('fakeIdResult')">Kopieren</button>
+        </div>
+        <div id="fakeIdResult" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-urlscan">
+      <div class="card">
+        <div class="card-label">URL-Scanner</div>
+        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft Links via Google Safe Browsing & URLhaus auf Phishing, Malware und Spam.</p>
+        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <input type="url" id="urlInput" placeholder="https://example.com" style="flex:1;min-width:200px;">
+          <button class="btn btn-primary" onclick="scanUrl()" id="urlScanBtn" style="flex-shrink:0;">Scannen</button>
+        </div>
+        <div id="urlResult"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-tracker">
+      <div class="card">
+        <div class="card-label">Tracker-Detector</div>
+        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Browser blockieren direkte Analyse fremder Seiten. Diese Tools scannen zuverlässig ohne CORS-Probleme.</p>
+        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <input type="url" id="trackerInput" placeholder="https://example.com" style="flex:1;min-width:200px;">
+          <button class="btn btn-primary" onclick="openTrackerTools()" id="trackerBtn" style="flex-shrink:0;">Öffnen</button>
+        </div>
+        <div id="trackerResult"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-meta">
+      <div class="card">
+        <div class="card-label">Meta-Scraper</div>
+        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">URL-Analyse: Domain-Infos lokal, Metadaten via externer Dienst.</p>
+        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <input type="url" id="metaInput" placeholder="https://example.com" style="flex:1;min-width:200px;" oninput="analyzeUrlLocal()">
+          <button class="btn btn-primary" onclick="scrapeMeta()" id="metaBtn" style="flex-shrink:0;">Analysieren</button>
+        </div>
+        <div id="metaResult"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-ipinfo">
+      <div class="card">
+        <div class="card-label">IP-Lookup</div>
+        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <input type="text" id="ipInput" placeholder="IP-Adresse oder leer lassen für eigene IP" style="flex:1;min-width:200px;font-family:var(--mono);font-size:13px;">
+          <button class="btn btn-primary" onclick="lookupIP()" id="ipBtn" style="flex-shrink:0;">Lookup</button>
+        </div>
+        <div id="ipResult"></div>
+      </div>
+    </div>
+
+    <div class="tool-panel" id="tp-emailrep">
+      <div class="card">
+        <div class="card-label">Email-Reputation</div>
+        <p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft ob eine Domain als Spam, Wegwerf-Adresse oder Blacklist-Eintrag bekannt ist — komplett lokal, kein API-Key nötig.</p>
+        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <input type="email" id="emailRepInput" placeholder="adresse@domain.com" style="flex:1;min-width:200px;" inputmode="email">
+          <button class="btn btn-primary" onclick="checkEmailRep()" id="emailRepBtn" style="flex-shrink:0;">Prüfen</button>
+        </div>
+        <div id="emailRepResult"></div>
+      </div>
     </div>
   </div>
 
@@ -647,7 +852,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
         <button class="modal-tab active" id="authTabLogin" onclick="switchAuthTab('login')">Login</button>
         <button class="modal-tab" id="authTabReg" onclick="switchAuthTab('register')">Registrieren</button>
       </div>
-      <input class="modal-input" id="authEmail" type="email" placeholder="E-Mail Adresse" inputmode="email" autocomplete="email">
+      <input class="modal-input" id="authEmail" type="email" placeholder="E-Mail" inputmode="email" autocomplete="email">
       <input class="modal-input" id="authPw" type="password" placeholder="Passwort" autocomplete="current-password" style="margin-bottom:12px;">
       <div class="modal-err" id="authErr"></div>
       <div class="modal-btns">
@@ -683,6 +888,31 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   </div>
 </div>
 
+<!-- RULE MODAL -->
+<div class="modal-overlay" id="ruleModalOv" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Neue Regel</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+      <select id="ruleType" style="height:44px;padding:0 14px;">
+        <option value="from">Absender enthält</option>
+        <option value="subject">Betreff enthält</option>
+        <option value="body">Text enthält</option>
+      </select>
+      <input type="text" id="ruleValue" placeholder="Suchbegriff…">
+      <select id="ruleAction" style="height:44px;padding:0 14px;">
+        <option value="highlight">Hervorheben</option>
+        <option value="delete">Löschen</option>
+        <option value="notify">Benachrichtigung</option>
+      </select>
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="document.getElementById('ruleModalOv').classList.remove('open')">Abbrechen</button>
+      <button class="btn btn-primary" onclick="saveRule()">Speichern</button>
+    </div>
+  </div>
+</div>
+
 <!-- SENT DETAIL MODAL -->
 <div class="modal-overlay" id="sentDetailOv" onclick="if(event.target===this)this.classList.remove('open')">
   <div class="modal-box">
@@ -700,7 +930,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 
 <script>
 // ════════════════════════════════════
-// 3D BACKGROUND
+// BG CANVAS
 // ════════════════════════════════════
 (function(){
   const canvas=document.getElementById('bg-canvas');
@@ -709,7 +939,7 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
   function isDark(){return document.documentElement.getAttribute('data-theme')!=='light';}
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
   function initStars(){stars=[];const n=Math.min(280,Math.floor(W*H/4000));for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.2,alpha:Math.random()*.6+.1,phase:Math.random()*Math.PI*2,speed:Math.random()*.015+.003});}
-  function initShapes(){shapes=[{type:'cube',xp:.06,yp:.15,sz:36,rs:.003,dy:.10,op:.18,rot:0,off:1.2},{type:'ring',xp:.94,yp:.10,sz:44,rs:-.003,dy:.08,op:.14,rot:0,off:2.1},{type:'oct',xp:.88,yp:.50,sz:28,rs:.004,dy:.07,op:.15,rot:0,off:.8},{type:'tri',xp:.50,yp:.06,sz:30,rs:.002,dy:.08,op:.12,rot:0,off:1.7},{type:'cube',xp:.04,yp:.70,sz:24,rs:-.003,dy:.09,op:.12,rot:0,off:3.0},{type:'ring',xp:.15,yp:.90,sz:38,rs:.002,dy:.10,op:.10,rot:0,off:.4},{type:'oct',xp:.82,yp:.85,sz:22,rs:.005,dy:.12,op:.11,rot:0,off:2.5},{type:'tri',xp:.30,yp:.20,sz:22,rs:.004,dy:.09,op:.13,rot:0,off:1.1},{type:'cube',xp:.55,yp:.80,sz:18,rs:-.004,dy:.08,op:.09,rot:0,off:.7},{type:'tri',xp:.20,yp:.55,sz:24,rs:.003,dy:.10,op:.10,rot:0,off:3.3},{type:'ring',xp:.75,yp:.65,sz:32,rs:-.002,dy:.07,op:.08,rot:0,off:1.9}];}
+  function initShapes(){shapes=[{type:'cube',xp:.06,yp:.15,sz:36,rs:.003,dy:.10,op:.18,rot:0,off:1.2},{type:'ring',xp:.94,yp:.10,sz:44,rs:-.003,dy:.08,op:.14,rot:0,off:2.1},{type:'oct',xp:.88,yp:.50,sz:28,rs:.004,dy:.07,op:.15,rot:0,off:.8},{type:'tri',xp:.50,yp:.06,sz:30,rs:.002,dy:.08,op:.12,rot:0,off:1.7},{type:'cube',xp:.04,yp:.70,sz:24,rs:-.003,dy:.09,op:.12,rot:0,off:3.0},{type:'ring',xp:.15,yp:.90,sz:38,rs:.002,dy:.10,op:.10,rot:0,off:.4},{type:'oct',xp:.82,yp:.85,sz:22,rs:.005,dy:.12,op:.11,rot:0,off:2.5},{type:'tri',xp:.30,yp:.20,sz:22,rs:.004,dy:.09,op:.13,rot:0,off:1.1}];}
   function drawCube(cx,cy,sz,rot,a){const c=Math.cos(rot),s=Math.sin(rot),h=sz*.5,off=sz*.28;const pts=[[-h,-h],[h,-h],[h,h],[-h,h]].map(([x,y])=>[x*c-y*s*.5+cx,x*s*.5+y*c*.5+cy]);const top=pts.map(([x,y])=>[x,y-off]);ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();ctx.beginPath();top.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();pts.forEach(([x,y],i)=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(top[i][0],top[i][1]);ctx.stroke();});ctx.restore();}
   function drawOct(cx,cy,sz,rot,a){ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;const pts=[];for(let i=0;i<4;i++){const ang=rot+i/4*Math.PI*2;pts.push([cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz*.6]);}const top=[cx,cy-sz*.9],bot=[cx,cy+sz*.9];for(let i=0;i<4;i++){const n=pts[(i+1)%4];ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(n[0],n[1]);ctx.stroke();ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(top[0],top[1]);ctx.stroke();ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(bot[0],bot[1]);ctx.stroke();}ctx.restore();}
   function drawRing(cx,cy,sz,rot,a){ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=isDark()?'rgba(255,255,255,.85)':'rgba(0,0,0,.8)';ctx.lineWidth=.8;ctx.beginPath();ctx.ellipse(cx,cy,sz,sz*.38,rot,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(cx,cy,sz*.55,sz*.21,rot,0,Math.PI*2);ctx.stroke();for(let i=0;i<6;i++){const ang=rot+i/6*Math.PI*2;ctx.beginPath();ctx.moveTo(cx+Math.cos(ang)*sz*.55,cy+Math.sin(ang)*sz*.21);ctx.lineTo(cx+Math.cos(ang)*sz,cy+Math.sin(ang)*sz*.38);ctx.stroke();}ctx.restore();}
@@ -723,32 +953,29 @@ textarea{resize:vertical;min-height:120px;line-height:1.6;}
 // THEME
 // ════════════════════════════════════
 function initTheme(){applyTheme(localStorage.getItem('altmail_theme')||'dark');}
-function applyTheme(t){document.documentElement.setAttribute('data-theme',t);const dark=t==='dark';document.getElementById('sb-sun').style.display=dark?'':'none';document.getElementById('sb-moon').style.display=dark?'none':'';document.getElementById('theme-label').textContent=dark?'Light Mode':'Dark Mode';document.getElementById('mt-sun').style.display=dark?'':'none';document.getElementById('mt-moon').style.display=dark?'none':'';localStorage.setItem('altmail_theme',t);}
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);const dark=t==='dark';$('sb-sun').style.display=dark?'':'none';$('sb-moon').style.display=dark?'none':'';$('theme-label').textContent=dark?'Light Mode':'Dark Mode';$('mt-sun').style.display=dark?'':'none';$('mt-moon').style.display=dark?'none':'';localStorage.setItem('altmail_theme',t);}
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
-initTheme();
 
 // ════════════════════════════════════
-// IP-BASED ONLINE COUNTER
+// ONLINE COUNTER
 // ════════════════════════════════════
 const ONLINE_STORE='altmail_online_ip_v1';
-const IP_TIMEOUT=30000;
-const HB_INTERVAL=10000;
-let myIP=null,myIPHash=null;
-async function getMyIP(){if(myIP)return myIP;try{const r=await fetch('https://api.ipify.org?format=json',{signal:AbortSignal.timeout(5000)});const d=await r.json();myIP=d.ip;return myIP;}catch{try{const r2=await fetch('https://api64.ipify.org?format=json',{signal:AbortSignal.timeout(4000)});const d2=await r2.json();myIP=d2.ip;return myIP;}catch{myIP='local_'+(sessionStorage.getItem('altmail_tab_id')||Math.random().toString(36).slice(2));return myIP;}}}
-async function hashIP(ip){if(!ip)return null;try{const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(ip+'altmail_v1'));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,16);}catch{return ip.replace(/\./g,'_').replace(/:/g,'_').slice(0,16);}}
+const IP_TIMEOUT=30000,HB_INTERVAL=10000;
+let myIPHash=null;
+async function getMyIP(){try{const r=await fetch('https://api.ipify.org?format=json',{signal:AbortSignal.timeout(5000)});return(await r.json()).ip;}catch{return'local_'+(sessionStorage.getItem('altmail_tab_id')||Math.random().toString(36).slice(2));}}
+async function hashIP(ip){try{const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(ip+'altmail_v1'));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,16);}catch{return ip.replace(/\./g,'_').slice(0,16);}}
 function readOnlineIPs(){try{return JSON.parse(localStorage.getItem(ONLINE_STORE)||'{}');}catch{return{};}}
 function writeOnlineIPs(obj){try{localStorage.setItem(ONLINE_STORE,JSON.stringify(obj));}catch{}}
-function purgeExpiredIPs(){const now=Date.now();const data=readOnlineIPs();const alive={};for(const[hash,ts]of Object.entries(data)){if(now-ts<IP_TIMEOUT)alive[hash]=ts;}writeOnlineIPs(alive);return Object.keys(alive).length;}
-function updateOnlineDisplay(){const count=purgeExpiredIPs();document.getElementById('onlineCount').textContent=Math.max(1,count);}
-async function ipHeartbeat(){if(!myIPHash){const ip=await getMyIP();myIPHash=await hashIP(ip);}if(myIPHash){const data=readOnlineIPs();data[myIPHash]=Date.now();writeOnlineIPs(data);}updateOnlineDisplay();}
-function removeMyIP(){if(!myIPHash)return;const data=readOnlineIPs();delete data[myIPHash];writeOnlineIPs(data);}
-function initOnlineCounter(){document.getElementById('onlineCount').textContent='1';ipHeartbeat();setInterval(ipHeartbeat,HB_INTERVAL);setInterval(updateOnlineDisplay,5000);try{const ch=new BroadcastChannel('altmail_online_ip_v1');ch.onmessage=()=>updateOnlineDisplay();}catch{}window.addEventListener('storage',e=>{if(e.key===ONLINE_STORE)updateOnlineDisplay();});window.addEventListener('beforeunload',removeMyIP);window.addEventListener('pagehide',removeMyIP);}
+function purgeExpiredIPs(){const now=Date.now(),data=readOnlineIPs(),alive={};for(const[h,ts]of Object.entries(data))if(now-ts<IP_TIMEOUT)alive[h]=ts;writeOnlineIPs(alive);return Object.keys(alive).length;}
+function updateOnlineDisplay(){$('onlineCount').textContent=Math.max(1,purgeExpiredIPs());}
+async function ipHeartbeat(){if(!myIPHash){myIPHash=await hashIP(await getMyIP());}if(myIPHash){const d=readOnlineIPs();d[myIPHash]=Date.now();writeOnlineIPs(d);}updateOnlineDisplay();}
+function initOnlineCounter(){ipHeartbeat();setInterval(ipHeartbeat,HB_INTERVAL);setInterval(updateOnlineDisplay,5000);window.addEventListener('beforeunload',()=>{if(myIPHash){const d=readOnlineIPs();delete d[myIPHash];writeOnlineIPs(d);}});}
 
 // ════════════════════════════════════
 // INDEXEDDB
 // ════════════════════════════════════
 let db=null;
-function openDB(){return new Promise(resolve=>{if(!window.indexedDB){resolve(null);return;}const req=indexedDB.open('AltMailDB',2);req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('users'))d.createObjectStore('users',{keyPath:'email'});if(!d.objectStoreNames.contains('saved_emails'))d.createObjectStore('saved_emails',{keyPath:'id'});if(!d.objectStoreNames.contains('sent_emails'))d.createObjectStore('sent_emails',{keyPath:'id'});};req.onsuccess=e=>{db=e.target.result;resolve(db);};req.onerror=()=>resolve(null);});}
+function openDB(){return new Promise(resolve=>{if(!window.indexedDB){resolve(null);return;}const req=indexedDB.open('AltMailDB',3);req.onupgradeneeded=e=>{const d=e.target.result;['users','saved_emails','sent_emails','rules'].forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'});});if(!d.objectStoreNames.contains('users'))d.createObjectStore('users',{keyPath:'email'});};req.onsuccess=e=>{db=e.target.result;resolve(db);};req.onerror=()=>resolve(null);});}
 function dbGet(store,key){return new Promise(r=>{if(!db){r(null);return;}const req=db.transaction(store,'readonly').objectStore(store).get(key);req.onsuccess=()=>r(req.result||null);req.onerror=()=>r(null);});}
 function dbPut(store,item){return new Promise(r=>{if(!db){r();return;}const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(item);tx.oncomplete=r;tx.onerror=r;});}
 function dbDel(store,key){return new Promise(r=>{if(!db){r();return;}const tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(key);tx.oncomplete=r;tx.onerror=r;});}
@@ -760,11 +987,22 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
 // STATE
 // ════════════════════════════════════
 const BASE='https://api.mail.tm';
+// Multi-inbox state
+let inboxes=[]; // [{tok,addr,pw,msgs,id,name}]
+let activeInboxIdx=0;
 let tok='',addr='',pw='',msgs=[];
 let tSecs=600,tMax=600,tIv,aIv,rcIv;
 let tMode='countdown',rcVal=15,totalRef=0,readIds=new Set(),sessionStart=null;
 let currentMsgText='';
+let rules=[];
+let fwdTarget='';
+let availDomains=[];
+let currentToolPanel=null;
+let b64CurrentMode='b64enc';
+let ugenCurrentStyle='normal';
+
 const $=id=>document.getElementById(id);
+initTheme();
 function rnd(n){return Array.from({length:n},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('')}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function fmt(iso){if(!iso)return'';const d=new Date(iso),now=new Date(),df=now-d;if(df<60000)return'Gerade';if(df<3600000)return Math.floor(df/60000)+' Min.';if(d.toDateString()===now.toDateString())return d.toLocaleTimeString('de',{hour:'2-digit',minute:'2-digit'});return d.toLocaleDateString('de',{day:'2-digit',month:'2-digit',year:'2-digit'});}
@@ -775,10 +1013,26 @@ function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('sh
 // ════════════════════════════════════
 // NAVIGATION
 // ════════════════════════════════════
-const PAGES=['active','sender','phone','saved','whoami','pwned'];
-const SNAV_IDS={active:'snav-active',sender:'snav-sender',phone:'snav-phone',saved:'snav-saved',whoami:'snav-whoami',pwned:'snav-pwned'};
-const MNAV_IDS={active:'mnav-active',sender:'mnav-sender',phone:'mnav-phone',saved:'mnav-saved',whoami:'mnav-whoami',pwned:'mnav-pwned'};
-function switchPage(name){PAGES.forEach(p=>{const el=$('page-'+p);if(el)el.style.display='none';const sn=$(SNAV_IDS[p]);if(sn)sn.classList.remove('active');const mn=$(MNAV_IDS[p]);if(mn)mn.classList.remove('active');});const el=$('page-'+name);if(el)el.style.display='block';const sn=$(SNAV_IDS[name]);if(sn)sn.classList.add('active');const mn=$(MNAV_IDS[name]);if(mn)mn.classList.add('active');if(name==='saved')renderSaved();if(name==='phone')loadPhones();if(name==='whoami')renderWhoami();if(name==='sender'){updateSenderFrom();renderSentList();}document.querySelector('.main').scrollTop=0;}
+const PAGES=['active','sender','phone','saved','whoami','pwned','tools'];
+const SNAV={active:'snav-active',sender:'snav-sender',phone:'snav-phone',saved:'snav-saved',whoami:'snav-whoami',pwned:'snav-pwned',tools:'snav-tools'};
+const MNAV={active:'mnav-active',sender:'mnav-sender',phone:'mnav-phone',saved:'mnav-saved',whoami:'mnav-whoami',pwned:'mnav-pwned',tools:'mnav-tools'};
+const CHIPS={active:'Temporäre E-Mail',sender:'Email senden',phone:'Temporäre Telefonnummer',saved:'Gespeichert',whoami:'WHOAMI',pwned:'Pwned?',tools:'Tools'};
+function switchPage(name){
+  PAGES.forEach(p=>{
+    const el=$('page-'+p);if(el)el.style.display='none';
+    const sn=$(SNAV[p]);if(sn)sn.classList.remove('active');
+    const mn=$(MNAV[p]);if(mn)mn.classList.remove('active');
+  });
+  const el=$('page-'+name);if(el)el.style.display='block';
+  const sn=$(SNAV[name]);if(sn)sn.classList.add('active');
+  const mn=$(MNAV[name]);if(mn)mn.classList.add('active');
+  $('headerChip').textContent=CHIPS[name]||name;
+  if(name==='saved')renderSaved();
+  if(name==='phone'){initCountryChips();loadPhones();}
+  if(name==='whoami')renderWhoami();
+  if(name==='sender'){updateSenderFrom();renderSentList();}
+  document.querySelector('.main').scrollTop=0;
+}
 
 // ════════════════════════════════════
 // CLIPBOARD
@@ -794,6 +1048,19 @@ function startTimer(){clearInterval(tIv);if(tMode==='unlimited'){$('timerReadout
 function startRefreshRing(){clearInterval(rcIv);rcVal=15;$('refreshRingWrap').style.display='flex';const circle=$('refreshRingCircle'),label=$('refreshRingLabel'),circ=2*Math.PI*5;rcIv=setInterval(()=>{rcVal--;label.textContent=rcVal;if(circle)circle.style.strokeDashoffset=circ*(1-rcVal/15);if(rcVal<=0){rcVal=15;label.textContent=15;if(circle)circle.style.strokeDashoffset=0;}},1000);}
 
 // ════════════════════════════════════
+// DOMAINS
+// ════════════════════════════════════
+async function loadDomains(){
+  try{
+    const r=await fetch(BASE+'/domains?page=1');
+    const d=await r.json();
+    availDomains=(d['hydra:member']||d).map(x=>x.domain).filter(Boolean);
+    const sel=$('domainSelect');
+    sel.innerHTML=availDomains.map(d=>`<option value="${esc(d)}">@${esc(d)}</option>`).join('');
+  }catch{}
+}
+
+// ════════════════════════════════════
 // EMAIL CORE
 // ════════════════════════════════════
 async function doGenerate(){
@@ -802,11 +1069,13 @@ async function doGenerate(){
   $('emailAddr').textContent='Wird generiert…';$('copyHint').textContent='';
   $('genBtn').disabled=true;$('saveBtn').disabled=true;$('refreshBtn').disabled=true;
   $('statusDot').className='status-dot loading';$('refreshRingWrap').style.display='none';
-  setStatus('loading','Verbinde mit mail.tm…');renderInbox(true);closeDetail();
+  setStatus('loading','Verbinde…');renderInbox(true);closeDetail();
   try{
-    const dr=await fetch(BASE+'/domains?page=1');if(!dr.ok)throw new Error('Domains: '+dr.status);
-    const dd=await dr.json();const domain=(dd['hydra:member']||dd)[0]?.domain;if(!domain)throw new Error('No domain');
-    const user=rnd(10),password=rnd(14)+'Aa1!',address=user+'@'+domain;
+    if(!availDomains.length)await loadDomains();
+    const selDomain=availDomains[0]||'mail.tm';
+    const user=rnd(10);
+    const password=rnd(14)+'Aa1!';
+    const address=user+'@'+selDomain;
     const ar=await fetch(BASE+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
     if(!ar.ok){const e=await ar.json().catch(()=>({}));throw new Error(e['hydra:description']||ar.status);}
     const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
@@ -815,7 +1084,7 @@ async function doGenerate(){
     $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
     $('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
     setStatus('ok','Bereit · aktualisiert alle 15 Sek.');
-    updateSenderFrom();startTimer();startRefreshRing();
+    updateSenderFrom();startTimer();startRefreshRing();renderInboxTabs();
     await doFetch(false);aIv=setInterval(()=>{doFetch(false);startRefreshRing();},15000);
   }catch(e){
     $('statusDot').className='status-dot err';$('genBtn').disabled=false;
@@ -825,26 +1094,136 @@ async function doGenerate(){
 
 async function doFetch(manual=false){
   if(!tok)return;
-  if(manual){$('refreshIco').className='spin';$('refreshBtn').disabled=true;clearInterval(rcIv);startRefreshRing();}
+  if(manual){$('refreshIco').classList.add('spin');$('refreshBtn').disabled=true;clearInterval(rcIv);startRefreshRing();}
   try{
     const r=await fetch(BASE+'/messages?page=1',{headers:{'Authorization':'Bearer '+tok}});
     if(r.status===401){setStatus('err','Session abgelaufen');return;}if(!r.ok)throw new Error('HTTP '+r.status);
     const d=await r.json();const list=d['hydra:member']||[];
     const old=new Set(msgs.map(m=>m.id));const fresh=list.filter(m=>!old.has(m.id));
-    if(fresh.length>0&&msgs.length>0)showToast('📬 '+fresh.length+' neue Nachricht'+(fresh.length>1?'en':''));
+    if(fresh.length>0&&msgs.length>0){
+      showToast(fresh.length+' neue Nachricht'+(fresh.length>1?'en':''));
+    }
     msgs=list;totalRef++;$('inboxCount').textContent=msgs.length;renderInbox(false);
     setStatus('ok','Zuletzt: '+new Date().toLocaleTimeString('de',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
     updateSavedBadge();
   }catch(e){setStatus('err','Aktualisierung fehlgeschlagen');}
-  finally{$('refreshIco').className='';$('refreshIco').textContent='↻';$('refreshBtn').disabled=false;}
+  finally{$('refreshIco').classList.remove('spin');$('refreshBtn').disabled=false;}
+}
+
+// Rules
+function applyRules(msg){
+  for(const r of rules){
+    const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;
+    if(field&&field.toLowerCase().includes(r.value.toLowerCase())){
+      if(r.action==='notify'&&Notification.permission==='granted'){
+        new Notification('AltMail · Regel: '+r.value,{body:msg.subject||''});
+      }
+    }
+  }
+}
+
+function shouldHideMsg(msg){
+  for(const r of rules){
+    if(r.action!=='delete')continue;
+    const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;
+    if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;
+  }
+  return false;
+}
+
+function highlightRule(msg){
+  for(const r of rules){
+    if(r.action!=='highlight')continue;
+    const field=r.type==='from'?msg.from?.address:r.type==='subject'?msg.subject:msg.intro;
+    if(field&&field.toLowerCase().includes(r.value.toLowerCase()))return true;
+  }
+  return false;
+}
+
+async function forwardEmail(msg){
+  const workerUrl=getWorkerUrl();
+  if(!workerUrl||!fwdTarget)return;
+  try{
+    await fetch(workerUrl,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({from:addr,password:pw,to:fwdTarget,subject:'Fwd: '+(msg.subject||''),text:'--- Weitergeleitet von '+addr+' ---\n\n'+(msg.intro||'')})});
+  }catch{}
 }
 
 function renderInbox(loading){
   const list=$('msgList'),empty=$('emptyState');
-  if(loading){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><span class="spin" style="font-size:18px">↻</span></div><h3>Verbinde…</h3><p>Einen Moment bitte.</p>';return;}
-  if(!msgs.length){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon" style="font-size:22px">◻</div><h3>Noch keine Nachrichten</h3><p>Sende eine E-Mail an deine Adresse.<br>Aktualisiert alle 15 Sekunden.</p>';return;}
+  if(loading){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="spin" style="color:var(--txt3)"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div><h3>Verbinde…</h3><p>Einen Moment bitte.</p>';return;}
+  const visible=msgs;
+  if(!visible.length){list.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l9 6 9-6"/></svg></div><h3>Noch keine Nachrichten</h3><p>Sende eine E-Mail an deine Adresse.</p>';return;}
   empty.style.display='none';
-  list.innerHTML=msgs.map(m=>{const u=!readIds.has(m.id);return`<li class="msg-item${u?' unread':''}" onclick="openMsg('${m.id}')">${u?'<div class="msg-unread-dot"></div>':''}<div class="msg-av">${(m.from?.address||'?')[0].toUpperCase()}</div><div class="msg-content"><div class="msg-row1"><span class="msg-from">${esc(m.from?.address||'Unbekannt')}</span><span class="msg-time">${fmt(m.createdAt)}</span></div><div class="msg-subject">${esc(m.subject||'(Kein Betreff)')}</div><div class="msg-preview">${esc(m.intro||'')}</div></div></li>`;}).join('');
+  list.innerHTML=visible.map(m=>{const u=!readIds.has(m.id);return`<li class="msg-item${u?' unread':''}" onclick="openMsg('${m.id}')">
+    ${u?'<div class="msg-unread-dot"></div>':''}
+    <div class="msg-av">${(m.from?.address||'?')[0].toUpperCase()}</div>
+    <div class="msg-content">
+      <div class="msg-row1"><span class="msg-from">${esc(m.from?.address||'Unbekannt')}</span><span class="msg-time">${fmt(m.createdAt)}</span></div>
+      <div class="msg-subject">${esc(m.subject||'(Kein Betreff)')}</div>
+      <div class="msg-preview">${esc(m.intro||'')}</div>
+    </div>
+  </li>`;}).join('');
+}
+
+// Multi-inbox tabs
+function renderInboxTabs(){
+  const el=$('inboxTabs');
+  if(!el)return;
+  if(!inboxes.length&&!addr){el.innerHTML='';return;}
+  // Sync current inbox into list
+  if(addr&&!inboxes.find(i=>i.addr===addr)){
+    inboxes.push({id:rnd(6),addr,tok,pw,msgs:[],name:addr.split('@')[0]});
+    activeInboxIdx=inboxes.length-1;
+  }
+  el.innerHTML=inboxes.map((ix,i)=>`
+    <button class="inbox-tab ${i===activeInboxIdx?'active':''}" onclick="switchInbox(${i})">
+      <div class="tab-dot"></div>
+      <span style="font-family:var(--mono);max-width:100px;overflow:hidden;text-overflow:ellipsis;">${esc(ix.addr.split('@')[0])}</span>
+      <span class="tab-count">${ix.msgs.length}</span>
+      ${inboxes.length>1?`<span onclick="event.stopPropagation();removeInbox(${i})" style="margin-left:2px;color:var(--txt3);cursor:pointer;">✕</span>`:''}
+    </button>
+  `).join('')+`<button class="add-inbox-btn" onclick="addInbox()" title="Weiteren Posteingang öffnen">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Hinzufügen
+  </button>`;
+}
+
+async function addInbox(){
+  showToast('Generiere zweiten Posteingang…');
+  if(!availDomains.length)await loadDomains();
+  const domain=availDomains[0];
+  const user=rnd(10),password=rnd(14)+'Aa1!',address=user+'@'+domain;
+  try{
+    const ar=await fetch(BASE+'/accounts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
+    if(!ar.ok)throw new Error('Account');
+    const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address,password})});
+    if(!tr.ok)throw new Error('Token');
+    const t=(await tr.json()).token;
+    inboxes.push({id:rnd(6),addr:address,tok:t,pw:password,msgs:[],name:address.split('@')[0]});
+    renderInboxTabs();
+    showToast('Posteingang hinzugefügt');
+  }catch(e){showToast('Fehler: '+e.message);}
+}
+
+function switchInbox(i){
+  // Save current state
+  if(inboxes[activeInboxIdx]){inboxes[activeInboxIdx].msgs=msgs;inboxes[activeInboxIdx].tok=tok;}
+  activeInboxIdx=i;
+  const ix=inboxes[i];
+  tok=ix.tok;addr=ix.addr;pw=ix.pw;msgs=ix.msgs||[];
+  $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
+  $('statusDot').className='status-dot ok';
+  $('inboxCount').textContent=msgs.length;
+  renderInbox(false);renderInboxTabs();
+  updateSenderFrom();
+}
+
+function removeInbox(i){
+  inboxes.splice(i,1);
+  if(activeInboxIdx>=inboxes.length)activeInboxIdx=Math.max(0,inboxes.length-1);
+  if(inboxes.length>0)switchInbox(activeInboxIdx);
+  else renderInboxTabs();
 }
 
 function extractLinks(text,html){const s=new Set();const re=/https?:\/\/[^\s"'<>)\]\\,]+/g;(text||'').match(re)?.forEach(u=>s.add(u.replace(/[.,;!?)>]+$/,'')));(html||'').match(re)?.forEach(u=>s.add(u.replace(/[.,;!?)>]+$/,'')));return[...s].filter(u=>!/(\.png|\.gif|\.jpg|\.jpeg|\.svg|\.ico|\.css|\.woff|unsubscribe)/i.test(u));}
@@ -857,17 +1236,62 @@ async function openMsg(id){
     const m=await r.json();$('dFrom').textContent=m.from?.address||'Unbekannt';$('dSubj').textContent=m.subject||'(Kein Betreff)';$('dMeta').textContent='An: '+(m.to?.[0]?.address||addr)+'  ·  '+new Date(m.createdAt).toLocaleString('de');
     currentMsgText=m.text||'';const htmlStr=Array.isArray(m.html)?m.html.join(''):(m.html||'');
     const all=extractLinks(m.text||'',htmlStr),confirms=all.filter(isConfirm),others=all.filter(u=>!isConfirm(u));
+    // 2FA extraction inline
+    const otps=extractOTPCodes(m.text||'');
     let html='';
-    if(confirms.length)html+=`<div style="margin-bottom:16px"><div class="links-label">Bestätigungs-Links</div>${confirms.map(u=>`<a class="link-card confirm" href="${esc(u)}" target="_blank" rel="noopener"><span class="link-confirm-badge">Bestätigen</span><span class="link-url">${esc(u)}</span><span class="link-arrow">↗</span></a>`).join('')}</div>`;
-    if(others.length)html+=`<div style="margin-bottom:16px"><div class="links-label">Links</div>${others.map(u=>`<a class="link-card" href="${esc(u)}" target="_blank" rel="noopener"><span class="link-url">${esc(u)}</span><span class="link-arrow">↗</span></a>`).join('')}</div>`;
+    if(otps.length)html+=`<div style="margin-bottom:16px"><div class="links-label">2FA Code</div>${otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Tippen zum Kopieren</span></div>`).join('')}</div>`;
+    if(confirms.length)html+=`<div style="margin-bottom:16px"><div class="links-label">Bestätigungs-Links</div>${confirms.map(u=>`<a class="link-card confirm" href="${esc(u)}" target="_blank" rel="noopener noreferrer"><span class="link-confirm-badge">Bestätigen</span><span class="link-url">${esc(u)}</span><span class="link-arrow">↗</span></a>`).join('')}</div>`;
+    if(others.length)html+=`<div style="margin-bottom:16px"><div class="links-label">Links</div>${others.map(u=>`<a class="link-card" href="${esc(u)}" target="_blank" rel="noopener noreferrer"><span class="link-url">${esc(u)}</span><span class="link-arrow">↗</span></a>`).join('')}</div>`;
     if(m.text?.trim()){if(html)html+='<hr class="body-divider">';html+=`<div class="links-label" style="margin-bottom:10px">Inhalt</div><div class="email-body-text">${esc(m.text.trim())}</div>`;}
     if(!html)html='<p style="color:var(--txt3);font-size:13px">(Leer)</p>';
     $('dBody').innerHTML=html;$('detailCard').style.display='block';$('detailCard').scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(e){showToast('Fehler: '+e.message);}
 }
 function closeDetail(){$('detailCard').style.display='none';}
-async function copyDetailBody(){if(!currentMsgText)return;const ok=await copyToClipboard(currentMsgText);showToast(ok?'📋 Kopiert ✓':'❌ Fehler');}
+async function copyDetailBody(){if(!currentMsgText)return;const ok=await copyToClipboard(currentMsgText);showToast(ok?'Kopiert ✓':'Fehler');}
 async function copyEmail(){if(!addr)return;const ok=await copyToClipboard(addr);const el=$('emailAddr'),hint=$('copyHint');if(ok){el.textContent='Kopiert ✓';hint.textContent='';showToast('Kopiert ✓');}setTimeout(()=>{el.textContent=addr;hint.textContent='Tippen zum Kopieren';},2000);}
+
+// ════════════════════════════════════
+// RULES
+// ════════════════════════════════════
+function openRuleModal(){$('ruleModalOv').classList.add('open');}
+async function saveRule(){
+  const type=$('ruleType').value,value=$('ruleValue').value.trim(),action=$('ruleAction').value;
+  if(!value){showToast('Suchbegriff eingeben');return;}
+  const rule={id:rnd(6),type,value,action};
+  rules.push(rule);
+  await dbPut('rules',rule);
+  renderRules();
+  $('ruleModalOv').classList.remove('open');
+  showToast('Regel gespeichert');
+}
+async function deleteRule(id){rules=rules.filter(r=>r.id!==id);await dbDel('rules',id);renderRules();}
+function renderRules(){
+  const el=$('ruleList');
+  if(!el)return;
+  if(!rules.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3);padding:8px 0;">Keine Regeln.</div>';return;}
+  const typeLabel={from:'Absender',subject:'Betreff',body:'Text'};
+  const actionLabel={highlight:'Hervorheben',delete:'Löschen',notify:'Benachrichtigung'};
+  el.innerHTML=rules.map(r=>`<div class="rule-item">
+    <div class="rule-info">
+      <div class="rule-cond"><span style="color:var(--txt3);font-size:11px">${typeLabel[r.type]||r.type}</span> · ${esc(r.value)}</div>
+      <div class="rule-meta">${actionLabel[r.action]||r.action}</div>
+    </div>
+    <button class="btn btn-danger btn-sm" onclick="deleteRule('${r.id}')">✕</button>
+  </div>`).join('');
+}
+
+// ════════════════════════════════════
+// FORWARD
+// ════════════════════════════════════
+function toggleForward(){const c=$('fwdConfig');c.style.display=c.style.display==='none'?'block':'none';}
+function saveForward(){
+  const t=$('fwdTarget').value.trim();
+  if(!t||!t.includes('@')){showToast('Gültige Email eingeben');return;}
+  fwdTarget=t;$('fwdStatus').textContent='An: '+t;$('fwdStatus').style.color='#4ade80';
+  $('fwdConfig').style.display='none';
+  showToast('Weiterleitung aktiviert');
+}
 
 // ════════════════════════════════════
 // SAVED EMAILS
@@ -876,353 +1300,532 @@ async function updateSavedBadge(){const arr=await dbGetAll('saved_emails');const
 function openSave(){if(!addr)return;$('modalAddr').textContent=addr;$('saveName').value='';$('modalOv').classList.add('open');setTimeout(()=>$('saveName').focus(),150);}
 function closeModal(){$('modalOv').classList.remove('open');}
 function closeModalOv(e){if(e.target===$('modalOv'))closeModal();}
-async function confirmSave(){if(!addr)return;const arr=await dbGetAll('saved_emails');if(arr.find(x=>x.address===addr)){showToast('Bereits gespeichert');closeModal();return;}await dbPut('saved_emails',{address:addr,password:pw,name:$('saveName').value.trim(),savedAt:new Date().toISOString(),id:rnd(8)});await updateSavedBadge();closeModal();showToast('✓ Gespeichert');}
+async function confirmSave(){if(!addr)return;const arr=await dbGetAll('saved_emails');if(arr.find(x=>x.address===addr)){showToast('Bereits gespeichert');closeModal();return;}await dbPut('saved_emails',{id:rnd(8),address:addr,password:pw,name:$('saveName').value.trim(),savedAt:new Date().toISOString()});await updateSavedBadge();closeModal();showToast('Gespeichert');}
 async function deleteSaved(id){await dbDel('saved_emails',id);await updateSavedBadge();renderSaved();showToast('Gelöscht');}
 async function loadSavedEmail(item){
   switchPage('active');clearInterval(aIv);clearInterval(tIv);clearInterval(rcIv);
   tok='';addr='';pw='';msgs=[];sessionStart=null;
-  $('emailAddr').textContent='Wird geladen…';$('copyHint').textContent='';$('genBtn').disabled=true;$('saveBtn').disabled=true;$('refreshBtn').disabled=true;$('statusDot').className='status-dot loading';$('refreshRingWrap').style.display='none';
+  $('emailAddr').textContent='Wird geladen…';$('statusDot').className='status-dot loading';
   setStatus('loading','Lade gespeicherte Email…');renderInbox(true);closeDetail();
   try{
     const tr=await fetch(BASE+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({address:item.address,password:item.password})});
     if(!tr.ok)throw new Error('HTTP '+tr.status);
     tok=(await tr.json()).token;addr=item.address;pw=item.password;sessionStart=new Date();
-    $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';$('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
-    tMode='unlimited';$('timerReadout').textContent='∞ Gespeichert';$('timerFill').style.width='100%';
-    setStatus('ok','Gespeicherte Email aktiv');updateSenderFrom();startRefreshRing();
+    $('emailAddr').textContent=addr;$('copyHint').textContent='Tippen zum Kopieren';
+    $('statusDot').className='status-dot ok';$('genBtn').disabled=false;$('saveBtn').disabled=false;$('refreshBtn').disabled=false;
+    tMode='unlimited';$('timerReadout').textContent='∞';$('timerFill').style.width='100%';
+    setStatus('ok','Gespeicherte Email aktiv');updateSenderFrom();startRefreshRing();renderInboxTabs();
     await doFetch(false);aIv=setInterval(()=>{doFetch(false);startRefreshRing();},15000);
-  }catch(e){$('statusDot').className='status-dot err';$('genBtn').disabled=false;$('emailAddr').textContent='Fehler – Email evtl. abgelaufen';setStatus('err',e.message);renderInbox(false);}
+  }catch(e){$('statusDot').className='status-dot err';$('genBtn').disabled=false;$('emailAddr').textContent='Fehler';setStatus('err',e.message);renderInbox(false);}
 }
 async function renderSaved(){
   const arr=(await dbGetAll('saved_emails')).sort((a,b)=>new Date(b.savedAt)-new Date(a.savedAt));
   const el=$('savedList');
-  if(!arr.length){el.innerHTML='<div class="saved-empty">Noch keine Adressen gespeichert.<br><br>Klicke auf "+ Speichern" bei einer aktiven Email.</div>';return;}
-  el.innerHTML=arr.map(item=>`<div class="saved-item"><div class="saved-info"><div class="saved-addr">${esc(item.address)}</div><div class="saved-meta">${item.name?`<span class="saved-name-badge">${esc(item.name)}</span>`:''} ${new Date(item.savedAt).toLocaleDateString('de',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}</div></div><div class="saved-actions"><button class="btn btn-ghost btn-sm" onclick="copyText('${esc(item.address)}')">Kopieren</button><button class="btn btn-primary btn-sm" onclick='loadSavedEmail(${JSON.stringify(item)})'>Laden</button><button class="btn btn-danger btn-sm" onclick="deleteSaved('${item.id}')">&#x2715;</button></div></div>`).join('');
+  if(!arr.length){el.innerHTML='<div class="saved-empty">Noch keine Adressen gespeichert.</div>';return;}
+  el.innerHTML=arr.map(item=>`<div class="saved-item"><div class="saved-info"><div class="saved-addr">${esc(item.address)}</div><div class="saved-meta">${item.name?`<span class="saved-name-badge">${esc(item.name)}</span>`:''} ${new Date(item.savedAt).toLocaleDateString('de',{day:'2-digit',month:'2-digit',year:'2-digit'})}</div></div><div class="saved-actions"><button class="btn btn-ghost btn-sm" onclick="copyText('${esc(item.address)}')">Kopieren</button><button class="btn btn-primary btn-sm" onclick='loadSavedEmail(${JSON.stringify(item)})'>Laden</button><button class="btn btn-danger btn-sm" onclick="deleteSaved('${item.id}')">✕</button></div></div>`).join('');
 }
-async function copyText(t){const ok=await copyToClipboard(t);showToast(ok?'Kopiert ✓':'❌ Fehler');}
+async function copyText(t){const ok=await copyToClipboard(t);showToast(ok?'Kopiert ✓':'Fehler');}
 
 // ════════════════════════════════════
 // PWNED
 // ════════════════════════════════════
 async function checkEmail(){
-  const email=$('pwnedEmailInput').value.trim();
-  if(!email||!email.includes('@')){showToast('Bitte gültige Email eingeben');return;}
-  const btn=$('checkEmailBtn'),res=$('pwnedEmailResult');
-  btn.disabled=true;btn.textContent='Prüfe…';
-  res.innerHTML='<div class="pwned-loading"><span class="spin" style="font-size:18px;display:inline-block">↻</span><br><br>Durchsuche Datenbanken…</div>';
+  const email=$('pwnedEmailInput').value.trim();if(!email||!email.includes('@')){showToast('Gültige Email eingeben');return;}
+  const btn=$('checkEmailBtn'),res=$('pwnedEmailResult');btn.disabled=true;btn.textContent='Prüfe…';
+  res.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';
   try{
     const r=await fetch(`https://api.xposedornot.com/v1/check-email/${encodeURIComponent(email)}`,{signal:AbortSignal.timeout(10000)});
     const d=await r.json();
-    if(r.status===404||d.Error==='Not found'||d.exposed===false){
-      res.innerHTML=`<div class="pwned-result safe" style="display:block"><div class="pwned-status-row"><div class="pwned-icon good">✅</div><div class="pwned-status-txt"><h3 style="color:var(--safe)">Nicht gefunden!</h3><p>Diese Email wurde in keiner bekannten Datenpanne gefunden.</p></div></div></div>`;
-    }else if(d.breaches||d.ExposedBreaches||d.exposed_breaches){
+    if(r.status===404||d.Error==='Not found'){res.innerHTML=`<div class="pwned-result safe" style="display:block"><div class="pwned-status-row"><div class="pwned-icon good"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pwned-status-txt"><h3 style="color:#4ade80">Nicht gefunden</h3><p>Keine bekannten Datenpannen.</p></div></div></div>`;}
+    else if(d.breaches||d.ExposedBreaches){
       const breachList=d.ExposedBreaches?.breaches_details||d.breaches||[];
-      const count=Array.isArray(breachList)?breachList.length:(d.exposed_breaches||1);
-      const items=Array.isArray(breachList)?breachList:[];
-      res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad">⚠️</div><div class="pwned-status-txt"><h3 style="color:var(--pwned)">${count} Datenpanne${count!==1?'n':''} gefunden!</h3><p>Passwörter für diese Dienste sofort ändern!</p></div></div>${items.length?`<ul class="breach-list">${items.slice(0,10).map(b=>{const name=b.domain||b.name||b.breach||b||'Unbekannt';return`<li class="breach-item"><div class="breach-logo">${String(name)[0]?.toUpperCase()||'?'}</div><div class="breach-info"><div class="breach-name">${esc(String(name))}</div></div></li>`;}).join('')}</ul>`:''}<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--brd)"><p style="font-size:12px;color:var(--txt3)">Details: <a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:underline;text-underline-offset:2px">haveibeenpwned.com ↗</a></p></div></div>`;
-    }else{_showHibpFallback(email,res);}
-  }catch(e){_showHibpFallback(email,res);}
+      const count=Array.isArray(breachList)?breachList.length:1;
+      res.innerHTML=`<div class="pwned-result pwned" style="display:block"><div class="pwned-status-row"><div class="pwned-icon bad"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="pwned-status-txt"><h3 style="color:#f87171">${count} Datenpanne${count!==1?'n':''}</h3><p>Passwörter sofort ändern.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;margin-top:8px;">Details auf HIBP ↗</a></div>`;
+    }else{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
+  }catch{res.innerHTML=`<div class="result-box"><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
   btn.disabled=false;btn.textContent='Prüfen';
 }
-function _showHibpFallback(email,res){res.innerHTML=`<div class="pwned-result" style="display:block;border-color:var(--brd)"><div class="pwned-status-row"><div class="pwned-icon" style="background:var(--s3);font-size:20px">🔍</div><div class="pwned-status-txt"><h3>API nicht erreichbar</h3><p>Bitte direkt auf HaveIBeenPwned prüfen.</p></div></div><a href="https://haveibeenpwned.com/account/${encodeURIComponent(email)}" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;display:flex;justify-content:center;text-decoration:none;margin-top:12px;">Auf HaveIBeenPwned.com prüfen ↗</a></div>`;}
-
 async function checkPassword(){
-  const pw=$('pwnedPwInput').value;if(!pw||pw.length<1){showToast('Bitte Passwort eingeben');return;}
+  const pw=$('pwnedPwInput').value;if(!pw){showToast('Passwort eingeben');return;}
   const btn=$('checkPwBtn'),res=$('pwnedPwResult');btn.disabled=true;btn.textContent='Prüfe…';
-  res.innerHTML='<div class="pwned-loading"><span class="spin" style="font-size:18px;display:inline-block">↻</span><br><br>Prüfe sicher…</div>';
-  const bar=$('pwStrengthBar');const strength=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';
-  bar.style.width=strength==='weak'?'30%':strength==='medium'?'60%':'100%';bar.className='pw-strength-bar '+strength;
+  const bar=$('pwStrengthBar');const s=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';
+  bar.style.width=s==='weak'?'30%':s==='medium'?'60%':'100%';bar.className='pw-strength-bar '+s;
   try{
-    const msgBuffer=new TextEncoder().encode(pw);const hashBuffer=await crypto.subtle.digest('SHA-1',msgBuffer);
-    const hashHex=Array.from(new Uint8Array(hashBuffer)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
-    const prefix=hashHex.slice(0,5);const suffix=hashHex.slice(5);
+    const buf=await crypto.subtle.digest('SHA-1',new TextEncoder().encode(pw));
+    const hex=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+    const prefix=hex.slice(0,5),suffix=hex.slice(5);
     const r=await fetch(`https://api.pwnedpasswords.com/range/${prefix}`,{signal:AbortSignal.timeout(8000)});
     if(!r.ok)throw new Error('HTTP '+r.status);
     const text=await r.text();let count=0;
     for(const line of text.split('\n')){const[h,c]=line.trim().split(':');if(h===suffix){count=parseInt(c);break;}}
-    if(count>0){res.innerHTML=`<div style="margin-top:10px"><span class="pw-result-pill pwned-pill">⚠️ ${count.toLocaleString('de')}× geleakt</span><p style="font-size:12px;color:var(--txt3);margin-top:10px;line-height:1.6">Dieses Passwort wurde <strong style="color:var(--pwned)">${count.toLocaleString('de')}-mal</strong> gefunden. Sofort ändern!</p></div>`;}
-    else{res.innerHTML=`<div style="margin-top:10px"><span class="pw-result-pill safe-pill">✅ Sicher</span><p style="font-size:12px;color:var(--txt3);margin-top:10px;line-height:1.6">Nicht in bekannten Datenlecks gefunden.</p></div>`;}
-  }catch(e){res.innerHTML=`<p style="font-size:13px;color:var(--txt3);margin-top:10px">Prüfung fehlgeschlagen: ${esc(e.message)}<br><a href="https://haveibeenpwned.com/Passwords" target="_blank" rel="noopener" style="color:var(--txt2)">Manuell prüfen ↗</a></p>`;}
+    if(count>0)res.innerHTML=`<span class="pw-result-pill pwned-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg> ${count.toLocaleString('de')}× geleakt</span>`;
+    else res.innerHTML=`<span class="pw-result-pill safe-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Sicher</span>`;
+  }catch(e){res.innerHTML=`<p style="font-size:12px;color:var(--txt3);margin-top:8px;">Prüfung fehlgeschlagen: ${esc(e.message)}</p>`;}
   btn.disabled=false;btn.textContent='Prüfen';
 }
 $('pwnedPwInput').addEventListener('input',function(){const pw=this.value,bar=$('pwStrengthBar');if(!pw){bar.style.width='0';bar.className='pw-strength-bar';return;}const s=pw.length<8?'weak':pw.length<12||!/[A-Z]/.test(pw)||!/[0-9]/.test(pw)?'medium':'strong';bar.style.width=s==='weak'?'30%':s==='medium'?'60%':'100%';bar.className='pw-strength-bar '+s;});
 
 // ════════════════════════════════════
-// WORKER URL MANAGEMENT
-// Wird einmalig vom Betreiber eingerichtet —
-// danach funktioniert der Versand für ALLE Nutzer ohne Setup.
+// WORKER / SENDER
 // ════════════════════════════════════
-const WORKER_URL_KEY = 'holy-bar-b042.waschmopp1.workers.dev';
-
-// ► Für Betreiber: Trage hier die Worker-URL fest ein,
-//   dann entfällt die UI-Konfiguration komplett für User.
-//   Leer lassen = URL-Eingabe im UI anzeigen.
-const HARDCODED_WORKER_URL = '*'; // z.B. 'https://altmail-smtp.mein-name.workers.dev'
-
-function getWorkerUrl() {
-  if (HARDCODED_WORKER_URL) return HARDCODED_WORKER_URL;
-  return localStorage.getItem(WORKER_URL_KEY) || '';
+const WORKER_URL_KEY='altmail_worker_url';
+const HARDCODED_WORKER_URL='https://altmail-worker.waschmopp1.workers.dev/';
+function getWorkerUrl(){if(HARDCODED_WORKER_URL)return HARDCODED_WORKER_URL;return localStorage.getItem(WORKER_URL_KEY)||'';}
+function saveWorkerUrl(){const url=$('workerUrlInput').value.trim();if(!url.startsWith('https://')){showToast('URL muss mit https:// beginnen');return;}localStorage.setItem(WORKER_URL_KEY,url);$('workerUrlStatus').innerHTML='Gespeichert';$('workerUrlStatus').style.color='#4ade80';showToast('Worker URL gespeichert');}
+function initWorkerConfig(){if(HARDCODED_WORKER_URL){const box=$('workerConfigBox');if(box)box.style.display='none';return;}const url=getWorkerUrl();if(url){$('workerUrlInput').value=url;$('workerUrlStatus').innerHTML='Konfiguriert';$('workerUrlStatus').style.color='#4ade80';}}
+function updateSenderFrom(){const box=$('senderFromBox'),avEl=$('senderFromAv'),addrEl=$('senderFromAddr'),subEl=$('senderFromSub'),dot=$('senderDot');if(addr){avEl.textContent=addr[0].toUpperCase();addrEl.textContent=addr;subEl.textContent='Aktive Temp-Email';dot.className='status-dot ok';box.classList.add('active-sender');}else{avEl.textContent='?';addrEl.textContent='Keine Email aktiv';subEl.textContent='Zuerst eine Temp-Email generieren';dot.className='status-dot';box.classList.remove('active-sender');}}
+function updateCharCounter(){const len=$('sendBody').value.length;const el=$('charCounter');el.textContent=len.toLocaleString('de')+' Zeichen';el.className='char-counter'+(len>10000?' warn':'');}
+function setSendBanner(type,icon,title,sub){const banner=$('sendStatusBanner');banner.className='send-status-banner show '+type;$('sendStatusIcon').textContent=icon;$('sendStatusTitle').textContent=title;$('sendStatusSub').innerHTML=sub||'';}
+function hideSendBanner(){$('sendStatusBanner').className='send-status-banner';}
+let sentEmails=[];
+async function sendEmail(){
+  if(!addr||!tok){showToast('Zuerst eine Temp-Email generieren!');switchPage('active');return;}
+  const to=$('sendTo').value.trim(),subject=$('sendSubject').value.trim(),body=$('sendBody').value.trim();
+  if(!to||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)){showToast('Empfänger-Email ungültig');return;}
+  if(!subject){showToast('Betreff eingeben');return;}if(!body){showToast('Nachricht eingeben');return;}
+  const workerUrl=getWorkerUrl();if(!workerUrl){setSendBanner('error','⚠','Worker URL fehlt','Bitte Worker URL konfigurieren.');return;}
+  const btn=$('sendBtn');btn.disabled=true;$('sendBtnTxt').textContent='Sende…';setSendBanner('loading','↻','Sende…','');
+  try{
+    const response=await fetch(workerUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({from:addr,password:pw,to,subject,text:body}),signal:AbortSignal.timeout(20000)});
+    const data=await response.json().catch(()=>({}));
+    if(response.ok&&data.ok){setSendBanner('success','✓','Email gesendet!',`Von <strong>${addr}</strong> an <strong>${to}</strong>`);await saveSentEmail({id:rnd(8),to,subject,body,from:addr,sentAt:new Date().toISOString(),status:'gesendet'});clearCompose();renderSentList();showToast('Email gesendet!');}
+    else{const errMsg=data.error||`HTTP ${response.status}`;setSendBanner('error','⚠','Versand fehlgeschlagen',esc(errMsg));await saveSentEmail({id:rnd(8),to,subject,body,from:addr,sentAt:new Date().toISOString(),status:'fehlgeschlagen'});renderSentList();}
+  }catch(err){setSendBanner('error','⚠',err.name==='TimeoutError'?'Timeout':'Verbindungsfehler',esc(err.message));}
+  finally{btn.disabled=false;$('sendBtnTxt').textContent='↑ Senden';}
 }
-
-function saveWorkerUrl() {
-  const url = $('workerUrlInput').value.trim();
-  if (!url.startsWith('https://')) {
-    showToast('URL muss mit https:// beginnen');
-    return;
-  }
-  localStorage.setItem(WORKER_URL_KEY, url);
-  $('workerUrlStatus').innerHTML = '✓ Gespeichert — Worker URL ist jetzt aktiv';
-  $('workerUrlStatus').style.color = '#4ade80';
-  showToast('✓ Worker URL gespeichert');
-  // Kurz testen
-  pingWorker(url);
-}
-
-async function pingWorker(url) {
-  try {
-    const r = await fetch(url, { method: 'OPTIONS', signal: AbortSignal.timeout(5000) });
-    if (r.ok || r.status === 204 || r.status === 405) {
-      $('workerUrlStatus').innerHTML = '✓ Worker erreichbar und bereit';
-      $('workerUrlStatus').style.color = '#4ade80';
-    }
-  } catch {
-    $('workerUrlStatus').innerHTML = '⚠ Worker nicht erreichbar — URL prüfen';
-    $('workerUrlStatus').style.color = '#fbbf24';
-  }
-}
-
-function initWorkerConfig() {
-  const url = getWorkerUrl();
-  const box = $('workerConfigBox');
-  
-  if (HARDCODED_WORKER_URL) {
-    // Betreiber hat URL fest eingetragen — Config-Box verstecken
-    if (box) box.style.display = 'none';
-    return;
-  }
-  
-  if (url) {
-    $('workerUrlInput').value = url;
-    $('workerUrlStatus').innerHTML = '✓ Worker URL konfiguriert';
-    $('workerUrlStatus').style.color = '#4ade80';
-  }
-}
-
-// ════════════════════════════════════
-// SENDER — via Cloudflare Worker
-// ════════════════════════════════════
-function updateSenderFrom() {
-  const box = $('senderFromBox');
-  const avEl = $('senderFromAv');
-  const addrEl = $('senderFromAddr');
-  const subEl = $('senderFromSub');
-  const dot = $('senderDot');
-
-  if (addr) {
-    avEl.textContent = addr[0].toUpperCase();
-    addrEl.textContent = addr;
-    subEl.textContent = 'Aktive Temp-Email · Versand via Worker';
-    dot.className = 'status-dot ok';
-    box.classList.add('active-sender');
-  } else {
-    avEl.textContent = '?';
-    addrEl.textContent = 'Keine Email aktiv';
-    subEl.textContent = 'Zuerst eine Temp-Email generieren';
-    dot.className = 'status-dot';
-    box.classList.remove('active-sender');
-  }
-}
-
-function updateCharCounter() {
-  const len = $('sendBody').value.length;
-  const el = $('charCounter');
-  el.textContent = len.toLocaleString('de') + ' Zeichen';
-  el.className = 'char-counter' + (len > 10000 ? ' warn' : '');
-}
-
-function setSendBanner(type, icon, title, sub) {
-  const banner = $('sendStatusBanner');
-  const iconEl = $('sendStatusIcon');
-  const titleEl = $('sendStatusTitle');
-  const subEl = $('sendStatusSub');
-  
-  banner.className = 'send-status-banner show ' + type;
-  iconEl.textContent = icon;
-  titleEl.textContent = title;
-  subEl.innerHTML = sub || '';
-}
-
-function hideSendBanner() {
-  $('sendStatusBanner').className = 'send-status-banner';
-}
-
-let sentEmails = [];
-
-async function sendEmail() {
-  if (!addr || !tok) {
-    showToast('Zuerst eine Temp-Email generieren!');
-    switchPage('active');
-    return;
-  }
-
-  const to = $('sendTo').value.trim();
-  const subject = $('sendSubject').value.trim();
-  const body = $('sendBody').value.trim();
-
-  // Validierung
-  if (!to || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
-    showToast('Empfänger-Email ungültig');
-    $('sendTo').focus();
-    return;
-  }
-  if (!subject) {
-    showToast('Betreff eingeben');
-    $('sendSubject').focus();
-    return;
-  }
-  if (!body) {
-    showToast('Nachricht eingeben');
-    $('sendBody').focus();
-    return;
-  }
-
-  const workerUrl = getWorkerUrl();
-  if (!workerUrl) {
-    setSendBanner('error', '⚙', 'Worker URL fehlt',
-      'Trage oben deine Cloudflare Worker URL ein — einmalig, dann funktioniert der Versand automatisch.');
-    $('workerUrlInput')?.focus();
-    return;
-  }
-
-  const btn = $('sendBtn');
-  btn.disabled = true;
-  $('sendBtnTxt').textContent = '↻ Sende…';
-  setSendBanner('loading', '↻', 'Sende…', 'Verbinde mit Cloudflare Worker');
-
-  try {
-    const response = await fetch(workerUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: addr, password: pw, to, subject, text: body }),
-      signal: AbortSignal.timeout(20000),
-    });
-
-    const data = await response.json().catch(() => ({}));
-
-    if (response.ok && data.ok) {
-      // Erfolg
-      setSendBanner('success', '✓',
-        'Email gesendet!',
-        `Von <strong>${addr}</strong> an <strong>${to}</strong>`
-      );
-      await saveSentEmail({ id: rnd(8), to, subject, body, from: addr, sentAt: new Date().toISOString(), status: 'gesendet' });
-      clearCompose();
-      renderSentList();
-      showToast('✓ Email gesendet!');
-    } else {
-      // Worker hat Fehler zurückgegeben
-      const errMsg = data.error || `HTTP ${response.status}`;
-      setSendBanner('error', '⚠', 'Versand fehlgeschlagen', escHtml(errMsg));
-      await saveSentEmail({ id: rnd(8), to, subject, body, from: addr, sentAt: new Date().toISOString(), status: 'fehlgeschlagen' });
-      renderSentList();
-      showToast('⚠ Versand fehlgeschlagen');
-    }
-  } catch (err) {
-    // Netzwerkfehler / Timeout
-    const isTimeout = err.name === 'TimeoutError' || err.message.includes('timeout');
-    setSendBanner('error', '⚠',
-      isTimeout ? 'Timeout' : 'Verbindungsfehler',
-      isTimeout
-        ? 'Der Worker hat zu lange gebraucht. Worker-URL prüfen oder erneut versuchen.'
-        : `Konnte Worker nicht erreichen: ${escHtml(err.message)}`
-    );
-    showToast('⚠ Verbindung fehlgeschlagen');
-  } finally {
-    btn.disabled = false;
-    $('sendBtnTxt').textContent = '↑ Senden';
-  }
-}
-
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function clearCompose() {
-  $('sendTo').value = '';
-  $('sendSubject').value = '';
-  $('sendBody').value = '';
-  updateCharCounter();
-  hideSendBanner();
-}
-
-async function saveSentEmail(item) {
-  await dbPut('sent_emails', item);
-  sentEmails = await dbGetAll('sent_emails');
-  const b = $('snav-sender-badge');
-  if (b) { b.textContent = sentEmails.length; b.style.display = sentEmails.length ? '' : 'none'; }
-}
-
-async function renderSentList() {
-  sentEmails = await dbGetAll('sent_emails');
-  sentEmails.sort((a, b) => new Date(b.sentAt) - new Date(a.sentAt));
-  const el = $('sentList'), card = $('sentCard');
-  $('sentCount').textContent = sentEmails.length;
-  if (!sentEmails.length) { card.style.display = 'none'; return; }
-  card.style.display = 'block';
-  el.innerHTML = sentEmails.map(s => {
-    const color = s.status === 'gesendet' ? '#4ade80' : s.status === 'fehlgeschlagen' ? '#f87171' : 'var(--txt3)';
-    return `<div class="sent-item">
-      <div class="sent-info">
-        <div class="sent-to">${esc(s.to)}</div>
-        <div class="sent-subj">${esc(s.subject)}</div>
-        <div class="sent-meta" style="color:${color}">${s.status} · ${new Date(s.sentAt).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</div>
-      </div>
-      <div class="sent-actions">
-        <button class="btn btn-ghost btn-sm" onclick="showSentDetail('${s.id}')">Ansehen</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteSent('${s.id}')">&#x2715;</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function showSentDetail(id) {
-  const s = sentEmails.find(x => x.id === id);
-  if (!s) return;
-  $('sdTitle').textContent = s.subject;
-  $('sdMeta').textContent = 'An: ' + s.to + ' · Von: ' + s.from + ' · ' + new Date(s.sentAt).toLocaleString('de');
-  $('sdBody').textContent = s.body;
-  $('sentDetailOv').classList.add('open');
-}
-async function deleteSent(id) { await dbDel('sent_emails', id); await renderSentList(); }
-async function clearSentHistory() {
-  const all = await dbGetAll('sent_emails');
-  for (const s of all) await dbDel('sent_emails', s.id);
-  await renderSentList();
-  showToast('Verlauf geleert');
-}
+function clearCompose(){$('sendTo').value='';$('sendSubject').value='';$('sendBody').value='';updateCharCounter();hideSendBanner();}
+async function saveSentEmail(item){await dbPut('sent_emails',item);sentEmails=await dbGetAll('sent_emails');const b=$('snav-sender-badge');if(b){b.textContent=sentEmails.length;b.style.display=sentEmails.length?'':'none';}}
+async function renderSentList(){sentEmails=await dbGetAll('sent_emails');sentEmails.sort((a,b)=>new Date(b.sentAt)-new Date(a.sentAt));const el=$('sentList'),card=$('sentCard');$('sentCount').textContent=sentEmails.length;if(!sentEmails.length){card.style.display='none';return;}card.style.display='block';el.innerHTML=sentEmails.map(s=>{const color=s.status==='gesendet'?'#4ade80':s.status==='fehlgeschlagen'?'#f87171':'var(--txt3)';return`<div class="sent-item"><div class="sent-info"><div class="sent-to">${esc(s.to)}</div><div class="sent-subj">${esc(s.subject)}</div><div class="sent-meta" style="color:${color}">${s.status} · ${new Date(s.sentAt).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</div></div><div class="sent-actions"><button class="btn btn-ghost btn-sm" onclick="showSentDetail('${s.id}')">Ansehen</button><button class="btn btn-danger btn-sm" onclick="deleteSent('${s.id}')">✕</button></div></div>`;}).join('');}
+function showSentDetail(id){const s=sentEmails.find(x=>x.id===id);if(!s)return;$('sdTitle').textContent=s.subject;$('sdMeta').textContent='An: '+s.to+' · Von: '+s.from;$('sdBody').textContent=s.body;$('sentDetailOv').classList.add('open');}
+async function deleteSent(id){await dbDel('sent_emails',id);await renderSentList();}
+async function clearSentHistory(){const all=await dbGetAll('sent_emails');for(const s of all)await dbDel('sent_emails',s.id);await renderSentList();showToast('Verlauf geleert');}
 
 // ════════════════════════════════════
 // PHONE
 // ════════════════════════════════════
 let currentPhoneCountry='us',currentPhoneNum='',currentPhoneId='',smsIv;
-const PHONE_SOURCES={us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],se:[{num:'+46769429093',id:'46769429093'}],nl:[{num:'+31685250870',id:'31685250870'}]};
+const COUNTRIES=[
+  {code:'us',label:'US'},{code:'uk',label:'UK'},{code:'de',label:'DE'},{code:'fr',label:'FR'},
+  {code:'ca',label:'CA'},{code:'se',label:'SE'},{code:'nl',label:'NL'},{code:'at',label:'AT'},
+  {code:'ch',label:'CH'},{code:'it',label:'IT'},{code:'es',label:'ES'},{code:'pl',label:'PL'},
+  {code:'au',label:'AU'},{code:'br',label:'BR'},{code:'in',label:'IN'},
+];
+const PHONE_SOURCES={
+  us:[{num:'+19162600026',id:'19162600026'},{num:'+15715732843',id:'15715732843'},{num:'+13522600906',id:'13522600906'}],
+  uk:[{num:'+447520644530',id:'447520644530'},{num:'+447441425704',id:'447441425704'}],
+  de:[{num:'+4915735985009',id:'4915735985009'},{num:'+4915735984892',id:'4915735984892'}],
+  fr:[{num:'+33757059685',id:'33757059685'},{num:'+33755847632',id:'33755847632'}],
+  ca:[{num:'+14389632198',id:'14389632198'},{num:'+16132091275',id:'16132091275'}],
+  se:[{num:'+46769429093',id:'46769429093'}],
+  nl:[{num:'+31685250870',id:'31685250870'}],
+  at:[{num:'+43720115609',id:'43720115609'}],
+  ch:[{num:'+41798075406',id:'41798075406'}],
+  it:[{num:'+393511104574',id:'393511104574'}],
+  es:[{num:'+34911599232',id:'34911599232'}],
+  pl:[{num:'+48732167890',id:'48732167890'}],
+  au:[{num:'+61488814729',id:'61488814729'}],
+  br:[{num:'+5511942556781',id:'5511942556781'}],
+  in:[{num:'+918048080505',id:'918048080505'}],
+};
+function initCountryChips(){
+  const el=$('countryChips');
+  if(el.children.length>0)return;
+  el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');
+}
 function selectCountry(code,btn){document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneId='';$('smsCard').style.display='none';$('activePhoneCard').style.display='none';clearInterval(smsIv);loadPhones();}
-function loadPhones(){const el=$('phoneList');const nums=PHONE_SOURCES[currentPhoneCountry]||PHONE_SOURCES.us;el.innerHTML=nums.map(({num,id})=>`<div class="phone-pill"><div class="status-dot ok"></div><span class="phone-number">${esc(num)}</span><button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${num.replace(/'/g,'')}',this)">Kopieren</button><button class="btn btn-primary btn-sm" style="margin-left:4px" onclick="selectPhone('${num.replace(/'/g,'')}','${id}')">SMS</button></div>`).join('');}
-async function copyPhoneNum(num,btn){const ok=await copyToClipboard(num);if(ok){const o=btn.textContent;btn.textContent='✓';setTimeout(()=>btn.textContent=o,1500);}showToast(ok?'Kopiert ✓':'❌ Fehler');}
-async function selectPhone(num,id){currentPhoneNum=num;currentPhoneId=id;$('activePhoneNum').textContent=num;$('activePhoneCard').style.display='block';$('smsCard').style.display='block';$('activePhoneCard').scrollIntoView({behavior:'smooth',block:'nearest'});await refreshSms();clearInterval(smsIv);smsIv=setInterval(refreshSms,20000);}
-async function copyActivePhone(){if(!currentPhoneNum)return;const ok=await copyToClipboard(currentPhoneNum);const el=$('activePhoneNum');if(ok){el.textContent='Kopiert ✓';setTimeout(()=>el.textContent=currentPhoneNum,2000);}else showToast('❌ Fehler');}
+function loadPhones(){const el=$('phoneList');const nums=PHONE_SOURCES[currentPhoneCountry]||PHONE_SOURCES.us;el.innerHTML=nums.map(({num,id})=>`<div class="phone-pill"><div class="status-dot ok"></div><span class="phone-number">${esc(num)}</span><button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${num}',this)">Kopieren</button><button class="btn btn-primary btn-sm" style="margin-left:4px" onclick="selectPhone('${num}','${id}')">SMS</button></div>`).join('');}
+async function copyPhoneNum(num,btn){const ok=await copyToClipboard(num);if(ok){const o=btn.textContent;btn.textContent='✓';setTimeout(()=>btn.textContent=o,1500);}showToast(ok?'Kopiert ✓':'Fehler');}
+async function selectPhone(num,id){currentPhoneNum=num;currentPhoneId=id;$('activePhoneNum').textContent=num;$('activePhoneCard').style.display='block';$('smsCard').style.display='block';await refreshSms();clearInterval(smsIv);smsIv=setInterval(refreshSms,20000);}
+async function copyActivePhone(){if(!currentPhoneNum)return;const ok=await copyToClipboard(currentPhoneNum);const el=$('activePhoneNum');if(ok){el.textContent='Kopiert ✓';setTimeout(()=>el.textContent=currentPhoneNum,2000);}else showToast('Fehler');}
 async function refreshSms(){
   if(!currentPhoneId)return;
   const el=$('smsList'),empty=$('smsEmpty');empty.style.display='none';
-  el.innerHTML='<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd)"><span class="spin">↻</span> Lade SMS…</li>';
+  el.innerHTML='<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd)"><svg width="13" height="13" class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg> Lade SMS…</li>';
   try{
     const r=await fetch(`https://quackr.io/api/tools/temporary-phone-number/${currentPhoneId}/messages`,{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(12000)});
     if(!r.ok)throw new Error('HTTP '+r.status);
     const data=await r.json();const list=Array.isArray(data)?data:(data.messages||data.data||[]);
     $('smsCount').textContent=list.length;
-    if(!list.length){el.innerHTML='';empty.style.display='';empty.innerHTML=`<div class="empty-icon" style="font-size:20px">💬</div><h3>Keine SMS</h3><p>Sende eine SMS an <strong>${esc(currentPhoneNum)}</strong>.</p>`;return;}
-    el.innerHTML=list.map(m=>{const from=m.sender||m.from||'Unbekannt',body=m.content||m.message||m.text||'',ts=m.receivedAt||m.created_at||'',t=ts?new Date(ts).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';return`<li class="sms-item"><div class="sms-av">📱</div><div style="flex:1;min-width:0"><div class="sms-from">${esc(from)}</div><div class="sms-body">${esc(body)}</div><div class="sms-time">${esc(t)}</div></div></li>`;}).join('');
-  }catch(e){el.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon" style="font-size:20px">💬</div><h3>Verbindungsfehler</h3><p>Bitte Refresh versuchen.</p>';}
+    if(!list.length){el.innerHTML='';empty.style.display='';return;}
+    el.innerHTML=list.map(m=>{
+      const from=m.sender||m.from||'Unbekannt',body=m.content||m.message||m.text||'',ts=m.receivedAt||m.created_at||'';
+      const t=ts?new Date(ts).toLocaleString('de',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+      const otps=extractOTPCodes(body);
+      return`<li class="sms-item">
+        <div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div style="flex:1;min-width:0">
+          <div class="sms-from">${esc(from)}</div>
+          <div class="sms-body">${esc(body)}</div>
+          ${otps.length?otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join(''):''}
+          <div class="sms-time">${esc(t)}</div>
+        </div>
+      </li>`;
+    }).join('');
+  }catch{el.innerHTML='';empty.style.display='';empty.innerHTML='<div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Verbindungsfehler</h3><p>Bitte erneut versuchen.</p>';}
+}
+
+// ════════════════════════════════════
+// 2FA EXTRACTOR
+// ════════════════════════════════════
+function extractOTPCodes(text){
+  // Priority: labeled codes first, then bare 6-digit, then 4/8-digit
+  const found=new Map(); // code -> label
+  const labeled=[
+    [/(?:code|otp|pin|token|passcode|verification)[\s:=]+([A-Z0-9]{4,8})/gi,'Code'],
+    [/(?:your|dein|ihr)\s+(?:code|otp|pin)[\s:]+([\d]{4,8})/gi,'Code'],
+    [/([\d]{6})\s+is\s+your/gi,'Code'],
+    [/(?:einmal|one.?time)[^\d]{0,20}([\d]{4,8})/gi,'OTP'],
+  ];
+  for(const[p,label]of labeled){let m;const re=new RegExp(p.source,p.flags);while((m=re.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],label);}}
+  // bare 6-digit
+  const bare6=/\b(\d{6})\b/g;let m;
+  while((m=bare6.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],'6-stellig');}
+  // bare 4/8 digit only if nothing else found
+  if(!found.size){
+    const bare48=/\b(\d{4}|\d{8})\b/g;
+    while((m=bare48.exec(text))!==null){if(!found.has(m[1]))found.set(m[1],m[1].length+'-stellig');}
+  }
+  return[...found.entries()].slice(0,5);
+}
+function extract2FA(){
+  const text=$('otpInput').value;const res=$('otpResult');
+  if(!text){res.innerHTML='';return;}
+  const codes=extractOTPCodes(text);
+  if(!codes.length){res.innerHTML='<p style="font-size:12px;color:var(--txt3);">Kein Code gefunden.</p>';return;}
+  res.innerHTML=codes.map(([c,label])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))">
+    <div><span class="otp-code">${esc(c)}</span><div style="font-size:10px;color:var(--txt3);margin-top:2px;">${esc(label)}</div></div>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3);flex-shrink:0"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </div>`).join('');
+}
+
+// ════════════════════════════════════
+// TOOLS
+// ════════════════════════════════════
+function openTool(id){
+  document.querySelectorAll('.tool-card').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tool-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  const card=$('tc-'+id);if(card)card.classList.add('active');
+  const panel=$('tp-'+id);
+  if(panel){
+    panel.style.display='block';
+    setTimeout(()=>panel.classList.add('active'),10);
+    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  currentToolPanel=id;
+}
+
+// ── PASSWORD GENERATOR ──
+const WORDS=['apple','brave','cloud','dance','ember','frost','grace','horse','ivory','jewel','knack','lemon','maple','nerve','ocean','pearl','quest','river','stone','tiger','ultra','vivid','water','xenon','yacht','zebra','amber','blaze','cedar','drill','eagle','flint','globe','haven','index','joker','karma','lunar','magic','noble','orbit','plank','quiet','radar','solar','tower','unity','vault','woven','xerox','yield'];
+function genPassword(){
+  const len=parseInt($('pwLen').value),useWords=$('pwWords').checked;
+  let result='';
+  if(useWords){
+    const wCount=Math.max(3,Math.round(len/6));
+    result=Array.from({length:wCount},()=>WORDS[Math.floor(Math.random()*WORDS.length)]).join('-');
+    if($('pwNum').checked)result+='-'+Math.floor(Math.random()*9000+1000);
+  }else{
+    let chars='abcdefghijklmnopqrstuvwxyz';
+    if($('pwUpper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if($('pwNum').checked)chars+='0123456789';
+    if($('pwSym').checked)chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';
+    const arr=new Uint8Array(len);crypto.getRandomValues(arr);
+    result=Array.from(arr).map(b=>chars[b%chars.length]).join('');
+  }
+  const el=$('pwResult');el.textContent=result;el.style.display='block';
+}
+
+// ── USERNAME GENERATOR ──
+const UGEN={
+  normal:{pre:['cool','dark','swift','night','neo','grey','void','silent','iron','ghost'],suf:['wolf','hawk','blade','storm','byte','code','net','dev','hub','core']},
+  tech:{pre:['null','void','0x','bin','hex','root','sudo','git','api','srv'],suf:['404','_dev','_io','_net','x86','v2','_sys','_ops','_cfg','_bin']},
+  anon:{pre:['anon','user','guest','hidden','masked','private','stealth','shadow','cipher','proxy'],suf:Array.from({length:10},()=>Math.floor(Math.random()*9000+1000).toString())},
+  real:{pre:['max','lena','felix','anna','david','julia','tom','sarah','jan','maria'],suf:['1992','1995','1998','2001','_h','_m','real','pro','net','web']},
+};
+function setUgenStyle(s,btn){document.querySelectorAll('[id^="ugenStyle-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');ugenCurrentStyle=s;}
+function genUsernames(){
+  const s=UGEN[ugenCurrentStyle]||UGEN.normal;
+  const results=Array.from({length:8},()=>{
+    const p=s.pre[Math.floor(Math.random()*s.pre.length)];
+    const su=s.suf[Math.floor(Math.random()*s.suf.length)];
+    return p+su;
+  });
+  const el=$('ugenResult');el.textContent=results.join('\n');el.style.display='block';
+}
+
+// ── FAKE ID GENERATOR ──
+const FAKE_DATA={
+  de:{
+    fn:['Max','Anna','Felix','Laura','Jonas','Emma','Leon','Sophie','Lukas','Mia','Paul','Lena','Finn','Hannah','Noah'],
+    ln:['Müller','Schmidt','Schneider','Fischer','Weber','Meyer','Wagner','Becker','Schulz','Hoffmann'],
+    city:['Berlin','Hamburg','München','Köln','Frankfurt','Stuttgart','Düsseldorf','Leipzig','Bremen','Dresden'],
+    street:['Hauptstraße','Bahnhofstraße','Gartenweg','Kirchgasse','Rosenweg','Birkenallee','Feldweg','Marktplatz'],
+  },
+  en:{
+    fn:['James','Emily','Oliver','Charlotte','William','Amelia','Noah','Ava','Liam','Isabella','Mason','Sophia'],
+    ln:['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Martinez','Wilson'],
+    city:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego'],
+    street:['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine Rd','Elm St','Washington Blvd','Park Ave'],
+  },
+  fr:{
+    fn:['Lucas','Emma','Hugo','Chloé','Nathan','Léa','Thomas','Camille','Louis','Manon'],
+    ln:['Martin','Bernard','Thomas','Petit','Robert','Richard','Durand','Dubois','Moreau','Laurent'],
+    city:['Paris','Marseille','Lyon','Toulouse','Nice','Nantes','Strasbourg','Montpellier','Bordeaux'],
+    street:['Rue de la Paix','Avenue Foch','Boulevard Saint-Michel','Rue du Commerce','Place de la République'],
+  },
+  es:{
+    fn:['Alejandro','María','Carlos','Ana','Juan','Laura','David','Carmen','Pedro','Isabel'],
+    ln:['García','Martínez','López','Sánchez','González','Pérez','Rodríguez','Fernández','Díaz','Torres'],
+    city:['Madrid','Barcelona','Valencia','Sevilla','Zaragoza','Málaga','Murcia','Palma','Bilbao'],
+    street:['Calle Mayor','Paseo de la Castellana','Gran Vía','Avenida de América','Calle Alcalá'],
+  },
+};
+function rndFrom(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function genFakeId(){
+  const locale=$('fakeLocale').value;const d=FAKE_DATA[locale]||FAKE_DATA.de;
+  const fn=rndFrom(d.fn),ln=rndFrom(d.ln);
+  const year=1960+Math.floor(Math.random()*40),month=String(1+Math.floor(Math.random()*12)).padStart(2,'0'),day=String(1+Math.floor(Math.random()*28)).padStart(2,'0');
+  const dob=`${day}.${month}.${year}`;
+  const city=rndFrom(d.city),street=rndFrom(d.street),nr=1+Math.floor(Math.random()*200);
+  const plz=String(10000+Math.floor(Math.random()*89999));
+  const phone='+'+Math.floor(Math.random()*9e11+1e11);
+  const user=(fn.toLowerCase()+'.'+ln.toLowerCase()).replace(/[^a-z.]/g,'');
+  const domains=['gmail.com','outlook.com','yahoo.com','proton.me','web.de'];
+  const email=user+(1990+Math.floor(Math.random()*30))+'@'+rndFrom(domains);
+  const el=$('fakeIdResult');
+  el.style.display='block';
+  el.innerHTML=`<div class="result-box" style="padding:0;">
+    ${[
+      ['Name',fn+' '+ln],['Geburtsdatum',dob],['Adresse',street+' '+nr+', '+plz+' '+city],
+      ['Telefon',phone],['Email',email],['Benutzername',user+(Math.floor(Math.random()*9000+1000))],
+    ].map(([l,v])=>`<div class="result-row"><span class="result-label">${l}</span><span class="result-val" style="cursor:pointer;" onclick="copyToClipboard('${v.replace(/'/g,"\\'")}').then(()=>showToast('Kopiert'))">${esc(v)}</span></div>`).join('')}
+  </div>`;
+}
+
+// ── URL SCANNER ──
+async function scanUrl(){
+  const url=$('urlInput').value.trim();if(!url){showToast('URL eingeben');return;}
+  const btn=$('urlScanBtn'),res=$('urlResult');btn.disabled=true;btn.textContent='Scanne…';
+  res.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';
+  try{
+    let hostname='';try{hostname=new URL(url).hostname;}catch{res.innerHTML='<p style="font-size:12px;color:#f87171;">Ungültige URL</p>';btn.disabled=false;btn.textContent='Scannen';return;}
+    // URLhaus check
+    let urlhausResult='Nicht erreichbar',urlhausColor='var(--txt3)';
+    try{
+      const r=await fetch('https://urlhaus-api.abuse.ch/v1/url/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'url='+encodeURIComponent(url),signal:AbortSignal.timeout(8000)});
+      const d=await r.json();
+      if(d.query_status==='is_found'){urlhausResult='Gemeldet (URLhaus)';urlhausColor='#f87171';}
+      else if(d.query_status==='no_results'){urlhausResult='Nicht gemeldet';urlhausColor='#4ade80';}
+    }catch{urlhausResult='API nicht erreichbar';}
+    // Google Safe Browsing (client-side heuristic)
+    const suspicious=/phish|malware|hack|porn|free-money|click-here|virus|trojan|ransom/i.test(url);
+    const isSuspicious=suspicious||urlhausColor==='#f87171';
+    res.innerHTML=`<div class="result-box" style="padding:0;">
+      <div class="result-row"><span class="result-label">URL</span><span class="result-val">${esc(hostname)}</span></div>
+      <div class="result-row"><span class="result-label">URLhaus</span><span class="result-val" style="color:${urlhausColor}">${esc(urlhausResult)}</span></div>
+      <div class="result-row"><span class="result-label">Muster</span><span class="result-val" style="color:${suspicious?'#f87171':'#4ade80'}">${suspicious?'Verdächtig':'Unauffällig'}</span></div>
+      <div class="result-row"><span class="result-label">HTTPS</span><span class="result-val" style="color:${url.startsWith('https://')?'#4ade80':'#fbbf24'}">${url.startsWith('https://')?'Ja':'Nein'}</span></div>
+      <div class="result-row"><span class="result-label">Gesamt</span><span class="result-val" style="color:${isSuspicious?'#f87171':'#4ade80'};font-weight:600;">${isSuspicious?'Potenziell gefährlich':'Unauffällig'}</span></div>
+    </div>
+    <div style="margin-top:8px;display:flex;gap:8px;">
+      <a href="https://www.virustotal.com/gui/url/${btoa(url)}/detection" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">VirusTotal ↗</a>
+      <a href="https://urlscan.io/search/#${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;flex:1;justify-content:center;">urlscan.io ↗</a>
+    </div>`;
+  }catch(e){res.innerHTML=`<p style="font-size:12px;color:#f87171;">${esc(e.message)}</p>`;}
+  btn.disabled=false;btn.textContent='Scannen';
+}
+
+// ── TRACKER DETECTOR ──
+const KNOWN_TRACKERS={
+  'google-analytics.com':'Google Analytics','gtag':'Google Tag Manager','doubleclick.net':'Google Ads',
+  'facebook.net':'Meta Pixel','fbevents':'Meta Pixel','twitter.com/i/adsct':'Twitter Ads',
+  'hotjar.com':'Hotjar','clarity.ms':'Microsoft Clarity','mixpanel.com':'Mixpanel',
+  'segment.com':'Segment','amplitude.com':'Amplitude','intercom.io':'Intercom',
+  'hubspot.com':'HubSpot','salesforce.com':'Salesforce','marketo.com':'Marketo',
+  'cloudflare.com':'Cloudflare','jsdelivr.net':'jsDelivr CDN','cdnjs.cloudflare':'Cloudflare CDN',
+  'disqus.com':'Disqus','gravatar.com':'Gravatar','wordpress.com':'WordPress',
+};
+function openTrackerTools(){
+  const url=$('trackerInput').value.trim();
+  const res=$('trackerResult');
+  if(!url){showToast('URL eingeben');return;}
+  let hostname='';
+  try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}
+  res.innerHTML=`<div style="margin-top:4px;">
+    <div class="links-label" style="margin-bottom:8px;">Externe Scanner für <span style="color:var(--txt)">${esc(hostname)}</span></div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <a href="https://themarkup.org/blacklight?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">Blacklight (Markup)</span><span style="font-size:11px;color:var(--txt3)">Ad/Tracker-Scanner</span><span class="link-arrow">↗</span>
+      </a>
+      <a href="https://webbkoll.dataskydd.net/en/check?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">Webbkoll (GDPR)</span><span style="font-size:11px;color:var(--txt3)">Datenschutz-Check</span><span class="link-arrow">↗</span>
+      </a>
+      <a href="https://urlscan.io/search/#page.domain:${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">urlscan.io</span><span style="font-size:11px;color:var(--txt3)">Request-Scanner</span><span class="link-arrow">↗</span>
+      </a>
+      <a href="https://observatory.mozilla.org/analyze/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">Mozilla Observatory</span><span style="font-size:11px;color:var(--txt3)">Security-Headers</span><span class="link-arrow">↗</span>
+      </a>
+    </div>
+  </div>`;
+}
+
+// ── META SCRAPER ──
+function analyzeUrlLocal(){
+  const url=$('metaInput').value.trim();
+  if(!url)return;
+  const res=$('metaResult');
+  try{
+    const u=new URL(url);
+    const isHttps=u.protocol==='https:';
+    const hasWWW=u.hostname.startsWith('www.');
+    const parts=u.hostname.replace(/^www\./,'').split('.');
+    const tld=parts.slice(-1)[0];
+    const domain=parts.slice(-2).join('.');
+    const hasPath=u.pathname!=='/'&&u.pathname!=='';
+    const hasQuery=u.search!=='';
+    const hasFragment=u.hash!=='';
+    res.innerHTML=`<div class="result-box" style="padding:0;">
+      <div class="result-row"><span class="result-label">Protokoll</span><span class="result-val${isHttps?' ok':' err'}">${isHttps?'HTTPS':'HTTP (unsicher)'}</span></div>
+      <div class="result-row"><span class="result-label">Domain</span><span class="result-val">${esc(domain)}</span></div>
+      <div class="result-row"><span class="result-label">TLD</span><span class="result-val">.${esc(tld)}</span></div>
+      <div class="result-row"><span class="result-label">Subdomain</span><span class="result-val">${hasWWW?'www':u.hostname.replace('.'+domain,'').replace(domain,'')||'—'}</span></div>
+      <div class="result-row"><span class="result-label">Pfad</span><span class="result-val">${hasPath?esc(u.pathname):'—'}</span></div>
+      <div class="result-row"><span class="result-label">Parameter</span><span class="result-val">${hasQuery?esc(u.search):'—'}</span></div>
+    </div>`;
+  }catch{}
+}
+
+async function scrapeMeta(){
+  const url=$('metaInput').value.trim();
+  const btn=$('metaBtn'),res=$('metaResult');
+  if(!url){showToast('URL eingeben');return;}
+  let hostname='';
+  try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}
+  // First show local analysis
+  analyzeUrlLocal();
+  // Then append external tool links
+  const existing=$('metaResult').innerHTML;
+  res.innerHTML=existing+`<div style="margin-top:10px;">
+    <div class="links-label" style="margin-bottom:8px;">Metadaten via externe Dienste</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <a href="https://metatags.io/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">metatags.io</span><span style="font-size:11px;color:var(--txt3)">OG, Twitter, SEO Tags</span><span class="link-arrow">↗</span>
+      </a>
+      <a href="https://www.opengraph.xyz/url/${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">opengraph.xyz</span><span style="font-size:11px;color:var(--txt3)">Open Graph Preview</span><span class="link-arrow">↗</span>
+      </a>
+      <a href="https://builtwith.com/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">builtwith.com</span><span style="font-size:11px;color:var(--txt3)">Technologien erkennen</span><span class="link-arrow">↗</span>
+      </a>
+      <a href="https://securityheaders.com/?q=${encodeURIComponent(url)}&followRedirects=on" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;">
+        <span class="link-url">securityheaders.com</span><span style="font-size:11px;color:var(--txt3)">HTTP-Header-Analyse</span><span class="link-arrow">↗</span>
+      </a>
+    </div>
+  </div>`;
+}
+
+// ── IP LOOKUP ──
+async function lookupIP(){
+  const input=$('ipInput').value.trim();
+  const btn=$('ipBtn'),res=$('ipResult');
+  btn.disabled=true;btn.textContent='…';
+  res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';
+  // ip-api.com has CORS enabled on HTTP fields endpoint
+  const target=input||'';
+  const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;
+  try{
+    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    if(d.status==='fail')throw new Error(d.message||'Ungültige IP');
+    const isVPN=d.proxy||d.hosting;
+    const rows=[
+      ['IP',d.query],
+      ['Land',`${d.country||'—'} (${d.countryCode||'—'})`],
+      ['Stadt',d.city||'—'],
+      ['Region',d.regionName||'—'],
+      ['Timezone',d.timezone||'—'],
+      ['ISP',d.isp||'—'],
+      ['Org / ASN',d.as||'—'],
+      ['Proxy/VPN',d.proxy?'Ja':'Nein'],
+      ['Hosting/DC',d.hosting?'Ja':'Nein'],
+    ];
+    const ipCopy=d.query;
+    res.innerHTML=`<div class="result-box" style="padding:0;">
+      ${rows.map(([l,v])=>{
+        let cls='';
+        if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';
+        if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';
+        return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;
+      }).join('')}
+    </div>
+    <div style="margin-top:8px;display:flex;gap:8px;">
+      <button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button>
+      <a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a>
+    </div>`;
+  }catch(e){
+    res.innerHTML=`<div class="result-box" style="padding:0;">
+      <div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--txt3);margin-top:8px;">Hinweis: ip-api.com funktioniert nur über HTTP, nicht HTTPS. Wenn die Seite über HTTPS läuft, direkt auf <a href="https://ip-api.com" target="_blank" rel="noopener noreferrer" style="color:var(--txt2)">ip-api.com ↗</a> prüfen.</p>`;
+  }
+  btn.disabled=false;btn.textContent='Lookup';
+}
+
+// ── EMAIL REPUTATION ──
+// Known disposable domains (local list — no API needed)
+const DISPOSABLE_DOMAINS=new Set(['mailnull.com','guerrillamail.com','throwam.com','yopmail.com','tempmail.com','temp-mail.org','10minutemail.com','sharklasers.com','guerrillamailblock.com','grr.la','guerrillamail.info','guerrillamail.biz','guerrillamail.de','guerrillamail.net','guerrillamail.org','spam4.me','trashmail.com','trashmail.me','trashmail.net','trashmail.org','trashmail.io','dispostable.com','mailnesia.com','mailnull.com','maildrop.cc','spamgourmet.com','spamgourmet.net','spamgourmet.org','spamspot.com','spamthis.co.uk','spamtrap.ro','fakeinbox.com','fakeinbox.net','discard.email','discardmail.com','discardmail.de','spamfree24.org','spamgob.com','spamhereplease.com','spamoff.de','spamwc.de','trash-mail.com','trashdevil.com','trashdevil.de','trashmailer.com','mailsiphon.com','mail.tm','mail.gw','inboxkitten.com','owlpic.com','tempinbox.com','tempr.email','temp-mail.ru','jetable.fr.nf','notsharingmy.info','spamgourmet.com','spamgourmet.net','speed.1s.fr','spamify.com']);
+
+const BLACKLISTED_DOMAINS=new Set(['mailinator.com','guerrillamail.com','trashmail.com','yopmail.com','spam4.me']);
+
+const FREE_PROVIDERS=new Set(['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','proton.me','protonmail.com','web.de','gmx.de','gmx.net','gmx.com','t-online.de','freenet.de','posteo.de','tutanota.com','tutanota.de','mailfence.com','disroot.org','riseup.net','fastmail.com','aol.com','live.com','msn.com','yahoo.de','yahoo.co.uk','yahoo.fr']);
+
+async function checkEmailRep(){
+  const val=$('emailRepInput').value.trim().toLowerCase();
+  const btn=$('emailRepBtn'),res=$('emailRepResult');
+  if(!val||!val.includes('@')){showToast('Gültige Email eingeben');return;}
+  btn.disabled=true;btn.textContent='Prüfe…';
+  const domain=val.split('@')[1]||'';
+  const isDisposable=DISPOSABLE_DOMAINS.has(domain);
+  const isBlacklisted=BLACKLISTED_DOMAINS.has(domain);
+  const isFree=FREE_PROVIDERS.has(domain);
+  const isCustom=!isDisposable&&!isFree;
+  // Check MX records via DNS-over-HTTPS
+  let hasMX=null,mxRecords=[];
+  try{
+    const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,{signal:AbortSignal.timeout(5000)});
+    const d=await r.json();
+    mxRecords=(d.Answer||[]).filter(a=>a.type===15).map(a=>a.data);
+    hasMX=mxRecords.length>0;
+  }catch{hasMX=null;}
+  // Risk score
+  let risk=0,riskLabel='Niedrig',riskColor='#4ade80';
+  if(isBlacklisted){risk=3;}
+  else if(isDisposable){risk=2;}
+  else if(!hasMX){risk=2;}
+  else if(!isFree&&!isCustom){risk=1;}
+  if(risk>=3){riskLabel='Kritisch';riskColor='#f87171';}
+  else if(risk===2){riskLabel='Hoch';riskColor='#f87171';}
+  else if(risk===1){riskLabel='Mittel';riskColor='#fbbf24';}
+  const rows=[
+    ['Domain',domain],
+    ['Typ',isDisposable?'Wegwerf-Adresse':isBlacklisted?'Blacklisted':isFree?'Free Provider':'Custom/Business'],
+    ['MX Records',hasMX===null?'Unbekannt':hasMX?mxRecords[0]?.split(' ').pop()||'Vorhanden':'Keine (ungültig)'],
+    ['Blacklist',isBlacklisted?'Eingetragen':'Nicht eingetragen'],
+    ['Risiko',riskLabel],
+  ];
+  res.innerHTML=`<div class="result-box" style="padding:0;">
+    ${rows.map(([l,v])=>{
+      let cls='';
+      if(l==='Blacklist')cls=isBlacklisted?' err':' ok';
+      if(l==='Risiko')cls=risk>=2?' err':risk===1?' warn':' ok';
+      if(l==='MX Records')cls=hasMX===false?' err':'';
+      if(l==='Typ')cls=isDisposable||isBlacklisted?' err':isFree?' warn':' ok';
+      return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(v)}</span></div>`;
+    }).join('')}
+  </div>
+  ${mxRecords.length?`<div style="margin-top:8px;"><div class="links-label" style="margin-bottom:4px;">MX Records</div>${mxRecords.slice(0,3).map(mx=>`<div class="tag">${esc(mx)}</div>`).join('')}</div>`:''}`;
+  btn.disabled=false;btn.textContent='Prüfen';
 }
 
 // ════════════════════════════════════
@@ -1237,9 +1840,8 @@ async function renderWhoami(){
   const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';
   const onlineCount=parseInt($('onlineCount')?.textContent||'1');
-  const loginBtn=!user?`<div style="text-align:center;padding:0 0 20px"><button class="btn btn-primary" onclick="closeWhoamiAndOpenAuth()">Account erstellen / Login</button></div>`:'';
-  card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}`+loginBtn+
-  `<div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div>
+  card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}
+  <div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div>
   <div class="whoami-grid">
     <div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div>
     <div class="whoami-stat"><div class="whoami-stat-val">${saved.length}</div><div class="whoami-stat-lbl">Gespeichert</div></div>
@@ -1252,22 +1854,18 @@ async function renderWhoami(){
   <div class="whoami-row"><span class="whoami-row-lbl">Gerät</span><span class="whoami-row-val">${isMobile?'Mobil':'Desktop'}</span></div>
   <div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div>
   <div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div>
-  <div class="whoami-row"><span class="whoami-row-lbl">IP-Adresse</span><span class="whoami-row-val ok" id="whoami-ip"><span class="spin" style="font-size:10px">↻</span> Laden…</span></div>
   <div class="whoami-row"><span class="whoami-row-lbl">Unique IPs online</span><span class="whoami-row-val ok">${onlineCount}</span></div>
   <div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;
-  getMyIP().then(ip=>{const ipEl=document.getElementById('whoami-ip');if(ipEl)ipEl.innerHTML=esc(ip||'—');});
 }
-function closeWhoamiAndOpenAuth(){switchPage('active');openAuthModal();}
 
 // ════════════════════════════════════
 // AUTH
 // ════════════════════════════════════
-const AUTH_KEY='altmail_session';
-let currentUser=null;
-function loadUser(){try{return JSON.parse(sessionStorage.getItem(AUTH_KEY)||localStorage.getItem(AUTH_KEY)||'null');}catch{return null;}}
-function saveUserSession(u){try{localStorage.setItem(AUTH_KEY,JSON.stringify(u));sessionStorage.setItem(AUTH_KEY,JSON.stringify(u));}catch{}}
-function clearUserSession(){try{localStorage.removeItem(AUTH_KEY);sessionStorage.removeItem(AUTH_KEY);}catch{}}
-async function openAuthModal(){currentUser=loadUser();if(currentUser){$('authLoggedOut').style.display='none';$('authLoggedIn').style.display='';$('authUserName').textContent=currentUser.name||currentUser.email.split('@')[0];$('authUserEmail').textContent=currentUser.email;$('authAvatarBig').textContent=(currentUser.email[0]||'?').toUpperCase();}else{$('authLoggedOut').style.display='';$('authLoggedIn').style.display='none';$('authErr').classList.remove('show');$('authEmail').value='';$('authPw').value='';}$('authModalOv').classList.add('open');setTimeout(()=>{try{$('authEmail').focus();}catch{}},300);}
+const AUTH_KEY='altmail_session';let currentUser=null;
+function loadUser(){try{return JSON.parse(sessionStorage.getItem(AUTH_KEY)||'null');}catch{return null;}}
+function saveUserSession(u){try{sessionStorage.setItem(AUTH_KEY,JSON.stringify(u));}catch{}}
+function clearUserSession(){try{sessionStorage.removeItem(AUTH_KEY);}catch{}}
+async function openAuthModal(){currentUser=loadUser();if(currentUser){$('authLoggedOut').style.display='none';$('authLoggedIn').style.display='';$('authUserName').textContent=currentUser.name||currentUser.email.split('@')[0];$('authUserEmail').textContent=currentUser.email;$('authAvatarBig').textContent=(currentUser.email[0]||'?').toUpperCase();}else{$('authLoggedOut').style.display='';$('authLoggedIn').style.display='none';$('authErr').classList.remove('show');}$('authModalOv').classList.add('open');}
 function closeAuthModal(){$('authModalOv').classList.remove('open');}
 function closeAuthModalOv(e){if(e.target===$('authModalOv'))closeAuthModal();}
 let authMode='login';
@@ -1276,28 +1874,32 @@ function setAuthErr(msg){$('authErr').textContent=msg;$('authErr').classList.add
 async function authSubmit(){
   const email=$('authEmail').value.trim();const apw=$('authPw').value;
   if(!email||!/@/.test(email)){setAuthErr('Gültige E-Mail eingeben.');return;}
-  if(apw.length<6){setAuthErr('Passwort muss mind. 6 Zeichen haben.');return;}
+  if(apw.length<6){setAuthErr('Passwort mind. 6 Zeichen.');return;}
   const btn=$('authSubmitBtn');btn.disabled=true;btn.textContent='…';
   try{
-    if(authMode==='register'){const existing=await dbGet('users',email);if(existing){setAuthErr('Account existiert bereits.');return;}const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');const user={email,pwHash:hashHex,name:email.split('@')[0],createdAt:new Date().toISOString()};await dbPut('users',user);currentUser={email,name:user.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('✓ Account erstellt & eingeloggt');}
-    else{const u=await dbGet('users',email);if(!u){setAuthErr('E-Mail oder Passwort falsch.');return;}const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(u.pwHash!==hashHex){setAuthErr('E-Mail oder Passwort falsch.');return;}currentUser={email,name:u.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('✓ Eingeloggt als '+(u.name||email));}
+    const hashBuf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(apw+'altmail_salt_2024'));
+    const hashHex=Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(authMode==='register'){const existing=await dbGet('users',email);if(existing){setAuthErr('Account existiert bereits.');return;}await dbPut('users',{id:email,email,pwHash:hashHex,name:email.split('@')[0],createdAt:new Date().toISOString()});currentUser={email,name:email.split('@')[0]};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('Account erstellt');}
+    else{const u=await dbGet('users',email);if(!u||u.pwHash!==hashHex){setAuthErr('E-Mail oder Passwort falsch.');return;}currentUser={email,name:u.name};saveUserSession(currentUser);updateAuthUI();closeAuthModal();showToast('Eingeloggt');}
   }finally{btn.disabled=false;btn.textContent=authMode==='login'?'Login':'Registrieren';}
 }
 function authLogout(){clearUserSession();currentUser=null;updateAuthUI();closeAuthModal();showToast('Ausgeloggt');}
-function updateAuthUI(){const u=loadUser();const av=$('authAvatar');if(u){av.textContent=(u.email[0]||'?').toUpperCase();av.style.borderColor='var(--brd-act)';av.style.color='var(--txt)';}else{av.textContent='?';av.style.borderColor='';av.style.color='';}$('auth-nav-label').textContent=u?(u.name||u.email.split('@')[0]):'Account';}
+function updateAuthUI(){const u=loadUser();const av=$('authAvatar');if(u){av.textContent=(u.email[0]||'?').toUpperCase();av.style.borderColor='var(--brd-act)';}else{av.textContent='?';av.style.borderColor='';}$('auth-nav-label').textContent=u?(u.name||u.email.split('@')[0]):'Account';}
 
-$('authEmail').addEventListener('keydown',e=>{if(e.key==='Enter')$('authPw').focus();});
-$('authPw').addEventListener('keydown',e=>{if(e.key==='Enter')authSubmit();});
-$('saveName').addEventListener('keydown',e=>{if(e.key==='Enter')confirmSave();});
-
+// ════════════════════════════════════
+// KEYBOARD
+// ════════════════════════════════════
 document.addEventListener('keydown',e=>{
   const tag=document.activeElement.tagName.toLowerCase();
-  if(tag==='input'||tag==='textarea')return;
-  if(e.key==='Escape'){closeDetail();closeModal();closeAuthModal();$('sentDetailOv').classList.remove('open');}
+  if(tag==='input'||tag==='textarea'||tag==='select')return;
+  if(e.key==='Escape'){closeDetail();closeModal();closeAuthModal();document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
   if(e.key.toLowerCase()==='n'&&!e.ctrlKey&&!e.metaKey&&!$('genBtn').disabled)doGenerate();
   if(e.key.toLowerCase()==='c'&&!e.ctrlKey&&!e.metaKey&&addr)copyEmail();
   if(e.key.toLowerCase()==='r'&&!e.ctrlKey&&!e.metaKey&&!$('refreshBtn').disabled)doFetch(true);
 });
+$('authEmail').addEventListener('keydown',e=>{if(e.key==='Enter')$('authPw').focus();});
+$('authPw').addEventListener('keydown',e=>{if(e.key==='Enter')authSubmit();});
+$('saveName').addEventListener('keydown',e=>{if(e.key==='Enter')confirmSave();});
 
 if(window.innerWidth<=768){$('mobile-theme-toggle').style.display='flex';}
 window.addEventListener('resize',()=>{$('mobile-theme-toggle').style.display=window.innerWidth<=768?'flex':'none';});
