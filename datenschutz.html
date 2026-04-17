@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung – AltMail</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--font:'Geist',system-ui,sans-serif;--mono:'Geist Mono',monospace;}
+[data-theme="dark"]{--bg:#0a0a0a;--s1:#111;--s2:#181818;--s3:#202020;--brd:rgba(255,255,255,0.07);--brd-hi:rgba(255,255,255,0.15);--txt:#f0f0f0;--txt2:#a0a0a0;--txt3:#606060;--shadow:0 4px 24px rgba(0,0,0,.3);}
+[data-theme="light"]{--bg:#f4f4f4;--s1:#fff;--s2:#f0f0f0;--s3:#e8e8e8;--brd:rgba(0,0,0,0.08);--brd-hi:rgba(0,0,0,0.15);--txt:#111;--txt2:#555;--txt3:#999;--shadow:0 4px 24px rgba(0,0,0,.08);}
+html,body{min-height:100%;background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+body{padding:0 0 80px;}
+
+nav{position:sticky;top:0;z-index:50;background:var(--s1);border-bottom:1px solid var(--brd);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;backdrop-filter:blur(12px);}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--txt);font-size:18px;font-weight:700;letter-spacing:-0.8px;}
+.nav-logo svg{color:var(--txt);}
+.logo-dot{color:var(--txt3);}
+.nav-actions{display:flex;align-items:center;gap:10px;}
+.btn-back{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-family:var(--font);font-size:13px;font-weight:500;border-radius:10px;border:1px solid var(--brd);background:var(--s2);color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .18s;}
+.btn-back:hover{background:var(--s3);border-color:var(--brd-hi);color:var(--txt);}
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--brd);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--txt2);}
+.theme-toggle:hover{border-color:var(--brd-hi);background:var(--s3);}
+.theme-toggle svg{width:16px;height:16px;}
+
+.container{max-width:660px;margin:0 auto;padding:40px 20px;}
+
+.hero{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--brd);}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--txt3);letter-spacing:.6px;text-transform:uppercase;background:var(--s2);border:1px solid var(--brd);border-radius:100px;padding:4px 12px;margin-bottom:18px;}
+.hero h1{font-size:32px;font-weight:600;letter-spacing:-1.2px;color:var(--txt);margin-bottom:10px;line-height:1.2;}
+.hero p{font-size:14px;color:var(--txt3);line-height:1.7;}
+.hero-meta{display:flex;align-items:center;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.hero-meta span{font-family:var(--mono);font-size:11px;color:var(--txt3);}
+
+/* TOC */
+.toc{background:var(--s1);border:1px solid var(--brd);border-radius:16px;padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow);}
+.toc-label{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px;}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.toc-list li a{font-size:13px;color:var(--txt3);text-decoration:none;display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--brd);transition:color .15s;}
+.toc-list li:last-child a{border-bottom:none;}
+.toc-list li a:hover{color:var(--txt2);}
+.toc-num{font-family:var(--mono);font-size:11px;color:var(--txt3);min-width:20px;}
+
+.section{background:var(--s1);border:1px solid var(--brd);border-radius:16px;padding:24px;margin-bottom:12px;box-shadow:var(--shadow);scroll-margin-top:70px;}
+.section-label{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--brd);}
+.section h2{font-size:16px;font-weight:600;color:var(--txt);letter-spacing:-.4px;margin-bottom:16px;}
+.section h3{font-size:13px;font-weight:600;color:var(--txt2);letter-spacing:-.2px;margin:18px 0 8px;}
+.section h3:first-of-type{margin-top:0;}
+.section p{font-size:13px;color:var(--txt2);line-height:1.75;margin-bottom:10px;}
+.section p:last-child{margin-bottom:0;}
+.section a{color:var(--txt2);border-bottom:1px solid var(--brd);text-decoration:none;padding-bottom:1px;transition:color .15s,border-color .15s;}
+.section a:hover{color:var(--txt);border-color:var(--brd-hi);}
+.section ul{margin:8px 0 12px 0;padding-left:0;list-style:none;}
+.section ul li{font-size:13px;color:var(--txt2);line-height:1.7;padding:4px 0 4px 18px;border-bottom:1px solid var(--brd);position:relative;}
+.section ul li:last-child{border-bottom:none;}
+.section ul li::before{content:'·';position:absolute;left:0;color:var(--txt3);font-size:16px;line-height:1.4;}
+
+/* RECHTE KARTEN */
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}
+.right-card{background:var(--s2);border:1px solid var(--brd);border-radius:10px;padding:14px;}
+.right-card-icon{width:28px;height:28px;border-radius:7px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.right-card-icon svg{width:14px;height:14px;color:var(--txt2);}
+.right-card-name{font-size:12px;font-weight:600;color:var(--txt);margin-bottom:3px;}
+.right-card-desc{font-size:11px;color:var(--txt3);line-height:1.5;}
+
+/* RECHTSGRUNDLAGE TAG */
+.law-tag{display:inline-block;font-size:10px;font-weight:600;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 8px;margin-left:6px;letter-spacing:.3px;vertical-align:middle;}
+
+/* KONTAKT BOX */
+.contact-box{background:var(--s2);border:1px solid var(--brd);border-radius:12px;padding:18px;margin-top:8px;}
+.contact-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--brd);}
+.contact-row:last-child{border-bottom:none;padding-bottom:0;}
+.contact-row:first-child{padding-top:0;}
+.contact-label{font-size:12px;color:var(--txt3);}
+.contact-val{font-family:var(--mono);font-size:12px;color:var(--txt2);}
+.contact-val a{color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--brd);}
+.contact-val a:hover{color:var(--txt);}
+
+/* COOKIES TABELLE */
+.cookie-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px;}
+.cookie-table th{font-size:10px;font-weight:500;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:1px solid var(--brd);text-align:left;}
+.cookie-table td{padding:10px;border-bottom:1px solid var(--brd);color:var(--txt2);font-family:var(--mono);font-size:12px;vertical-align:top;}
+.cookie-table tr:last-child td{border-bottom:none;}
+.cookie-type{display:inline-block;font-size:10px;font-weight:600;border-radius:100px;padding:2px 8px;}
+.cookie-type.necessary{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2);}
+.cookie-type.optional{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2);}
+
+.note-box{background:var(--s2);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;margin-top:8px;}
+.note-box p{font-size:12px;color:var(--txt3);line-height:1.7;}
+.note-box strong{color:var(--txt2);}
+
+.page-footer{margin-top:40px;padding-top:24px;border-top:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.page-footer p{font-size:12px;color:var(--txt3);}
+.footer-links{display:flex;gap:14px;}
+.footer-links a{font-size:12px;color:var(--txt3);text-decoration:none;transition:color .15s;}
+.footer-links a:hover{color:var(--txt2);}
+.footer-links a.active{color:var(--txt2);font-weight:500;}
+
+@media(max-width:520px){.rights-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    AltMail<span class="logo-dot">.</span>
+  </a>
+  <div class="nav-actions">
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a class="btn-back" href="/">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Zurück
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-badge">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      DSGVO-konform
+    </div>
+    <h1>Datenschutzerklärung</h1>
+    <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Diese Erklärung informiert Sie darüber, welche Daten wir erheben, wie wir sie verwenden und welche Rechte Sie haben.</p>
+    <div class="hero-meta">
+      <span>Letzte Aktualisierung: April 2026</span>
+      <span>Version: 1.0</span>
+    </div>
+  </div>
+
+  <!-- INHALTSVERZEICHNIS -->
+  <div class="toc">
+    <div class="toc-label">Inhaltsverzeichnis</div>
+    <ul class="toc-list">
+      <li><a href="#verantwortlicher"><span class="toc-num">01</span> Verantwortlicher</a></li>
+      <li><a href="#grundsaetze"><span class="toc-num">02</span> Grundsätze der Datenverarbeitung</a></li>
+      <li><a href="#erhobene-daten"><span class="toc-num">03</span> Welche Daten wir erheben</a></li>
+      <li><a href="#zweck"><span class="toc-num">04</span> Zweck der Verarbeitung</a></li>
+      <li><a href="#speicherung"><span class="toc-num">05</span> Speicherdauer</a></li>
+      <li><a href="#cookies"><span class="toc-num">06</span> Cookies &amp; lokale Speicherung</a></li>
+      <li><a href="#dritte"><span class="toc-num">07</span> Drittanbieter &amp; externe Dienste</a></li>
+      <li><a href="#rechte"><span class="toc-num">08</span> Ihre Rechte</a></li>
+      <li><a href="#kontakt"><span class="toc-num">09</span> Datenschutz-Kontakt</a></li>
+    </ul>
+  </div>
+
+  <!-- 1. VERANTWORTLICHER -->
+  <div class="section" id="verantwortlicher">
+    <div class="section-label">01</div>
+    <h2>Verantwortlicher</h2>
+    <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie sonstiger datenschutzrechtlicher Bestimmungen ist:</p>
+    <div class="contact-box">
+      <div class="contact-row">
+        <span class="contact-label">Name</span>
+        <span class="contact-val">Max Mustermann</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Adresse</span>
+        <span class="contact-val">Musterstraße 1, 12345 Musterstadt</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">E-Mail</span>
+        <span class="contact-val"><a href="mailto:kontakt@alt-emailer.com">kontakt@alt-emailer.com</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Website</span>
+        <span class="contact-val">altmail.app / alt-emailer.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. GRUNDSÄTZE -->
+  <div class="section" id="grundsaetze">
+    <div class="section-label">02</div>
+    <h2>Grundsätze der Datenverarbeitung</h2>
+    <p>AltMail ist ein Dienst zur Erstellung temporärer E-Mail-Adressen. Wir verfolgen das Prinzip der Datensparsamkeit: Wir erheben nur die Daten, die technisch notwendig sind, um den Dienst bereitzustellen.</p>
+    <ul>
+      <li>Keine Registrierung erforderlich</li>
+      <li>Keine dauerhaften Nutzerprofile</li>
+      <li>Keine Weitergabe personenbezogener Daten an Dritte zu Werbezwecken</li>
+      <li>Alle temporären E-Mail-Adressen werden über die API von <a href="https://mail.tm" target="_blank" rel="noopener noreferrer">mail.tm</a> / <a href="https://mail.gw" target="_blank" rel="noopener noreferrer">mail.gw</a> bereitgestellt</li>
+      <li>Gespeicherte Daten (Adressen, gesendete Emails) verbleiben ausschließlich lokal auf Ihrem Gerät (IndexedDB / LocalStorage)</li>
+    </ul>
+    <p>Rechtsgrundlage für die Verarbeitung ist <strong>Art. 6 Abs. 1 lit. b DSGVO</strong> (Vertragserfüllung / vorvertragliche Maßnahmen) sowie <strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigte Interessen).</p>
+  </div>
+
+  <!-- 3. ERHOBENE DATEN -->
+  <div class="section" id="erhobene-daten">
+    <div class="section-label">03</div>
+    <h2>Welche Daten wir erheben</h2>
+
+    <h3>Server-Logfiles</h3>
+    <p>Beim Aufrufen unserer Website übermittelt Ihr Browser automatisch folgende Daten, die in Server-Logfiles gespeichert werden:<span class="law-tag">Art. 6 I f DSGVO</span></p>
+    <ul>
+      <li>IP-Adresse (anonymisiert nach 24 Stunden)</li>
+      <li>Datum und Uhrzeit des Zugriffs</li>
+      <li>Aufgerufene URL</li>
+      <li>Browser-Typ und -Version</li>
+      <li>Betriebssystem</li>
+      <li>HTTP-Statuscode</li>
+    </ul>
+
+    <h3>Temporäre E-Mail-Adressen</h3>
+    <p>Die von Ihnen genutzten temporären E-Mail-Adressen werden über die externe API mail.tm / mail.gw generiert. Diese Dienste haben eigene Datenschutzbestimmungen. Wir haben keinen dauerhaften Zugriff auf den Inhalt der E-Mails.</p>
+
+    <h3>Lokal gespeicherte Daten (auf Ihrem Gerät)</h3>
+    <p>Wenn Sie Funktionen wie „Email speichern" oder „Email senden" nutzen, werden diese Daten ausschließlich in Ihrem Browser (IndexedDB / LocalStorage) gespeichert. Sie verlassen Ihr Gerät nicht und werden nicht an unsere Server übertragen.</p>
+
+    <h3>Konto-Funktion (optional)</h3>
+    <p>Die optionale Konto-Funktion speichert Ihre E-Mail-Adresse und ein gehashtes Passwort ebenfalls ausschließlich lokal in Ihrem Browser (IndexedDB). Es findet keine Übertragung an einen Server statt.</p>
+  </div>
+
+  <!-- 4. ZWECK -->
+  <div class="section" id="zweck">
+    <div class="section-label">04</div>
+    <h2>Zweck der Verarbeitung</h2>
+    <ul>
+      <li>Bereitstellung des Dienstes (temporäre E-Mail-Adressen, SMS-Empfang)</li>
+      <li>Technischer Betrieb und Sicherheit der Website</li>
+      <li>Fehlerbehebung und Missbrauchserkennung (Logfiles)</li>
+      <li>Verbesserung der Benutzerfreundlichkeit</li>
+    </ul>
+    <p>Eine Verarbeitung zu Werbe- oder Trackingzwecken findet nicht statt.</p>
+  </div>
+
+  <!-- 5. SPEICHERDAUER -->
+  <div class="section" id="speicherung">
+    <div class="section-label">05</div>
+    <h2>Speicherdauer</h2>
+    <ul>
+      <li><strong>Server-Logfiles:</strong> 7 Tage, danach automatische Löschung</li>
+      <li><strong>Temporäre E-Mail-Adressen:</strong> Laufzeit gemäß Auswahl (5 Min. bis unbegrenzt), danach Löschung durch den API-Anbieter</li>
+      <li><strong>Lokale Daten (Browser):</strong> Bis zur manuellen Löschung durch den Nutzer oder beim Leeren des Browser-Speichers</li>
+    </ul>
+  </div>
+
+  <!-- 6. COOKIES -->
+  <div class="section" id="cookies">
+    <div class="section-label">06</div>
+    <h2>Cookies &amp; lokale Speicherung</h2>
+    <p>Wir setzen keine Tracking-Cookies ein. Die folgenden technisch notwendigen Einträge im Browser-Speicher (LocalStorage / IndexedDB) werden verwendet:</p>
+    <table class="cookie-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Typ</th>
+          <th>Zweck</th>
+          <th>Dauer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>altmail_theme</td>
+          <td><span class="cookie-type necessary">Notwendig</span></td>
+          <td>Theme-Einstellung (Dark/Light)</td>
+          <td>Dauerhaft</td>
+        </tr>
+        <tr>
+          <td>altmail_worker_url</td>
+          <td><span class="cookie-type necessary">Notwendig</span></td>
+          <td>Konfigurierte Worker-URL für E-Mail-Versand</td>
+          <td>Dauerhaft</td>
+        </tr>
+        <tr>
+          <td>altmail_online_ip_v1</td>
+          <td><span class="cookie-type necessary">Notwendig</span></td>
+          <td>Anonymisierter Online-Zähler (gehashte IP)</td>
+          <td>30 Sekunden</td>
+        </tr>
+        <tr>
+          <td>AltMailDB (IndexedDB)</td>
+          <td><span class="cookie-type optional">Optional</span></td>
+          <td>Gespeicherte Adressen, gesendete Emails, Konto-Daten</td>
+          <td>Bis zur Löschung</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box" style="margin-top:12px;">
+      <p>Sie können alle lokal gespeicherten Daten jederzeit über die Browser-Einstellungen löschen: <strong>Einstellungen → Datenschutz → Websitedaten löschen</strong>.</p>
+    </div>
+  </div>
+
+  <!-- 7. DRITTE -->
+  <div class="section" id="dritte">
+    <div class="section-label">07</div>
+    <h2>Drittanbieter &amp; externe Dienste</h2>
+    <p>Folgende externe Dienste werden genutzt. Eine Nutzung erfolgt nur, wenn Sie die entsprechende Funktion aktiv aufrufen:</p>
+
+    <h3>mail.tm / mail.gw</h3>
+    <p>API zur Bereitstellung temporärer E-Mail-Adressen. Es werden zur Kontoerstellung zufällig generierte Benutzernamen und Passwörter übertragen.<br>
+    Datenschutz: <a href="https://mail.tm" target="_blank" rel="noopener noreferrer">mail.tm</a></p>
+
+    <h3>Google Fonts</h3>
+    <p>Zur Darstellung der Schriftarten wird Google Fonts genutzt. Dabei wird Ihre IP-Adresse an Google-Server übertragen.<span class="law-tag">Art. 6 I f DSGVO</span><br>
+    Datenschutz: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></p>
+
+    <h3>Have I Been Pwned / XposedOrNot (optional)</h3>
+    <p>Wenn Sie die Pwned-Funktion nutzen, wird Ihre E-Mail-Adresse oder ein gekürzter SHA-1-Hash an externe APIs übermittelt. Dieses geschieht ausschließlich auf Ihre explizite Anfrage.</p>
+
+    <h3>ip-api.com (optional)</h3>
+    <p>Für die IP-Lookup-Funktion wird eine Anfrage mit der gesuchten IP-Adresse an ip-api.com gesendet.</p>
+
+    <h3>URLhaus / VirusTotal (optional)</h3>
+    <p>Für den URL-Scanner werden URLs an die jeweiligen APIs übermittelt – ausschließlich auf Ihre explizite Anfrage.</p>
+
+    <h3>allorigins.win / corsproxy.io (optional)</h3>
+    <p>Für den SMS-Empfang werden CORS-Proxies genutzt, um Inhalte öffentlicher SMS-Dienste abzurufen.</p>
+
+    <h3>Cloudflare Workers (optional)</h3>
+    <p>Wenn Sie die E-Mail-Senden-Funktion nutzen und eine Worker-URL konfiguriert haben, werden Absender, Empfänger, Betreff und Inhalt an den Worker übermittelt.</p>
+  </div>
+
+  <!-- 8. RECHTE -->
+  <div class="section" id="rechte">
+    <div class="section-label">08</div>
+    <h2>Ihre Rechte</h2>
+    <p>Sie haben gemäß DSGVO folgende Rechte gegenüber uns als Verantwortlichem:</p>
+    <div class="rights-grid">
+      <div class="right-card">
+        <div class="right-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="right-card-name">Auskunft<span class="law-tag">Art. 15</span></div>
+        <div class="right-card-desc">Welche Daten wir über Sie gespeichert haben.</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+        <div class="right-card-name">Berichtigung<span class="law-tag">Art. 16</span></div>
+        <div class="right-card-desc">Korrektur unrichtiger Daten.</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
+        <div class="right-card-name">Löschung<span class="law-tag">Art. 17</span></div>
+        <div class="right-card-desc">Recht auf „Vergessenwerden".</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <div class="right-card-name">Portabilität<span class="law-tag">Art. 20</span></div>
+        <div class="right-card-desc">Daten in maschinenlesbarem Format erhalten.</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+        <div class="right-card-name">Widerspruch<span class="law-tag">Art. 21</span></div>
+        <div class="right-card-desc">Widerspruch gegen die Verarbeitung.</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="right-card-name">Einschränkung<span class="law-tag">Art. 18</span></div>
+        <div class="right-card-desc">Einschränkung der Verarbeitung.</div>
+      </div>
+    </div>
+    <p style="margin-top:16px;">Zur Ausübung Ihrer Rechte wenden Sie sich bitte an die unter Abschnitt 9 genannte Kontaktadresse. Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Die zuständige Aufsichtsbehörde in Deutschland können Sie unter <a href="https://www.bfdi.bund.de" target="_blank" rel="noopener noreferrer">www.bfdi.bund.de</a> finden.</p>
+  </div>
+
+  <!-- 9. KONTAKT -->
+  <div class="section" id="kontakt">
+    <div class="section-label">09</div>
+    <h2>Datenschutz-Kontakt</h2>
+    <p>Bei Fragen zum Datenschutz, zur Auskunft oder zur Löschung Ihrer Daten wenden Sie sich bitte an:</p>
+    <div class="contact-box">
+      <div class="contact-row">
+        <span class="contact-label">Name</span>
+        <span class="contact-val">Max Mustermann</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">E-Mail</span>
+        <span class="contact-val"><a href="mailto:datenschutz@alt-emailer.com">datenschutz@alt-emailer.com</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Postanschrift</span>
+        <span class="contact-val">Musterstraße 1, 12345 Musterstadt</span>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:12px;">
+      <p>Wir bearbeiten Anfragen in der Regel innerhalb von <strong>30 Tagen</strong> gemäß Art. 12 DSGVO. Bei komplexen Anfragen kann diese Frist auf bis zu 3 Monate verlängert werden.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p>© 2025 AltMail · Alle Rechte vorbehalten</p>
+    <div class="footer-links">
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html" class="active">Datenschutz</a>
+      <a href="/">Startseite</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function initTheme(){
+  const t=localStorage.getItem('altmail_theme')||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('ico-sun').style.display=t==='dark'?'':'none';
+  document.getElementById('ico-moon').style.display=t==='dark'?'none':'';
+}
+function toggleTheme(){
+  const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('altmail_theme',t);
+  document.getElementById('ico-sun').style.display=t==='dark'?'':'none';
+  document.getElementById('ico-moon').style.display=t==='dark'?'none':'';
+}
+initTheme();
+</script>
+</body>
+</html>
