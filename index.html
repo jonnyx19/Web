@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-<!-- ═══ SEO ═══ -->
 <title>AltMail – Kostenlose Wegwerf-Email & temporäre Handynummer sofort</title>
 <meta name="description" content="AltMail: Kostenlose Wegwerf-Email und temporäre Telefonnummer sofort – anonym, ohne Registrierung. Einweg-Email, Fake-Mail, Temp-Mail und SMS online empfangen.">
 <meta name="keywords" content="wegwerf email, temporäre email, fake email, einweg email, temp mail, disposable email, temporäre telefonnummer, wegwerf nummer, SMS empfangen online, virtuelle nummer, einweg SMS, anonyme email, datenschutz tools, passwort generator, datenleck prüfen">
@@ -54,12 +52,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-
 .main::-webkit-scrollbar-thumb{background:var(--s3);border-radius:4px;}
 .main-inner{max-width:680px;margin:0 auto;padding:32px 20px 80px;}
 
-/* ── MOBILE NAV: 5 Tabs inkl. Gespeichert ── */
+/* ── MOBILE NAV ── */
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--brd);z-index:50;padding:4px 0 env(safe-area-inset-bottom,0);flex-direction:row;align-items:center;}
 .mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:var(--r-sm);cursor:pointer;color:var(--txt3);font-size:9px;font-weight:500;border:none;background:none;font-family:var(--font);min-height:50px;justify-content:center;transition:color .15s;position:relative;}
 .mob-nav-item.active{color:var(--txt);}
 .mob-nav-item svg{width:17px;height:17px;}
-/* Badge auf Gespeichert-Tab */
 .mob-badge{position:absolute;top:5px;right:calc(50% - 18px);min-width:14px;height:14px;background:var(--txt);color:var(--bg);border-radius:100px;font-size:9px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 3px;line-height:1;}
 .mob-badge.visible{display:flex;}
 
@@ -78,22 +75,27 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font);-webkit-font-
 .btn-danger{background:transparent;border-color:var(--brd);color:var(--txt3);}
 .btn-danger:hover{border-color:rgba(248,113,113,.4);color:#f87171;background:rgba(248,113,113,.05);}
 .btn-sm{padding:8px 13px;font-size:12px;border-radius:var(--r-sm);min-height:38px;}
-.btn-group{display:flex;gap:8px;flex-wrap:wrap;}
 input,textarea,select{font-family:var(--font);font-size:16px;color:var(--txt);background:var(--s2);border:1px solid var(--brd);border-radius:var(--r-sm);padding:12px 14px;outline:none;width:100%;transition:border-color .15s;-webkit-appearance:none;appearance:none;box-sizing:border-box;}
 input:focus,textarea:focus,select:focus{border-color:var(--brd-act);}
 input::placeholder,textarea::placeholder{color:var(--txt3);}
 textarea{resize:vertical;min-height:120px;line-height:1.6;}
 select{cursor:pointer;}
+
+/* ── FIX 1: EMAIL ROW overflow ── */
 .email-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;}
-.email-pill{flex:1;min-width:160px;display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none;touch-action:manipulation;}
+.email-pill{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 14px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none;touch-action:manipulation;overflow:hidden;}
 .email-pill:hover{border-color:var(--brd-hi);background:var(--s3);}
 .status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--txt3);transition:background .3s;}
 .status-dot.ok{background:#fff;box-shadow:0 0 8px rgba(255,255,255,.35);}
 .status-dot.loading{background:var(--txt3);animation:sdot .8s infinite;}
 .status-dot.err{background:#f87171;}
 @keyframes sdot{0%,100%{opacity:.3}50%{opacity:1}}
-.email-addr{font-family:var(--mono);font-size:13px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;letter-spacing:-.3px;}
+.email-addr{font-family:var(--mono);font-size:13px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;letter-spacing:-.3px;}
 .email-copy-hint{font-size:11px;color:var(--txt3);flex-shrink:0;white-space:nowrap;}
+
+/* ── FIX 2: btn-group in email-row ── */
+.btn-group{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;}
+
 .timer-section{margin-top:16px;padding-top:16px;border-top:1px solid var(--brd);}
 .section-label{font-size:11px;font-weight:500;color:var(--txt3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:8px;}
 .timer-opts{display:flex;flex-wrap:wrap;gap:4px;align-items:center;}
@@ -113,7 +115,6 @@ select{cursor:pointer;}
 .sl-dot.ok{background:#fff;box-shadow:0 0 6px rgba(255,255,255,.3);}
 .sl-dot.err{background:#f87171;animation:sdot 1s infinite;}
 .sl-dot.loading{animation:sdot .6s infinite;}
-.sl-txt{font-size:12px;color:var(--txt3);}
 .refresh-ring-wrap{display:inline-flex;align-items:center;gap:6px;margin-left:auto;}
 .refresh-ring svg{width:14px;height:14px;transform:rotate(-90deg);}
 .refresh-ring circle{fill:none;stroke:var(--txt3);stroke-width:2;stroke-linecap:round;stroke-dasharray:38;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;}
@@ -203,9 +204,13 @@ select{cursor:pointer;}
 .country-chip:hover{border-color:var(--brd-hi);color:var(--txt2);}
 .country-chip.on{background:var(--btn-bg);color:var(--btn-clr);border-color:transparent;font-weight:600;}
 .phone-select-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
-.phone-pill{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:12px 16px;margin-bottom:6px;transition:border-color .2s;}
-.phone-number{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--txt);flex:1;letter-spacing:.5px;}
-.sms-src-tag{font-size:10px;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 7px;white-space:nowrap;}
+
+/* ── FIX 3: phone-pill overflow on mobile ── */
+.phone-pill{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:10px 12px;margin-bottom:6px;transition:border-color .2s;flex-wrap:wrap;}
+.phone-number{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--txt);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.3px;}
+.phone-pill-actions{display:flex;gap:6px;flex-shrink:0;}
+
+.sms-src-tag{font-size:10px;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:2px 7px;white-space:nowrap;flex-shrink:0;}
 .sms-item{display:flex;align-items:flex-start;gap:10px;padding:14px 10px;border-top:1px solid var(--brd);border-radius:var(--r-sm);transition:background .15s;margin:0 -10px;animation:fadeUp .2s ease;}
 .sms-item:hover{background:var(--glow);}
 .sms-av{width:34px;height:34px;border-radius:9px;background:var(--s3);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -215,19 +220,36 @@ select{cursor:pointer;}
 .otp-badge{display:inline-flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--brd-hi);border-radius:var(--r-sm);padding:6px 12px;margin-top:6px;cursor:pointer;}
 .otp-code{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--txt);letter-spacing:2px;}
 .otp-label{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;}
-.whoami-hero{display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px;text-align:center;border-bottom:1px solid var(--brd);margin-bottom:20px;}
-.whoami-avatar{width:72px;height:72px;border-radius:50%;background:var(--s3);border:2px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--txt);margin-bottom:14px;}
-.whoami-name{font-size:20px;font-weight:600;color:var(--txt);letter-spacing:-.5px;margin-bottom:4px;}
-.whoami-sub{font-family:var(--mono);font-size:12px;color:var(--txt3);}
-.whoami-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
-.whoami-stat{background:var(--s2);border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;}
-.whoami-stat-val{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--txt);letter-spacing:-1px;margin-bottom:4px;line-height:1;}
-.whoami-stat-lbl{font-size:11px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;}
-.whoami-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--brd);}
-.whoami-row:last-child{border-bottom:none;}
-.whoami-row-lbl{font-size:12px;color:var(--txt3);}
-.whoami-row-val{font-family:var(--mono);font-size:12px;color:var(--txt2);text-align:right;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.whoami-row-val.ok{color:#fff;}
+
+/* ── PROFILE PAGE ── */
+.profile-page{position:relative;min-height:100vh;overflow:hidden;}
+#profile-3d-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.profile-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:48px 20px 80px;min-height:80vh;}
+.profile-avatar-wrap{position:relative;margin-bottom:24px;}
+.profile-avatar-ring{width:104px;height:104px;border-radius:50%;padding:3px;background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.05));position:relative;}
+.profile-avatar-img{width:98px;height:98px;border-radius:50%;background:var(--s3);border:2px solid var(--brd-hi);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:var(--txt);overflow:hidden;object-fit:cover;}
+.profile-avatar-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.profile-status-dot{position:absolute;bottom:4px;right:4px;width:14px;height:14px;border-radius:50%;background:#4ade80;border:2px solid var(--s1);box-shadow:0 0 8px rgba(74,222,128,.5);}
+.profile-name{font-size:28px;font-weight:700;letter-spacing:-1px;color:var(--txt);margin-bottom:6px;text-align:center;}
+.profile-handle{font-family:var(--mono);font-size:13px;color:var(--txt3);margin-bottom:12px;letter-spacing:.5px;}
+.profile-bio{font-size:14px;color:var(--txt2);text-align:center;max-width:340px;line-height:1.7;margin-bottom:32px;}
+.profile-links{display:flex;flex-direction:column;gap:10px;width:100%;max-width:360px;}
+.profile-link-card{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:16px;border:1px solid var(--brd-hi);background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-decoration:none;color:var(--txt);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.profile-link-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);pointer-events:none;}
+.profile-link-card:hover{border-color:var(--brd-act);background:rgba(255,255,255,.07);transform:translateY(-2px);}
+.profile-link-card:active{transform:scale(.98);}
+.profile-link-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
+.profile-link-icon.discord{background:rgba(88,101,242,.25);border:1px solid rgba(88,101,242,.3);}
+.profile-link-icon.tiktok{background:rgba(255,0,80,.15);border:1px solid rgba(255,0,80,.25);}
+.profile-link-info{flex:1;min-width:0;}
+.profile-link-name{font-size:14px;font-weight:600;color:var(--txt);letter-spacing:-.3px;margin-bottom:2px;}
+.profile-link-sub{font-size:12px;color:var(--txt3);}
+.profile-link-arrow{font-size:16px;color:var(--txt3);flex-shrink:0;}
+.profile-made-with{margin-top:40px;font-size:11px;color:var(--txt3);letter-spacing:.4px;text-align:center;}
+.profile-made-with a{color:var(--txt3);text-decoration:none;border-bottom:1px solid var(--brd);}
+
+/* ── END PROFILE PAGE ── */
+
 .pwned-hero{text-align:center;padding:20px 0 28px;}
 .pwned-hero h2{font-size:20px;font-weight:600;letter-spacing:-.5px;color:var(--txt);margin-bottom:8px;}
 .pwned-hero p{font-size:13px;color:var(--txt3);line-height:1.6;max-width:400px;margin:0 auto;}
@@ -321,7 +343,6 @@ select{cursor:pointer;}
 .affiliate-desc{font-size:11px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .affiliate-arrow{font-size:11px;color:var(--txt3);flex-shrink:0;}
 .affiliate-badge{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;color:var(--txt3);background:var(--s3);border:1px solid var(--brd);border-radius:100px;padding:1px 6px;letter-spacing:.4px;text-transform:uppercase;}
-/* SEO keyword block – crawlable aber visuell unsichtbar */
 .seo-block{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;left:-9999px;top:-9999px;}
 @media(max-width:768px){
   .sidebar{display:none;}
@@ -337,6 +358,9 @@ select{cursor:pointer;}
   .tool-grid{grid-template-columns:1fr;}
   .pwned-input-row{flex-direction:column;}
   .worker-url-row{flex-direction:column;}
+  /* Mobile phone pill fix */
+  .phone-pill{gap:6px;}
+  .phone-number{font-size:13px;}
 }
 @media(min-width:769px) and (max-width:1100px){
   :root{--sidebar-w:60px;}
@@ -349,28 +373,10 @@ select{cursor:pointer;}
 </head>
 <body>
 
-<!-- SEO: Keyword-Block, nur für Suchmaschinen sichtbar -->
 <div class="seo-block" aria-hidden="true">
   <h1>AltMail – Kostenlose Wegwerf-Email und temporäre Telefonnummer</h1>
-  <p>Mit AltMail erstellst du sofort eine kostenlose Wegwerf-Email-Adresse ohne Registrierung. Perfekt für Einweg-Emails, anonymes Surfen, Fake-Mail, Temp-Mail und Disposable-Email-Adressen. Zusätzlich bietet AltMail temporäre Telefonnummern zum kostenlosen SMS-Empfang online – ohne SIM-Karte, ohne Datenweitergabe.</p>
-  <ul>
-    <li>Wegwerf Email kostenlos erstellen</li>
-    <li>Temporäre Email-Adresse ohne Anmeldung</li>
-    <li>Fake Email Adresse für Registrierungen</li>
-    <li>Einweg Email sofort verfügbar</li>
-    <li>Anonymous Email ohne Konto</li>
-    <li>Temp Mail Deutsch</li>
-    <li>10 Minuten Mail Alternative</li>
-    <li>Temporäre Handynummer kostenlos</li>
-    <li>SMS empfangen online ohne SIM</li>
-    <li>Virtuelle Telefonnummer gratis</li>
-    <li>Einweg SMS Nummer Deutschland</li>
-    <li>Datenleck prüfen kostenlos</li>
-    <li>Have I Been Pwned Deutsch</li>
-    <li>Sicherer Passwort Generator</li>
-    <li>Datenschutz Tools online kostenlos</li>
-    <li>Anonyme Identität erstellen</li>
-  </ul>
+  <p>Mit AltMail erstellst du sofort eine kostenlose Wegwerf-Email-Adresse ohne Registrierung.</p>
+  <ul><li>Wegwerf Email kostenlos erstellen</li><li>Temporäre Email-Adresse ohne Anmeldung</li><li>Fake Email Adresse für Registrierungen</li><li>Temporäre Handynummer kostenlos</li><li>SMS empfangen online ohne SIM</li><li>Datenleck prüfen kostenlos</li></ul>
 </div>
 
 <canvas id="bg-canvas"></canvas>
@@ -411,7 +417,7 @@ select{cursor:pointer;}
   </button>
   <button class="nav-item" id="snav-whoami" onclick="switchPage('whoami')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    <span class="nav-label">WHOAMI</span>
+    <span class="nav-label">Profil</span>
   </button>
   <div class="sidebar-bottom">
     <button class="nav-item" onclick="toggleTheme()">
@@ -426,7 +432,6 @@ select{cursor:pointer;}
   </div>
 </nav>
 
-<!-- ═══ MOBILE NAV – 5 Tabs inkl. Gespeichert ═══ -->
 <nav class="mobile-nav" aria-label="Navigation">
   <button class="mob-nav-item active" id="mnav-active" onclick="switchPage('active')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -742,15 +747,83 @@ select{cursor:pointer;}
     <div class="tool-panel" id="tp-ugen"><div class="card"><div class="card-label">Username-Generator</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;"><button class="t-chip on" id="ugenStyle-normal" onclick="setUgenStyle('normal',this)">Normal</button><button class="t-chip" id="ugenStyle-tech" onclick="setUgenStyle('tech',this)">Tech</button><button class="t-chip" id="ugenStyle-anon" onclick="setUgenStyle('anon',this)">Anonym</button><button class="t-chip" id="ugenStyle-real" onclick="setUgenStyle('real',this)">Realistisch</button></div><div style="display:flex;gap:8px;"><button class="btn btn-primary" onclick="genUsernames()">Generieren</button><button class="btn btn-ghost" onclick="copyToolResult('ugenResult')">Kopieren</button></div><div class="gen-output" id="ugenResult" style="display:none;"></div></div></div>
     <div class="tool-panel" id="tp-fakeid"><div class="card"><div class="card-label">Fake-Identität</div><div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;"><select id="fakeLocale" style="height:36px;padding:0 10px;font-size:13px;width:auto;"><option value="de">Deutsch</option><option value="en">Englisch</option><option value="fr">Französisch</option><option value="es">Spanisch</option></select><button class="btn btn-primary" onclick="genFakeId()">Generieren</button><button class="btn btn-ghost" onclick="copyToolResult('fakeIdResult')">Kopieren</button></div><div id="fakeIdResult" style="display:none;"></div></div></div>
     <div class="tool-panel" id="tp-urlscan"><div class="card"><div class="card-label">URL-Scanner</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft Links via URLhaus auf Phishing, Malware und Spam.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="urlInput" placeholder="https://example.com" style="flex:1;min-width:200px;"><button class="btn btn-primary" onclick="scanUrl()" id="urlScanBtn" style="flex-shrink:0;">Scannen</button></div><div id="urlResult"></div></div></div>
-    <div class="tool-panel" id="tp-tracker"><div class="card"><div class="card-label">Tracker-Detector</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Browser blockieren direkte Analyse fremder Seiten. Diese Tools scannen zuverlässig ohne CORS-Probleme.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="trackerInput" placeholder="https://example.com" style="flex:1;min-width:200px;"><button class="btn btn-primary" onclick="openTrackerTools()" id="trackerBtn" style="flex-shrink:0;">Öffnen</button></div><div id="trackerResult"></div></div></div>
+    <div class="tool-panel" id="tp-tracker"><div class="card"><div class="card-label">Tracker-Detector</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Browser blockieren direkte Analyse fremder Seiten.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="trackerInput" placeholder="https://example.com" style="flex:1;min-width:200px;"><button class="btn btn-primary" onclick="openTrackerTools()" id="trackerBtn" style="flex-shrink:0;">Öffnen</button></div><div id="trackerResult"></div></div></div>
     <div class="tool-panel" id="tp-meta"><div class="card"><div class="card-label">Meta-Scraper</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">URL-Analyse: Domain-Infos lokal, Metadaten via externer Dienst.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="url" id="metaInput" placeholder="https://example.com" style="flex:1;min-width:200px;" oninput="analyzeUrlLocal()"><button class="btn btn-primary" onclick="scrapeMeta()" id="metaBtn" style="flex-shrink:0;">Analysieren</button></div><div id="metaResult"></div></div></div>
-    <div class="tool-panel" id="tp-ipinfo"><div class="card"><div class="card-label">IP-Lookup</div><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="text" id="ipInput" placeholder="IP-Adresse oder leer lassen für eigene IP" style="flex:1;min-width:200px;font-family:var(--mono);font-size:13px;"><button class="btn btn-primary" onclick="lookupIP()" id="ipBtn" style="flex-shrink:0;">Lookup</button></div><div id="ipResult"></div></div></div>
-    <div class="tool-panel" id="tp-emailrep"><div class="card"><div class="card-label">Email-Reputation</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft ob eine Domain als Spam, Wegwerf-Adresse oder Blacklist-Eintrag bekannt ist — komplett lokal, kein API-Key nötig.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="email" id="emailRepInput" placeholder="adresse@domain.com" style="flex:1;min-width:200px;" inputmode="email"><button class="btn btn-primary" onclick="checkEmailRep()" id="emailRepBtn" style="flex-shrink:0;">Prüfen</button></div><div id="emailRepResult"></div></div></div>
+    <div class="tool-panel" id="tp-ipinfo"><div class="card"><div class="card-label">IP-Lookup</div><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="text" id="ipInput" placeholder="IP-Adresse oder leer für eigene IP" style="flex:1;min-width:200px;font-family:var(--mono);font-size:13px;"><button class="btn btn-primary" onclick="lookupIP()" id="ipBtn" style="flex-shrink:0;">Lookup</button></div><div id="ipResult"></div></div></div>
+    <div class="tool-panel" id="tp-emailrep"><div class="card"><div class="card-label">Email-Reputation</div><p style="font-size:12px;color:var(--txt3);margin-bottom:12px;line-height:1.6;">Prüft ob eine Domain als Spam, Wegwerf-Adresse oder Blacklist-Eintrag bekannt ist.</p><div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><input type="email" id="emailRepInput" placeholder="adresse@domain.com" style="flex:1;min-width:200px;" inputmode="email"><button class="btn btn-primary" onclick="checkEmailRep()" id="emailRepBtn" style="flex-shrink:0;">Prüfen</button></div><div id="emailRepResult"></div></div></div>
   </div>
 
-  <!-- PAGE: WHOAMI -->
+  <!-- PAGE: WHOAMI → PROFIL (guns.lol style) -->
   <div class="page" id="page-whoami" style="display:none">
-    <div class="card" id="whoamiCard"></div>
+    <div class="profile-page">
+      <canvas id="profile-3d-canvas"></canvas>
+      <div class="profile-content">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar-ring">
+            <div class="profile-avatar-img" id="profileAvatarEl">
+              <!-- Profile image loads here — replace src with real image URL -->
+              <img src="https://avatars.githubusercontent.com/u/0" alt="Profil" onerror="this.style.display='none';this.parentNode.textContent='J'" />
+            </div>
+          </div>
+          <div class="profile-status-dot"></div>
+        </div>
+
+        <div class="profile-name">jnyaims</div>
+        <div class="profile-handle">@jnyaims</div>
+        <div class="profile-bio">
+          Creator · Developer · Privacy enthusiast.<br>
+          AltMail — anonyme Emails &amp; Temp-Nummern.
+        </div>
+
+        <div class="profile-links">
+
+          <!-- Discord -->
+          <a class="profile-link-card" href="https://discord.gg/jN9q5ceYYp" target="_blank" rel="noopener noreferrer">
+            <div class="profile-link-icon discord">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.003.02.013.04.028.053a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" fill="#5865F2"/>
+              </svg>
+            </div>
+            <div class="profile-link-info">
+              <div class="profile-link-name">Discord</div>
+              <div class="profile-link-sub">discord.gg/jN9q5ceYYp</div>
+            </div>
+            <div class="profile-link-arrow">↗</div>
+          </a>
+
+          <!-- TikTok -->
+          <a class="profile-link-card" href="https://www.tiktok.com/@jnyaims" target="_blank" rel="noopener noreferrer">
+            <div class="profile-link-icon tiktok">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.87a8.2 8.2 0 0 0 4.79 1.52V6.93a4.85 4.85 0 0 1-1.02-.24z" fill="#FF0050"/>
+              </svg>
+            </div>
+            <div class="profile-link-info">
+              <div class="profile-link-name">TikTok</div>
+              <div class="profile-link-sub">@jnyaims</div>
+            </div>
+            <div class="profile-link-arrow">↗</div>
+          </a>
+
+          <!-- AltMail App -->
+          <a class="profile-link-card" href="https://altmail.app" target="_blank" rel="noopener noreferrer">
+            <div class="profile-link-icon" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#f0f0f0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="profile-link-info">
+              <div class="profile-link-name">AltMail</div>
+              <div class="profile-link-sub">altmail.app — Temp-Email &amp; SMS</div>
+            </div>
+            <div class="profile-link-arrow">↗</div>
+          </a>
+
+        </div>
+
+        <div class="profile-made-with">
+          Made with <a href="https://altmail.app">AltMail</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </main>
@@ -836,9 +909,10 @@ select{cursor:pointer;}
 
 <div class="toast" id="toast"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ════════════════════════════════════
-// BG CANVAS
+// BG CANVAS (Stars + Shapes)
 // ════════════════════════════════════
 (function(){
   const canvas=document.getElementById('bg-canvas');
@@ -856,6 +930,89 @@ select{cursor:pointer;}
   window.addEventListener('resize',()=>{resize();initStars();initShapes();});
   resize();initStars();initShapes();render();
 })();
+
+// ════════════════════════════════════
+// PROFILE 3D (Three.js)
+// ════════════════════════════════════
+let profileScene=null;
+function initProfile3D(){
+  const canvas=document.getElementById('profile-3d-canvas');
+  if(!canvas||profileScene)return;
+  if(typeof THREE==='undefined')return;
+
+  profileScene=true;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  const parent=canvas.parentElement;
+  const W=parent.clientWidth||400,H=parent.clientHeight||600;
+  renderer.setSize(W,H);
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,W/H,0.1,100);
+  camera.position.z=5;
+
+  const isDark=()=>document.documentElement.getAttribute('data-theme')!=='light';
+  const col=()=>isDark()?0xffffff:0x111111;
+
+  // Wireframe objects
+  const objs=[];
+  const geo1=new THREE.IcosahedronGeometry(0.9,1);
+  const geo2=new THREE.TorusGeometry(0.6,0.18,12,40);
+  const geo3=new THREE.OctahedronGeometry(0.7,0);
+  const geo4=new THREE.IcosahedronGeometry(0.5,0);
+
+  const makeMesh=(geo,x,y,z)=>{
+    const mat=new THREE.MeshBasicMaterial({color:col(),wireframe:true,transparent:true,opacity:isDark()?0.18:0.1});
+    const m=new THREE.Mesh(geo,mat);
+    m.position.set(x,y,z);
+    scene.add(m);
+    objs.push(m);
+    return m;
+  };
+
+  makeMesh(geo1,-2.5,1.5,-1);
+  makeMesh(geo2,2.8,-1,-1.5);
+  makeMesh(geo3,-2.8,-1.5,-0.5);
+  makeMesh(geo4,2.5,1.8,-1);
+
+  // Particles
+  const pGeo=new THREE.BufferGeometry();
+  const pCount=120;
+  const pPos=new Float32Array(pCount*3);
+  for(let i=0;i<pCount*3;i++)pPos[i]=(Math.random()-0.5)*14;
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  const pMat=new THREE.PointsMaterial({color:col(),size:0.025,transparent:true,opacity:isDark()?0.35:0.2});
+  const particles=new THREE.Points(pGeo,pMat);
+  scene.add(particles);
+
+  let frame=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    const t=frame*0.006;
+    objs.forEach((m,i)=>{
+      m.rotation.x=t*(0.3+i*0.08);
+      m.rotation.y=t*(0.2+i*0.06);
+      m.position.y=m.position.y+(Math.sin(t+i)*0.003);
+      m.material.color.set(col());
+      m.material.opacity=isDark()?0.18:0.1;
+    });
+    pMat.color.set(col());
+    pMat.opacity=isDark()?0.35:0.2;
+    particles.rotation.y=t*0.04;
+    frame++;
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  // Resize
+  const ro=new ResizeObserver(()=>{
+    const pw=parent.clientWidth||400,ph=parent.clientHeight||600;
+    renderer.setSize(pw,ph);
+    camera.aspect=pw/ph;
+    camera.updateProjectionMatrix();
+  });
+  ro.observe(parent);
+}
 
 // ════════════════════════════════════
 // THEME
@@ -923,7 +1080,7 @@ function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('sh
 const PAGES=['active','sender','phone','saved','whoami','pwned','tools'];
 const SNAV={active:'snav-active',sender:'snav-sender',phone:'snav-phone',saved:'snav-saved',whoami:'snav-whoami',pwned:'snav-pwned',tools:'snav-tools'};
 const MNAV={active:'mnav-active',sender:'mnav-sender',phone:'mnav-phone',saved:'mnav-saved',tools:'mnav-tools'};
-const CHIPS={active:'Temporäre E-Mail',sender:'Email senden',phone:'Temporäre Telefonnummer',saved:'Gespeichert',whoami:'WHOAMI',pwned:'Pwned?',tools:'Tools'};
+const CHIPS={active:'Temporäre E-Mail',sender:'Email senden',phone:'Temporäre Telefonnummer',saved:'Gespeichert',whoami:'Profil',pwned:'Pwned?',tools:'Tools'};
 function switchPage(name){
   PAGES.forEach(p=>{const el=$('page-'+p);if(el)el.style.display='none';const sn=$(SNAV[p]);if(sn)sn.classList.remove('active');const mn=MNAV[p]?$(MNAV[p]):null;if(mn)mn.classList.remove('active');});
   const el=$('page-'+name);if(el)el.style.display='block';
@@ -932,7 +1089,7 @@ function switchPage(name){
   $('headerChip').textContent=CHIPS[name]||name;
   if(name==='saved')renderSaved();
   if(name==='phone'){initCountryChips();loadPhones();}
-  if(name==='whoami')renderWhoami();
+  if(name==='whoami'){setTimeout(initProfile3D,100);}
   if(name==='sender'){updateSenderFrom();renderSentList();}
   document.querySelector('.main').scrollTop=0;
 }
@@ -1066,14 +1223,12 @@ async function deleteRule(id){rules=rules.filter(r=>r.id!==id);await dbDel('rule
 function renderRules(){const el=$('ruleList');if(!el)return;if(!rules.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3);padding:8px 0;">Keine Regeln.</div>';return;}const typeLabel={from:'Absender',subject:'Betreff',body:'Text'};const actionLabel={highlight:'Hervorheben',delete:'Löschen',notify:'Benachrichtigung'};el.innerHTML=rules.map(r=>`<div class="rule-item"><div class="rule-info"><div class="rule-cond"><span style="color:var(--txt3);font-size:11px">${typeLabel[r.type]||r.type}</span> · ${esc(r.value)}</div><div class="rule-meta">${actionLabel[r.action]||r.action}</div></div><button class="btn btn-danger btn-sm" onclick="deleteRule('${r.id}')">✕</button></div>`).join('');}
 
 // ════════════════════════════════════
-// SAVED EMAILS + Badge (Desktop + Mobile)
+// SAVED EMAILS + Badge
 // ════════════════════════════════════
 async function updateSavedBadge(){
   const arr=await dbGetAll('saved_emails');
   const n=arr.length;
-  // Sidebar badge
   const b=$('snav-saved-badge');if(b){b.textContent=n;b.style.display=n?'':'none';}
-  // Mobile badge
   const mb=$('mob-saved-badge');if(mb){mb.textContent=n;mb.className='mob-badge'+(n?' visible':'');}
 }
 function openSave(){if(!addr)return;$('modalAddr').textContent=addr;$('saveName').value='';$('modalOv').classList.add('open');setTimeout(()=>$('saveName').focus(),150);}
@@ -1178,13 +1333,9 @@ async function deleteSent(id){await dbDel('sent_emails',id);await renderSentList
 async function clearSentHistory(){const all=await dbGetAll('sent_emails');for(const s of all)await dbDel('sent_emails',s.id);await renderSentList();showToast('Verlauf geleert');}
 
 // ════════════════════════════════════
-// PHONE — Echte Nummern via CORS-Proxy
-// Quellen: receive-smss.com · sms24.me · receivesms.co
+// PHONE
 // ════════════════════════════════════
 let currentPhoneCountry='de',currentPhoneNum='',currentPhoneMeta=null,smsIv;
-
-// Echte öffentliche Nummern von SMS-Empfangsdiensten.
-// Format: {num, url} — url ist die echte Seite mit den SMS.
 const COUNTRIES=[
   {code:'de',label:'🇩🇪 DE'},{code:'us',label:'🇺🇸 US'},{code:'uk',label:'🇬🇧 UK'},
   {code:'fr',label:'🇫🇷 FR'},{code:'se',label:'🇸🇪 SE'},{code:'nl',label:'🇳🇱 NL'},
@@ -1192,259 +1343,34 @@ const COUNTRIES=[
   {code:'pl',label:'🇵🇱 PL'},{code:'ro',label:'🇷🇴 RO'},{code:'be',label:'🇧🇪 BE'},
   {code:'es',label:'🇪🇸 ES'},{code:'fi',label:'🇫🇮 FI'},{code:'no',label:'🇳🇴 NO'},
 ];
+const PHONE_DB={de:[{num:'+4915735982513',url:'https://receive-smss.com/sms/4915735982513/'},{num:'+4915735984892',url:'https://receive-smss.com/sms/4915735984892/'},{num:'+4917631765494',url:'https://sms24.me/en/numbers/4917631765494/'},{num:'+4915207757250',url:'https://sms24.me/en/numbers/4915207757250/'},{num:'+4915901822700',url:'https://sms24.me/en/numbers/4915901822700/'},{num:'+4915208166521',url:'https://receive-smss.com/sms/4915208166521/'}],us:[{num:'+12027368558',url:'https://receive-smss.com/sms/12027368558/'},{num:'+13127571994',url:'https://receive-smss.com/sms/13127571994/'},{num:'+15417543010',url:'https://sms24.me/en/numbers/15417543010/'},{num:'+14235867958',url:'https://sms24.me/en/numbers/14235867958/'},{num:'+19377021936',url:'https://receivesms.co/sms/19377021936/'},{num:'+12069917072',url:'https://receivesms.co/sms/12069917072/'},{num:'+17752944227',url:'https://receive-smss.com/sms/17752944227/'}],uk:[{num:'+447893953422',url:'https://receive-smss.com/sms/447893953422/'},{num:'+447441429554',url:'https://receive-smss.com/sms/447441429554/'},{num:'+447418310024',url:'https://sms24.me/en/numbers/447418310024/'},{num:'+447441422480',url:'https://sms24.me/en/numbers/447441422480/'},{num:'+447723491428',url:'https://receive-smss.com/sms/447723491428/'}],fr:[{num:'+33757055814',url:'https://receive-smss.com/sms/33757055814/'},{num:'+33644637665',url:'https://sms24.me/en/numbers/33644637665/'},{num:'+33757059685',url:'https://receive-smss.com/sms/33757059685/'},{num:'+33756948598',url:'https://sms24.me/en/numbers/33756948598/'}],se:[{num:'+46769429093',url:'https://receive-smss.com/sms/46769429093/'},{num:'+46727273878',url:'https://sms24.me/en/numbers/46727273878/'},{num:'+46812450020',url:'https://sms24.me/en/numbers/46812450020/'},{num:'+46793064747',url:'https://receive-smss.com/sms/46793064747/'}],nl:[{num:'+3197010520865',url:'https://receive-smss.com/sms/3197010520865/'},{num:'+31685250870',url:'https://sms24.me/en/numbers/31685250870/'},{num:'+31970102045',url:'https://receivesms.co/sms/31970102045/'},{num:'+31616599406',url:'https://receive-smss.com/sms/31616599406/'}],ca:[{num:'+14166681520',url:'https://receive-smss.com/sms/14166681520/'},{num:'+16132091275',url:'https://sms24.me/en/numbers/16132091275/'},{num:'+14164184706',url:'https://sms24.me/en/numbers/14164184706/'},{num:'+16476500232',url:'https://receive-smss.com/sms/16476500232/'}],at:[{num:'+43720115609',url:'https://sms24.me/en/numbers/43720115609/'},{num:'+43676800122998',url:'https://receive-smss.com/sms/43676800122998/'}],ch:[{num:'+41798075406',url:'https://sms24.me/en/numbers/41798075406/'},{num:'+41775436304',url:'https://receive-smss.com/sms/41775436304/'},{num:'+41795468145',url:'https://sms24.me/en/numbers/41795468145/'}],pl:[{num:'+48732167890',url:'https://sms24.me/en/numbers/48732167890/'},{num:'+48792861697',url:'https://receive-smss.com/sms/48792861697/'},{num:'+48730608096',url:'https://sms24.me/en/numbers/48730608096/'}],ro:[{num:'+40724522407',url:'https://sms24.me/en/numbers/40724522407/'},{num:'+40773201850',url:'https://receive-smss.com/sms/40773201850/'}],be:[{num:'+3223002130',url:'https://receive-smss.com/sms/3223002130/'},{num:'+3285880148',url:'https://sms24.me/en/numbers/3285880148/'}],es:[{num:'+34632600034',url:'https://receive-smss.com/sms/34632600034/'},{num:'+34654275030',url:'https://sms24.me/en/numbers/34654275030/'},{num:'+34910770372',url:'https://receive-smss.com/sms/34910770372/'}],fi:[{num:'+358441084565',url:'https://sms24.me/en/numbers/358441084565/'},{num:'+358441588574',url:'https://receive-smss.com/sms/358441588574/'}],no:[{num:'+4759441131',url:'https://sms24.me/en/numbers/4759441131/'},{num:'+4748158393',url:'https://receive-smss.com/sms/4748158393/'}]};
 
-// Jede Nummer mit ihrer echten URL beim Anbieter
-const PHONE_DB = {
-  de: [
-    {num:'+4915735982513', url:'https://receive-smss.com/sms/4915735982513/'},
-    {num:'+4915735984892', url:'https://receive-smss.com/sms/4915735984892/'},
-    {num:'+4917631765494', url:'https://sms24.me/en/numbers/4917631765494/'},
-    {num:'+4915207757250', url:'https://sms24.me/en/numbers/4915207757250/'},
-    {num:'+4915901822700', url:'https://sms24.me/en/numbers/4915901822700/'},
-    {num:'+4915208166521', url:'https://receive-smss.com/sms/4915208166521/'},
-  ],
-  us: [
-    {num:'+12027368558', url:'https://receive-smss.com/sms/12027368558/'},
-    {num:'+13127571994', url:'https://receive-smss.com/sms/13127571994/'},
-    {num:'+15417543010', url:'https://sms24.me/en/numbers/15417543010/'},
-    {num:'+14235867958', url:'https://sms24.me/en/numbers/14235867958/'},
-    {num:'+19377021936', url:'https://receivesms.co/sms/19377021936/'},
-    {num:'+12069917072', url:'https://receivesms.co/sms/12069917072/'},
-    {num:'+17752944227', url:'https://receive-smss.com/sms/17752944227/'},
-  ],
-  uk: [
-    {num:'+447893953422', url:'https://receive-smss.com/sms/447893953422/'},
-    {num:'+447441429554', url:'https://receive-smss.com/sms/447441429554/'},
-    {num:'+447418310024', url:'https://sms24.me/en/numbers/447418310024/'},
-    {num:'+447441422480', url:'https://sms24.me/en/numbers/447441422480/'},
-    {num:'+447723491428', url:'https://receive-smss.com/sms/447723491428/'},
-  ],
-  fr: [
-    {num:'+33757055814', url:'https://receive-smss.com/sms/33757055814/'},
-    {num:'+33644637665', url:'https://sms24.me/en/numbers/33644637665/'},
-    {num:'+33757059685', url:'https://receive-smss.com/sms/33757059685/'},
-    {num:'+33756948598', url:'https://sms24.me/en/numbers/33756948598/'},
-  ],
-  se: [
-    {num:'+46769429093', url:'https://receive-smss.com/sms/46769429093/'},
-    {num:'+46727273878', url:'https://sms24.me/en/numbers/46727273878/'},
-    {num:'+46812450020', url:'https://sms24.me/en/numbers/46812450020/'},
-    {num:'+46793064747', url:'https://receive-smss.com/sms/46793064747/'},
-  ],
-  nl: [
-    {num:'+3197010520865', url:'https://receive-smss.com/sms/3197010520865/'},
-    {num:'+31685250870',   url:'https://sms24.me/en/numbers/31685250870/'},
-    {num:'+31970102045',   url:'https://receivesms.co/sms/31970102045/'},
-    {num:'+31616599406',   url:'https://receive-smss.com/sms/31616599406/'},
-  ],
-  ca: [
-    {num:'+14166681520', url:'https://receive-smss.com/sms/14166681520/'},
-    {num:'+16132091275', url:'https://sms24.me/en/numbers/16132091275/'},
-    {num:'+14164184706', url:'https://sms24.me/en/numbers/14164184706/'},
-    {num:'+16476500232', url:'https://receive-smss.com/sms/16476500232/'},
-  ],
-  at: [
-    {num:'+43720115609',    url:'https://sms24.me/en/numbers/43720115609/'},
-    {num:'+43676800122998', url:'https://receive-smss.com/sms/43676800122998/'},
-  ],
-  ch: [
-    {num:'+41798075406', url:'https://sms24.me/en/numbers/41798075406/'},
-    {num:'+41775436304', url:'https://receive-smss.com/sms/41775436304/'},
-    {num:'+41795468145', url:'https://sms24.me/en/numbers/41795468145/'},
-  ],
-  pl: [
-    {num:'+48732167890', url:'https://sms24.me/en/numbers/48732167890/'},
-    {num:'+48792861697', url:'https://receive-smss.com/sms/48792861697/'},
-    {num:'+48730608096', url:'https://sms24.me/en/numbers/48730608096/'},
-  ],
-  ro: [
-    {num:'+40724522407', url:'https://sms24.me/en/numbers/40724522407/'},
-    {num:'+40773201850', url:'https://receive-smss.com/sms/40773201850/'},
-  ],
-  be: [
-    {num:'+3223002130', url:'https://receive-smss.com/sms/3223002130/'},
-    {num:'+3285880148', url:'https://sms24.me/en/numbers/3285880148/'},
-  ],
-  es: [
-    {num:'+34632600034', url:'https://receive-smss.com/sms/34632600034/'},
-    {num:'+34654275030', url:'https://sms24.me/en/numbers/34654275030/'},
-    {num:'+34910770372', url:'https://receive-smss.com/sms/34910770372/'},
-  ],
-  fi: [
-    {num:'+358441084565', url:'https://sms24.me/en/numbers/358441084565/'},
-    {num:'+358441588574', url:'https://receive-smss.com/sms/358441588574/'},
-  ],
-  no: [
-    {num:'+4759441131', url:'https://sms24.me/en/numbers/4759441131/'},
-    {num:'+4748158393', url:'https://receive-smss.com/sms/4748158393/'},
-  ],
-};
+function detectSource(url){if(url.includes('receive-smss.com'))return'receive-smss';if(url.includes('sms24.me'))return'sms24';if(url.includes('receivesms.co'))return'receivesms';return'unknown';}
+async function fetchViaProxy(targetUrl){const proxies=[`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`];for(const proxy of proxies){try{const r=await fetch(proxy,{signal:AbortSignal.timeout(10000)});if(!r.ok)continue;const ct=r.headers.get('content-type')||'';if(ct.includes('json')){const j=await r.json();if(j.contents&&j.contents.length>200)return j.contents;}else{const t=await r.text();if(t.length>200)return t;}}catch{}}return null;}
+function parseSms(html,source){const msgs=[];if(!html)return msgs;const doc=new DOMParser().parseFromString(html,'text/html');if(source==='receive-smss'){doc.querySelectorAll('.row.border-bottom,.sms-object,.receive-block,tr').forEach(el=>{const tds=[...el.querySelectorAll('td')];if(tds.length>=2){const from=tds[0]?.textContent?.trim()||'';const body=tds[1]?.textContent?.trim()||'';const time=tds[tds.length-1]?.textContent?.trim()||'';if(body.length>1)msgs.push({from,body,time});}const fromEl=el.querySelector('.sendfrom,.from-number,[class*="from"]');const bodyEl=el.querySelector('.sms-body,.message-body,[class*="message"],[class*="content"]');if(bodyEl&&bodyEl.textContent.trim().length>1){msgs.push({from:fromEl?.textContent?.trim()||'SMS',body:bodyEl.textContent.trim(),time:''});}});}if(source==='sms24'){doc.querySelectorAll('.panel-body .row,.sms_msg,tr').forEach(el=>{const tds=[...el.querySelectorAll('td')];if(tds.length>=2){msgs.push({from:tds[0]?.textContent?.trim()||'SMS',body:tds[1]?.textContent?.trim()||'',time:tds[tds.length-1]?.textContent?.trim()||''});}const cols=[...el.querySelectorAll('.col-xs-12,.col-md-3,.col-md-9')];if(cols.length>=2&&cols[1]?.textContent?.trim().length>1){msgs.push({from:cols[0]?.textContent?.trim()||'SMS',body:cols[1].textContent.trim(),time:''});}});}if(source==='receivesms'){doc.querySelectorAll('tr,.sms-list-item').forEach(el=>{const tds=[...el.querySelectorAll('td')];if(tds.length>=2){msgs.push({from:tds[0]?.textContent?.trim()||'SMS',body:tds[1]?.textContent?.trim()||'',time:tds[tds.length-1]?.textContent?.trim()||''});}});}if(!msgs.length){doc.querySelectorAll('table tr').forEach(row=>{const cells=[...row.querySelectorAll('td')];if(cells.length>=2){const body=cells[1]?.textContent?.trim()||cells[cells.length-1]?.textContent?.trim()||'';if(body.length>2)msgs.push({from:cells[0]?.textContent?.trim()||'SMS',body,time:''});}});}const seen=new Set();return msgs.filter(m=>{const key=m.body.slice(0,50);if(seen.has(key)||m.body.length<2)return false;seen.add(key);return true;}).slice(0,25);}
 
-// Erkennt Quelle anhand der URL
-function detectSource(url){
-  if(url.includes('receive-smss.com'))return 'receive-smss';
-  if(url.includes('sms24.me'))return 'sms24';
-  if(url.includes('receivesms.co'))return 'receivesms';
-  return 'unknown';
-}
+function initCountryChips(){const el=$('countryChips');if(el.children.length>0)return;el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');}
+function selectCountry(code,btn){document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneMeta=null;$('smsCard').style.display='none';$('activePhoneCard').style.display='none';clearInterval(smsIv);loadPhones();}
 
-// Holt HTML der Nummer via CORS-Proxy
-async function fetchViaProxy(targetUrl){
-  const proxies=[
-    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
-    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
-    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
-  ];
-  for(const proxy of proxies){
-    try{
-      const r=await fetch(proxy,{signal:AbortSignal.timeout(10000)});
-      if(!r.ok)continue;
-      const ct=r.headers.get('content-type')||'';
-      if(ct.includes('json')){const j=await r.json();if(j.contents&&j.contents.length>200)return j.contents;}
-      else{const t=await r.text();if(t.length>200)return t;}
-    }catch{}
-  }
-  return null;
-}
-
-// Parst SMS aus dem HTML der jeweiligen Seite
-function parseSms(html, source){
-  const msgs=[];
-  if(!html)return msgs;
-  const doc=new DOMParser().parseFromString(html,'text/html');
-
-  if(source==='receive-smss'){
-    // SMS stehen in .sms-content Divs oder Tabellenzeilen
-    doc.querySelectorAll('.row.border-bottom, .sms-object, .receive-block, tr').forEach(el=>{
-      const tds=[...el.querySelectorAll('td')];
-      if(tds.length>=2){
-        const from=tds[0]?.textContent?.trim()||'';
-        const body=tds[1]?.textContent?.trim()||'';
-        const time=tds[tds.length-1]?.textContent?.trim()||'';
-        if(body.length>1)msgs.push({from,body,time});
-      }
-      // Div-basiertes Layout
-      const fromEl=el.querySelector('.sendfrom,.from-number,[class*="from"]');
-      const bodyEl=el.querySelector('.sms-body,.message-body,[class*="message"],[class*="content"]');
-      if(bodyEl&&bodyEl.textContent.trim().length>1){
-        msgs.push({from:fromEl?.textContent?.trim()||'SMS',body:bodyEl.textContent.trim(),time:''});
-      }
-    });
-  }
-
-  if(source==='sms24'){
-    doc.querySelectorAll('.panel-body .row, .sms_msg, tr').forEach(el=>{
-      const tds=[...el.querySelectorAll('td')];
-      if(tds.length>=2){
-        msgs.push({from:tds[0]?.textContent?.trim()||'SMS',body:tds[1]?.textContent?.trim()||'',time:tds[tds.length-1]?.textContent?.trim()||''});
-      }
-      const cols=[...el.querySelectorAll('.col-xs-12,.col-md-3,.col-md-9')];
-      if(cols.length>=2&&cols[1]?.textContent?.trim().length>1){
-        msgs.push({from:cols[0]?.textContent?.trim()||'SMS',body:cols[1].textContent.trim(),time:''});
-      }
-    });
-  }
-
-  if(source==='receivesms'){
-    doc.querySelectorAll('tr, .sms-list-item').forEach(el=>{
-      const tds=[...el.querySelectorAll('td')];
-      if(tds.length>=2){
-        msgs.push({from:tds[0]?.textContent?.trim()||'SMS',body:tds[1]?.textContent?.trim()||'',time:tds[tds.length-1]?.textContent?.trim()||''});
-      }
-    });
-  }
-
-  // Generischer Fallback: alle Tabellenzeilen
-  if(!msgs.length){
-    doc.querySelectorAll('table tr').forEach(row=>{
-      const cells=[...row.querySelectorAll('td')];
-      if(cells.length>=2){
-        const body=cells[1]?.textContent?.trim()||cells[cells.length-1]?.textContent?.trim()||'';
-        if(body.length>2)msgs.push({from:cells[0]?.textContent?.trim()||'SMS',body,time:''});
-      }
-    });
-  }
-
-  // Deduplizieren nach body
-  const seen=new Set();
-  return msgs.filter(m=>{
-    const key=m.body.slice(0,50);
-    if(seen.has(key)||m.body.length<2)return false;
-    seen.add(key);return true;
-  }).slice(0,25);
-}
-
-function initCountryChips(){
-  const el=$('countryChips');
-  if(el.children.length>0)return;
-  el.innerHTML=COUNTRIES.map(c=>`<button class="country-chip${c.code===currentPhoneCountry?' on':''}" onclick="selectCountry('${c.code}',this)">${c.label}</button>`).join('');
-}
-function selectCountry(code,btn){
-  document.querySelectorAll('.country-chip').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');currentPhoneCountry=code;currentPhoneNum='';currentPhoneMeta=null;
-  $('smsCard').style.display='none';$('activePhoneCard').style.display='none';
-  clearInterval(smsIv);loadPhones();
-}
+// Fixed loadPhones: uses phone-pill-actions div for buttons
 function loadPhones(){
   const el=$('phoneList');
   const nums=PHONE_DB[currentPhoneCountry]||PHONE_DB.de;
   el.innerHTML=nums.map(p=>`
     <div class="phone-pill">
-      <div class="status-dot ok"></div>
+      <div class="status-dot ok" style="flex-shrink:0"></div>
       <span class="phone-number">${esc(p.num)}</span>
       <span class="sms-src-tag">${detectSource(p.url)}</span>
-      <button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${p.num}',this)">Kopieren</button>
-      <button class="btn btn-primary btn-sm" style="margin-left:4px" onclick='selectPhone(${JSON.stringify(p)})'>SMS</button>
+      <div class="phone-pill-actions">
+        <button class="btn btn-ghost btn-sm" onclick="copyPhoneNum('${p.num}',this)">Kopieren</button>
+        <button class="btn btn-primary btn-sm" onclick='selectPhone(${JSON.stringify(p)})'>SMS</button>
+      </div>
     </div>`).join('');
 }
 async function copyPhoneNum(num,btn){const ok=await copyToClipboard(num);if(ok){const o=btn.textContent;btn.textContent='✓';setTimeout(()=>btn.textContent=o,1500);}showToast(ok?'Kopiert ✓':'Fehler');}
-
-async function selectPhone(p){
-  currentPhoneNum=p.num;currentPhoneMeta=p;
-  $('activePhoneNum').textContent=p.num;
-  $('activePhoneCard').style.display='block';
-  $('smsCard').style.display='block';
-  // Direktlink immer sichtbar
-  const dl=$('smsDirectLink');if(dl){dl.href=p.url;dl.style.display='inline-flex';}
-  await refreshSms(true);
-  clearInterval(smsIv);smsIv=setInterval(()=>refreshSms(false),20000);
-}
+async function selectPhone(p){currentPhoneNum=p.num;currentPhoneMeta=p;$('activePhoneNum').textContent=p.num;$('activePhoneCard').style.display='block';$('smsCard').style.display='block';const dl=$('smsDirectLink');if(dl){dl.href=p.url;dl.style.display='inline-flex';}await refreshSms(true);clearInterval(smsIv);smsIv=setInterval(()=>refreshSms(false),20000);}
 async function copyActivePhone(){if(!currentPhoneNum)return;const ok=await copyToClipboard(currentPhoneNum);const el=$('activePhoneNum');if(ok){el.textContent='Kopiert ✓';setTimeout(()=>el.textContent=currentPhoneNum,2000);}else showToast('Fehler');}
-
-async function refreshSms(showLoader=false){
-  if(!currentPhoneMeta)return;
-  const listEl=$('smsList'),emptyEl=$('smsEmpty');
-  if(showLoader){
-    listEl.innerHTML=`<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd);display:flex;align-items:center;gap:8px"><svg width="13" height="13" class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg> Lade SMS…</li>`;
-    emptyEl.style.display='none';
-  }
-  const source=detectSource(currentPhoneMeta.url);
-  const html=await fetchViaProxy(currentPhoneMeta.url);
-  const list=parseSms(html,source);
-  $('smsCount').textContent=list.length;
-
-  if(!list.length){
-    listEl.innerHTML='';
-    emptyEl.style.display='';
-    $('smsEmptyTitle').textContent=html?'Noch keine SMS':'Proxy-Fehler';
-    $('smsEmptyText').textContent=html?'Sende eine SMS an diese Nummer. Aktualisiert alle 20 Sek.':'Direktlink öffnen für SMS.';
-    const dl=$('smsDirectLink');if(dl){dl.href=currentPhoneMeta.url;dl.style.display='inline-flex';}
-    return;
-  }
-  emptyEl.style.display='none';
-  listEl.innerHTML=list.map(m=>{
-    const otps=extractOTPCodes(m.body);
-    return`<li class="sms-item">
-      <div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-      <div style="flex:1;min-width:0">
-        <div class="sms-from">${esc(m.from||'SMS')}</div>
-        <div class="sms-body">${esc(m.body)}</div>
-        ${otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join('')}
-        ${m.time?`<div class="sms-time">${esc(m.time)}</div>`:''}
-      </div>
-    </li>`;
-  }).join('');
-}
+async function refreshSms(showLoader=false){if(!currentPhoneMeta)return;const listEl=$('smsList'),emptyEl=$('smsEmpty');if(showLoader){listEl.innerHTML=`<li style="padding:14px 10px;color:var(--txt3);font-size:12px;border-top:1px solid var(--brd);display:flex;align-items:center;gap:8px"><svg width="13" height="13" class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg> Lade SMS…</li>`;emptyEl.style.display='none';}const source=detectSource(currentPhoneMeta.url);const html=await fetchViaProxy(currentPhoneMeta.url);const list=parseSms(html,source);$('smsCount').textContent=list.length;if(!list.length){listEl.innerHTML='';emptyEl.style.display='';$('smsEmptyTitle').textContent=html?'Noch keine SMS':'Proxy-Fehler';$('smsEmptyText').textContent=html?'Sende eine SMS an diese Nummer. Aktualisiert alle 20 Sek.':'Direktlink öffnen für SMS.';const dl=$('smsDirectLink');if(dl){dl.href=currentPhoneMeta.url;dl.style.display='inline-flex';}return;}emptyEl.style.display='none';listEl.innerHTML=list.map(m=>{const otps=extractOTPCodes(m.body);return`<li class="sms-item"><div class="sms-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div style="flex:1;min-width:0"><div class="sms-from">${esc(m.from||'SMS')}</div><div class="sms-body">${esc(m.body)}</div>${otps.map(([c])=>`<div class="otp-badge" onclick="copyToClipboard('${c}').then(()=>showToast('Kopiert ✓'))"><span class="otp-code">${esc(c)}</span><span class="otp-label">Kopieren</span></div>`).join('')}${m.time?`<div class="sms-time">${esc(m.time)}</div>`:''}</div></li>`;}).join('');}
 
 // ════════════════════════════════════
 // 2FA EXTRACTOR
@@ -1467,19 +1393,12 @@ async function scanUrl(){const url=$('urlInput').value.trim();if(!url){showToast
 function openTrackerTools(){const url=$('trackerInput').value.trim();const res=$('trackerResult');if(!url){showToast('URL eingeben');return;}let hostname='';try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}res.innerHTML=`<div style="margin-top:4px;"><div class="links-label" style="margin-bottom:8px;">Externe Scanner für <span style="color:var(--txt)">${esc(hostname)}</span></div><div style="display:flex;flex-direction:column;gap:6px;"><a href="https://themarkup.org/blacklight?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Blacklight (Markup)</span><span style="font-size:11px;color:var(--txt3)">Ad/Tracker-Scanner</span><span class="link-arrow">↗</span></a><a href="https://webbkoll.dataskydd.net/en/check?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Webbkoll (GDPR)</span><span style="font-size:11px;color:var(--txt3)">Datenschutz-Check</span><span class="link-arrow">↗</span></a><a href="https://urlscan.io/search/#page.domain:${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">urlscan.io</span><span style="font-size:11px;color:var(--txt3)">Request-Scanner</span><span class="link-arrow">↗</span></a><a href="https://observatory.mozilla.org/analyze/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">Mozilla Observatory</span><span style="font-size:11px;color:var(--txt3)">Security-Headers</span><span class="link-arrow">↗</span></a></div></div>`;}
 function analyzeUrlLocal(){const url=$('metaInput').value.trim();if(!url)return;const res=$('metaResult');try{const u=new URL(url);const isHttps=u.protocol==='https:';const hasWWW=u.hostname.startsWith('www.');const parts=u.hostname.replace(/^www\./,'').split('.');const tld=parts.slice(-1)[0];const domain=parts.slice(-2).join('.');const hasPath=u.pathname!=='/'&&u.pathname!=='';const hasQuery=u.search!=='';res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Protokoll</span><span class="result-val${isHttps?' ok':' err'}">${isHttps?'HTTPS':'HTTP (unsicher)'}</span></div><div class="result-row"><span class="result-label">Domain</span><span class="result-val">${esc(domain)}</span></div><div class="result-row"><span class="result-label">TLD</span><span class="result-val">.${esc(tld)}</span></div><div class="result-row"><span class="result-label">Subdomain</span><span class="result-val">${hasWWW?'www':u.hostname.replace('.'+domain,'').replace(domain,'')||'—'}</span></div><div class="result-row"><span class="result-label">Pfad</span><span class="result-val">${hasPath?esc(u.pathname):'—'}</span></div><div class="result-row"><span class="result-label">Parameter</span><span class="result-val">${hasQuery?esc(u.search):'—'}</span></div></div>`;}catch{}}
 async function scrapeMeta(){const url=$('metaInput').value.trim();const btn=$('metaBtn'),res=$('metaResult');if(!url){showToast('URL eingeben');return;}let hostname='';try{hostname=new URL(url).hostname;}catch{showToast('Ungültige URL');return;}analyzeUrlLocal();const existing=$('metaResult').innerHTML;res.innerHTML=existing+`<div style="margin-top:10px;"><div class="links-label" style="margin-bottom:8px;">Metadaten via externe Dienste</div><div style="display:flex;flex-direction:column;gap:6px;"><a href="https://metatags.io/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">metatags.io</span><span style="font-size:11px;color:var(--txt3)">OG, Twitter, SEO Tags</span><span class="link-arrow">↗</span></a><a href="https://www.opengraph.xyz/url/${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">opengraph.xyz</span><span style="font-size:11px;color:var(--txt3)">Open Graph Preview</span><span class="link-arrow">↗</span></a><a href="https://builtwith.com/${encodeURIComponent(hostname)}" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">builtwith.com</span><span style="font-size:11px;color:var(--txt3)">Technologien erkennen</span><span class="link-arrow">↗</span></a><a href="https://securityheaders.com/?q=${encodeURIComponent(url)}&followRedirects=on" target="_blank" rel="noopener noreferrer" class="link-card" style="text-decoration:none;"><span class="link-url">securityheaders.com</span><span style="font-size:11px;color:var(--txt3)">HTTP-Header-Analyse</span><span class="link-arrow">↗</span></a></div></div>`;}
-async function lookupIP(){const input=$('ipInput').value.trim();const btn=$('ipBtn'),res=$('ipResult');btn.disabled=true;btn.textContent='…';res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';const target=input||'';const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;try{const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(d.status==='fail')throw new Error(d.message||'Ungültige IP');const rows=[['IP',d.query],['Land',`${d.country||'—'} (${d.countryCode||'—'})`],['Stadt',d.city||'—'],['Region',d.regionName||'—'],['Timezone',d.timezone||'—'],['ISP',d.isp||'—'],['Org / ASN',d.as||'—'],['Proxy/VPN',d.proxy?'Ja':'Nein'],['Hosting/DC',d.hosting?'Ja':'Nein']];const ipCopy=d.query;res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;}).join('')}</div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button><a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a></div>`;}catch(e){res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div></div><p style="font-size:12px;color:var(--txt3);margin-top:8px;">Hinweis: ip-api.com funktioniert nur über HTTP.</p>`;}btn.disabled=false;btn.textContent='Lookup';}
+async function lookupIP(){const input=$('ipInput').value.trim();const btn=$('ipBtn'),res=$('ipResult');btn.disabled=true;btn.textContent='…';res.innerHTML='<div style="padding:16px;text-align:center;color:var(--txt3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>';const target=input||'';const url=`http://ip-api.com/json/${encodeURIComponent(target)}?fields=status,message,country,countryCode,regionName,city,zip,timezone,isp,org,as,proxy,hosting,query`;try{const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(d.status==='fail')throw new Error(d.message||'Ungültige IP');const rows=[['IP',d.query],['Land',`${d.country||'—'} (${d.countryCode||'—'})`],['Stadt',d.city||'—'],['Region',d.regionName||'—'],['Timezone',d.timezone||'—'],['ISP',d.isp||'—'],['Org / ASN',d.as||'—'],['Proxy/VPN',d.proxy?'Ja':'Nein'],['Hosting/DC',d.hosting?'Ja':'Nein']];const ipCopy=d.query;res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Proxy/VPN')cls=d.proxy?' warn':' ok';if(l==='Hosting/DC')cls=d.hosting?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(String(v))}</span></div>`;}).join('')}</div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn btn-ghost btn-sm" onclick="copyToClipboard('${ipCopy}').then(()=>showToast('IP kopiert'))">IP kopieren</button><a href="https://ipinfo.io/${ipCopy}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="text-decoration:none;">ipinfo.io ↗</a></div>`;}catch(e){res.innerHTML=`<div class="result-box" style="padding:0;"><div class="result-row"><span class="result-label">Fehler</span><span class="result-val err">${esc(e.message)}</span></div></div>`;}btn.disabled=false;btn.textContent='Lookup';}
 const DISPOSABLE_DOMAINS=new Set(['mailnull.com','guerrillamail.com','throwam.com','yopmail.com','tempmail.com','temp-mail.org','10minutemail.com','sharklasers.com','guerrillamailblock.com','grr.la','guerrillamail.info','guerrillamail.biz','guerrillamail.de','guerrillamail.net','guerrillamail.org','spam4.me','trashmail.com','trashmail.me','trashmail.net','trashmail.org','trashmail.io','dispostable.com','mailnesia.com','maildrop.cc','spamgourmet.com','spamgourmet.net','spamgourmet.org','fakeinbox.com','fakeinbox.net','discard.email','discardmail.com','discardmail.de','trash-mail.com','trashdevil.com','trashmailer.com','mailsiphon.com','mail.tm','mail.gw','inboxkitten.com','tempr.email','temp-mail.ru','jetable.fr.nf','spamify.com']);
 const BLACKLISTED_DOMAINS=new Set(['mailinator.com','guerrillamail.com','trashmail.com','yopmail.com','spam4.me']);
 const FREE_PROVIDERS=new Set(['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','proton.me','protonmail.com','web.de','gmx.de','gmx.net','gmx.com','t-online.de','freenet.de','posteo.de','tutanota.com','tutanota.de','mailfence.com','disroot.org','riseup.net','fastmail.com','aol.com','live.com','msn.com','yahoo.de','yahoo.co.uk','yahoo.fr']);
 async function checkEmailRep(){const val=$('emailRepInput').value.trim().toLowerCase();const btn=$('emailRepBtn'),res=$('emailRepResult');if(!val||!val.includes('@')){showToast('Gültige Email eingeben');return;}btn.disabled=true;btn.textContent='Prüfe…';const domain=val.split('@')[1]||'';const isDisposable=DISPOSABLE_DOMAINS.has(domain);const isBlacklisted=BLACKLISTED_DOMAINS.has(domain);const isFree=FREE_PROVIDERS.has(domain);const isCustom=!isDisposable&&!isFree;let hasMX=null,mxRecords=[];try{const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,{signal:AbortSignal.timeout(5000)});const d=await r.json();mxRecords=(d.Answer||[]).filter(a=>a.type===15).map(a=>a.data);hasMX=mxRecords.length>0;}catch{hasMX=null;}let risk=0,riskLabel='Niedrig';if(isBlacklisted)risk=3;else if(isDisposable)risk=2;else if(!hasMX)risk=2;else if(!isFree&&!isCustom)risk=1;if(risk>=3)riskLabel='Kritisch';else if(risk===2)riskLabel='Hoch';else if(risk===1)riskLabel='Mittel';const rows=[['Domain',domain],['Typ',isDisposable?'Wegwerf-Adresse':isBlacklisted?'Blacklisted':isFree?'Free Provider':'Custom/Business'],['MX Records',hasMX===null?'Unbekannt':hasMX?mxRecords[0]?.split(' ').pop()||'Vorhanden':'Keine (ungültig)'],['Blacklist',isBlacklisted?'Eingetragen':'Nicht eingetragen'],['Risiko',riskLabel]];res.innerHTML=`<div class="result-box" style="padding:0;">${rows.map(([l,v])=>{let cls='';if(l==='Blacklist')cls=isBlacklisted?' err':' ok';if(l==='Risiko')cls=risk>=2?' err':risk===1?' warn':' ok';if(l==='MX Records')cls=hasMX===false?' err':'';if(l==='Typ')cls=isDisposable||isBlacklisted?' err':isFree?' warn':' ok';return`<div class="result-row"><span class="result-label">${l}</span><span class="result-val${cls}">${esc(v)}</span></div>`;}).join('')}</div>${mxRecords.length?`<div style="margin-top:8px;"><div class="links-label" style="margin-bottom:4px;">MX Records</div>${mxRecords.slice(0,3).map(mx=>`<div class="tag">${esc(mx)}</div>`).join('')}</div>`:''}`;btn.disabled=false;btn.textContent='Prüfen';}
 async function copyToolResult(id){const el=$(id);if(!el||!el.textContent)return;const ok=await copyToClipboard(el.textContent.trim());showToast(ok?'Kopiert ✓':'Fehler');}
-
-// ════════════════════════════════════
-// WHOAMI
-// ════════════════════════════════════
-async function renderWhoami(){const card=$('whoamiCard');const user=loadUser();const saved=await dbGetAll('saved_emails');const ua=navigator.userAgent;let browser='Unbekannt',os='Unbekannt';if(/Firefox\//.test(ua))browser='Firefox';else if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome/.test(ua))browser='Safari';if(/Windows NT 10/.test(ua))os='Windows 10/11';else if(/Mac OS X/.test(ua))os='macOS';else if(/Android/.test(ua))os='Android';else if(/iPhone|iPad/.test(ua))os='iOS';else if(/Linux/.test(ua))os='Linux';const isMobile=/Mobi|Android|iPhone|iPad/i.test(ua);const sessionDuration=sessionStart?Math.floor((new Date()-sessionStart)/60000)+' min':'—';const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';const onlineCount=parseInt($('onlineCount')?.textContent||'1');card.innerHTML=`${user?`<div class="whoami-hero"><div class="whoami-avatar">${(user.email[0]||'?').toUpperCase()}</div><div class="whoami-name">${esc(user.name||user.email.split('@')[0])}</div><div class="whoami-sub">${esc(user.email)}</div></div>`:''}
-  <div style="margin-bottom:20px"><div class="card-label" style="margin-bottom:12px">Session</div><div class="whoami-grid"><div class="whoami-stat"><div class="whoami-stat-val">${msgs.length}</div><div class="whoami-stat-lbl">Emails</div></div><div class="whoami-stat"><div class="whoami-stat-val">${saved.length}</div><div class="whoami-stat-lbl">Gespeichert</div></div><div class="whoami-stat"><div class="whoami-stat-val">${totalRef}</div><div class="whoami-stat-lbl">Refreshes</div></div><div class="whoami-stat"><div class="whoami-stat-val">${sessionDuration}</div><div class="whoami-stat-lbl">Session</div></div></div></div>
-  <div><div class="card-label" style="margin-bottom:4px">Browser & Gerät</div><div class="whoami-row"><span class="whoami-row-lbl">Browser</span><span class="whoami-row-val">${esc(browser)}</span></div><div class="whoami-row"><span class="whoami-row-lbl">OS</span><span class="whoami-row-val">${esc(os)}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Gerät</span><span class="whoami-row-val">${isMobile?'Mobil':'Desktop'}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Bildschirm</span><span class="whoami-row-val">${screen.width}×${screen.height}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Zeitzone</span><span class="whoami-row-val">${esc(tz)}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Unique IPs online</span><span class="whoami-row-val ok">${onlineCount}</span></div><div class="whoami-row"><span class="whoami-row-lbl">Theme</span><span class="whoami-row-val">${document.documentElement.getAttribute('data-theme')==='dark'?'Dark':'Light'}</span></div></div>`;}
 
 // ════════════════════════════════════
 // AUTH
@@ -1512,6 +1431,7 @@ window.addEventListener('resize',()=>{$('mobile-theme-toggle').style.display=win
 // BOOT
 // ════════════════════════════════════
 async function boot(){
+  initTheme();
   await openDB();
   await updateSavedBadge();
   await renderSentList();
